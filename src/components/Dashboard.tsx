@@ -54,14 +54,14 @@ const Dashboard = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Bem-vindo ao Meraki! 👋</h1>
-          <p className="text-muted-foreground">Pronta para mais uma jornada de aprendizagem?</p>
+          <p className="text-muted-foreground">Pronto para mais uma jornada de aprendizagem, Victor?</p>
         </div>
         <div className="flex items-center gap-4">
           <Badge variant="secondary" className="text-sm">
             <Star className="w-4 h-4 mr-1" />
             Nível 12
           </Badge>
-          <Button variant="learning" size="sm">
+          <Button variant="learning" size="sm" className="text-green-700">
             <BookOpen className="w-4 h-4 mr-2" />
             Continuar Estudando
           </Button>
@@ -153,17 +153,17 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Button variant="learning" className="h-16 text-base">
+        <Button variant="learning" className="h-16 text-base text-green-700">
           <Brain className="w-5 h-5 mr-3" />
           Método CPA
         </Button>
-        <Button variant="achievement" className="h-16 text-base">
+        <Button variant="achievement" className="h-16 text-base text-green-700">
           <Target className="w-5 h-5 mr-3" />
           Prática Personalizada
         </Button>
-        <Button variant="focus" className="h-16 text-base">
+        <Button variant="focus" className="h-16 text-base text-green-700">
           <Award className="w-5 h-5 mr-3" />
-          Relatório de Progresso
+          Continuar Estudando
         </Button>
       </div>
     </div>

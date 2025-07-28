@@ -258,11 +258,11 @@ const CPAMethod = () => {
                 Exemplo {currentExampleIndex + 1} de {currentStageData.examples.length}
               </h3>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" onClick={prevExample}>
-                  ←
+                <Button variant="outline" size="sm" onClick={prevExample} className="flex items-center gap-1">
+                  ← <span className="text-xs">Exemplo anterior</span>
                 </Button>
-                <Button variant="outline" size="sm" onClick={nextExample}>
-                  →
+                <Button variant="outline" size="sm" onClick={nextExample} className="flex items-center gap-1">
+                  <span className="text-xs">Próximo exemplo</span> →
                 </Button>
               </div>
             </div>
@@ -298,7 +298,7 @@ const CPAMethod = () => {
               <Button 
                 variant="learning" 
                 onClick={handleStageComplete}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white"
               >
                 <PlayCircle className="w-4 h-4" />
                 Praticar Este Estágio
@@ -331,7 +331,7 @@ const CPAMethod = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-learning flex items-center justify-center mx-auto mb-4">
                   <Brain className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Compreensão Profunda</h3>
+                <h3 className="font-semibold text-green-700 mb-2">Compreensão Profunda</h3>
                 <p className="text-sm text-muted-foreground">
                   Desenvolve entendimento conceitual sólido antes da abstração matemática
                 </p>
@@ -341,7 +341,7 @@ const CPAMethod = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-achievement flex items-center justify-center mx-auto mb-4">
                   <Calculator className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Resolução de Problemas</h3>
+                <h3 className="font-semibold text-green-700 mb-2">Resolução de Problemas</h3>
                 <p className="text-sm text-muted-foreground">
                   Ensina múltiplas estratégias para abordar desafios matemáticos complexos
                 </p>

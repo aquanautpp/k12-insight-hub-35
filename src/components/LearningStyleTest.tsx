@@ -274,9 +274,9 @@ const LearningStyleTest = () => {
                   <Trophy className="w-8 h-8 text-white" />
                 </div>
               </div>
-              <CardTitle className="text-2xl text-white mb-2">
-                Parabéns! Você descobriu seu superpoder! 🎉
-              </CardTitle>
+               <CardTitle className="text-2xl text-green-700 mb-2">
+                 Descubra Seu Superpoder de Aprender! 🎉
+               </CardTitle>
             </CardHeader>
             
             <CardContent className="p-8">
@@ -366,16 +366,16 @@ const LearningStyleTest = () => {
       <div className="max-w-4xl mx-auto">
         <Card className="border-0 shadow-card">
           <CardHeader className="bg-gradient-learning rounded-t-lg">
-            <div className="flex items-center justify-between text-white">
+            <div className="flex items-center justify-between text-green-700">
               <div>
-                <CardTitle className="text-xl mb-2">Descubra Seu Superpoder de Aprender! 🧠</CardTitle>
-                <p className="text-white/90">
+                <CardTitle className="text-xl mb-2 text-green-700">Descubra Seu Superpoder de Aprender! 🧠</CardTitle>
+                <p className="text-green-700">
                   Pergunta {currentQuestion + 1} de {questions.length}
                 </p>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold">{Math.round(((currentQuestion) / questions.length) * 100)}%</div>
-                <div className="text-sm text-white/90">Completo</div>
+                <div className="text-2xl font-bold text-green-700">{Math.round(((currentQuestion) / questions.length) * 100)}%</div>
+                <div className="text-sm text-green-700">Completo</div>
               </div>
             </div>
             <Progress value={(currentQuestion / questions.length) * 100} className="mt-4" />

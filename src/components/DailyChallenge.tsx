@@ -41,6 +41,7 @@ const DailyChallenge = () => {
   const [answer, setAnswer] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [showTutorHelp, setShowTutorHelp] = useState(false);
+  const [feedback, setFeedback] = useState("");
   const { toast } = useToast();
 
   const handleSubmitAnswer = () => {
@@ -54,20 +55,14 @@ const DailyChallenge = () => {
     }
 
     // Feedback detalhado
-    const expectedAnswer = "A família Silva tem renda de R$ 4.500. Gastos totais: R$ 3.700. Sobram R$ 800. Para 20% de emergência precisam de R$ 900/mês. Para a viagem precisam de R$ 450/mês. Total necessário: R$ 1.350. Como só sobram R$ 800, precisam cortar R$ 550 nos gastos, especialmente lazer (de R$ 300 para R$ 50) e transporte (de R$ 400 para R$ 200).";
+    const expectedAnswer = "💡 Solução Sugerida: A família Silva tem renda de R$ 4.500. Gastos totais: R$ 3.700. Sobram R$ 800. Para 20% de emergência precisam de R$ 900/mês. Para a viagem precisam de R$ 450/mês. Total necessário: R$ 1.350. Como só sobram R$ 800, precisam cortar R$ 550 nos gastos, especialmente lazer (de R$ 300 para R$ 50) e transporte (de R$ 400 para R$ 200).";
+    
+    setFeedback(expectedAnswer);
     
     toast({
       title: "✅ Resposta Avaliada!",
       description: "Sua solução foi analisada. Veja o feedback abaixo.",
     });
-
-    // Mostrar feedback
-    setTimeout(() => {
-      toast({
-        title: "💡 Solução Sugerida",
-        description: expectedAnswer,
-      });
-    }, 2000);
 
     console.log("Resposta enviada:", answer);
   };
@@ -214,7 +209,7 @@ const DailyChallenge = () => {
             <div className="flex gap-3">
               <Button 
                 onClick={handleSubmitAnswer}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white"
                 variant="learning"
               >
                 <FileText className="w-4 h-4" />
@@ -223,10 +218,90 @@ const DailyChallenge = () => {
               
               <Button 
                 variant="outline"
-                onClick={() => setAnswer("")}
+                onClick={() => {
+                  setAnswer("");
+                  setFeedback("");
+                }}
               >
                 Limpar
               </Button>
+            </div>
+            
+            {/* Feedback Permanente */}
+            {feedback && (
+              <div className="mt-4 bg-primary/10 border border-primary/20 rounded-lg p-4">
+                <p className="text-foreground">{feedback}</p>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+      
+      {/* Seção de Recomendações de Leitura */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
+            📚 Recomendações de Leitura
+          </CardTitle>
+          <CardDescription className="text-muted-foreground">
+            Livros e recursos para desenvolver mentalidade empreendedora
+          </CardDescription>
+        </CardHeader>
+        
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-foreground">Livros sobre Negócios para Crianças</h3>
+              
+              <div className="space-y-3">
+                <div className="bg-gradient-subtle p-4 rounded-lg">
+                  <h4 className="font-medium text-foreground">"O Menino do Dinheiro" - Reinaldo Domingos</h4>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Ensina conceitos de educação financeira de forma lúdica e divertida.
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-subtle p-4 rounded-lg">
+                  <h4 className="font-medium text-foreground">"Como Ensinar Crianças a Lidar com Dinheiro" - Cássia D'Aquino</h4>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Estratégias práticas para desenvolver consciência financeira desde cedo.
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-subtle p-4 rounded-lg">
+                  <h4 className="font-medium text-foreground">"O Pequeno Empreendedor" - Conrado Adolpho</h4>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Desperta o espírito empreendedor através de histórias inspiradoras.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-foreground">Trechos Inspiradores</h3>
+              
+              <div className="space-y-3">
+                <div className="bg-card border border-border rounded-lg p-4">
+                  <blockquote className="text-foreground italic">
+                    "O dinheiro é apenas uma ferramenta. O que importa é como você o usa para realizar seus sonhos."
+                  </blockquote>
+                  <p className="text-sm text-muted-foreground mt-2">- Princípio da Educação Financeira</p>
+                </div>
+                
+                <div className="bg-card border border-border rounded-lg p-4">
+                  <blockquote className="text-foreground italic">
+                    "Cada centavo poupado hoje é um passo em direção ao seu futuro brilhante."
+                  </blockquote>
+                  <p className="text-sm text-muted-foreground mt-2">- Sabedoria Financeira</p>
+                </div>
+                
+                <div className="bg-card border border-border rounded-lg p-4">
+                  <blockquote className="text-foreground italic">
+                    "Empreender é transformar problemas em oportunidades e sonhos em realidade."
+                  </blockquote>
+                  <p className="text-sm text-muted-foreground mt-2">- Espírito Empreendedor</p>
+                </div>
+              </div>
             </div>
           </div>
         </CardContent>
