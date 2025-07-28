@@ -8,45 +8,45 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Balanced Light Theme with Subtle Accents */
-    --background: 210 15% 95%;
-    --foreground: 210 20% 15%;
+    /* Elegant Earth Tones with Olive Green */
+    --background: 45 15% 96%;
+    --foreground: 25 20% 25%;
 
-    --card: 210 10% 98%;
-    --card-foreground: 210 20% 15%;
+    --card: 45 10% 98%;
+    --card-foreground: 25 20% 25%;
 
-    --popover: 210 10% 98%;
-    --popover-foreground: 210 20% 15%;
+    --popover: 45 10% 98%;
+    --popover-foreground: 25 20% 25%;
 
-    /* Olive Green - Primary Actions */
+    /* Rich Olive Green - Primary Actions */
     --primary: 85 35% 45%;
-    --primary-foreground: 210 20% 95%;
+    --primary-foreground: 45 15% 95%;
     --primary-hover: 85 40% 40%;
 
-    /* Sage Green - Secondary Actions */
-    --secondary: 100 20% 85%;
-    --secondary-foreground: 210 20% 20%;
+    /* Warm Sage - Secondary Actions */
+    --secondary: 85 15% 88%;
+    --secondary-foreground: 25 20% 30%;
 
-    /* Warm Beige - Supporting Elements */
-    --muted: 210 8% 88%;
-    --muted-foreground: 210 15% 45%;
+    /* Soft Taupe - Supporting Elements */
+    --muted: 35 12% 92%;
+    --muted-foreground: 25 15% 50%;
 
-    /* Warm Sand - Accent */
-    --accent: 35 25% 75%;
-    --accent-foreground: 210 20% 20%;
+    /* Warm Terra Cotta - Accent */
+    --accent: 25 35% 80%;
+    --accent-foreground: 25 20% 25%;
 
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 12% 82%;
-    --input: 210 10% 92%;
+    --border: 35 15% 85%;
+    --input: 45 8% 94%;
     --ring: 85 35% 45%;
 
-    /* Very Subtle Gradients */
-    --gradient-learning: linear-gradient(135deg, hsl(210 10% 96%), hsl(85 15% 90%));
-    --gradient-achievement: linear-gradient(135deg, hsl(210 10% 96%), hsl(100 12% 88%));
-    --gradient-focus: linear-gradient(135deg, hsl(210 10% 98%), hsl(85 10% 92%));
-    --gradient-subtle: linear-gradient(180deg, hsl(210 15% 95%), hsl(210 8% 92%));
+    /* Elegant Earth Gradients */
+    --gradient-learning: linear-gradient(135deg, hsl(85 25% 92%), hsl(45 20% 88%));
+    --gradient-achievement: linear-gradient(135deg, hsl(25 30% 90%), hsl(85 20% 88%));
+    --gradient-focus: linear-gradient(135deg, hsl(45 15% 94%), hsl(85 15% 90%));
+    --gradient-subtle: linear-gradient(180deg, hsl(45 15% 96%), hsl(35 12% 92%));
 
     /* Olive Green + Beige Shadows */
     --shadow-learning: 0 10px 30px -10px hsl(85 35% 35% / 0.2);

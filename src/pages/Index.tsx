@@ -4,6 +4,7 @@ import Dashboard from "@/components/Dashboard";
 import CPAMethod from "@/components/CPAMethod";
 import ChatTutor from "@/components/ChatTutor";
 import MerakiChatTutor from "@/components/MerakiChatTutor";
+import LearningStyleTest from "@/components/LearningStyleTest";
 import ProgressView from "@/components/ProgressView";
 import DailyChallenge from "@/components/DailyChallenge";
 
@@ -16,6 +17,8 @@ const Index = () => {
         return <Dashboard />;
       case 'singapore-method':
         return <CPAMethod />;
+      case 'learning-test':
+        return <LearningStyleTest />;
       case 'chat-tutor':
         return <ChatTutor />;
       case 'meraki-chat':
