@@ -222,7 +222,7 @@ Que estágio você gostaria de praticar mais?`,
       description: "Representações visuais e desenhos"
     },
     abstract: { 
-      title: "Estágio Simbólico", 
+      title: "Estágio Abstrato", 
       icon: "🔢", 
       color: "bg-purple-100 text-purple-800",
       description: "Símbolos e operações matemáticas"
@@ -230,7 +230,7 @@ Que estágio você gostaria de praticar mais?`,
     adaptive: { 
       title: "Abordagem Adaptativa", 
       icon: "🎯", 
-      color: "bg-green-100 text-green-800",
+      color: "bg-orange-100 text-orange-800",
       description: "Combinação de todos os estágios"
     }
   };
@@ -279,15 +279,15 @@ Que estágio você gostaria de praticar mais?`,
   return (
     <div className="max-w-4xl mx-auto p-6">
       <Card className="h-[700px] flex flex-col shadow-card">
-        <CardHeader className="bg-gradient-learning text-white rounded-t-lg">
+        <CardHeader className="bg-green-700 text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                 <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl font-bold">Meraki - Tutora de IA</CardTitle>
-                <p className="text-white/80 text-sm flex items-center">
+                <CardTitle className="text-xl font-bold text-green-50">Meraki - Tutora de IA</CardTitle>
+                <p className="text-green-100 text-sm flex items-center">
                   <span className="mr-2">{stageInfo[currentStage].icon}</span>
                   {stageInfo[currentStage].title}
                 </p>

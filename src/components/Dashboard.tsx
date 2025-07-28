@@ -153,7 +153,7 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Button variant="learning" className="h-16 text-base text-green-700">
+        <Button variant="achievement" className="h-16 text-base text-green-700">
           <Brain className="w-5 h-5 mr-3" />
           Método CPA
         </Button>
@@ -161,7 +161,7 @@ const Dashboard = () => {
           <Target className="w-5 h-5 mr-3" />
           Prática Personalizada
         </Button>
-        <Button variant="focus" className="h-16 text-base text-green-700">
+        <Button variant="achievement" className="h-16 text-base text-green-700">
           <Award className="w-5 h-5 mr-3" />
           Continuar Estudando
         </Button>

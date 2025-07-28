@@ -209,7 +209,7 @@ const DailyChallenge = () => {
             <div className="flex gap-3">
               <Button 
                 onClick={handleSubmitAnswer}
-                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white"
+                className="flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white"
                 variant="learning"
               >
                 <FileText className="w-4 h-4" />

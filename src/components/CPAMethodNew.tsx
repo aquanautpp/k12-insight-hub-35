@@ -331,27 +331,27 @@ const CPAMethod = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-learning flex items-center justify-center mx-auto mb-4">
                   <Brain className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="font-semibold text-green-700 mb-2">Compreensão Profunda</h3>
-                <p className="text-sm text-muted-foreground">
-                  Desenvolve entendimento conceitual sólido antes da abstração matemática
-                </p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-achievement flex items-center justify-center mx-auto mb-4">
-                  <Calculator className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="font-semibold text-green-700 mb-2">Resolução de Problemas</h3>
-                <p className="text-sm text-muted-foreground">
-                  Ensina múltiplas estratégias para abordar desafios matemáticos complexos
-                </p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
-                  <Eye className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Visualização</h3>
+                <h3 className="font-semibold text-foreground mb-2">Compreensão Profunda</h3>
+                 <p className="text-sm text-muted-foreground">
+                   Desenvolve entendimento conceitual sólido antes da abstração matemática
+                 </p>
+               </div>
+               
+               <div className="text-center">
+                 <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
+                   <Calculator className="w-8 h-8 text-primary" />
+                 </div>
+                 <h3 className="font-semibold text-foreground mb-2">Resolução de Problemas</h3>
+                 <p className="text-sm text-muted-foreground">
+                   Ensina múltiplas estratégias para abordar desafios matemáticos complexos
+                 </p>
+               </div>
+               
+               <div className="text-center">
+                 <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
+                   <Eye className="w-8 h-8 text-primary" />
+                 </div>
+                 <h3 className="font-semibold text-foreground mb-2">Visualização</h3>
                 <p className="text-sm text-muted-foreground">
                   Fortalece capacidade de representar e visualizar conceitos matemáticos
                 </p>
