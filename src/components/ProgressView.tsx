@@ -15,7 +15,8 @@ import {
   BarChart3,
   Zap,
   Download,
-  Settings
+  Settings,
+  CheckCircle
 } from "lucide-react";
 
 const ProgressView = () => {
@@ -133,23 +134,23 @@ const ProgressView = () => {
 
       {/* Learning Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="p-6 bg-gradient-learning text-white shadow-learning">
+        <Card className="p-6 bg-gradient-subtle text-black border border-green-200">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-black text-sm">Tempo de Estudo</p>
               <p className="text-2xl font-bold text-black">{learningStats.totalHours}h</p>
             </div>
-            <Clock className="w-8 h-8 text-white/70" />
+            <Clock className="w-8 h-8 text-green-600" />
           </div>
         </Card>
         
-        <Card className="p-6 bg-gradient-achievement text-white shadow-achievement">
+        <Card className="p-6 bg-gradient-subtle text-black border border-green-200">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-black text-sm">Problemas Resolvidos</p>
               <p className="text-2xl font-bold text-black">{learningStats.problemsSolved}</p>
             </div>
-            <Target className="w-8 h-8 text-white/70" />
+            <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
         </Card>
         

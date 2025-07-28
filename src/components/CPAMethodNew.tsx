@@ -293,18 +293,9 @@ const CPAMethod = () => {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex gap-4 pt-4">
-              <Button 
-                variant="learning" 
-                onClick={handleStageComplete}
-                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white"
-              >
-                <PlayCircle className="w-4 h-4" />
-                Praticar Este Estágio
-              </Button>
-              
-              {currentStage !== 'abstract' && (
+            {/* Navigation to next stage */}
+            {currentStage !== 'abstract' && (
+              <div className="flex justify-end pt-4">
                 <Button 
                   variant="outline" 
                   onClick={handleStageComplete}
@@ -313,8 +304,8 @@ const CPAMethod = () => {
                   <ArrowRight className="w-4 h-4" />
                   Próximo Estágio
                 </Button>
-              )}
-            </div>
+              </div>
+            )}
           </CardContent>
         </Card>
 

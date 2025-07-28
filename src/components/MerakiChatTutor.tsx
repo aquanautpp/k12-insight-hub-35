@@ -279,7 +279,7 @@ Que estágio você gostaria de praticar mais?`,
   return (
     <div className="max-w-4xl mx-auto p-6">
       <Card className="h-[700px] flex flex-col shadow-card">
-        <CardHeader className="bg-green-600 text-white rounded-t-lg">
+        <CardHeader className="bg-green-700 text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
