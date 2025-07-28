@@ -318,8 +318,8 @@ const LearningStyleTest = () => {
                 </div>
               </div>
                <CardTitle className="text-2xl text-green-700 mb-2">
-                 Descubra Seu Superpoder de Aprender! 🎉
-               </CardTitle>
+                  Descobrir Como Eu Aprendo 🎉
+                </CardTitle>
             </CardHeader>
             
             <CardContent className="p-8">

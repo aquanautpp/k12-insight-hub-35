@@ -153,23 +153,23 @@ const ProgressView = () => {
           </div>
         </Card>
         
-        <Card className="p-6 bg-gradient-focus text-primary border border-primary/20">
+        <Card className="p-6 bg-gradient-subtle text-black border border-green-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-primary/70 text-sm">Sequência de Dias</p>
-              <p className="text-2xl font-bold">{learningStats.streakDays}</p>
+              <p className="text-black text-sm">Sequência de Dias</p>
+              <p className="text-2xl font-bold text-black">{learningStats.streakDays}</p>
             </div>
-            <Zap className="w-8 h-8 text-primary/70" />
+            <Zap className="w-8 h-8 text-green-600" />
           </div>
         </Card>
         
-        <Card className="p-6 shadow-card">
+        <Card className="p-6 bg-gradient-subtle text-black border border-green-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-muted-foreground text-sm">IA Utilizada</p>
-              <p className="text-2xl font-bold text-foreground">{learningStats.aiRecommendationsUsed}</p>
+              <p className="text-black text-sm">IA Utilizada</p>
+              <p className="text-2xl font-bold text-black">{learningStats.aiRecommendationsUsed}</p>
             </div>
-            <Brain className="w-8 h-8 text-accent" />
+            <Brain className="w-8 h-8 text-green-600" />
           </div>
         </Card>
       </div>
