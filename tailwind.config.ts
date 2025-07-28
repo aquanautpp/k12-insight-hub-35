@@ -92,6 +92,7 @@ export default {
 				'gradient-achievement': 'var(--gradient-achievement)',
 				'gradient-focus': 'var(--gradient-focus)',
 				'gradient-subtle': 'var(--gradient-subtle)',
+				'gradient-tutor': 'linear-gradient(135deg, hsl(82, 39%, 30%), hsl(82, 50%, 40%))',
 				'gradient-heart-primary': 'var(--gradient-heart-primary)',
 				'gradient-heart-secondary': 'var(--gradient-heart-secondary)',
 			},
