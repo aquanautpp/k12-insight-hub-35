@@ -53,6 +53,24 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				heart: {
+					primary: 'hsl(var(--heart-primary))',
+					secondary: 'hsl(var(--heart-secondary))',
+				},
+				gold: {
+					DEFAULT: 'hsl(var(--gold))',
+					foreground: 'hsl(var(--gold-foreground))',
+					50: 'hsl(45 100% 96%)',
+					100: 'hsl(45 100% 90%)',
+					200: 'hsl(45 100% 80%)',
+					300: 'hsl(45 100% 70%)',
+					400: 'hsl(45 100% 60%)',
+					500: 'hsl(var(--gold))',
+					600: 'hsl(45 90% 45%)',
+					700: 'hsl(45 80% 35%)',
+					800: 'hsl(45 70% 25%)',
+					900: 'hsl(45 60% 15%)',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -73,7 +91,9 @@ export default {
 				'gradient-learning': 'var(--gradient-learning)',
 				'gradient-achievement': 'var(--gradient-achievement)',
 				'gradient-focus': 'var(--gradient-focus)',
-				'gradient-subtle': 'var(--gradient-subtle)'
+				'gradient-subtle': 'var(--gradient-subtle)',
+				'gradient-heart-primary': 'var(--gradient-heart-primary)',
+				'gradient-heart-secondary': 'var(--gradient-heart-secondary)',
 			},
 			boxShadow: {
 				'learning': 'var(--shadow-learning)',

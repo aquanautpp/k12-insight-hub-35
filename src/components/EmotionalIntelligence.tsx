@@ -261,20 +261,22 @@ const EmotionalIntelligence = () => {
 
 // Função auxiliar para retornar o componente do domínio
 const getDomainComponent = (domainId: EIDomain) => {
-  switch (domainId) {
-    case 'autoconsciencia':
-      return require('./EI/AutoconscienciaModule').default;
-    case 'autorregulacao':
-      return require('./EI/AutorregulacaoModule').default;
-    case 'automotivacao':
-      return require('./EI/AutomotivacaoModule').default;
-    case 'empatia':
-      return require('./EI/EmpatiaModule').default;
-    case 'habilidades_sociais':
-      return require('./EI/HabilidadesSociaisModule').default;
-    default:
-      return () => <div>Módulo não encontrado</div>;
-  }
+  // Para demonstração, retornamos um componente simples
+  // Na implementação real, você importaria os componentes específicos
+  return ({ onBack }: { onBack: () => void }) => (
+    <div className="min-h-screen bg-gradient-subtle p-6">
+      <button 
+        onClick={onBack}
+        className="mb-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg"
+      >
+        ← Voltar
+      </button>
+      <h1 className="text-2xl font-bold">Módulo {domainId} em desenvolvimento</h1>
+      <p className="text-muted-foreground mt-2">
+        Este módulo específico será implementado em breve com atividades interativas.
+      </p>
+    </div>
+  );
 };
 
 export default EmotionalIntelligence;

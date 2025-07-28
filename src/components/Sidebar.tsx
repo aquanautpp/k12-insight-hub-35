@@ -7,6 +7,8 @@ import {
   BarChart3, 
   Target, 
   BookOpen,
+  Heart,
+  Book,
   User
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -49,6 +51,11 @@ const navigationItems = [
     icon: MessageSquare,
   },
   {
+    id: 'emotional-intelligence',
+    title: 'Inteligência Emocional',
+    icon: Heart,
+  },
+  {
     id: 'progress',
     title: 'Progresso',
     icon: BarChart3,
@@ -57,6 +64,16 @@ const navigationItems = [
     id: 'activities',
     title: 'Atividades',
     icon: BookOpen,
+  },
+  {
+    id: 'reading',
+    title: 'Recomendações de Leitura',
+    icon: Book,
+  },
+  {
+    id: 'profile',
+    title: 'Perfil',
+    icon: User,
   },
 ];
 

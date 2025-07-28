@@ -3,11 +3,12 @@ import { AppSidebar } from "@/components/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import Dashboard from "@/components/Dashboard";
 import CPAMethod from "@/components/CPAMethodNew";
-import ChatTutor from "@/components/ChatTutor";
 import MerakiChatTutor from "@/components/MerakiChatTutor";
 import LearningStyleTest from "@/components/LearningStyleTest";
 import ProgressView from "@/components/ProgressView";
 import DailyChallenge from "@/components/DailyChallenge";
+import EmotionalIntelligence from "@/components/EmotionalIntelligence";
+import ReadingRecommendations from "@/components/ReadingRecommendations";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -20,14 +21,16 @@ const Index = () => {
         return <CPAMethod />;
       case 'learning-test':
         return <LearningStyleTest />;
-      case 'chat-tutor':
-        return <ChatTutor />;
       case 'meraki-chat':
         return <MerakiChatTutor />;
+      case 'emotional-intelligence':
+        return <EmotionalIntelligence />;
       case 'progress':
         return <ProgressView />;
       case 'activities':
         return <DailyChallenge />;
+      case 'reading':
+        return <ReadingRecommendations />;
       case 'profile':
         return <Dashboard />; // Placeholder
       default:
@@ -49,8 +52,10 @@ const Index = () => {
                 {currentView === 'cpa-method' && 'Método CPA'}
                 {currentView === 'learning-test' && 'Teste de Aprendizagem'}
                 {currentView === 'meraki-chat' && 'Tutor IA'}
+                {currentView === 'emotional-intelligence' && 'Inteligência Emocional'}
                 {currentView === 'progress' && 'Progresso'}
                 {currentView === 'activities' && 'Atividades'}
+                {currentView === 'reading' && 'Recomendações de Leitura'}
               </h2>
             </div>
           </header>
