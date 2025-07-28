@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Dashboard from "@/components/Dashboard";
 import SingaporeMethod from "@/components/SingaporeMethod";
 import ChatTutor from "@/components/ChatTutor";
+import MerakiChatTutor from "@/components/MerakiChatTutor";
 import ProgressView from "@/components/ProgressView";
 import DailyChallenge from "@/components/DailyChallenge";
 
@@ -17,6 +18,8 @@ const Index = () => {
         return <SingaporeMethod />;
       case 'chat-tutor':
         return <ChatTutor />;
+      case 'meraki-chat':
+        return <MerakiChatTutor />;
       case 'progress':
         return <ProgressView />;
       case 'activities':
