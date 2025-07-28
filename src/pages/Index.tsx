@@ -4,6 +4,7 @@ import Dashboard from "@/components/Dashboard";
 import SingaporeMethod from "@/components/SingaporeMethod";
 import ChatTutor from "@/components/ChatTutor";
 import ProgressView from "@/components/ProgressView";
+import DailyChallenge from "@/components/DailyChallenge";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -19,7 +20,7 @@ const Index = () => {
       case 'progress':
         return <ProgressView />;
       case 'activities':
-        return <Dashboard />; // Placeholder
+        return <DailyChallenge />;
       case 'profile':
         return <Dashboard />; // Placeholder
       default:

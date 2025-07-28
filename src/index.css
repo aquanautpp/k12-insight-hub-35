@@ -8,50 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Educational Platform Design System */
-    --background: 250 100% 99%;
-    --foreground: 220 20% 20%;
+    /* Olive Green + Beige Design System */
+    --background: 60 20% 95%;
+    --foreground: 120 15% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 20%;
+    --card: 45 30% 92%;
+    --card-foreground: 120 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 20%;
+    --popover: 45 30% 92%;
+    --popover-foreground: 120 15% 15%;
 
-    /* Educational Blue - Trust & Focus */
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 217 91% 55%;
+    /* Olive Green - Primary Actions */
+    --primary: 85 35% 35%;
+    --primary-foreground: 45 50% 95%;
+    --primary-hover: 85 40% 30%;
 
-    /* Success Green - Achievements */
-    --secondary: 142 71% 45%;
-    --secondary-foreground: 0 0% 100%;
+    /* Sage Green - Secondary Actions */
+    --secondary: 100 25% 55%;
+    --secondary-foreground: 45 50% 95%;
 
-    /* Learning Gray - Supporting Elements */
-    --muted: 220 13% 95%;
-    --muted-foreground: 220 9% 46%;
+    /* Warm Beige - Supporting Elements */
+    --muted: 45 25% 88%;
+    --muted-foreground: 85 15% 40%;
 
-    /* Warm Orange - Engagement */
-    --accent: 43 96% 56%;
-    --accent-foreground: 220 20% 20%;
+    /* Warm Sand - Accent */
+    --accent: 35 45% 75%;
+    --accent-foreground: 120 15% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 95%;
-    --ring: 217 91% 60%;
+    --border: 85 20% 80%;
+    --input: 45 25% 88%;
+    --ring: 85 35% 35%;
 
-    /* Educational Gradients */
-    --gradient-learning: linear-gradient(135deg, hsl(217 91% 60%), hsl(142 71% 45%));
-    --gradient-achievement: linear-gradient(135deg, hsl(142 71% 45%), hsl(43 96% 56%));
-    --gradient-focus: linear-gradient(135deg, hsl(217 91% 60%), hsl(250 100% 99%));
-    --gradient-subtle: linear-gradient(180deg, hsl(250 100% 99%), hsl(220 13% 98%));
+    /* Olive Green + Beige Gradients */
+    --gradient-learning: linear-gradient(135deg, hsl(85 35% 35%), hsl(100 25% 55%));
+    --gradient-achievement: linear-gradient(135deg, hsl(100 25% 55%), hsl(35 45% 75%));
+    --gradient-focus: linear-gradient(135deg, hsl(85 35% 35%), hsl(60 20% 95%));
+    --gradient-subtle: linear-gradient(180deg, hsl(60 20% 95%), hsl(45 25% 92%));
 
-    /* Educational Shadows */
-    --shadow-learning: 0 10px 30px -10px hsl(217 91% 60% / 0.2);
-    --shadow-achievement: 0 8px 25px -8px hsl(142 71% 45% / 0.3);
-    --shadow-card: 0 4px 12px -4px hsl(220 20% 20% / 0.1);
+    /* Olive Green + Beige Shadows */
+    --shadow-learning: 0 10px 30px -10px hsl(85 35% 35% / 0.2);
+    --shadow-achievement: 0 8px 25px -8px hsl(100 25% 55% / 0.3);
+    --shadow-card: 0 4px 12px -4px hsl(120 15% 15% / 0.1);
 
     /* Animation Variables */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
