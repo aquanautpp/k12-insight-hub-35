@@ -144,53 +144,69 @@ const ProgressView = () => {
 
       {/* Weekly Progress Chart */}
       <Card className="p-6 shadow-card">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-foreground">Progresso Semanal</h2>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-primary"></div>
-              <span className="text-sm text-muted-foreground">Matemática</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-secondary"></div>
-              <span className="text-sm text-muted-foreground">Ciências</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-accent"></div>
-              <span className="text-sm text-muted-foreground">Línguas</span>
-            </div>
-          </div>
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-foreground mb-2">Progresso Semanal</h2>
+          <p className="text-sm text-muted-foreground">Seu desempenho geral nos últimos 7 dias</p>
         </div>
         
-        <div className="grid grid-cols-7 gap-4">
-          {weeklyProgress.map((day, index) => (
-            <div key={index} className="text-center">
-              <p className="text-sm font-medium text-muted-foreground mb-3">{day.day}</p>
-              <div className="space-y-2">
-                <div className="bg-muted rounded-full h-20 flex flex-col justify-end p-1">
-                  <div 
-                    className="bg-primary rounded-full transition-all duration-500"
-                    style={{ height: `${day.mathematics}%` }}
-                  ></div>
+        <div className="space-y-6">
+          {/* Gráfico Principal Simplificado */}
+          <div className="grid grid-cols-7 gap-3">
+            {weeklyProgress.map((day, index) => {
+              const dailyAverage = Math.round((day.mathematics + day.science + day.language) / 3);
+              return (
+                <div key={index} className="text-center">
+                  <div className="mb-3">
+                    <div className="w-12 h-12 mx-auto rounded-lg bg-gradient-to-t from-gray-100 to-gray-50 border flex items-end justify-center p-1">
+                      <div 
+                        className={`w-full rounded-sm transition-all duration-700 ${
+                          dailyAverage >= 90 ? 'bg-green-500' :
+                          dailyAverage >= 70 ? 'bg-blue-500' :
+                          dailyAverage >= 50 ? 'bg-yellow-500' : 'bg-gray-400'
+                        }`}
+                        style={{ height: `${Math.max(dailyAverage, 8)}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                  <p className="text-xs font-medium text-foreground mb-1">{day.day}</p>
+                  <p className="text-xs text-muted-foreground">{dailyAverage}%</p>
                 </div>
-                <div className="bg-muted rounded-full h-20 flex flex-col justify-end p-1">
-                  <div 
-                    className="bg-secondary rounded-full transition-all duration-500"
-                    style={{ height: `${day.science}%` }}
-                  ></div>
-                </div>
-                <div className="bg-muted rounded-full h-20 flex flex-col justify-end p-1">
-                  <div 
-                    className="bg-accent rounded-full transition-all duration-500"
-                    style={{ height: `${day.language}%` }}
-                  ></div>
-                </div>
+              );
+            })}
+          </div>
+
+          {/* Legenda Minimalista */}
+          <div className="border-t pt-4">
+            <div className="flex items-center justify-center gap-6 text-xs">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-green-500"></div>
+                <span className="text-muted-foreground">Excelente (90%+)</span>
               </div>
-              <p className="text-xs text-muted-foreground mt-2">
-                {Math.round((day.mathematics + day.science + day.language) / 3)}%
-              </p>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-blue-500"></div>
+                <span className="text-muted-foreground">Bom (70-89%)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-yellow-500"></div>
+                <span className="text-muted-foreground">Regular (50-69%)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-gray-400"></div>
+                <span className="text-muted-foreground">Precisa melhorar (&lt;50%)</span>
+              </div>
             </div>
-          ))}
+          </div>
+
+          {/* Detalhes por Matéria - Expandível */}
+          <div className="border-t pt-4">
+            <Button 
+              variant="ghost" 
+              className="w-full text-sm text-muted-foreground hover:text-foreground"
+              onClick={() => {/* Toggle detailed view */}}
+            >
+              Ver detalhes por matéria ↓
+            </Button>
+          </div>
         </div>
       </Card>
 
