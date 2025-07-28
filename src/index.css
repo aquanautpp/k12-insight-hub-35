@@ -9,38 +9,38 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Olive Green + Beige Design System */
-    --background: 60 20% 95%;
-    --foreground: 120 15% 15%;
+    --background: 60 20% 97%;
+    --foreground: 120 25% 12%;
 
-    --card: 45 30% 92%;
-    --card-foreground: 120 15% 15%;
+    --card: 45 30% 95%;
+    --card-foreground: 120 25% 12%;
 
-    --popover: 45 30% 92%;
-    --popover-foreground: 120 15% 15%;
+    --popover: 45 30% 95%;
+    --popover-foreground: 120 25% 12%;
 
     /* Olive Green - Primary Actions */
-    --primary: 85 35% 35%;
-    --primary-foreground: 45 50% 95%;
-    --primary-hover: 85 40% 30%;
+    --primary: 85 40% 32%;
+    --primary-foreground: 60 30% 98%;
+    --primary-hover: 85 45% 28%;
 
     /* Sage Green - Secondary Actions */
-    --secondary: 100 25% 55%;
-    --secondary-foreground: 45 50% 95%;
+    --secondary: 100 30% 48%;
+    --secondary-foreground: 60 30% 98%;
 
     /* Warm Beige - Supporting Elements */
-    --muted: 45 25% 88%;
-    --muted-foreground: 85 15% 40%;
+    --muted: 45 20% 90%;
+    --muted-foreground: 85 25% 35%;
 
     /* Warm Sand - Accent */
-    --accent: 35 45% 75%;
-    --accent-foreground: 120 15% 15%;
+    --accent: 35 50% 65%;
+    --accent-foreground: 120 25% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 85 20% 80%;
-    --input: 45 25% 88%;
-    --ring: 85 35% 35%;
+    --border: 85 25% 75%;
+    --input: 45 20% 92%;
+    --ring: 85 40% 32%;
 
     /* Olive Green + Beige Gradients */
     --gradient-learning: linear-gradient(135deg, hsl(85 35% 35%), hsl(100 25% 55%));
