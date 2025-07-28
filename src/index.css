@@ -74,7 +74,16 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+  /* Emotional Intelligence gradients */
+  --gradient-heart-primary: linear-gradient(135deg, hsl(340, 75%, 60%), hsl(320, 65%, 55%));
+  --gradient-heart-secondary: linear-gradient(135deg, hsl(320, 65%, 55%), hsl(300, 70%, 50%));
+  
+  /* Additional color tokens for IE module */
+  --heart-primary: 340 75% 60%;
+  --heart-secondary: 320 65% 55%;
+  --gold: 45 100% 50%;
+  --gold-foreground: 25 25% 10%;
+}
 
   .dark {
     --background: 25 25% 8%;
