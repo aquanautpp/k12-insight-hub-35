@@ -264,7 +264,7 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[70%] rounded-lg p-4 ${
+                      className={`max-w-[80%] rounded-lg p-4 ${
                         message.sender === 'user'
                           ? 'bg-primary text-primary-foreground'
                           : 'bg-muted'
@@ -333,7 +333,13 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
 
         {/* Quick Actions */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="p-4 hover:bg-muted/50 cursor-pointer transition-colors">
+          <Card 
+            className="p-4 hover:bg-muted/50 cursor-pointer transition-colors"
+            onClick={() => {
+              setInputMessage("Me dê um exemplo de problema de adição para praticar");
+              handleSendMessage();
+            }}
+          >
             <div className="flex items-center gap-3">
               <Lightbulb className="h-6 w-6 text-yellow-500" />
               <div>
@@ -343,7 +349,14 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
             </div>
           </Card>
           
-          <Card className="p-4 hover:bg-muted/50 cursor-pointer transition-colors">
+          <Card 
+            className="p-4 hover:bg-muted/50 cursor-pointer transition-colors"
+            onClick={() => {
+              setCurrentStage('pictorial');
+              setInputMessage("Explique visualmente como resolver uma multiplicação");
+              handleSendMessage();
+            }}
+          >
             <div className="flex items-center gap-3">
               <Eye className="h-6 w-6 text-blue-500" />
               <div>
@@ -353,7 +366,13 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
             </div>
           </Card>
           
-          <Card className="p-4 hover:bg-muted/50 cursor-pointer transition-colors">
+          <Card 
+            className="p-4 hover:bg-muted/50 cursor-pointer transition-colors"
+            onClick={() => {
+              setInputMessage("Quero praticar problemas de frações com sua orientação");
+              handleSendMessage();
+            }}
+          >
             <div className="flex items-center gap-3">
               <Calculator className="h-6 w-6 text-green-500" />
               <div>

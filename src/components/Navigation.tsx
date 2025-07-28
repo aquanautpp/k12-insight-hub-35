@@ -24,7 +24,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home, badge: null },
-    { id: 'singapore-method', label: 'Método de Singapura', icon: Brain, badge: 'Novo' },
+    { id: 'singapore-method', label: 'Método CPA', icon: Brain, badge: 'Novo' },
     { id: 'meraki-chat', label: 'Meraki Chat', icon: MessageSquare, badge: 'IA' },
     { id: 'progress', label: 'Progresso', icon: TrendingUp, badge: null },
     { id: 'activities', label: 'Atividades', icon: BookOpen, badge: '3' },

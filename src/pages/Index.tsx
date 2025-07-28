@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Dashboard from "@/components/Dashboard";
-import SingaporeMethod from "@/components/SingaporeMethod";
+import CPAMethod from "@/components/CPAMethod";
 import ChatTutor from "@/components/ChatTutor";
 import MerakiChatTutor from "@/components/MerakiChatTutor";
 import ProgressView from "@/components/ProgressView";
@@ -15,7 +15,7 @@ const Index = () => {
       case 'dashboard':
         return <Dashboard />;
       case 'singapore-method':
-        return <SingaporeMethod />;
+        return <CPAMethod />;
       case 'chat-tutor':
         return <ChatTutor />;
       case 'meraki-chat':

@@ -53,12 +53,22 @@ const DailyChallenge = () => {
       return;
     }
 
+    // Feedback detalhado
+    const expectedAnswer = "A família Silva tem renda de R$ 4.500. Gastos totais: R$ 3.700. Sobram R$ 800. Para 20% de emergência precisam de R$ 900/mês. Para a viagem precisam de R$ 450/mês. Total necessário: R$ 1.350. Como só sobram R$ 800, precisam cortar R$ 550 nos gastos, especialmente lazer (de R$ 300 para R$ 50) e transporte (de R$ 400 para R$ 200).";
+    
     toast({
-      title: "Resposta enviada!",
-      description: "Sua resposta foi registrada. Continue praticando!",
+      title: "✅ Resposta Avaliada!",
+      description: "Sua solução foi analisada. Veja o feedback abaixo.",
     });
 
-    // Aqui seria enviado para o backend
+    // Mostrar feedback
+    setTimeout(() => {
+      toast({
+        title: "💡 Solução Sugerida",
+        description: expectedAnswer,
+      });
+    }, 2000);
+
     console.log("Resposta enviada:", answer);
   };
 

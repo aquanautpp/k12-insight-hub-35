@@ -18,8 +18,8 @@ import achievementIcon from "@/assets/achievement-icon.jpg";
 const Dashboard = () => {
   const studentProgress = {
     mathematics: 85,
-    science: 72,
-    language: 91,
+    reasoning: 78,
+    creativity: 91,
     overall: 83
   };
 
@@ -73,11 +73,17 @@ const Dashboard = () => {
         {Object.entries(studentProgress).map(([subject, progress]) => (
           <Card key={subject} className="p-6 shadow-card hover:shadow-learning transition-all duration-300 transform hover:-translate-y-1">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-semibold capitalize text-foreground">{subject}</h3>
+              <h3 className="font-semibold capitalize text-foreground">
+                {subject === 'mathematics' ? 'Matemática' : 
+                 subject === 'reasoning' ? 'Raciocínio Lógico' :
+                 subject === 'creativity' ? 'Criatividade' :
+                 subject === 'overall' ? 'Geral' : subject}
+              </h3>
               <div className="w-8 h-8 rounded-full bg-gradient-learning flex items-center justify-center">
                 {subject === 'mathematics' && <Calculator className="w-4 h-4 text-white" />}
+                {subject === 'reasoning' && <Brain className="w-4 h-4 text-white" />}
+                {subject === 'creativity' && <Star className="w-4 h-4 text-white" />}
                 {subject === 'overall' && <TrendingUp className="w-4 h-4 text-white" />}
-                {subject !== 'mathematics' && subject !== 'overall' && <BookOpen className="w-4 h-4 text-white" />}
               </div>
             </div>
             <div className="space-y-2">
@@ -149,7 +155,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Button variant="learning" className="h-16 text-base">
           <Brain className="w-5 h-5 mr-3" />
-          Método de Singapura
+          Método CPA
         </Button>
         <Button variant="achievement" className="h-16 text-base">
           <Target className="w-5 h-5 mr-3" />

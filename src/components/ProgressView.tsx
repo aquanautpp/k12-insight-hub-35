@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -11,10 +12,14 @@ import {
   Brain,
   BookOpen,
   BarChart3,
-  Zap
+  Zap,
+  Download,
+  Settings
 } from "lucide-react";
 
 const ProgressView = () => {
+  const [selectedMetric, setSelectedMetric] = useState('overall');
+  
   const weeklyProgress = [
     { day: 'Seg', mathematics: 85, science: 70, language: 90 },
     { day: 'Ter', mathematics: 90, science: 75, language: 85 },
@@ -51,20 +56,46 @@ const ProgressView = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Relatório de Progresso</h1>
-          <p className="text-muted-foreground">Análise detalhada do seu aprendizado</p>
+          <h1 className="text-3xl font-bold text-foreground">Análise de Progresso</h1>
+          <p className="text-muted-foreground">Acompanhe seu desenvolvimento e conquistas</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex gap-3">
           <Button variant="outline" size="sm">
-            <Calendar className="w-4 h-4 mr-2" />
-            Esta Semana
+            <Download className="w-4 h-4 mr-2" />
+            Exportar Relatório
           </Button>
           <Button variant="learning" size="sm">
-            <BarChart3 className="w-4 h-4 mr-2" />
-            Exportar Relatório
+            <Settings className="w-4 h-4 mr-2" />
+            Configurar Metas
           </Button>
         </div>
       </div>
+
+      {/* Guia Explicativo */}
+      <Card className="p-6 bg-gradient-focus border border-primary/20">
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+            <Brain className="w-6 h-6 text-primary" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold text-foreground mb-2">Como Funciona o Acompanhamento</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="bg-white/10 rounded-lg p-3">
+                <h4 className="font-medium text-foreground mb-1">📊 Métricas Adaptivas</h4>
+                <p className="text-foreground/80">A IA monitora seu desempenho em tempo real, identificando padrões de aprendizagem e áreas de melhoria.</p>
+              </div>
+              <div className="bg-white/10 rounded-lg p-3">
+                <h4 className="font-medium text-foreground mb-1">🎯 Metas Personalizadas</h4>
+                <p className="text-foreground/80">Definimos objetivos baseados no seu ritmo e estilo de aprendizagem para maximizar o progresso.</p>
+              </div>
+              <div className="bg-white/10 rounded-lg p-3">
+                <h4 className="font-medium text-foreground mb-1">🚀 Insights Preditivos</h4>
+                <p className="text-foreground/80">Prevemos tendências futuras e sugerimos ações para otimizar seu desenvolvimento contínuo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
 
       {/* Learning Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
