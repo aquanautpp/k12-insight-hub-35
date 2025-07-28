@@ -32,7 +32,7 @@ interface AppSidebarProps {
 const navigationItems = [
   {
     id: 'dashboard',
-    title: 'Dashboard',
+    title: 'Painel de Controle',
     icon: LayoutDashboard,
   },
   {
@@ -69,11 +69,6 @@ const navigationItems = [
     id: 'reading',
     title: 'Recomendações de Leitura',
     icon: Book,
-  },
-  {
-    id: 'profile',
-    title: 'Perfil',
-    icon: User,
   },
 ];
 

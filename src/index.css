@@ -53,6 +53,15 @@ All colors MUST be HSL.
     --shadow-achievement: 0 8px 25px -8px hsl(100 25% 55% / 0.3);
     --shadow-card: 0 4px 12px -4px hsl(120 15% 15% / 0.1);
 
+    /* Terra e tons terrosos */
+    --earth-base: 38 25% 15%;
+    --earth-light: 38 25% 25%;
+    --earth-accent: 38 45% 35%;
+    --earth-warm: 30 35% 25%;
+    --earth-rich: 25 30% 20%;
+    --terracotta: 15 65% 40%;
+    --clay: 20 45% 35%;
+
     /* Animation Variables */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);

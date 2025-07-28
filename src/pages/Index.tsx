@@ -31,8 +31,6 @@ const Index = () => {
         return <DailyChallenge />;
       case 'reading':
         return <ReadingRecommendations />;
-      case 'profile':
-        return <Dashboard />; // Placeholder
       default:
         return <Dashboard />;
     }
@@ -48,7 +46,7 @@ const Index = () => {
             <SidebarTrigger className="ml-2" />
             <div className="ml-4">
               <h2 className="text-lg font-semibold text-foreground">
-                {currentView === 'dashboard' && 'Dashboard'}
+                {currentView === 'dashboard' && 'Painel de Controle'}
                 {currentView === 'cpa-method' && 'Método CPA'}
                 {currentView === 'learning-test' && 'Teste de Aprendizagem'}
                 {currentView === 'meraki-chat' && 'Tutor IA'}
