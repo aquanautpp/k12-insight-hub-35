@@ -14,6 +14,11 @@ import {
   PlayCircle,
   ArrowRight
 } from "lucide-react";
+import AutoconscienciaModule from "@/components/EI/AutoconscienciaModule";
+import AutorregulacaoModule from "@/components/EI/AutorregulacaoModule";
+import AutomotivacaoModule from "@/components/EI/AutomotivacaoModule";
+import EmpatiaModule from "@/components/EI/EmpatiaModule";
+import HabilidadesSociaisModule from "@/components/EI/HabilidadesSociaisModule";
 
 // Tipos para o sistema de IE
 type EIDomain = 'autoconsciencia' | 'autorregulacao' | 'automotivacao' | 'empatia' | 'habilidades_sociais';
@@ -263,19 +268,14 @@ const EmotionalIntelligence = () => {
 const getDomainComponent = (domainId: EIDomain) => {
   switch (domainId) {
     case 'autoconsciencia':
-      const AutoconscienciaModule = require('@/components/EI/AutoconscienciaModule.tsx').default;
       return AutoconscienciaModule;
     case 'autorregulacao':
-      const AutorregulacaoModule = require('@/components/EI/AutorregulacaoModule.tsx').default;
       return AutorregulacaoModule;
     case 'automotivacao':
-      const AutomotivacaoModule = require('@/components/EI/AutomotivacaoModule.tsx').default;
       return AutomotivacaoModule;
     case 'empatia':
-      const EmpatiaModule = require('@/components/EI/EmpatiaModule.tsx').default;
       return EmpatiaModule;
     case 'habilidades_sociais':
-      const HabilidadesSociaisModule = require('@/components/EI/HabilidadesSociaisModule.tsx').default;
       return HabilidadesSociaisModule;
     default:
       return ({ onBack }: { onBack: () => void }) => (
