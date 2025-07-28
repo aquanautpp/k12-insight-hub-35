@@ -3,8 +3,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Lightbulb, Bot, Calculator, FileText } from "lucide-react";
+import { Lightbulb, Bot, Calculator, FileText, RefreshCw, Trophy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useProgress } from "@/contexts/ProgressContext";
+import DynamicChallengeSystem from "./DynamicChallengeSystem";
 
 interface DailyChallenge {
   id: string;
@@ -42,7 +44,22 @@ const DailyChallenge = () => {
   const [showHint, setShowHint] = useState(false);
   const [showTutorHelp, setShowTutorHelp] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [showDynamicChallenges, setShowDynamicChallenges] = useState(false);
   const { toast } = useToast();
+  const { progress, addXP, completeChallenge } = useProgress();
+
+  const handleChallengeComplete = (challengeId: string, solution: string, timeSpent: number) => {
+    completeChallenge(challengeId);
+    const baseXP = 100;
+    const timeBonus = Math.max(0, (300 - timeSpent) / 10); // Bonus por velocidade
+    const totalXP = Math.round(baseXP + timeBonus);
+    addXP('Desafio Dinâmico', totalXP);
+    
+    toast({
+      title: "🎉 Desafio Concluído!",
+      description: `Parabéns! Você ganhou ${totalXP} XP!`,
+    });
+  };
 
   const handleSubmitAnswer = () => {
     if (!answer.trim()) {
@@ -86,6 +103,34 @@ const DailyChallenge = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
+      {/* Toggle entre desafio estático e dinâmico */}
+      <div className="flex gap-4 mb-6">
+        <Button 
+          variant={!showDynamicChallenges ? "default" : "outline"}
+          onClick={() => setShowDynamicChallenges(false)}
+          className="flex items-center gap-2"
+        >
+          <FileText className="w-4 h-4" />
+          Desafio do Dia
+        </Button>
+        <Button 
+          variant={showDynamicChallenges ? "default" : "outline"}
+          onClick={() => setShowDynamicChallenges(true)}
+          className="flex items-center gap-2"
+        >
+          <Trophy className="w-4 h-4" />
+          Desafios Dinâmicos
+        </Button>
+      </div>
+
+      {showDynamicChallenges ? (
+        <DynamicChallengeSystem
+          userLevel={progress.currentLevel}
+          userPreferences={progress.userPreferences}
+          completedChallenges={progress.completedChallenges}
+          onChallengeComplete={handleChallengeComplete}
+        />
+      ) : (
       <Card className="shadow-card">
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -236,6 +281,7 @@ const DailyChallenge = () => {
           </div>
         </CardContent>
       </Card>
+      )}
     </div>
   );
 };

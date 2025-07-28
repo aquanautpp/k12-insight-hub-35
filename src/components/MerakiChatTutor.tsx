@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, BookOpen, Calculator, Brain, Target } from "lucide-react";
+import { useProgress } from "@/contexts/ProgressContext";
+import { openaiService } from "@/services/openaiService";
 
 // Definindo os tipos para o estágio CPA
 type CPAStage = 'concrete' | 'pictorial' | 'abstract' | 'adaptive';
@@ -20,6 +22,7 @@ interface Message {
 }
 
 const MerakiChatTutor = () => {
+  const { addXP, addChatInteraction } = useProgress();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -42,7 +45,16 @@ const MerakiChatTutor = () => {
 
   const generateMerakiResponse = async (userMessage: string, stage: CPAStage) => {
     await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Usar serviço de IA melhorado
+    const context = `Estágio atual: ${stage}. Método CPA (Concreto-Pictorial-Abstrato).`;
+    const aiResponse = await openaiService.generateResponse(userMessage, context);
+    
+    if (aiResponse.length > 50) {
+      return { content: aiResponse, stage };
+    }
 
+    // Fallback para respostas específicas existentes
     // Tópicos matemáticos que podemos identificar
     const mathTopics = {
       addition: /(?:adição|somar|soma|mais|\+|adicionar)/i,
@@ -262,6 +274,10 @@ Que estágio você gostaria de praticar mais?`,
       };
 
       setMessages(prev => [...prev, merakiMessage]);
+      
+      // Adicionar XP e tracking
+      addChatInteraction();
+      addXP('Conversa com Meraki', 25);
     } catch (error) {
       console.error('Erro ao gerar resposta:', error);
     } finally {
