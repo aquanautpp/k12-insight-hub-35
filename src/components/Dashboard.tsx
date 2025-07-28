@@ -10,20 +10,12 @@ import {
   BookOpen,
   Calculator,
   Clock,
-  Star,
-  Zap,
-  Trophy
+  Star
 } from "lucide-react";
 import aiInsightsIcon from "@/assets/ai-insights-icon.jpg";
 import achievementIcon from "@/assets/achievement-icon.jpg";
-import { useProgress } from "@/contexts/ProgressContext";
-import XPSystem from "./XPSystem";
-import AchievementSystem from "./AchievementSystem";
-import SmartRecommendationEngine from "./SmartRecommendationEngine";
 
 const Dashboard = () => {
-  const { progress, addXP, unlockAchievement } = useProgress();
-  
   const studentProgress = {
     mathematics: 85,
     reasoning: 78,
@@ -49,24 +41,12 @@ const Dashboard = () => {
     }
   ];
 
-  const handleRecommendationClick = (recommendation: any) => {
-    console.log('Navigating to:', recommendation);
-    if (recommendation.route) {
-      // Navigate to route - here you would integrate with your router
-      window.location.hash = recommendation.route;
-    }
-    addXP('Seguiu Recomendação', 25);
-  };
-
-  const userProfile = {
-    level: progress.currentLevel,
-    learningStyle: progress.testResults?.learningStyle || 'visual',
-    strengths: ['logical_reasoning'],
-    weakAreas: progress.skillsProgress.filter(s => s.level < 70).map(s => s.skill.toLowerCase().replace(' ', '_')),
-    recentActivity: ['emotional_intelligence', 'mathematics'],
-    timeOfDay: 'morning' as const,
-    sessionLength: 'medium' as const
-  };
+  const achievements = [
+    { title: "Mestre do Método CPA", description: "Completou todos os estágios", icon: "🏆" },
+    { title: "Streak de 7 dias", description: "Praticou matemática 7 dias seguidos", icon: "🔥" },
+    { title: "Pensador Visual", description: "Resolveu 50 problemas pictóricos", icon: "👁️" },
+    { title: "Explorador de IA", description: "Utilizou todas as recomendações de IA", icon: "🤖" }
+  ];
 
   return (
     <div className="p-6 space-y-6 bg-gradient-subtle min-h-screen">
@@ -88,18 +68,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* XP System */}
-      <XPSystem
-        currentXP={progress.currentXP}
-        currentLevel={progress.currentLevel}
-        xpToNextLevel={progress.xpToNextLevel}
-        totalXPForNextLevel={progress.totalXPForNextLevel}
-        recentGains={progress.recentXPGains}
-      />
-
       {/* Progress Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {Object.entries(studentProgress).map(([subject, progressValue]) => (
+        {Object.entries(studentProgress).map(([subject, progress]) => (
           <Card key={subject} className="p-6 shadow-card hover:shadow-learning transition-all duration-300 transform hover:-translate-y-1">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-semibold capitalize text-foreground">
@@ -116,10 +87,10 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <Progress value={progressValue} className="h-2" />
+              <Progress value={progress} className="h-2" />
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Progresso</span>
-                <span className="font-medium text-primary">{progressValue}%</span>
+                <span className="font-medium text-primary">{progress}%</span>
               </div>
             </div>
           </Card>
@@ -162,31 +133,26 @@ const Dashboard = () => {
         </div>
       </Card>
 
-      {/* Smart Recommendations */}
-      <SmartRecommendationEngine
-        userProfile={userProfile}
-        onRecommendationClick={handleRecommendationClick}
-      />
-
       {/* Achievements */}
       <Card className="p-6 shadow-card">
         <div className="flex items-center mb-6">
           <div className="w-10 h-10 rounded-lg bg-gradient-achievement flex items-center justify-center mr-3">
-            <Trophy className="w-6 h-6 text-white" />
+            <img src={achievementIcon} alt="Achievements" className="w-6 h-6" />
           </div>
-          <h2 className="text-xl font-bold text-foreground">Sistema de Conquistas</h2>
+          <h2 className="text-xl font-bold text-foreground">Suas Conquistas</h2>
         </div>
         
-        <AchievementSystem
-          achievements={progress.achievements}
-          onClaimReward={(achievementId) => {
-            const achievement = progress.achievements.find(a => a.id === achievementId);
-            if (achievement) {
-              addXP('Conquista Desbloqueada', achievement.rewards.xp);
-              unlockAchievement(achievementId);
-            }
-          }}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {achievements.map((achievement, index) => (
+            <div key={index} className="group">
+              <Card className="p-4 text-center hover:shadow-achievement transition-all duration-300 transform group-hover:-translate-y-1 group-hover:scale-105">
+                <div className="text-3xl mb-2 group-hover:animate-pulse-glow">{achievement.icon}</div>
+                <h3 className="font-semibold text-sm mb-1">{achievement.title}</h3>
+                <p className="text-xs text-muted-foreground">{achievement.description}</p>
+              </Card>
+            </div>
+          ))}
+        </div>
       </Card>
 
       {/* Quick Actions */}
