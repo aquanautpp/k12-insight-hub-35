@@ -187,19 +187,6 @@ const CPAMethod = () => {
               <p className="text-foreground leading-relaxed">{stages[currentStage].explanation}</p>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex gap-4 pt-4">
-              {currentStage !== 'abstract' && (
-                <Button 
-                  variant="outline" 
-                  onClick={handleStageComplete}
-                  className="flex items-center gap-2"
-                >
-                  <ArrowRight className="w-4 h-4" />
-                  Próximo Estágio
-                </Button>
-              )}
-            </div>
           </CardContent>
         </Card>
 
@@ -213,8 +200,8 @@ const CPAMethod = () => {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-achievement flex items-center justify-center mx-auto mb-4">
-                  <Brain className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
+                  <Brain className="w-8 h-8 text-green-700" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Compreensão Profunda</h3>
                 <p className="text-sm text-muted-foreground">
