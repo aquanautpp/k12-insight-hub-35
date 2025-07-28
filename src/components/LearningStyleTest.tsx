@@ -389,23 +389,9 @@ const LearningStyleTest = () => {
               )}
 
               <div className="text-center">
-                <Button onClick={resetTest} variant="outline" className="mr-4">
+                <Button onClick={resetTest} variant="outline">
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Refazer Teste
-                </Button>
-                <Button 
-                  variant="learning"
-                  className="text-green-700"
-                  onClick={() => {
-                    // Gerar atividades personalizadas baseadas no perfil
-                    const activities = generatePersonalizedActivities(mainProfile);
-                    console.log('Atividades personalizadas:', activities);
-                    // Aqui poderia navegar para uma página de atividades ou mostrar um modal
-                    alert(`Atividades personalizadas para ${profileData.title}:\n\n${activities.join('\n\n')}`);
-                  }}
-                >
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  Explorar Atividades Personalizadas
                 </Button>
               </div>
             </CardContent>
@@ -422,7 +408,7 @@ const LearningStyleTest = () => {
           <CardHeader className="bg-gradient-learning rounded-t-lg">
             <div className="flex items-center justify-between text-green-700">
               <div>
-                <CardTitle className="text-xl mb-2 text-green-700">Descubra Seu Superpoder de Aprender! 🧠</CardTitle>
+                <CardTitle className="text-xl mb-2 text-green-700">Descobrir Como Eu Aprendo! 🧠</CardTitle>
                 <p className="text-green-700">
                   Pergunta {currentQuestion + 1} de {questions.length}
                 </p>
@@ -480,8 +466,8 @@ const LearningStyleTest = () => {
               <Button
                 onClick={handleNextQuestion}
                 disabled={!selectedAnswer}
-                variant="learning"
-                className="text-green-700"
+                variant="outline"
+                className="text-green-700 border-green-700 hover:bg-green-50"
               >
                 {currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima'}
               </Button>

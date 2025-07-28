@@ -240,8 +240,8 @@ const ReadingRecommendations = () => {
                     
                     <div className="flex gap-2 mt-4">
                       <Button 
-                        variant={book.hasRead ? "outline" : "learning"}
-                        className={`flex-1 ${book.hasRead ? 'text-green-700' : 'text-green-700'}`}
+                        variant="outline"
+                        className="flex-1 text-green-700 border-green-700 hover:bg-green-50"
                         onClick={() => toggleRead(book.id)}
                       >
                         {book.hasRead ? (
@@ -256,7 +256,7 @@ const ReadingRecommendations = () => {
                           </>
                         )}
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="text-green-700 border-green-700">
                         <Bookmark className="w-4 h-4" />
                       </Button>
                     </div>

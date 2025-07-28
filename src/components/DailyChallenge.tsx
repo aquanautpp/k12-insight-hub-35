@@ -209,8 +209,8 @@ const DailyChallenge = () => {
             <div className="flex gap-3">
               <Button 
                 onClick={handleSubmitAnswer}
-                className="flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white"
-                variant="learning"
+                className="flex items-center gap-2 text-green-700 border-green-700 hover:bg-green-50"
+                variant="outline"
               >
                 <FileText className="w-4 h-4" />
                 Enviar Resposta

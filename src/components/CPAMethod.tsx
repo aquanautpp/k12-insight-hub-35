@@ -126,9 +126,9 @@ const CPAMethod = () => {
                     </div>
                     {isCompleted && <CheckCircle className="w-6 h-6 text-white" />}
                   </div>
-                  <h3 className={`font-bold mb-2 ${isCompleted ? 'text-white' : 'text-green-700'}`}>
-                    {stage.title}
-                  </h3>
+                   <h3 className={`font-bold mb-2 ${isCompleted ? 'text-white' : 'text-green-700'}`}>
+                     {stage.title}
+                   </h3>
                   <p className={`text-sm ${isCompleted ? 'text-white/80' : 'text-muted-foreground'}`}>
                     {stage.description}
                   </p>
@@ -213,7 +213,7 @@ const CPAMethod = () => {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-learning flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 rounded-full bg-gradient-achievement flex items-center justify-center mx-auto mb-4">
                   <Brain className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Compreensão Profunda</h3>

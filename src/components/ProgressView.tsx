@@ -62,11 +62,43 @@ const ProgressView = () => {
           <p className="text-muted-foreground">Acompanhe seu desenvolvimento e conquistas</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="outline" size="sm" className="text-green-700">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="text-green-700 border-green-700 hover:bg-green-50"
+            onClick={() => {
+              // Funcionalidade para exportar relatório
+              const reportData = {
+                totalHours: 24.5,
+                problemsSolved: 156,
+                streakDays: 12,
+                skills: ['Álgebra', 'Geometria', 'Frações']
+              };
+              const dataStr = JSON.stringify(reportData, null, 2);
+              const blob = new Blob([dataStr], { type: 'application/json' });
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = 'relatorio-progresso.json';
+              link.click();
+              URL.revokeObjectURL(url);
+            }}
+          >
             <Download className="w-4 h-4 mr-2" />
             Exportar Relatório
           </Button>
-          <Button variant="learning" size="sm" className="text-green-700">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="text-green-700 border-green-700 hover:bg-green-50"
+            onClick={() => {
+              // Funcionalidade para configurar metas
+              const newGoal = prompt('Defina sua meta semanal de horas de estudo:', '10');
+              if (newGoal) {
+                alert(`Meta definida: ${newGoal} horas por semana!`);
+              }
+            }}
+          >
             <Settings className="w-4 h-4 mr-2" />
             Configurar Metas
           </Button>

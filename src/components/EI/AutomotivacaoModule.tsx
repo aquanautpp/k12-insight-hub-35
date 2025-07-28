@@ -425,8 +425,8 @@ const AutomotivacaoModule = ({ onBack }: AutomotivacaoModuleProps) => {
                     <p className="text-sm text-muted-foreground mb-4">{activity.description}</p>
                     
                     <Button 
-                      variant={activity.isCompleted ? "outline" : "learning"}
-                      className="w-full"
+                      variant="outline"
+                      className="w-full text-black border-black hover:bg-gray-50"
                       onClick={() => setCurrentActivity(activity.id)}
                     >
                       {activity.isCompleted ? (
