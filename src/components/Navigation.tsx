@@ -60,7 +60,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                   onClick={() => onViewChange(item.id)}
                   className="relative"
                 >
-                  <Icon className="w-4 h-4 mr-2" />
+                  <Icon className={`w-4 h-4 mr-2 ${item.id === 'singapore-method' ? 'text-green-700' : ''}`} />
                   {item.label}
                   {item.badge && (
                     <Badge variant="secondary" className="ml-2 text-xs">
@@ -127,7 +127,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                     }}
                     className="w-full justify-start relative"
                   >
-                    <Icon className="w-4 h-4 mr-3" />
+                    <Icon className={`w-4 h-4 mr-3 ${item.id === 'singapore-method' ? 'text-green-700' : ''}`} />
                     {item.label}
                     {item.badge && (
                       <Badge variant="secondary" className="ml-auto text-xs">
