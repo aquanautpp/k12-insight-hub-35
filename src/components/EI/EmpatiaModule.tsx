@@ -284,7 +284,7 @@ const EmpatiaModule = ({ onBack }: EmpatiaModuleProps) => {
             >
               Voltar às Histórias
             </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white">
+            <Button variant="learning">
               Salvar Reflexões
             </Button>
           </div>

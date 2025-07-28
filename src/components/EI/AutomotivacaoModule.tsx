@@ -143,7 +143,8 @@ const AutomotivacaoModule = ({ onBack }: AutomotivacaoModuleProps) => {
                   setNewGoal('');
                 }
               }}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full"
+              variant="learning"
             >
               <Plus className="w-4 h-4 mr-2" />
               Adicionar Meta

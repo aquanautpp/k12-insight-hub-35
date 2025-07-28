@@ -84,7 +84,7 @@ const EmotionalIntelligence = () => {
       color: 'text-purple-600',
       bgGradient: 'bg-gradient-to-br from-purple-500 to-purple-700',
       progress: 10,
-      isUnlocked: false,
+      isUnlocked: true,
       activities: 9,
       completedActivities: 1
     },
@@ -96,7 +96,7 @@ const EmotionalIntelligence = () => {
       color: 'text-pink-600',
       bgGradient: 'bg-gradient-to-br from-pink-500 to-pink-700',
       progress: 0,
-      isUnlocked: false,
+      isUnlocked: true,
       activities: 12,
       completedActivities: 0
     }

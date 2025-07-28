@@ -142,7 +142,7 @@ const AutorregulacaoModule = ({ onBack }: AutorregulacaoModuleProps) => {
         <div className="flex justify-center gap-4">
           <Button
             onClick={() => setIsBreathing(!isBreathing)}
-            className={`${isBreathing ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'} text-white`}
+            variant={isBreathing ? 'destructive' : 'learning'}
           >
             {isBreathing ? 'Pausar' : 'Começar'}
           </Button>
@@ -167,7 +167,7 @@ const AutorregulacaoModule = ({ onBack }: AutorregulacaoModuleProps) => {
           </p>
         </div>
         
-        <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+        <Button className="w-full" variant="learning">
           <CheckCircle className="w-4 h-4 mr-2" />
           Concluir Exercício
         </Button>
@@ -262,7 +262,7 @@ const AutorregulacaoModule = ({ onBack }: AutorregulacaoModuleProps) => {
             >
               Voltar aos Cenários
             </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white">
+            <Button variant="learning">
               Próximo Cenário
             </Button>
           </div>

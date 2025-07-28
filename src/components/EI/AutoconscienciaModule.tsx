@@ -130,7 +130,7 @@ const AutoconscienciaModule = ({ onBack }: AutoconscienciaModuleProps) => {
               placeholder="Escreva sobre o que pode ter influenciado este sentimento..."
               className="min-h-24"
             />
-            <Button className="mt-3 bg-green-600 hover:bg-green-700 text-white">
+            <Button className="mt-3" variant="learning">
               Registrar Reflexão
             </Button>
           </div>
@@ -189,7 +189,7 @@ const AutoconscienciaModule = ({ onBack }: AutoconscienciaModuleProps) => {
           </div>
         </div>
         
-        <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+        <Button className="w-full" variant="learning">
           <CheckCircle className="w-4 h-4 mr-2" />
           Salvar no Meu Diário
         </Button>
@@ -245,7 +245,7 @@ const AutoconscienciaModule = ({ onBack }: AutoconscienciaModuleProps) => {
           </p>
         </div>
         
-        <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+        <Button className="w-full" variant="learning">
           Concluir Atividade
         </Button>
       </CardContent>

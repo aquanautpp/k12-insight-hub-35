@@ -20,7 +20,7 @@ const CPAMethod = () => {
       problem: "Problema: 56 + 28. Represente com blocos.",
       solution: "Solução: Use 5 barras de dezena + 6 cubos unitários para 56. Adicione 2 barras de dezena + 8 cubos unitários para 28.",
       visualization: "Representação com blocos base 10: Dezenas e unidades organizadas fisicamente para compreensão tátil.",
-      explanation: "No estágio concreto, manipulamos objetos físicos como blocos de base 10, cubos coloridos e materiais do cotidiano. Isso desenvolve a intuição numérica e torna conceitos abstratos tangíveis. O estudante literalmente 'sente' a matemática através do toque e movimento."
+      explanation: "No estágio concreto, manipulamos objetos físicos como blocos de base 10, cubos coloridos e materiais do cotidiano. Isso desenvolve a intuição numérica e torna conceitos abstratos tangíveis. O estudante literalmente 'sente' a matemática através do toque e movimento. 🔍 Dica: Procure objetos em casa como feijões, palitos ou brinquedos para praticar! Use lápis para representar dezenas e borrachas para unidades."
     },
     pictorial: {
       title: "Estágio Pictórico", 
@@ -126,7 +126,7 @@ const CPAMethod = () => {
                     </div>
                     {isCompleted && <CheckCircle className="w-6 h-6 text-white" />}
                   </div>
-                  <h3 className={`font-bold mb-2 ${isCompleted ? 'text-white' : 'text-foreground'}`}>
+                  <h3 className={`font-bold mb-2 ${isCompleted ? 'text-white' : 'text-green-700'}`}>
                     {stage.title}
                   </h3>
                   <p className={`text-sm ${isCompleted ? 'text-white/80' : 'text-muted-foreground'}`}>
@@ -189,15 +189,6 @@ const CPAMethod = () => {
 
             {/* Action Buttons */}
             <div className="flex gap-4 pt-4">
-              <Button 
-                variant="learning" 
-                onClick={handleStageComplete}
-                className="flex items-center gap-2"
-              >
-                <PlayCircle className="w-4 h-4" />
-                Praticar Este Estágio
-              </Button>
-              
               {currentStage !== 'abstract' && (
                 <Button 
                   variant="outline" 

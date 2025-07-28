@@ -62,11 +62,11 @@ const ProgressView = () => {
           <p className="text-muted-foreground">Acompanhe seu desenvolvimento e conquistas</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="text-green-700">
             <Download className="w-4 h-4 mr-2" />
             Exportar Relatório
           </Button>
-          <Button variant="learning" size="sm">
+          <Button variant="learning" size="sm" className="text-green-700">
             <Settings className="w-4 h-4 mr-2" />
             Configurar Metas
           </Button>

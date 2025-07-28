@@ -295,7 +295,7 @@ const HabilidadesSociaisModule = ({ onBack }: HabilidadesSociaisModuleProps) => 
             >
               Voltar aos Cenários
             </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white">
+            <Button variant="learning">
               Próximo Conflito
             </Button>
           </div>
@@ -428,7 +428,7 @@ const HabilidadesSociaisModule = ({ onBack }: HabilidadesSociaisModuleProps) => 
             >
               Voltar aos Exercícios
             </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white">
+            <Button variant="learning">
               Salvar Prática
             </Button>
           </div>

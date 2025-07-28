@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Brain, Eye, Volume2, Hammer, Users, Navigation, Trophy, RotateCcw } from "lucide-react";
+import { Brain, Eye, Volume2, Hammer, Users, Navigation, Trophy, RotateCcw, BookOpen } from "lucide-react";
 
 interface Question {
   id: number;
@@ -213,6 +213,49 @@ const profiles = {
   }
 };
 
+const generatePersonalizedActivities = (profile: string) => {
+  const activitiesByProfile = {
+    visual: [
+      "Criar mapas mentais coloridos para conceitos matemáticos",
+      "Usar gráficos e diagramas para resolver problemas",
+      "Desenhar representações visuais de frações",
+      "Assistir vídeos educativos com animações"
+    ],
+    auditivo: [
+      "Explicar problemas matemáticos em voz alta",
+      "Criar músicas ou rimas para memorizar fórmulas",
+      "Participar de discussões em grupo sobre conceitos",
+      "Ouvir podcasts educativos"
+    ],
+    cinestesico: [
+      "Usar blocos e objetos físicos para aprender",
+      "Resolver problemas andando pela sala",
+      "Criar experimentos práticos",
+      "Usar jogos de movimento para aprender"
+    ],
+    logico: [
+      "Resolver problemas passo a passo com lógica",
+      "Criar tabelas e esquemas organizados",
+      "Analisar padrões e sequências",
+      "Usar métodos sistemáticos de resolução"
+    ],
+    social: [
+      "Trabalhar em grupos de estudo",
+      "Ensinar conceitos para outros colegas",
+      "Participar de projetos colaborativos",
+      "Discutir ideias em fóruns educativos"
+    ],
+    autonomo: [
+      "Criar cronogramas pessoais de estudo",
+      "Definir metas individuais de aprendizagem",
+      "Explorar recursos educativos independentemente",
+      "Desenvolver projetos pessoais de pesquisa"
+    ]
+  };
+  
+  return activitiesByProfile[profile] || activitiesByProfile.visual;
+};
+
 const LearningStyleTest = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
@@ -350,7 +393,18 @@ const LearningStyleTest = () => {
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Refazer Teste
                 </Button>
-                <Button variant="learning">
+                <Button 
+                  variant="learning"
+                  className="text-green-700"
+                  onClick={() => {
+                    // Gerar atividades personalizadas baseadas no perfil
+                    const activities = generatePersonalizedActivities(mainProfile);
+                    console.log('Atividades personalizadas:', activities);
+                    // Aqui poderia navegar para uma página de atividades ou mostrar um modal
+                    alert(`Atividades personalizadas para ${profileData.title}:\n\n${activities.join('\n\n')}`);
+                  }}
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
                   Explorar Atividades Personalizadas
                 </Button>
               </div>
@@ -427,6 +481,7 @@ const LearningStyleTest = () => {
                 onClick={handleNextQuestion}
                 disabled={!selectedAnswer}
                 variant="learning"
+                className="text-green-700"
               >
                 {currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima'}
               </Button>

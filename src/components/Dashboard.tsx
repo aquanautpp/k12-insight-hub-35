@@ -25,17 +25,17 @@ const Dashboard = () => {
 
   const aiInsights = [
     {
-      type: "strength",
+      type: "pontos_fortes",
       message: "Você demonstra excelência em resolução visual de problemas",
       confidence: 94
     },
     {
-      type: "recommendation",
+      type: "recomendacao",
       message: "Pratique mais problemas de frações usando o método pictórico",
       confidence: 87
     },
     {
-      type: "pattern",
+      type: "padrao",
       message: "Seu melhor horário de aprendizagem é entre 9h-11h",
       confidence: 92
     }
@@ -114,10 +114,14 @@ const Dashboard = () => {
             <div key={index} className="bg-white/80 rounded-lg p-4 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center">
-                  {insight.type === 'strength' && <Target className="w-4 h-4 text-secondary mr-2" />}
-                  {insight.type === 'recommendation' && <Brain className="w-4 h-4 text-primary mr-2" />}
-                  {insight.type === 'pattern' && <Clock className="w-4 h-4 text-accent mr-2" />}
-                  <span className="text-sm font-medium capitalize">{insight.type}</span>
+                  {insight.type === 'pontos_fortes' && <Target className="w-4 h-4 text-secondary mr-2" />}
+                  {insight.type === 'recomendacao' && <Brain className="w-4 h-4 text-primary mr-2" />}
+                  {insight.type === 'padrao' && <Clock className="w-4 h-4 text-accent mr-2" />}
+                  <span className="text-sm font-medium capitalize">
+                    {insight.type === 'pontos_fortes' ? 'Pontos Fortes' : 
+                     insight.type === 'recomendacao' ? 'Recomendação' : 
+                     insight.type === 'padrao' ? 'Padrão' : insight.type}
+                  </span>
                 </div>
                 <Badge variant="outline" className="text-xs">
                   {insight.confidence}% confiança

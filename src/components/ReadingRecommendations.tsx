@@ -241,7 +241,7 @@ const ReadingRecommendations = () => {
                     <div className="flex gap-2 mt-4">
                       <Button 
                         variant={book.hasRead ? "outline" : "learning"}
-                        className="flex-1"
+                        className={`flex-1 ${book.hasRead ? 'text-green-700' : 'text-green-700'}`}
                         onClick={() => toggleRead(book.id)}
                       >
                         {book.hasRead ? (

@@ -163,11 +163,11 @@ const ChatTutor = () => {
       {/* Header */}
       <div className="text-center space-y-4">
         <div className="flex items-center justify-center">
-          <div className={`w-16 h-16 rounded-2xl ${currentStageData.color} flex items-center justify-center mr-4 shadow-lg`}>
+          <div className="w-16 h-16 rounded-2xl bg-green-700 flex items-center justify-center mr-4 shadow-lg">
             <StageIcon className="w-8 h-8 text-white" />
           </div>
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">Tutor CPA</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-2">Meraki - Tutora de IA</h1>
             <p className="text-lg text-muted-foreground">
               Método de Singapura com IA
             </p>
