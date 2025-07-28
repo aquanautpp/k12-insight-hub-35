@@ -19,6 +19,7 @@ import {
 
 const ProgressView = () => {
   const [selectedMetric, setSelectedMetric] = useState('overall');
+  const { progress } = useProgress();
   
   const weeklyProgress = [
     { day: 'Seg', mathematics: 85, science: 70, language: 90 },

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useProgress } from "@/contexts/ProgressContext";
 import { Send, Brain, Lightbulb, Eye, Calculator, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 
@@ -22,10 +23,11 @@ interface Message {
 }
 
 const MerakiChatTutor = () => {
+  const { addChatInteraction } = useProgress();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: 'Olá! Sou Meraki, seu tutor inteligente baseado no Método de Singapura. Vou te ajudar a compreender matemática através dos três estágios: Concreto (objetos físicos), Pictórico (representações visuais) e Abstrato (símbolos matemáticos). Como posso ajudar você hoje?',
+      content: 'Olá! Sou Meraki, seu tutor inteligente baseado no Método CPA de Singapura. Vou te ajudar a compreender matemática através dos três estágios: Concreto (objetos físicos), Pictórico (representações visuais) e Abstrato (símbolos matemáticos). Como posso ajudar você hoje?',
       sender: 'meraki',
       timestamp: new Date(),
       stage: 'adaptive'
@@ -185,6 +187,7 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
       };
 
       setMessages(prev => [...prev, merakiMessage]);
+      addChatInteraction();
       
       toast.success("Meraki respondeu com explicação CPA!");
     } catch (error) {
@@ -256,54 +259,52 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
           </CardHeader>
           
           <CardContent className="flex-1 flex flex-col p-0">
-            <ScrollArea className="flex-1 px-6" ref={scrollRef}>
-              <div className="space-y-4 pb-4">
-                {messages.map((message) => (
+            <div className="flex-1 px-6 py-4 space-y-4 overflow-y-auto max-h-[450px]" ref={scrollRef}>
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
                   <div
-                    key={message.id}
-                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                    className={`max-w-[85%] rounded-lg p-4 ${
+                      message.sender === 'user'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted border border-border'
+                    }`}
                   >
-                    <div
-                      className={`max-w-[80%] rounded-lg p-4 ${
-                        message.sender === 'user'
-                          ? 'bg-primary text-primary-foreground'
-                          : 'bg-muted'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 mb-2">
-                        {message.sender === 'meraki' && (
-                          <>
-                            <Brain className="h-4 w-4 text-primary" />
-                            <span className="font-semibold text-primary">Meraki</span>
-                          </>
-                        )}
-                        {message.stage && (
-                          <Badge variant="secondary" className="text-xs">
-                            <span className="mr-1">{stageInfo[message.stage].icon}</span>
-                            {stageInfo[message.stage].title}
-                          </Badge>
-                        )}
-                        <span className="text-xs opacity-70">
-                          {message.timestamp.toLocaleTimeString()}
-                        </span>
-                      </div>
-                      <div className="whitespace-pre-wrap">{message.content}</div>
+                    <div className="flex items-center gap-2 mb-2">
+                      {message.sender === 'meraki' && (
+                        <>
+                          <Brain className="h-4 w-4 text-primary" />
+                          <span className="font-semibold text-primary">Meraki</span>
+                        </>
+                      )}
+                      {message.stage && (
+                        <Badge variant="secondary" className="text-xs">
+                          <span className="mr-1">{stageInfo[message.stage].icon}</span>
+                          {stageInfo[message.stage].title}
+                        </Badge>
+                      )}
+                      <span className="text-xs opacity-70">
+                        {message.timestamp.toLocaleTimeString()}
+                      </span>
+                    </div>
+                    <div className="whitespace-pre-wrap text-sm">{message.content}</div>
+                  </div>
+                </div>
+              ))}
+              
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-muted rounded-lg p-4 max-w-[70%] border border-border">
+                    <div className="flex items-center gap-2">
+                      <Brain className="h-4 w-4 text-primary animate-pulse" />
+                      <span>Meraki está pensando...</span>
                     </div>
                   </div>
-                ))}
-                
-                {isLoading && (
-                  <div className="flex justify-start">
-                    <div className="bg-muted rounded-lg p-4 max-w-[70%]">
-                      <div className="flex items-center gap-2">
-                        <Brain className="h-4 w-4 text-primary animate-pulse" />
-                        <span>Meraki está pensando...</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </ScrollArea>
+                </div>
+              )}
+            </div>
 
             {/* Input Area */}
             <div className="border-t p-6">
@@ -337,7 +338,6 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
             className="p-4 hover:bg-muted/50 cursor-pointer transition-colors"
             onClick={() => {
               setInputMessage("Me dê um exemplo de problema de adição para praticar");
-              handleSendMessage();
             }}
           >
             <div className="flex items-center gap-3">
@@ -354,7 +354,6 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
             onClick={() => {
               setCurrentStage('pictorial');
               setInputMessage("Explique visualmente como resolver uma multiplicação");
-              handleSendMessage();
             }}
           >
             <div className="flex items-center gap-3">
@@ -370,7 +369,6 @@ Qual estágio ajudou mais na sua compreensão? Posso focar em um específico se 
             className="p-4 hover:bg-muted/50 cursor-pointer transition-colors"
             onClick={() => {
               setInputMessage("Quero praticar problemas de frações com sua orientação");
-              handleSendMessage();
             }}
           >
             <div className="flex items-center gap-3">

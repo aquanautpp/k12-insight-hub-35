@@ -8,24 +8,24 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Elegant Earth Tones with High Contrast */
-    --background: 45 20% 97%;
-    --foreground: 25 25% 20%;
+    /* Rich Earth Tones with Vibrant Colors */
+    --background: 45 25% 92%;
+    --foreground: 25 30% 15%;
 
-    --card: 45 15% 99%;
-    --card-foreground: 25 25% 20%;
+    --card: 45 20% 95%;
+    --card-foreground: 25 30% 15%;
 
     --popover: 45 15% 99%;
     --popover-foreground: 25 25% 20%;
 
     /* Rich Olive Green - Primary Actions */
-    --primary: 85 40% 35%;
-    --primary-foreground: 45 20% 98%;
-    --primary-hover: 85 45% 30%;
+    --primary: 85 50% 30%;
+    --primary-foreground: 45 25% 95%;
+    --primary-hover: 85 55% 25%;
 
-    /* Darker Sage - Secondary Actions */
-    --secondary: 85 20% 85%;
-    --secondary-foreground: 25 30% 25%;
+    /* Vibrant Sage - Secondary Actions */
+    --secondary: 85 30% 75%;
+    --secondary-foreground: 25 35% 20%;
 
     /* Contrasted Taupe - Supporting Elements */
     --muted: 35 15% 90%;
