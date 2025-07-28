@@ -136,8 +136,8 @@ const ProgressView = () => {
         <Card className="p-6 bg-gradient-learning text-white shadow-learning">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/80 text-sm">Tempo de Estudo</p>
-              <p className="text-2xl font-bold">{learningStats.totalHours}h</p>
+              <p className="text-black text-sm">Tempo de Estudo</p>
+              <p className="text-2xl font-bold text-black">{learningStats.totalHours}h</p>
             </div>
             <Clock className="w-8 h-8 text-white/70" />
           </div>
@@ -146,8 +146,8 @@ const ProgressView = () => {
         <Card className="p-6 bg-gradient-achievement text-white shadow-achievement">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/80 text-sm">Problemas Resolvidos</p>
-              <p className="text-2xl font-bold">{learningStats.problemsSolved}</p>
+              <p className="text-black text-sm">Problemas Resolvidos</p>
+              <p className="text-2xl font-bold text-black">{learningStats.problemsSolved}</p>
             </div>
             <Target className="w-8 h-8 text-white/70" />
           </div>

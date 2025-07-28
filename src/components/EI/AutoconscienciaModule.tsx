@@ -38,15 +38,6 @@ const AutoconscienciaModule = ({ onBack }: AutoconscienciaModuleProps) => {
 
   const activities: Activity[] = [
     {
-      id: 'emotion_quiz_1',
-      title: 'Quiz: Reconhecendo Emoções',
-      type: 'quiz',
-      description: 'Identifique emoções através de expressões faciais e situações',
-      icon: <Brain className="w-5 h-5" />,
-      isCompleted: true,
-      estimatedTime: 10
-    },
-    {
       id: 'emotion_naming',
       title: 'Como Estou Me Sentindo Agora?',
       type: 'emotion_naming',
