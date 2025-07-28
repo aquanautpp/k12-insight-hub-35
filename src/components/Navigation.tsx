@@ -25,7 +25,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home, badge: null },
     { id: 'singapore-method', label: 'Método CPA', icon: Brain, badge: 'Novo' },
-    { id: 'learning-test', label: 'Descobrir Como Eu Aprendo', icon: Target, badge: 'Superpoder' },
+    { id: 'learning-test', label: 'Descubra Seu Superpoder de Aprender!', icon: Target, badge: 'Superpoder' },
     { id: 'meraki-chat', label: 'Meraki Chat', icon: MessageSquare, badge: 'IA' },
     { id: 'progress', label: 'Progresso', icon: TrendingUp, badge: null },
     { id: 'activities', label: 'Atividades', icon: BookOpen, badge: '3' },
