@@ -83,6 +83,78 @@ const DailyChallenge = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <DynamicChallengeDisplay />
+      
+      {/* Challenge Interaction Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Answer Input Section */}
+        <div className="bg-card border border-border rounded-lg p-6 space-y-4">
+          <h3 className="text-lg font-semibold text-foreground">Sua Resposta</h3>
+          <textarea
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            placeholder="Digite sua solução detalhada aqui..."
+            className="w-full h-32 p-4 border border-border rounded-lg resize-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground bg-background"
+          />
+          
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={handleSubmitAnswer}
+              className="flex-1 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors font-medium"
+            >
+              Enviar Resposta
+            </button>
+            <button
+              onClick={() => setShowHint(!showHint)}
+              className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors"
+            >
+              {showHint ? 'Ocultar Dica' : 'Ver Dica'}
+            </button>
+            <button
+              onClick={() => setShowTutorHelp(!showTutorHelp)}
+              className="px-4 py-2 border border-secondary text-secondary rounded-lg hover:bg-secondary/10 transition-colors"
+            >
+              {showTutorHelp ? 'Ocultar Tutor' : 'Tutor IA'}
+            </button>
+          </div>
+        </div>
+
+        {/* Help and Feedback Section */}
+        <div className="space-y-4">
+          {/* Hint Section */}
+          {showHint && (
+            <div className="bg-gradient-subtle border border-primary/20 rounded-lg p-4">
+              <h4 className="font-medium text-primary mb-2 flex items-center">
+                <span className="mr-2">💡</span>
+                Dica
+              </h4>
+              <p className="text-foreground text-sm leading-relaxed">{getHint()}</p>
+            </div>
+          )}
+
+          {/* Tutor Help Section */}
+          {showTutorHelp && (
+            <div className="bg-gradient-focus border border-secondary/20 rounded-lg p-4">
+              <h4 className="font-medium text-secondary mb-2 flex items-center">
+                <span className="mr-2">🤖</span>
+                Ajuda do Tutor IA
+              </h4>
+              <p className="text-foreground text-sm leading-relaxed">{getTutorAdvice()}</p>
+            </div>
+          )}
+
+          {/* Feedback Section */}
+          {feedback && (
+            <div className="bg-gradient-achievement border border-primary/20 rounded-lg p-4">
+              <h4 className="font-medium text-primary mb-2 flex items-center">
+                <span className="mr-2">✅</span>
+                Feedback da Resposta
+              </h4>
+              <p className="text-foreground text-sm leading-relaxed">{feedback}</p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

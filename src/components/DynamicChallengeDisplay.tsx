@@ -65,9 +65,9 @@ export const DynamicChallengeDisplay: React.FC = () => {
     return (
       <Card className="p-6 text-center">
         <div className="space-y-4">
-          <Target className="w-12 h-12 text-muted-foreground mx-auto" />
+          <Target className="w-12 h-12 text-primary mx-auto" />
           <h3 className="text-lg font-semibold text-foreground">Nenhum Desafio Ativo</h3>
-          <p className="text-muted-foreground">Gere um novo desafio personalizado para seu nível</p>
+          <p className="text-foreground">Gere um novo desafio personalizado para seu nível</p>
           <Button onClick={handleGenerateNewChallenge} disabled={isGenerating}>
             {isGenerating ? (
               <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
@@ -91,7 +91,7 @@ export const DynamicChallengeDisplay: React.FC = () => {
               <CardTitle className="text-xl font-bold text-foreground">
                 {currentChallenge.title}
               </CardTitle>
-              <CardDescription className="text-muted-foreground">
+              <CardDescription className="text-foreground/80">
                 Desafio Personalizado - Nível {xpData.currentLevel}
               </CardDescription>
             </div>
@@ -100,7 +100,7 @@ export const DynamicChallengeDisplay: React.FC = () => {
             <Badge className={getDifficultyColor(currentChallenge.difficulty)}>
               {currentChallenge.difficulty}
             </Badge>
-            <Badge variant="outline" className="flex items-center gap-1">
+            <Badge variant="outline" className="flex items-center gap-1 text-primary border-primary">
               <Trophy className="w-3 h-3" />
               {currentChallenge.xpReward} XP
             </Badge>
@@ -111,16 +111,16 @@ export const DynamicChallengeDisplay: React.FC = () => {
       <CardContent className="space-y-4">
         {/* Challenge Info */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Clock className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-sm text-foreground">
+            <Clock className="w-4 h-4 text-primary" />
             ~{currentChallenge.timeEstimate} min
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Target className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-sm text-foreground">
+            <Target className="w-4 h-4 text-primary" />
             {currentChallenge.category.replace('_', ' ')}
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Trophy className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-sm text-foreground">
+            <Trophy className="w-4 h-4 text-primary" />
             {currentChallenge.xpReward} XP de recompensa
           </div>
         </div>
@@ -157,8 +157,8 @@ export const DynamicChallengeDisplay: React.FC = () => {
         <div className="flex gap-3 pt-4">
           <Button 
             onClick={handleCompleteChallenge}
-            className="flex-1 text-green-700 border-green-700 hover:bg-green-50"
-            variant="outline"
+            className="flex-1"
+            variant="default"
           >
             <Trophy className="w-4 h-4 mr-2" />
             Completar Desafio (+{currentChallenge.xpReward} XP)
