@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator } from "lucide-react";
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
+import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
 
 type Stage = 'concrete' | 'pictorial' | 'abstract';
 
@@ -12,6 +13,7 @@ const CPAMethod = () => {
   const [currentStage, setCurrentStage] = useState<Stage>('concrete');
   const [completedStages, setCompletedStages] = useState<Stage[]>([]);
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
+  const [showInteractiveChallenge, setShowInteractiveChallenge] = useState(false);
 
   const stages = {
     concrete: {
@@ -309,47 +311,85 @@ const CPAMethod = () => {
           </CardContent>
         </Card>
 
-        {/* Benefits Section */}
-        <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle className="text-xl font-bold text-foreground">
-              Benefícios do Método CPA
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-learning flex items-center justify-center mx-auto mb-4">
-                  <Brain className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Compreensão Profunda</h3>
-                 <p className="text-sm text-muted-foreground">
-                   Desenvolve entendimento conceitual sólido antes da abstração matemática
-                 </p>
-               </div>
-               
-               <div className="text-center">
-                 <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
-                   <Calculator className="w-8 h-8 text-primary" />
-                 </div>
-                 <h3 className="font-semibold text-foreground mb-2">Resolução de Problemas</h3>
-                 <p className="text-sm text-muted-foreground">
-                   Ensina múltiplas estratégias para abordar desafios matemáticos complexos
-                 </p>
-               </div>
-               
-               <div className="text-center">
-                 <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
-                   <Eye className="w-8 h-8 text-primary" />
-                 </div>
-                 <h3 className="font-semibold text-foreground mb-2">Visualização</h3>
-                <p className="text-sm text-muted-foreground">
-                  Fortalece capacidade de representar e visualizar conceitos matemáticos
-                </p>
-              </div>
+        {/* Desafio Interativo */}
+        {showInteractiveChallenge ? (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-foreground">Desafio Interativo CPA</h2>
+              <Button 
+                variant="outline" 
+                onClick={() => setShowInteractiveChallenge(false)}
+              >
+                Voltar aos Exemplos
+              </Button>
             </div>
-          </CardContent>
-        </Card>
+            <CPAIntegratedChallenge />
+          </div>
+        ) : (
+          <>
+            {/* Call to Action para Desafio Interativo */}
+            <Card className="shadow-card bg-gradient-primary text-white">
+              <CardContent className="p-8 text-center">
+                <h3 className="text-2xl font-bold mb-4">Pronto para o Desafio?</h3>
+                <p className="text-lg mb-6 opacity-90">
+                  Agora que você conhece a teoria, experimente resolver um problema real 
+                  usando os três estágios do método CPA de forma interativa!
+                </p>
+                <Button 
+                  size="lg" 
+                  variant="secondary"
+                  onClick={() => setShowInteractiveChallenge(true)}
+                  className="flex items-center gap-2"
+                >
+                  <PlayCircle className="w-5 h-5" />
+                  Iniciar Desafio Interativo
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Benefits Section */}
+            <Card className="shadow-card">
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-foreground">
+                  Benefícios do Método CPA
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <div className="w-16 h-16 rounded-full bg-gradient-learning flex items-center justify-center mx-auto mb-4">
+                      <Brain className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-foreground mb-2">Compreensão Profunda</h3>
+                     <p className="text-sm text-muted-foreground">
+                       Desenvolve entendimento conceitual sólido antes da abstração matemática
+                     </p>
+                   </div>
+                   
+                   <div className="text-center">
+                     <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
+                       <Calculator className="w-8 h-8 text-primary" />
+                     </div>
+                     <h3 className="font-semibold text-foreground mb-2">Resolução de Problemas</h3>
+                     <p className="text-sm text-muted-foreground">
+                       Ensina múltiplas estratégias para abordar desafios matemáticos complexos
+                     </p>
+                   </div>
+                   
+                   <div className="text-center">
+                     <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
+                       <Eye className="w-8 h-8 text-primary" />
+                     </div>
+                     <h3 className="font-semibold text-foreground mb-2">Visualização</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Fortalece capacidade de representar e visualizar conceitos matemáticos
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </>
+        )}
       </div>
     </div>
   );
