@@ -79,7 +79,7 @@ const Dashboard = () => {
               </h3>
               <div className="w-8 h-8 rounded-full bg-gradient-learning flex items-center justify-center">
                 {subject === 'mathematics' && <Calculator className="w-4 h-4 text-white" />}
-                {subject === 'reasoning' && <Brain className="w-4 h-4 text-white" />}
+                {subject === 'reasoning' && <Brain className="w-4 h-4 text-primary" />}
                 {subject === 'creativity' && <Star className="w-4 h-4 text-white" />}
                 {subject === 'overall' && <TrendingUp className="w-4 h-4 text-white" />}
               </div>

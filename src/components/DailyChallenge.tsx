@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DynamicChallengeDisplay } from "./DynamicChallengeDisplay";
 import { useToast } from "@/hooks/use-toast";
+import { useChallenge } from "@/contexts/ChallengeContext";
 
 interface DailyChallenge {
   id: string;
@@ -73,11 +74,41 @@ const DailyChallenge = () => {
   };
 
   const getHint = () => {
-    return "Dica: Primeiro calcule quanto sobra após os gastos atuais. Depois determine se é possível atingir ambas as metas (20% para emergência + R$ 450/mês para viagem). Se não for possível, identifique onde cortar gastos.";
+    const { currentChallenge } = useChallenge();
+    if (!currentChallenge) return "Gere um novo desafio para ver dicas personalizadas.";
+    
+    // Gerar dica baseada na categoria do desafio atual
+    switch (currentChallenge.category) {
+      case 'mathematics':
+        return "Dica: Identifique os dados conhecidos, determine o que precisa calcular e aplique operações matemáticas passo a passo.";
+      case 'logic':
+        return "Dica: Analise os padrões, elimine as possibilidades impossíveis e use raciocínio dedutivo.";
+      case 'life_practical':
+        return "Dica: Considere soluções práticas, pense em diferentes alternativas e avalie os prós e contras.";
+      case 'emotional':
+        return "Dica: Analise os sentimentos envolvidos, identifique as emoções e considere as melhores formas de expressão.";
+      default:
+        return "Dica: Leia atentamente o problema, organize as informações e desenvolva sua solução passo a passo.";
+    }
   };
 
   const getTutorAdvice = () => {
-    return "💡 Tutor IA: Para resolver este problema, siga estes passos: 1) Calcule a renda disponível após gastos fixos, 2) Determine quanto precisa poupar mensalmente para cada meta, 3) Compare com o que sobra, 4) Se necessário, sugira ajustes nos gastos não-essenciais como lazer.";
+    const { currentChallenge } = useChallenge();
+    if (!currentChallenge) return "Gere um novo desafio para receber orientação do tutor IA.";
+    
+    // Gerar conselho baseado na categoria do desafio atual
+    switch (currentChallenge.category) {
+      case 'mathematics':
+        return "💡 Tutor IA: Use o método CPA: 1) Concrete - visualize com objetos, 2) Pictorial - desenhe o problema, 3) Abstract - aplique fórmulas matemáticas.";
+      case 'logic':
+        return "💡 Tutor IA: Para problemas lógicos: 1) Liste o que você sabe, 2) Identifique o que precisa descobrir, 3) Use eliminação e dedução sistemática.";
+      case 'life_practical':
+        return "💡 Tutor IA: Para situações práticas: 1) Analise o contexto, 2) Liste opções disponíveis, 3) Avalie consequências, 4) Escolha a melhor solução.";
+      case 'emotional':
+        return "💡 Tutor IA: Para questões emocionais: 1) Identifique os sentimentos, 2) Aceite as emoções, 3) Encontre formas saudáveis de expressão, 4) Busque apoio quando necessário.";
+      default:
+        return "💡 Tutor IA: Organize suas ideias, analise os dados disponíveis e desenvolva uma solução estruturada passo a passo.";
+    }
   };
 
   return (

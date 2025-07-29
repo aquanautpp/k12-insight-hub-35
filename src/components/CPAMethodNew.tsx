@@ -320,7 +320,7 @@ const CPAMethod = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="w-16 h-16 rounded-full bg-gradient-learning flex items-center justify-center mx-auto mb-4">
-                  <Brain className="w-8 h-8 text-white" />
+                  <Brain className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Compreensão Profunda</h3>
                  <p className="text-sm text-muted-foreground">
