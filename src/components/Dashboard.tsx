@@ -1,3 +1,4 @@
+import React from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -14,39 +15,39 @@ import {
 } from "lucide-react";
 import aiInsightsIcon from "@/assets/ai-insights-icon.jpg";
 import achievementIcon from "@/assets/achievement-icon.jpg";
+import { useProgress } from "@/contexts/ProgressContext";
+import { useXP } from "@/contexts/XPContext";
+import { useAchievement } from "@/contexts/AchievementContext";
+import { SmartInsights } from "./SmartInsights";
+import { XPDisplay } from "./XPDisplay";
 
 const Dashboard = () => {
+  const { progress } = useProgress();
+  const { xpData } = useXP();
+  const { unlockedAchievements, checkAchievements } = useAchievement();
+
+  // Update achievements based on current progress
+  React.useEffect(() => {
+    checkAchievements(progress, xpData);
+  }, [progress.completedActivities, progress.currentStreak, xpData.currentLevel, progress.chatInteractions]);
+
+  // Calculate dynamic progress based on actual data
   const studentProgress = {
-    mathematics: 85,
-    reasoning: 78,
-    creativity: 91,
-    overall: 83
+    mathematics: Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3),
+    reasoning: progress.skillsProgress.find(s => s.skill === 'Raciocínio Lógico')?.level || 75,
+    creativity: progress.skillsProgress.find(s => s.skill === 'Criatividade')?.level || 70,
+    overall: Math.round((progress.completedActivities / progress.totalActivities) * 100)
   };
 
-  const aiInsights = [
-    {
-      type: "pontos_fortes",
-      message: "Você demonstra excelência em resolução visual de problemas",
-      confidence: 94
-    },
-    {
-      type: "recomendacao",
-      message: "Pratique mais problemas de frações usando o método pictórico",
-      confidence: 87
-    },
-    {
-      type: "padrao",
-      message: "Seu melhor horário de aprendizagem é entre 9h-11h",
-      confidence: 92
-    }
-  ];
-
-  const achievements = [
-    { title: "Mestre do Método CPA", description: "Completou todos os estágios", icon: "🏆" },
-    { title: "Streak de 7 dias", description: "Praticou matemática 7 dias seguidos", icon: "🔥" },
-    { title: "Pensador Visual", description: "Resolveu 50 problemas pictóricos", icon: "👁️" },
-    { title: "Explorador de IA", description: "Utilizou todas as recomendações de IA", icon: "🤖" }
-  ];
+  // Use recent unlocked achievements, fallback to static ones if none
+  const achievements = unlockedAchievements.length > 0 
+    ? unlockedAchievements.slice(-4)
+    : [
+        { title: "Mestre do Método CPA", description: "Completou todos os estágios", icon: "🏆" },
+        { title: "Streak de 7 dias", description: "Praticou matemática 7 dias seguidos", icon: "🔥" },
+        { title: "Pensador Visual", description: "Resolveu 50 problemas pictóricos", icon: "👁️" },
+        { title: "Explorador de IA", description: "Utilizou todas as recomendações de IA", icon: "🤖" }
+      ];
 
   return (
     <div className="p-6 space-y-6 bg-gradient-subtle min-h-screen">
@@ -57,10 +58,7 @@ const Dashboard = () => {
           <p className="text-muted-foreground">Pronto para mais uma jornada de aprendizagem, Victor?</p>
         </div>
         <div className="flex items-center gap-4">
-          <Badge variant="secondary" className="text-sm">
-            <Star className="w-4 h-4 mr-1" />
-            Nível 12
-          </Badge>
+          <XPDisplay />
           <Button variant="learning" size="sm" className="text-green-700">
             <BookOpen className="w-4 h-4 mr-2" />
             Continuar Estudando
@@ -109,28 +107,7 @@ const Dashboard = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {aiInsights.map((insight, index) => (
-            <div key={index} className="bg-white/80 rounded-lg p-4 backdrop-blur-sm">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center">
-                  {insight.type === 'pontos_fortes' && <Target className="w-4 h-4 text-secondary mr-2" />}
-                  {insight.type === 'recomendacao' && <Brain className="w-4 h-4 text-primary mr-2" />}
-                  {insight.type === 'padrao' && <Clock className="w-4 h-4 text-accent mr-2" />}
-                  <span className="text-sm font-medium capitalize">
-                    {insight.type === 'pontos_fortes' ? 'Pontos Fortes' : 
-                     insight.type === 'recomendacao' ? 'Recomendação' : 
-                     insight.type === 'padrao' ? 'Padrão' : insight.type}
-                  </span>
-                </div>
-                <Badge variant="outline" className="text-xs">
-                  {insight.confidence}% confiança
-                </Badge>
-              </div>
-              <p className="text-sm text-foreground">{insight.message}</p>
-            </div>
-          ))}
-        </div>
+        <SmartInsights />
       </Card>
 
       {/* Achievements */}
