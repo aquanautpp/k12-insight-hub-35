@@ -61,7 +61,7 @@ const DailyChallenge = () => {
       description: "Sua solução foi analisada. Veja o feedback abaixo.",
     });
 
-    console.log("Resposta enviada:", answer);
+    // Answer submitted - would integrate with backend here
   };
 
   const getDifficultyColor = (difficulty: string) => {

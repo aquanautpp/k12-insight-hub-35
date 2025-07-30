@@ -37,15 +37,14 @@ const Dashboard = () => {
   // Update achievements based on current progress
   React.useEffect(() => {
     checkAchievements(progress, xpData);
-  }, [progress.completedActivities, progress.currentStreak, xpData.currentLevel, progress.chatInteractions]);
+  }, [progress.completedActivities, progress.currentStreak, xpData.currentLevel, progress.chatInteractions, checkAchievements]);
 
   // Calculate dynamic progress based on actual data
-  const studentProgress = {
+  const studentProgress = React.useMemo(() => ({
     mathematics: Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3),
     reasoning: progress.skillsProgress.find(s => s.skill === 'Raciocínio Lógico')?.level || 75,
-    creativity: progress.skillsProgress.find(s => s.skill === 'Criatividade')?.level || 70,
     overall: Math.round((progress.completedActivities / progress.totalActivities) * 100)
-  };
+  }), [progress]);
 
   // Use recent unlocked achievements, fallback to static ones if none
   const achievements = unlockedAchievements.length > 0 
@@ -59,141 +58,108 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section - Inspired by tryrefer.com */}
+      {/* Hero Section - Clean & Focused */}
       <div className="section-spacious text-center">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <AvatarPersona 
-            size="xl" 
-            className="mx-auto mb-8" 
+            size="lg" 
+            className="mx-auto mb-6" 
             icon={<Brain />}
           />
           
-          <h1 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 tracking-tight animate-fade-in">
-            Bem-vindo de volta, Victor! 👋
+          <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-3 tracking-tight animate-fade-in">
+            Bem-vindo de volta! 👋
           </h1>
-          <h2 className="text-2xl md:text-3xl text-primary mb-6 font-medium animate-fade-in">
-            Dominar matemática em <span className="text-secondary font-bold">15 minutos por dia</span>
-          </h2>
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in">
-            Sua próxima conquista está a apenas alguns cliques de distância. Continue sua jornada épica de descobertas! 🚀
+          <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed animate-fade-in">
+            Continue sua jornada de aprendizagem com o método CPA
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button variant="pill" size="lg" className="min-w-48 hover-scale animate-fade-in">
-              <BookOpen className="w-5 h-5 mr-2" />
-              Alcançar Minha Meta Hoje
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
+            <Button variant="pill" size="lg" className="min-w-40 hover-scale animate-fade-in">
+              <BookOpen className="w-4 h-4 mr-2" />
+              Estudar Hoje
             </Button>
-            <Button variant="pill-outline" size="lg" className="min-w-48 hover-scale animate-fade-in">
-              <Target className="w-5 h-5 mr-2" />
-              Celebrar Progresso
+            <Button variant="pill-outline" size="lg" className="min-w-40 hover-scale animate-fade-in">
+              <Target className="w-4 h-4 mr-2" />
+              Ver Progresso
             </Button>
-          </div>
-
-          <div className="flex justify-center">
-            <XPDisplay />
           </div>
         </div>
       </div>
 
-      {/* Progress Overview - Clean Cards */}
-      <div className="max-w-6xl mx-auto px-6 pb-16">
-        <h2 className="text-2xl font-semibold text-center mb-12 text-foreground">
-          Sua História de Conquistas ⭐
-        </h2>
+      {/* Progress Overview - Simplified */}
+      <div className="max-w-4xl mx-auto px-6 pb-12">
+        <div className="relative">
+          <XPDisplay className="absolute top-0 right-0" />
+          <h2 className="text-xl font-semibold mb-8 text-foreground">
+            Seu Progresso
+          </h2>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {Object.entries(studentProgress).map(([subject, progress]) => (
-            <Card key={subject} className="card-clean p-8 text-center group magnetic-hover thoughtful-interaction sophisticated-reveal">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-achievement flex items-center justify-center group-hover:scale-110 transition-transform duration-300 digital-maker-glow">
-                {subject === 'mathematics' && <Calculator className="w-8 h-8 text-primary-foreground" />}
-                {subject === 'reasoning' && <Brain className="w-8 h-8 text-primary-foreground" />}
-                {subject === 'creativity' && <Star className="w-8 h-8 text-primary-foreground" />}
-                {subject === 'overall' && <TrendingUp className="w-8 h-8 text-primary-foreground" />}
+            <Card key={subject} className="card-clean p-6 text-center group hover-scale">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-achievement flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                {subject === 'mathematics' && <Calculator className="w-6 h-6 text-primary-foreground" />}
+                {subject === 'reasoning' && <Brain className="w-6 h-6 text-primary-foreground" />}
+                {subject === 'overall' && <TrendingUp className="w-6 h-6 text-primary-foreground" />}
               </div>
               
-              <h3 className="text-lg font-semibold mb-4 text-foreground elegant-text-reveal">
-                {subject === 'mathematics' ? '🧮 Matemática' : 
-                 subject === 'reasoning' ? '🧠 Raciocínio Lógico' :
-                 subject === 'creativity' ? '✨ Criatividade' :
-                 subject === 'overall' ? '🎯 Jornada Geral' : subject}
+              <h3 className="text-base font-semibold mb-3 text-foreground">
+                {subject === 'mathematics' ? 'Matemática' : 
+                 subject === 'reasoning' ? 'Raciocínio' :
+                 subject === 'overall' ? 'Geral' : subject}
               </h3>
               
-              <div className="space-y-3">
-                <Progress value={progress} className={`h-3 animate-scale-in ${progress >= 85 ? 'progress-glow' : ''}`} />
-                <div className="text-2xl font-bold text-primary animate-fade-in artistic-emphasis">{progress}%</div>
-                <p className="text-sm text-muted-foreground">
-                  {progress >= 80 ? '🏆 Quase dominado!' : 
-                   progress >= 50 ? '🚀 Em progresso' : 
-                   '🌱 Crescendo'}
-                </p>
+              <div className="space-y-2">
+                <Progress value={progress} className="h-2" />
+                <div className="text-xl font-bold text-primary">{progress}%</div>
               </div>
             </Card>
           ))}
         </div>
       </div>
 
-      {/* AI Insights Section - Clean Modern Design */}
-      <div className="max-w-4xl mx-auto px-6 pb-16">
-        <Card className="card-clean p-12 bg-gradient-focus">
-          <div className="text-center mb-8">
-            <AvatarPersona 
-              size="lg" 
-              className="mx-auto mb-6"
-              icon={<img src={aiInsightsIcon} alt="AI Insights" className="w-full h-full rounded-full" />}
-            />
-            
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Insights de IA Personalizada
+      {/* AI Insights Section - Integrated */}
+      <div className="max-w-4xl mx-auto px-6 pb-12">
+        <Card className="card-clean p-8 bg-gradient-focus">
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-semibold text-primary mb-2">
+              Insights Personalizados
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
-              Nossa inteligência artificial analisou seu padrão de aprendizagem e criou recomendações personalizadas para você.
+            <p className="text-muted-foreground">
+              Recomendações baseadas no seu progresso
             </p>
           </div>
           
           <SmartInsights />
           
-          {/* Quick Win Messages */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Integrated Quick Win Message */}
+          <div className="mt-4">
             <QuickWinMessage type="daily" />
-            <QuickWinMessage type="skill" />
-            <QuickWinMessage type="achievement" />
           </div>
         </Card>
       </div>
 
-      {/* Adaptive Learning Section - Phase 2 */}
-      <div className="max-w-6xl mx-auto px-6 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <AdaptiveLearningPath 
-              currentLevel={studentProgress.overall}
-              completedModules={["Números Básicos", "Operações Simples", "Frações Iniciais"]}
-              nextModules={["Percentuais Práticos", "Geometria Visual", "Álgebra Introdutória"]}
-              successRate={87}
-            />
-          </div>
+      {/* Trilha Personalizada - Consolidated */}
+      <div className="max-w-4xl mx-auto px-6 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <AdaptiveLearningPath 
+            currentLevel={studentProgress.overall}
+            completedModules={["Números Básicos", "Operações Simples"]}
+            nextModules={["Percentuais", "Geometria Visual"]}
+            successRate={87}
+          />
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Sua Trilha Personalizada</h3>
-            <p className="text-sm text-muted-foreground">
-              Baseado no seu estilo de aprendizagem e progresso atual
-            </p>
+            <h3 className="text-lg font-semibold text-foreground">Próximos Passos</h3>
             <div className="space-y-3">
               <div className="p-3 bg-gradient-subtle rounded-lg border">
                 <div className="flex items-center gap-2 mb-1">
                   <Target className="w-4 h-4 text-primary" />
-                  <span className="font-medium text-sm">Próximo Marco</span>
+                  <span className="font-medium text-sm">Meta Diária</span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Complete 3 exercícios de percentuais para desbloquear "Mestre dos Números"
-                </p>
-              </div>
-              <div className="p-3 bg-gradient-focus rounded-lg border">
-                <div className="flex items-center gap-2 mb-1">
-                  <Clock className="w-4 h-4 text-secondary" />
-                  <span className="font-medium text-sm">Tempo Estimado</span>
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  15 minutos para completar sua meta diária
+                  15 minutos de prática hoje
                 </p>
               </div>
             </div>
@@ -201,89 +167,44 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Brand Personality Showcase - Phase 3 */}
-      <div className="max-w-6xl mx-auto px-6 pb-16">
-        <BrandPersonalityShowcase />
-      </div>
-
-      {/* Narrative Progress Visualization - Phase 4 */}
-      <div className="max-w-6xl mx-auto px-6 pb-16">
-        <NarrativeProgressVisualization 
-          milestones={sampleProgressMilestones}
-          currentLevel={studentProgress.overall}
-          totalXP={xpData.totalXP}
-          streak={progress.currentStreak}
-        />
-      </div>
-
-      {/* Documentary Learning Journey - Phase 4 */}
-      <div className="max-w-6xl mx-auto px-6 pb-16">
-        <DocumentaryLearningJourney 
-          title="Mestres da Matemática: Sua Jornada Épica"
-          description="Uma experiência cinematográfica de aprendizagem que transforma conceitos em aventuras"
-          chapters={sampleDocumentaryChapters}
-          currentChapter={0}
-          onChapterComplete={(chapterId) => console.log("Chapter completed:", chapterId)}
-        />
-      </div>
-
-      {/* Authentic AI Tutor - Phase 4 */}
-      <div className="max-w-4xl mx-auto px-6 pb-16">
-        <AuthenticAITutor 
-          personality={sampleTutorPersonality}
-          currentStage="concrete"
-          studentProgress={studentProgress.overall}
-          recentActivity="Trabalhando com frações"
-        />
-      </div>
-
-      {/* Contextual Examples Section */}
-      <div className="max-w-6xl mx-auto px-6 pb-16">
-        <ContextualExamples 
-          examples={sampleContextualExamples}
-          currentSubject="mathematics"
-        />
-      </div>
-
-      {/* Achievements Section - Modern Layout */}
-      <div className="max-w-6xl mx-auto px-6 pb-16">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-semibold text-foreground mb-4">Troféus Conquistados 🏆</h2>
-          <p className="text-muted-foreground">Cada conquista te aproxima do próximo nível de maestria</p>
+      {/* Achievements Section - Simplified */}
+      <div className="max-w-4xl mx-auto px-6 pb-12">
+        <div className="text-center mb-8">
+          <h2 className="text-xl font-semibold text-foreground mb-2">Conquistas 🏆</h2>
+          <p className="text-muted-foreground text-sm">Suas últimas realizações</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {achievements.map((achievement, index) => (
-            <Card key={index} className="card-clean p-6 text-center group hover:shadow-achievement">
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-200">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {achievements.slice(0, 4).map((achievement, index) => (
+            <Card key={index} className="card-clean p-4 text-center group hover-scale">
+              <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-200">
                 {achievement.icon}
               </div>
-              <h3 className="font-semibold text-base mb-2 text-foreground">{achievement.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{achievement.description}</p>
+              <h3 className="font-medium text-sm mb-1 text-foreground">{achievement.title}</h3>
+              <p className="text-xs text-muted-foreground">{achievement.description}</p>
             </Card>
           ))}
         </div>
       </div>
 
-      {/* Enhanced Quick Actions */}
+      {/* Quick Actions - Simplified */}
       <div className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-semibold text-foreground mb-4 elegant-text-reveal">Pronto para Sua Próxima Aventura? 🎮</h2>
-          <p className="text-muted-foreground elegant-text-reveal">Escolha seu caminho de aprendizagem e vamos juntos!</p>
+        <div className="text-center mb-6">
+          <h2 className="text-xl font-semibold text-foreground mb-2">Continuar Aprendendo</h2>
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="pill" size="xl" className="min-w-56 thoughtful-interaction premium-gradient-morph text-white border-0">
-            <Brain className="w-5 h-5 mr-3" />
-            🚀 Dominar CPA Hoje
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button variant="pill" size="lg" className="min-w-40 hover-scale">
+            <Brain className="w-4 h-4 mr-2" />
+            Método CPA
           </Button>
-          <Button variant="pill-outline" size="xl" className="min-w-56 magnetic-hover artistic-emphasis">
-            <Target className="w-5 h-5 mr-3" />
-            ⚡ Prática de 15min
+          <Button variant="pill-outline" size="lg" className="min-w-40 hover-scale">
+            <Target className="w-4 h-4 mr-2" />
+            Prática Rápida
           </Button>
-          <Button variant="pill-secondary" size="xl" className="min-w-56 human-touch digital-maker-glow">
-            <Award className="w-5 h-5 mr-3" />
-            💪 Fortalecer Emoções
+          <Button variant="pill-secondary" size="lg" className="min-w-40 hover-scale">
+            <Award className="w-4 h-4 mr-2" />
+            Int. Emocional
           </Button>
         </div>
       </div>
