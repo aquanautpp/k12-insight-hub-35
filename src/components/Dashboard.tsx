@@ -21,6 +21,9 @@ import { useAchievement } from "@/contexts/AchievementContext";
 import { SmartInsights } from "./SmartInsights";
 import { XPDisplay } from "./XPDisplay";
 import { AvatarPersona } from "./ui/avatar-persona";
+import { AdaptiveLearningPath } from "./AdaptiveLearningPath";
+import { QuickWinMessage } from "./QuickWinMessage";
+import { ContextualExamples, sampleContextualExamples } from "./ContextualExamples";
 
 const Dashboard = () => {
   const { progress } = useProgress();
@@ -65,7 +68,7 @@ const Dashboard = () => {
             Bem-vindo de volta, Victor! 👋
           </h1>
           <h2 className="text-2xl md:text-3xl text-primary mb-6 font-medium animate-fade-in">
-            Dominar matemática em <span className="text-secondary font-bold">5 minutos por dia</span>
+            Dominar matemática em <span className="text-secondary font-bold">15 minutos por dia</span>
           </h2>
           <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in">
             Sua próxima conquista está a apenas alguns cliques de distância. Continue sua jornada épica de descobertas! 🚀
@@ -144,7 +147,62 @@ const Dashboard = () => {
           </div>
           
           <SmartInsights />
+          
+          {/* Quick Win Messages */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <QuickWinMessage type="daily" />
+            <QuickWinMessage type="skill" />
+            <QuickWinMessage type="achievement" />
+          </div>
         </Card>
+      </div>
+
+      {/* Adaptive Learning Section - Phase 2 */}
+      <div className="max-w-6xl mx-auto px-6 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <AdaptiveLearningPath 
+              currentLevel={studentProgress.overall}
+              completedModules={["Números Básicos", "Operações Simples", "Frações Iniciais"]}
+              nextModules={["Percentuais Práticos", "Geometria Visual", "Álgebra Introdutória"]}
+              successRate={87}
+            />
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-foreground">Sua Trilha Personalizada</h3>
+            <p className="text-sm text-muted-foreground">
+              Baseado no seu estilo de aprendizagem e progresso atual
+            </p>
+            <div className="space-y-3">
+              <div className="p-3 bg-gradient-subtle rounded-lg border">
+                <div className="flex items-center gap-2 mb-1">
+                  <Target className="w-4 h-4 text-primary" />
+                  <span className="font-medium text-sm">Próximo Marco</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Complete 3 exercícios de percentuais para desbloquear "Mestre dos Números"
+                </p>
+              </div>
+              <div className="p-3 bg-gradient-focus rounded-lg border">
+                <div className="flex items-center gap-2 mb-1">
+                  <Clock className="w-4 h-4 text-secondary" />
+                  <span className="font-medium text-sm">Tempo Estimado</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  15 minutos para completar sua meta diária
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Contextual Examples Section */}
+      <div className="max-w-6xl mx-auto px-6 pb-16">
+        <ContextualExamples 
+          examples={sampleContextualExamples}
+          currentSubject="mathematics"
+        />
       </div>
 
       {/* Achievements Section - Modern Layout */}
@@ -181,7 +239,7 @@ const Dashboard = () => {
             </Button>
             <Button variant="pill-outline" size="xl" className="min-w-56 hover-scale animate-fade-in">
               <Target className="w-5 h-5 mr-3" />
-              ⚡ Prática de 5min
+              ⚡ Prática de 15min
             </Button>
             <Button variant="pill-secondary" size="xl" className="min-w-56 hover-scale animate-fade-in">
               <Award className="w-5 h-5 mr-3" />

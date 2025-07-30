@@ -14,7 +14,7 @@ export const QuickWinMessage: React.FC<QuickWinMessageProps> = ({
   const messages = {
     daily: {
       icon: Clock,
-      title: "5 Minutos = 1 Grande Vitória",
+      title: "15 Minutos = 1 Grande Vitória",
       description: "Pequenas ações diárias criam transformações épicas",
       color: "text-primary",
       gradient: "bg-gradient-focus"
