@@ -154,13 +154,16 @@ const EmotionalIntelligence = () => {
               key={domain.id}
               className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl ${
                 domain.isUnlocked ? 'shadow-lg' : 'opacity-60'
-              }`}
+              } bg-white`}
               onClick={() => handleDomainClick(domain.id)}
-              style={{
-                background: 'linear-gradient(135deg, hsl(67, 45%, 35%), hsl(67, 55%, 25%))'
-              }}
             >
-              <CardContent className="p-6 text-white">
+              {/* Parte superior com fundo verde */}
+              <div 
+                className="p-6 text-white"
+                style={{
+                  background: 'linear-gradient(135deg, hsl(67, 40%, 35%), hsl(67, 45%, 30%))'
+                }}
+              >
                 <div className="flex items-start justify-between mb-4">
                   <div className="text-white">
                     {domain.icon}
@@ -173,7 +176,7 @@ const EmotionalIntelligence = () => {
                 <h3 className="text-xl font-bold mb-2 text-white">{domain.title}</h3>
                 <p className="text-white/90 text-sm mb-4">{domain.description}</p>
                 
-                <div className="space-y-3 mb-4">
+                <div className="space-y-3">
                   <div className="flex justify-between text-sm text-white/90">
                     <span>Progresso</span>
                     <span>{domain.progress}%</span>
@@ -185,9 +188,12 @@ const EmotionalIntelligence = () => {
                     ></div>
                   </div>
                 </div>
-                
+              </div>
+
+              {/* Parte inferior com fundo branco */}
+              <CardContent className="p-4 bg-white">
                 {domain.isUnlocked && (
-                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-medium">
+                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2 text-foreground hover:bg-muted font-medium">
                     <PlayCircle className="w-4 h-4" />
                     Continuar Atividades
                     <ArrowRight className="w-4 h-4" />
@@ -195,7 +201,7 @@ const EmotionalIntelligence = () => {
                 )}
                 
                 {!domain.isUnlocked && (
-                  <div className="flex items-center justify-center gap-2 text-white/70 text-sm">
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
                     <Lock className="w-4 h-4" />
                     Bloqueado
                   </div>
