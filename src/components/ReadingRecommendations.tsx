@@ -29,6 +29,7 @@ interface Book {
 
 const ReadingRecommendations = () => {
   const [books, setBooks] = useState<Book[]>([
+    // Empreendedorismo
     {
       id: 'se-vira-moleque',
       title: 'Se Vira, Moleque!',
@@ -38,7 +39,7 @@ const ReadingRecommendations = () => {
       tags: ['#protagonismo', '#atitude', '#responsabilidade'],
       isFavorite: false,
       hasRead: false,
-      color: 'from-blue-500 to-blue-700'
+      color: 'from-primary to-primary-foreground'
     },
     {
       id: 'manual-empreendedor-mirim',
@@ -49,7 +50,18 @@ const ReadingRecommendations = () => {
       tags: ['#empreendedorismo', '#projetos', '#criatividade'],
       isFavorite: true,
       hasRead: false,
-      color: 'from-green-500 to-green-700'
+      color: 'from-primary to-primary/80'
+    },
+    {
+      id: 'a-menina-do-vale',
+      title: 'A Menina do Vale - Como o Empreendedorismo Pode Mudar Sua Vida',
+      description: 'História inspiradora de Bel Pesce no Vale do Silício, mostrando que empreendedorismo é para todos.',
+      inspirationalText: 'Sonhe grande e persista! Este livro mostra que com dedicação e paixão, é possível transformar ideias em realidade, independentemente da idade ou gênero.',
+      ageRange: '12+',
+      tags: ['#empreendedorismo', '#inspiração', '#mulheres'],
+      isFavorite: false,
+      hasRead: false,
+      color: 'from-primary/90 to-primary'
     },
     {
       id: 'meu-primeiro-negocio',
@@ -60,8 +72,23 @@ const ReadingRecommendations = () => {
       tags: ['#negócios', '#gestão', '#valor'],
       isFavorite: false,
       hasRead: true,
-      color: 'from-purple-500 to-purple-700'
+      color: 'from-primary/70 to-primary/90'
     },
+    
+    // Mulheres Inspiradoras
+    {
+      id: 'historias-garotas-rebeldes',
+      title: 'Histórias de Ninar para Garotas Rebeldes',
+      description: 'Coleção de histórias sobre mulheres que fizeram a diferença em diversas áreas.',
+      inspirationalText: 'Apresenta modelos femininos fortes e bem-sucedidos, incentivando as meninas a sonharem alto e perseguirem seus objetivos com coragem.',
+      ageRange: '8+',
+      tags: ['#mulheres', '#inspiração', '#liderança'],
+      isFavorite: true,
+      hasRead: false,
+      color: 'from-primary/60 to-primary/80'
+    },
+    
+    // Educação Financeira
     {
       id: 'educacao-financeira-infantil',
       title: 'Coleção: Educação Financeira Infantil',
@@ -71,7 +98,53 @@ const ReadingRecommendations = () => {
       tags: ['#dinheiro', '#poupança', '#investimento'],
       isFavorite: true,
       hasRead: false,
-      color: 'from-gold-400 to-gold-600'
+      color: 'from-primary/80 to-primary'
+    },
+    
+    // Inteligência Emocional
+    {
+      id: 'monstro-das-cores',
+      title: 'O Monstro das Cores',
+      description: 'Livro visual e didático para introduzir as emoções às crianças através de cores.',
+      inspirationalText: 'É uma ferramenta visual excelente para iniciar a conversa sobre emoções e a importância de organizá-las.',
+      ageRange: '4+',
+      tags: ['#emoções', '#cores', '#autoconhecimento'],
+      isFavorite: false,
+      hasRead: false,
+      color: 'from-primary/50 to-primary/70'
+    },
+    {
+      id: 'que-semana',
+      title: 'Que Semana!',
+      description: 'Desenvolvimento da inteligência emocional com situações cotidianas e atividades práticas.',
+      inspirationalText: 'Oferece atividades práticas e cenários realistas para que as crianças desenvolvam suas habilidades socioemocionais.',
+      ageRange: '6+',
+      tags: ['#inteligência-emocional', '#atividades', '#cotidiano'],
+      isFavorite: false,
+      hasRead: false,
+      color: 'from-primary/40 to-primary/60'
+    },
+    {
+      id: 'elefante-nao-sabia-esperar',
+      title: 'O Elefante que Não Sabia Esperar (Série As Emoções de Leo)',
+      description: 'Série que aborda emoções específicas como paciência, frustração e raiva.',
+      inspirationalText: 'Foca em emoções específicas, permitindo que as crianças compreendam e desenvolvam estratégias para lidar com cada uma delas.',
+      ageRange: '5+',
+      tags: ['#paciência', '#frustração', '#gestão-emocional'],
+      isFavorite: false,
+      hasRead: false,
+      color: 'from-primary/30 to-primary/50'
+    },
+    {
+      id: 'baralhinho-do-bem',
+      title: 'Baralhinho do Bem',
+      description: 'Jogos e atividades interativas para estimular a expressão de sentimentos.',
+      inspirationalText: 'Promove a interação e a prática das habilidades socioemocionais de forma lúdica e engajadora.',
+      ageRange: '6+',
+      tags: ['#jogos', '#interação', '#expressão'],
+      isFavorite: true,
+      hasRead: false,
+      color: 'from-primary/20 to-primary/40'
     }
   ]);
 
@@ -130,53 +203,53 @@ const ReadingRecommendations = () => {
       <div className="max-w-6xl mx-auto p-6">
         {/* Hero Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 mb-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-primary mb-4">
             <Rocket className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            Olá, futuro empreendedor e pensador! 🚀
+            Recomendações de Leitura 📚
           </h1>
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-gold-50 to-orange-50 rounded-2xl p-6 border border-gold-200">
-            <p className="text-lg text-gold-800 leading-relaxed">
-              Descubra como grandes ideias nascem, como os produtos chegam até nós e como você pode criar 
-              projetos incríveis que ajudam o mundo — e ainda ganhar por isso! 💡
+          <div className="max-w-4xl mx-auto bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-6 border border-primary/20">
+            <p className="text-lg text-foreground leading-relaxed">
+              Descubra livros incríveis que vão desenvolver seu espírito empreendedor e inteligência emocional! 
+              Cada livro foi escolhido especialmente para jovens pensadores como você. 💡
             </p>
-            <p className="text-lg text-gold-700 mt-3">
-              Essa seleção de livros vai te mostrar como usar sua criatividade, inteligência e atitude 
-              para virar o protagonista da sua própria história. <strong>Vamos nessa?</strong> 🌟
+            <p className="text-lg text-muted-foreground mt-3">
+              Explore histórias inspiradoras, aprenda sobre dinheiro, emoções e como transformar 
+              suas ideias em realidade. <strong>Vamos nessa jornada literária?</strong> 🌟
             </p>
           </div>
         </div>
 
         {/* Estatísticas */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <Card className="text-center">
+          <Card className="text-center border-primary/20">
             <CardContent className="p-6">
-              <BookOpen className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+              <BookOpen className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-2xl font-bold text-foreground">{books.length}</div>
               <div className="text-sm text-muted-foreground">Livros Disponíveis</div>
             </CardContent>
           </Card>
           
-          <Card className="text-center">
+          <Card className="text-center border-primary/20">
             <CardContent className="p-6">
-              <Heart className="w-8 h-8 text-red-500 mx-auto mb-2" />
+              <Heart className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-2xl font-bold text-foreground">{books.filter(b => b.isFavorite).length}</div>
               <div className="text-sm text-muted-foreground">Favoritos</div>
             </CardContent>
           </Card>
           
-          <Card className="text-center">
+          <Card className="text-center border-primary/20">
             <CardContent className="p-6">
-              <CheckCircle className="w-8 h-8 text-green-600 mx-auto mb-2" />
+              <CheckCircle className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-2xl font-bold text-foreground">{books.filter(b => b.hasRead).length}</div>
               <div className="text-sm text-muted-foreground">Já Lidos</div>
             </CardContent>
           </Card>
           
-          <Card className="text-center">
+          <Card className="text-center border-primary/20">
             <CardContent className="p-6">
-              <Star className="w-8 h-8 text-gold-500 mx-auto mb-2" />
+              <Star className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-2xl font-bold text-foreground">
                 {Math.round((books.filter(b => b.hasRead).length / books.length) * 100)}%
               </div>
@@ -185,93 +258,387 @@ const ReadingRecommendations = () => {
           </Card>
         </div>
 
-        {/* Livros Recomendados */}
-        <Card className="mb-8">
+        {/* Livros por Categoria */}
+        <div className="space-y-8 mb-8">
+          {/* Empreendedorismo */}
+          <Card className="border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Rocket className="w-6 h-6 text-primary" />
+                🚀 Empreendedorismo
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {books.filter(book => book.tags.some(tag => tag.includes('empreendedorismo') || tag.includes('negócios') || tag.includes('protagonismo'))).map((book) => (
+                  <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
+                    <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
+                          <p className="text-muted-foreground text-sm mb-3">{book.description}</p>
+                        </div>
+                        <div className="flex gap-2 ml-4">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleFavorite(book.id)}
+                            className="p-2"
+                          >
+                            <Heart className={`w-4 h-4 ${book.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleRead(book.id)}
+                            className="p-2"
+                          >
+                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-primary/5 rounded-lg p-4 mb-4 border-l-4 border-primary">
+                        <p className="text-primary text-sm font-medium mb-1">💭 Trecho Inspirador:</p>
+                        <p className="text-primary/80 text-sm italic">"{book.inspirationalText}"</p>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-2 flex-wrap">
+                          <Badge variant="outline" className="text-xs border-primary/30">Idade: {book.ageRange}</Badge>
+                          {book.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary" className="text-xs bg-primary/10 text-primary">{tag}</Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-2 mt-4">
+                        <Button 
+                          variant="outline"
+                          className="flex-1 text-primary border-primary hover:bg-primary/10"
+                          onClick={() => toggleRead(book.id)}
+                        >
+                          {book.hasRead ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 mr-2" />
+                              Já li!
+                            </>
+                          ) : (
+                            <>
+                              <BookOpen className="w-4 h-4 mr-2" />
+                              Quero ler
+                            </>
+                          )}
+                        </Button>
+                        <Button variant="outline" size="sm" className="text-primary border-primary">
+                          <Bookmark className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Mulheres Inspiradoras */}
+          <Card className="border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="w-6 h-6 text-primary" />
+                👩 Mulheres Inspiradoras
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {books.filter(book => book.tags.some(tag => tag.includes('mulheres') || tag.includes('inspiração') || tag.includes('liderança'))).map((book) => (
+                  <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
+                    <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
+                          <p className="text-muted-foreground text-sm mb-3">{book.description}</p>
+                        </div>
+                        <div className="flex gap-2 ml-4">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleFavorite(book.id)}
+                            className="p-2"
+                          >
+                            <Heart className={`w-4 h-4 ${book.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleRead(book.id)}
+                            className="p-2"
+                          >
+                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-primary/5 rounded-lg p-4 mb-4 border-l-4 border-primary">
+                        <p className="text-primary text-sm font-medium mb-1">💭 Trecho Inspirador:</p>
+                        <p className="text-primary/80 text-sm italic">"{book.inspirationalText}"</p>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-2 flex-wrap">
+                          <Badge variant="outline" className="text-xs border-primary/30">Idade: {book.ageRange}</Badge>
+                          {book.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary" className="text-xs bg-primary/10 text-primary">{tag}</Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-2 mt-4">
+                        <Button 
+                          variant="outline"
+                          className="flex-1 text-primary border-primary hover:bg-primary/10"
+                          onClick={() => toggleRead(book.id)}
+                        >
+                          {book.hasRead ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 mr-2" />
+                              Já li!
+                            </>
+                          ) : (
+                            <>
+                              <BookOpen className="w-4 h-4 mr-2" />
+                              Quero ler
+                            </>
+                          )}
+                        </Button>
+                        <Button variant="outline" size="sm" className="text-primary border-primary">
+                          <Bookmark className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Educação Financeira */}
+          <Card className="border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <DollarSign className="w-6 h-6 text-primary" />
+                💰 Educação Financeira
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {books.filter(book => book.tags.some(tag => tag.includes('dinheiro') || tag.includes('poupança') || tag.includes('investimento'))).map((book) => (
+                  <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
+                    <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
+                          <p className="text-muted-foreground text-sm mb-3">{book.description}</p>
+                        </div>
+                        <div className="flex gap-2 ml-4">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleFavorite(book.id)}
+                            className="p-2"
+                          >
+                            <Heart className={`w-4 h-4 ${book.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleRead(book.id)}
+                            className="p-2"
+                          >
+                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-primary/5 rounded-lg p-4 mb-4 border-l-4 border-primary">
+                        <p className="text-primary text-sm font-medium mb-1">💭 Trecho Inspirador:</p>
+                        <p className="text-primary/80 text-sm italic">"{book.inspirationalText}"</p>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-2 flex-wrap">
+                          <Badge variant="outline" className="text-xs border-primary/30">Idade: {book.ageRange}</Badge>
+                          {book.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary" className="text-xs bg-primary/10 text-primary">{tag}</Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-2 mt-4">
+                        <Button 
+                          variant="outline"
+                          className="flex-1 text-primary border-primary hover:bg-primary/10"
+                          onClick={() => toggleRead(book.id)}
+                        >
+                          {book.hasRead ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 mr-2" />
+                              Já li!
+                            </>
+                          ) : (
+                            <>
+                              <BookOpen className="w-4 h-4 mr-2" />
+                              Quero ler
+                            </>
+                          )}
+                        </Button>
+                        <Button variant="outline" size="sm" className="text-primary border-primary">
+                          <Bookmark className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Inteligência Emocional */}
+          <Card className="border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Heart className="w-6 h-6 text-primary" />
+                💚 Inteligência Emocional
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {books.filter(book => book.tags.some(tag => tag.includes('emoções') || tag.includes('inteligência-emocional') || tag.includes('autoconhecimento') || tag.includes('paciência') || tag.includes('gestão-emocional') || tag.includes('jogos') || tag.includes('expressão'))).map((book) => (
+                  <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
+                    <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
+                          <p className="text-muted-foreground text-sm mb-3">{book.description}</p>
+                        </div>
+                        <div className="flex gap-2 ml-4">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleFavorite(book.id)}
+                            className="p-2"
+                          >
+                            <Heart className={`w-4 h-4 ${book.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleRead(book.id)}
+                            className="p-2"
+                          >
+                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-primary/5 rounded-lg p-4 mb-4 border-l-4 border-primary">
+                        <p className="text-primary text-sm font-medium mb-1">💭 Trecho Inspirador:</p>
+                        <p className="text-primary/80 text-sm italic">"{book.inspirationalText}"</p>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-2 flex-wrap">
+                          <Badge variant="outline" className="text-xs border-primary/30">Idade: {book.ageRange}</Badge>
+                          {book.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary" className="text-xs bg-primary/10 text-primary">{tag}</Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-2 mt-4">
+                        <Button 
+                          variant="outline"
+                          className="flex-1 text-primary border-primary hover:bg-primary/10"
+                          onClick={() => toggleRead(book.id)}
+                        >
+                          {book.hasRead ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 mr-2" />
+                              Já li!
+                            </>
+                          ) : (
+                            <>
+                              <BookOpen className="w-4 h-4 mr-2" />
+                              Quero ler
+                            </>
+                          )}
+                        </Button>
+                        <Button variant="outline" size="sm" className="text-primary border-primary">
+                          <Bookmark className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Dicas para Pais e Educadores */}
+        <Card className="mb-8 border-primary/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <BookOpen className="w-6 h-6 text-primary" />
-              📚 Livros Recomendados
+              <Users className="w-6 h-6 text-primary" />
+              👨‍👩‍👧‍👦 Dicas para Pais e Educadores
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {books.map((book) => (
-                <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow">
-                  <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
-                        <p className="text-muted-foreground text-sm mb-3">{book.description}</p>
-                      </div>
-                      <div className="flex gap-2 ml-4">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => toggleFavorite(book.id)}
-                          className="p-2"
-                        >
-                          <Heart className={`w-4 h-4 ${book.isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => toggleRead(book.id)}
-                          className="p-2"
-                        >
-                          <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-500 text-green-500' : 'text-muted-foreground'}`} />
-                        </Button>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-blue-50 rounded-lg p-4 mb-4 border-l-4 border-blue-400">
-                      <p className="text-blue-800 text-sm font-medium mb-1">💭 Trecho Inspirador:</p>
-                      <p className="text-blue-700 text-sm italic">"{book.inspirationalText}"</p>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex gap-2 flex-wrap">
-                        <Badge variant="outline" className="text-xs">Idade: {book.ageRange}</Badge>
-                        {book.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-2 mt-4">
-                      <Button 
-                        variant="outline"
-                        className="flex-1 text-green-700 border-green-700 hover:bg-green-50"
-                        onClick={() => toggleRead(book.id)}
-                      >
-                        {book.hasRead ? (
-                          <>
-                            <CheckCircle className="w-4 h-4 mr-2" />
-                            Já li!
-                          </>
-                        ) : (
-                          <>
-                            <BookOpen className="w-4 h-4 mr-2" />
-                            Quero ler
-                          </>
-                        )}
-                      </Button>
-                      <Button variant="outline" size="sm" className="text-green-700 border-green-700">
-                        <Bookmark className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+              <Card className="p-6 border-primary/20">
+                <h3 className="font-semibold text-primary mb-4">📖 Leia junto</h3>
+                <p className="text-muted-foreground text-sm">
+                  A leitura compartilhada é uma ótima oportunidade para conversar sobre as emoções e 
+                  os conceitos de negócios apresentados nos livros.
+                </p>
+              </Card>
+              
+              <Card className="p-6 border-primary/20">
+                <h3 className="font-semibold text-primary mb-4">💬 Incentive a discussão</h3>
+                <p className="text-muted-foreground text-sm">
+                  Faça perguntas como "O que você faria nessa situação?", "Como você se sentiria?" 
+                  ou "Que ideia você teria para resolver esse problema?".
+                </p>
+              </Card>
+              
+              <Card className="p-6 border-primary/20">
+                <h3 className="font-semibold text-primary mb-4">🎯 Crie oportunidades</h3>
+                <p className="text-muted-foreground text-sm">
+                  Incentive as crianças a colocarem em prática o que aprenderam, seja através de um 
+                  pequeno projeto de "negócio" em casa ou atividades que estimulem a expressão emocional.
+                </p>
+              </Card>
+              
+              <Card className="p-6 border-primary/20">
+                <h3 className="font-semibold text-primary mb-4">⭐ Seja um exemplo</h3>
+                <p className="text-muted-foreground text-sm">
+                  Demonstre suas próprias emoções de forma saudável e converse sobre como você 
+                  lida com os desafios do dia a dia.
+                </p>
+              </Card>
             </div>
           </CardContent>
         </Card>
 
         {/* Seção Extra: Ideias para Explorar */}
-        <Card>
+        <Card className="border-primary/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Lightbulb className="w-6 h-6 text-gold-500" />
+              <Lightbulb className="w-6 h-6 text-primary" />
               💡 Ideias para Explorar
             </CardTitle>
           </CardHeader>
@@ -280,7 +647,7 @@ const ReadingRecommendations = () => {
               {explorationIdeas.map((idea) => (
                 <Card 
                   key={idea.id}
-                  className={`cursor-pointer transition-all hover:shadow-md ${
+                  className={`cursor-pointer transition-all hover:shadow-md border-primary/10 ${
                     selectedIdea === idea.id ? 'border-primary shadow-md' : ''
                   }`}
                   onClick={() => setSelectedIdea(selectedIdea === idea.id ? null : idea.id)}
@@ -291,13 +658,13 @@ const ReadingRecommendations = () => {
                         <h3 className="font-semibold text-foreground mb-1">{idea.title}</h3>
                         <p className="text-sm text-muted-foreground">{idea.description}</p>
                       </div>
-                      <ArrowRight className={`w-5 h-5 text-muted-foreground transition-transform ${
+                      <ArrowRight className={`w-5 h-5 text-primary transition-transform ${
                         selectedIdea === idea.id ? 'rotate-90' : ''
                       }`} />
                     </div>
                     
                     {selectedIdea === idea.id && (
-                      <div className="mt-4 pt-4 border-t">
+                      <div className="mt-4 pt-4 border-t border-primary/20">
                         <div className="space-y-2">
                           {idea.content.map((item, index) => (
                             <div key={index} className="flex items-start gap-2">

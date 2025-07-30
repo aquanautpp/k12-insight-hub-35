@@ -68,7 +68,7 @@ const navigationItems = [
   },
   {
     id: 'reading',
-    title: 'Recomendações de Leitura',
+    title: 'Leitura',
     icon: Book,
   },
 ];
