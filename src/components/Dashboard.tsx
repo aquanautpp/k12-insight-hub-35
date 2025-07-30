@@ -22,6 +22,18 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
   const { progress } = useProgress();
   const { xpData } = useXP();
   const { unlockedAchievements, checkAchievements } = useAchievement();
+  
+  // Early return com loading se dados essenciais não estão disponíveis
+  if (!progress || !xpData || !unlockedAchievements) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Brain className="w-12 h-12 animate-spin mx-auto mb-4 text-primary" />
+          <p className="text-muted-foreground">Carregando seu dashboard...</p>
+        </div>
+      </div>
+    );
+  }
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const featuresRef = useRef<HTMLDivElement>(null);
@@ -52,8 +64,11 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
   const { currentIndex } = useScrollHijack(featuresRef, features.length);
 
   React.useEffect(() => {
-    checkAchievements(progress, xpData);
-  }, [progress, checkAchievements, xpData]);
+    // Só chama checkAchievements se os dados estão disponíveis e não causará loop
+    if (progress?.completedActivities !== undefined && xpData?.currentLevel !== undefined) {
+      checkAchievements(progress, xpData);
+    }
+  }, [progress?.completedActivities, xpData?.currentLevel, checkAchievements]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,20 +78,21 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Calculate dynamic progress based on actual data
+  // Calculate dynamic progress based on actual data with safe defaults
   const mathProgress = React.useMemo(() => {
+    if (!progress?.cpaProgress) return 0;
     return Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3);
-  }, [progress.cpaProgress]);
+  }, [progress?.cpaProgress]);
 
   const reasoningProgress = React.useMemo(() => {
-    return progress.skillsProgress.find(s => s.skill === 'Raciocínio Lógico')?.level || 75;
-  }, [progress.skillsProgress]);
+    return progress?.skillsProgress?.find(s => s.skill === 'Raciocínio Lógico')?.level || 75;
+  }, [progress?.skillsProgress]);
 
   const overallProgress = React.useMemo(() => {
-    return Math.round((progress.completedActivities / Math.max(progress.totalActivities, 1)) * 100);
-  }, [progress.completedActivities, progress.totalActivities]);
+    return Math.round(((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1)) * 100);
+  }, [progress?.completedActivities, progress?.totalActivities]);
 
-  const displayAchievements = unlockedAchievements.length > 0 ? unlockedAchievements.slice(-4) : [
+  const displayAchievements = (unlockedAchievements && unlockedAchievements.length > 0) ? unlockedAchievements.slice(-4) : [
     { title: 'Primeiro Passo', description: 'Complete sua primeira atividade', icon: '🎯' },
     { title: 'Mente Curiosa', description: 'Faça 5 perguntas ao tutor', icon: '🤔' },
     { title: 'Aprendiz Diário', description: 'Estude por 3 dias consecutivos', icon: '📚' },
@@ -181,7 +197,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
                 <Award className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
-                <AnimatedCounter end={xpData.totalXP} />
+                <AnimatedCounter end={xpData?.totalXP || 0} />
               </h3>
               <p className="text-muted-foreground">XP Total</p>
             </motion.div>
@@ -191,7 +207,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
                 <Target className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
-                <AnimatedCounter end={xpData.currentLevel} />
+                <AnimatedCounter end={xpData?.currentLevel || 1} />
               </h3>
               <p className="text-muted-foreground">Nível Atual</p>
             </motion.div>
@@ -201,7 +217,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
                 <Calendar className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
-                <AnimatedCounter end={progress.completedActivities} />
+                <AnimatedCounter end={progress?.completedActivities || 0} />
               </h3>
               <p className="text-muted-foreground">Atividades</p>
             </motion.div>
