@@ -25,6 +25,9 @@ import { AdaptiveLearningPath } from "./AdaptiveLearningPath";
 import { QuickWinMessage } from "./QuickWinMessage";
 import { ContextualExamples, sampleContextualExamples } from "./ContextualExamples";
 import { BrandPersonalityShowcase } from "./ArtisticBranding";
+import { DocumentaryLearningJourney, sampleDocumentaryChapters } from "./DocumentaryJourney";
+import { AuthenticAITutor, sampleTutorPersonality } from "./AuthenticTutor";
+import { NarrativeProgressVisualization, sampleProgressMilestones } from "./NarrativeProgress";
 
 const Dashboard = () => {
   const { progress } = useProgress();
@@ -201,6 +204,37 @@ const Dashboard = () => {
       {/* Brand Personality Showcase - Phase 3 */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
         <BrandPersonalityShowcase />
+      </div>
+
+      {/* Narrative Progress Visualization - Phase 4 */}
+      <div className="max-w-6xl mx-auto px-6 pb-16">
+        <NarrativeProgressVisualization 
+          milestones={sampleProgressMilestones}
+          currentLevel={studentProgress.overall}
+          totalXP={xpData.totalXP}
+          streak={progress.currentStreak}
+        />
+      </div>
+
+      {/* Documentary Learning Journey - Phase 4 */}
+      <div className="max-w-6xl mx-auto px-6 pb-16">
+        <DocumentaryLearningJourney 
+          title="Mestres da Matemática: Sua Jornada Épica"
+          description="Uma experiência cinematográfica de aprendizagem que transforma conceitos em aventuras"
+          chapters={sampleDocumentaryChapters}
+          currentChapter={0}
+          onChapterComplete={(chapterId) => console.log("Chapter completed:", chapterId)}
+        />
+      </div>
+
+      {/* Authentic AI Tutor - Phase 4 */}
+      <div className="max-w-4xl mx-auto px-6 pb-16">
+        <AuthenticAITutor 
+          personality={sampleTutorPersonality}
+          currentStage="concrete"
+          studentProgress={studentProgress.overall}
+          recentActivity="Trabalhando com frações"
+        />
       </div>
 
       {/* Contextual Examples Section */}
