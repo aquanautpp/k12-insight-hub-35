@@ -121,79 +121,92 @@ const DailyChallenge = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-6xl mx-auto p-6 space-y-6">
       <DynamicChallengeDisplay />
       
-      {/* Challenge Interaction Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Answer Input Section */}
+      {/* Challenge Interaction Section - Layout Horizontal */}
+      <div className="space-y-6">
+        {/* Botões de Dica e Ajuda acima da caixa de resposta */}
+        <div className="flex gap-3 justify-start">
+          <button
+            onClick={() => setShowHint(!showHint)}
+            className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-all duration-200 hover-scale flex items-center gap-2"
+          >
+            <span>💡</span>
+            {showHint ? 'Ocultar Dica' : 'Pedir Dica'}
+          </button>
+          <button
+            onClick={() => setShowTutorHelp(!showTutorHelp)}
+            className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-all duration-200 hover-scale flex items-center gap-2"
+          >
+            <span>🤖</span>
+            {showTutorHelp ? 'Ocultar Ajuda' : 'Ajuda do Tutor IA'}
+          </button>
+        </div>
+
+        {/* Seções de Dica e Tutor IA específicas para o desafio atual */}
+        {showHint && (
+          <div className="bg-gradient-subtle border border-primary/20 rounded-lg p-4">
+            <h4 className="font-medium text-primary mb-2 flex items-center">
+              <span className="mr-2">💡</span>
+              Dica
+            </h4>
+            <p className="text-foreground text-sm leading-relaxed">
+              Primeiro calcule quanto sobra após os gastos atuais. Depois determine se é possível atingir ambas as metas (20% para emergência + R$ 450/mês para viagem). Se não for possível, identifique onde cortar gastos.
+            </p>
+          </div>
+        )}
+
+        {showTutorHelp && (
+          <div className="bg-gradient-focus border border-primary/20 rounded-lg p-4">
+            <h4 className="font-medium text-primary mb-2 flex items-center">
+              <span className="mr-2">💡</span>
+              Tutor IA
+            </h4>
+            <p className="text-foreground text-sm leading-relaxed">
+              Para resolver este problema, siga estes passos: 1) Calcule a renda disponível após gastos fixos, 2) Determine quanto precisa poupar mensalmente para cada meta, 3) Compare com o que sobra, 4) Se necessário, sugira ajustes nos gastos não-essenciais como lazer.
+            </p>
+          </div>
+        )}
+
+        {/* Caixa de Resposta Grande e Horizontal */}
         <div className="bg-card border border-border rounded-lg p-6 space-y-4">
-          <h3 className="text-lg font-semibold text-foreground">💡 Sua Solução Genial</h3>
+          <h3 className="text-lg font-semibold text-foreground">Sua Resposta:</h3>
           <textarea
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
-            placeholder="Mostre sua estratégia! Cada ideia conta para resolver este desafio..."
-            className="w-full h-32 p-4 border border-border rounded-lg resize-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground bg-background transition-all duration-200 hover:shadow-md"
+            placeholder="Escreva sua solução aqui... Detalhe seu raciocínio e os cálculos realizados."
+            className="w-full h-40 p-4 border border-border rounded-lg resize-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground bg-background transition-all duration-200 hover:shadow-md"
           />
           
-          {/* Action Buttons */}
+          {/* Botões de Ação */}
           <div className="flex gap-3">
             <button
               onClick={handleSubmitAnswer}
-              className="flex-1 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-all duration-200 font-medium hover-scale"
+              className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-all duration-200 font-medium hover-scale flex items-center gap-2"
             >
-              🚀 Enviar Minha Solução
+              <span>📝</span>
+              Enviar Resposta
             </button>
             <button
-              onClick={() => setShowHint(!showHint)}
-              className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-all duration-200 hover-scale"
+              onClick={() => setAnswer('')}
+              className="px-4 py-2 border border-border text-foreground rounded-lg hover:bg-muted transition-all duration-200 hover-scale"
             >
-              {showHint ? 'Ocultar Dica' : '💡 Dica Especial'}
-            </button>
-            <button
-              onClick={() => setShowTutorHelp(!showTutorHelp)}
-              className="px-4 py-2 border border-secondary text-secondary rounded-lg hover:bg-secondary/10 transition-all duration-200 hover-scale"
-            >
-              {showTutorHelp ? 'Ocultar Tutor' : '🤖 Tutor IA'}
+              Limpar
             </button>
           </div>
         </div>
 
-        {/* Help and Feedback Section */}
-        <div className="space-y-4">
-          {/* Hint Section */}
-          {showHint && (
-            <div className="bg-gradient-subtle border border-primary/20 rounded-lg p-4">
-              <h4 className="font-medium text-primary mb-2 flex items-center">
-                <span className="mr-2">💡</span>
-                Dica
-              </h4>
-              <p className="text-foreground text-sm leading-relaxed">{getHint()}</p>
-            </div>
-          )}
-
-          {/* Tutor Help Section */}
-          {showTutorHelp && (
-            <div className="bg-gradient-focus border border-secondary/20 rounded-lg p-4">
-              <h4 className="font-medium text-secondary mb-2 flex items-center">
-                <span className="mr-2">🤖</span>
-                Ajuda do Tutor IA
-              </h4>
-              <p className="text-foreground text-sm leading-relaxed">{getTutorAdvice()}</p>
-            </div>
-          )}
-
-          {/* Feedback Section */}
-          {feedback && (
-            <div className="bg-gradient-achievement border border-primary/20 rounded-lg p-4">
-              <h4 className="font-medium text-primary mb-2 flex items-center">
-                <span className="mr-2">✅</span>
-                Feedback da Resposta
-              </h4>
-              <p className="text-foreground text-sm leading-relaxed">{feedback}</p>
-            </div>
-          )}
-        </div>
+        {/* Feedback Section */}
+        {feedback && (
+          <div className="bg-gradient-achievement border border-primary/20 rounded-lg p-4">
+            <h4 className="font-medium text-primary mb-2 flex items-center">
+              <span className="mr-2">✅</span>
+              Feedback da Resposta
+            </h4>
+            <p className="text-foreground text-sm leading-relaxed">{feedback}</p>
+          </div>
+        )}
       </div>
     </div>
   );
