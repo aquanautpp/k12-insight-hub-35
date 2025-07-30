@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface Achievement {
   id: string;
@@ -152,7 +152,7 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
     achievements.filter(a => a.isUnlocked)
   );
 
-  const checkAchievements = useCallback((progressData: any, xpData: any) => {
+  const checkAchievements = (progressData: any, xpData: any) => {
     const newlyUnlocked: Achievement[] = [];
     
     setAchievements(prev => prev.map(achievement => {
@@ -197,7 +197,7 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
     }
     
     return newlyUnlocked;
-  }, []);
+  };
 
   const unlockAchievement = (achievementId: string) => {
     setAchievements(prev => prev.map(achievement => 
