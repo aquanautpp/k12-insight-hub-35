@@ -334,15 +334,15 @@ Que estágio você gostaria de praticar mais?`,
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <Card className="h-[700px] flex flex-col shadow-card">
+      <Card className="h-[850px] flex flex-col shadow-card">
         <CardHeader className="bg-gradient-tutor text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <Brain className="w-6 h-6 text-primary" />
+                <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl font-bold text-white">Meraki - Tutora de IA</CardTitle>
+                <CardTitle className="text-xl font-bold text-white">Meraki - Tutor de IA</CardTitle>
                 <p className="text-white/90 text-sm flex items-center">
                   <span className="mr-2">{stageInfo[currentStage].icon}</span>
                   {stageInfo[currentStage].title}
@@ -386,14 +386,14 @@ Que estágio você gostaria de praticar mais?`,
                   key={message.id}
                   className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div
-                    className={`max-w-[80%] rounded-lg p-3 ${
-                      message.sender === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-foreground'
-                    }`}
-                  >
-                    <div className="whitespace-pre-wrap">{message.content}</div>
+                   <div
+                     className={`max-w-[80%] rounded-lg p-4 ${
+                       message.sender === 'user'
+                         ? 'bg-primary text-primary-foreground'
+                         : 'bg-muted text-foreground'
+                     }`}
+                   >
+                     <div className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</div>
                     
                     <div className="flex items-center justify-between mt-2 text-xs opacity-70">
                       <span>
