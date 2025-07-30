@@ -272,47 +272,28 @@ export const CPAIntegratedChallenge = ({
           )}
         </div>
 
-        {/* Pronto para Desafio - Estatísticas */}
-        <Card className="shadow-card card-interactive bg-gradient-primary border border-primary/30">
-          <CardHeader className="bg-gradient-primary text-white rounded-t-lg">
-            <CardTitle className="text-xl font-bold text-white text-center">
-              🏆 Pronto para o Desafio
-            </CardTitle>
-          </CardHeader>
+        {/* Estatísticas e feedback */}
+        <Card className="shadow-card card-interactive bg-gradient-focus border border-primary/20">
           <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="flex flex-col items-center gap-3 p-4 rounded-lg bg-white/10 border border-primary/30">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
-                  <Timer className="w-6 h-6 text-primary" />
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">
-                    {Math.floor((new Date().getTime() - startTime.getTime()) / 1000)}s
-                  </div>
-                  <span className="text-sm text-white/80">Tempo Total</span>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
+                <Timer className="w-5 h-5 text-primary" />
+                <span className="text-sm font-medium text-foreground">
+                  Tempo: {Math.floor((new Date().getTime() - startTime.getTime()) / 1000)}s
+                </span>
               </div>
               
-              <div className="flex flex-col items-center gap-3 p-4 rounded-lg bg-white/10 border border-primary/30">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
-                  <Brain className="w-6 h-6 text-primary" />
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">
-                    {getStageTitle(currentStage)}
-                  </div>
-                  <span className="text-sm text-white/80">Estágio Atual</span>
-                </div>
+              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
+                <Brain className="w-5 h-5 text-primary" />
+                <span className="text-sm font-medium text-foreground">
+                  {getStageTitle(currentStage)}
+                </span>
               </div>
               
-              <div className="flex flex-col items-center gap-3 p-4 rounded-lg bg-white/10 border border-primary/30">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-xl font-bold text-primary">
-                  {Object.values(stageAttempts).reduce((a, b) => a + b, 0)}
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">Total</div>
-                  <span className="text-sm text-white/80">Tentativas</span>
-                </div>
+              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
+                <span className="text-sm font-medium text-foreground">
+                  Tentativas: {Object.values(stageAttempts).reduce((a, b) => a + b, 0)}
+                </span>
               </div>
             </div>
           </CardContent>

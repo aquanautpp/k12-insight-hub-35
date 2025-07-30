@@ -196,40 +196,40 @@ const EmotionalIntelligence = () => {
         </div>
 
         {/* Guia de Como Funciona */}
-        <Card className="mb-8 card-interactive shadow-card bg-gradient-focus border border-primary/20">
-          <CardHeader className="bg-gradient-primary text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Brain className="w-6 h-6" />
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Brain className="w-6 h-6 text-primary" />
               Como Funciona o Treinamento em IE?
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-6">
+          <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center p-4 rounded-lg bg-gradient-subtle border border-primary/20 hover-scale transition-all duration-300">
-                <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center mx-auto mb-3">
-                  <Brain className="w-6 h-6 text-white" />
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-3">
+                  <Brain className="w-6 h-6 text-blue-600" />
                 </div>
-                <h4 className="font-semibold mb-2 text-foreground">Aprenda Através da Prática</h4>
+                <h4 className="font-semibold mb-2">Aprenda Através da Prática</h4>
                 <p className="text-sm text-muted-foreground">
                   Atividades interativas, jogos e simulações que tornam o aprendizado emocional divertido e eficaz.
                 </p>
               </div>
               
-              <div className="text-center p-4 rounded-lg bg-gradient-subtle border border-primary/20 hover-scale transition-all duration-300">
-                <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center mx-auto mb-3">
-                  <Heart className="w-6 h-6 text-white" />
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
+                  <Heart className="w-6 h-6 text-green-600" />
                 </div>
-                <h4 className="font-semibold mb-2 text-foreground">Reflita e Registre</h4>
+                <h4 className="font-semibold mb-2">Reflita e Registre</h4>
                 <p className="text-sm text-muted-foreground">
                   Use o diário emocional para registrar sentimentos e acompanhar seu crescimento pessoal.
                 </p>
               </div>
               
-              <div className="text-center p-4 rounded-lg bg-gradient-subtle border border-primary/20 hover-scale transition-all duration-300">
-                <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center mx-auto mb-3">
-                  <Sparkles className="w-6 h-6 text-white" />
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-3">
+                  <Sparkles className="w-6 h-6 text-purple-600" />
                 </div>
-                <h4 className="font-semibold mb-2 text-foreground">Cresça Continuamente</h4>
+                <h4 className="font-semibold mb-2">Cresça Continuamente</h4>
                 <p className="text-sm text-muted-foreground">
                   Receba feedback personalizado e desafios adaptativos para desenvolver suas habilidades emocionais.
                 </p>
@@ -239,21 +239,21 @@ const EmotionalIntelligence = () => {
         </Card>
 
         {/* Avatar Emocional */}
-        <Card className="card-interactive shadow-card bg-gradient-primary border border-primary/30 hover:shadow-xl transition-all duration-300">
+        <Card className="bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="text-6xl animate-pulse-glow">😊</div>
+              <div className="text-6xl">😊</div>
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-2">
                   Seu Avatar Emocional: Alex, o Explorador
                 </h3>
-                <p className="text-white/90 mb-3">
+                <p className="text-muted-foreground mb-3">
                   Alex evolui conforme você completa as atividades de IE. Atualmente ele está no nível "Descobridor" 
                   e está ansioso para aprender mais sobre emoções com você!
                 </p>
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-white/20 text-white border-white/30">Nível Descobridor</Badge>
-                  <Badge className="bg-white/10 text-white border-white/20">6 conquistas desbloqueadas</Badge>
+                  <Badge variant="secondary">Nível Descobridor</Badge>
+                  <Badge variant="outline">6 conquistas desbloqueadas</Badge>
                 </div>
               </div>
             </div>

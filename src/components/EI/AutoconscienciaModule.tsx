@@ -299,31 +299,31 @@ const AutoconscienciaModule = ({ onBack }: AutoconscienciaModuleProps) => {
         </Card>
 
         {/* Conceito */}
-        <Card className="mb-8 card-interactive bg-gradient-primary border border-primary/30">
-          <CardHeader className="bg-gradient-primary text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2 text-white">
+        <Card className="mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-800">
               <Brain className="w-6 h-6" />
               O que é Autoconsciência Emocional?
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-6">
-            <p className="text-foreground mb-4">
+          <CardContent>
+            <p className="text-blue-700 mb-4">
               A autoconsciência emocional é a habilidade de reconhecer e compreender suas próprias emoções. 
               É como ter um "radar emocional" interno que te ajuda a entender o que você está sentindo e por quê.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-gradient-subtle rounded-lg p-4 border border-primary/20">
-                <h4 className="font-semibold text-foreground mb-2">Por que é importante?</h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
+              <div className="bg-white/80 rounded-lg p-4">
+                <h4 className="font-semibold text-blue-800 mb-2">Por que é importante?</h4>
+                <ul className="text-sm text-blue-700 space-y-1">
                   <li>• Ajuda a tomar melhores decisões</li>
                   <li>• Melhora relacionamentos</li>
                   <li>• Reduz conflitos internos</li>
                   <li>• Aumenta a autoestima</li>
                 </ul>
               </div>
-              <div className="bg-gradient-subtle rounded-lg p-4 border border-primary/20">
-                <h4 className="font-semibold text-foreground mb-2">Como desenvolver?</h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
+              <div className="bg-white/80 rounded-lg p-4">
+                <h4 className="font-semibold text-blue-800 mb-2">Como desenvolver?</h4>
+                <ul className="text-sm text-blue-700 space-y-1">
                   <li>• Praticar mindfulness</li>
                   <li>• Manter um diário emocional</li>
                   <li>• Refletir sobre situações</li>
