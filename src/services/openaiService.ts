@@ -30,7 +30,9 @@ class OpenAIService {
     }
   ): Promise<ChatResponse> {
     
-    // Mock implementation - replace with actual OpenAI API call
+    // This method currently returns a mock response.
+    // When an API key is provided, replace the code below with a real
+    // OpenAI API call.
     if (!this.apiKey) {
       return this.getMockResponse(userMessage, context);
     }
