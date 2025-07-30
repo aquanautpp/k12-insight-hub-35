@@ -111,8 +111,8 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
             <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4 float-animation">
               <BarChart3 className="w-10 h-10 text-primary-foreground" />
             </div>
-            <h2 className="text-2xl font-bold mb-2 elegant-text-reveal text-primary-foreground">Sua História de Conquistas</h2>
-            <p className="text-primary-foreground/90 elegant-text-reveal">
+            <h2 className="text-2xl font-bold mb-2 elegant-text-reveal text-foreground">Sua História de Conquistas</h2>
+            <p className="text-foreground/90 elegant-text-reveal">
               {generateProgressNarrative()}
             </p>
           </div>
@@ -120,20 +120,20 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
           {/* Key Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="thoughtful-interaction bg-white/10 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-primary-foreground">{currentLevel}</div>
-              <div className="text-sm text-primary-foreground/80">Nível Atual</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{currentLevel}</div>
+              <div className="text-sm text-foreground/80">Nível Atual</div>
             </div>
             <div className="thoughtful-interaction bg-white/10 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-primary-foreground">{totalXP.toLocaleString()}</div>
-              <div className="text-sm text-primary-foreground/80">XP Total</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{totalXP.toLocaleString()}</div>
+              <div className="text-sm text-foreground/80">XP Total</div>
             </div>
             <div className="thoughtful-interaction bg-white/10 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-primary-foreground">{streak}</div>
-              <div className="text-sm text-primary-foreground/80">Dias Seguidos</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{streak}</div>
+              <div className="text-sm text-foreground/80">Dias Seguidos</div>
             </div>
             <div className="thoughtful-interaction bg-white/10 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-primary-foreground">{milestones.length}</div>
-              <div className="text-sm text-primary-foreground/80">Marcos Históricos</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{milestones.length}</div>
+              <div className="text-sm text-foreground/80">Marcos Históricos</div>
             </div>
           </div>
         </div>
