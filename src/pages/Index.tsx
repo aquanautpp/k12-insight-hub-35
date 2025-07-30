@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AppSidebar } from "@/components/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 import Dashboard from "@/components/Dashboard";
 import CPAMethod from "@/components/CPAMethodNew";
 import MerakiChatTutor from "@/components/MerakiChatTutor";
@@ -42,10 +43,10 @@ const Index = () => {
         <AppSidebar currentView={currentView} onViewChange={setCurrentView} />
         
         <div className="flex-1 flex flex-col">
-          <header className="h-12 flex items-center border-b border-border bg-card">
-            <SidebarTrigger className="ml-2" />
-            <div className="ml-4">
-              <h2 className="text-lg font-semibold text-foreground">
+          <header className="nav-clean h-16 flex items-center justify-between px-6">
+            <div className="flex items-center">
+              <SidebarTrigger className="mr-4" />
+              <div className="text-sm text-muted-foreground font-medium">
                 {currentView === 'dashboard' && 'Painel de Controle'}
                 {currentView === 'cpa-method' && 'Método CPA'}
                 {currentView === 'learning-test' && 'Teste de Aprendizagem'}
@@ -54,7 +55,16 @@ const Index = () => {
                 {currentView === 'progress' && 'Progresso'}
                 {currentView === 'activities' && 'Atividades'}
                 {currentView === 'reading' && 'Recomendações de Leitura'}
-              </h2>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" size="sm" className="text-muted-foreground">
+                Conta
+              </Button>
+              <Button variant="pill" size="sm">
+                Sair
+              </Button>
             </div>
           </header>
           

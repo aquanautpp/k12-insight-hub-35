@@ -5,27 +5,33 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-learning hover:shadow-lg transform hover:-translate-y-0.5",
+        default: "bg-primary text-primary-foreground hover:bg-primary-hover rounded-md",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md hover:shadow-lg",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-md",
         outline:
-          "border border-border bg-background hover:bg-muted hover:border-primary/50",
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-achievement transform hover:-translate-y-0.5",
-        ghost: "hover:bg-muted hover:text-accent-foreground",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md",
+        ghost: "hover:bg-accent hover:text-accent-foreground rounded-md",
         link: "text-primary underline-offset-4 hover:underline",
-        learning: "bg-gradient-learning text-white shadow-learning hover:shadow-xl transform hover:-translate-y-1 hover:scale-105",
-        achievement: "bg-gradient-achievement text-white shadow-achievement hover:shadow-xl transform hover:-translate-y-1",
-        focus: "bg-gradient-focus text-primary border border-primary/20 hover:border-primary/40 shadow-card",
+        // Modern pill buttons inspired by tryrefer.com
+        pill: "bg-primary text-primary-foreground hover:bg-primary-hover rounded-full px-6 py-3",
+        "pill-outline": "border border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full px-6 py-3",
+        "pill-secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full px-6 py-3",
+        // Clean modern variants
+        learning: "bg-gradient-learning text-primary border border-primary/20 hover:shadow-learning rounded-xl",
+        achievement: "bg-gradient-achievement text-primary-foreground hover:shadow-achievement hover:scale-105 rounded-xl",
+        focus: "bg-gradient-focus text-primary border border-primary/20 hover:border-primary/40 shadow-card rounded-xl",
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        sm: "h-9 px-3",
+        lg: "h-11 px-8",
+        xl: "h-14 px-10 text-base",
         icon: "h-10 w-10",
       },
     },

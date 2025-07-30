@@ -8,50 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Rich Earth Tones with Vibrant Colors */
-    --background: 45 25% 92%;
-    --foreground: 25 30% 15%;
+    /* Modern Clean Backgrounds - Inspired by tryrefer.com */
+    --background: 0 0% 98%;
+    --foreground: 220 15% 20%;
 
-    --card: 45 20% 95%;
-    --card-foreground: 25 30% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 20%;
 
-    --popover: 45 15% 99%;
-    --popover-foreground: 25 25% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 20%;
 
-    /* Rich Olive Green - Primary Actions */
+    /* Rich Olive Green - Primary Actions (maintained) */
     --primary: 85 50% 30%;
-    --primary-foreground: 45 25% 95%;
+    --primary-foreground: 0 0% 100%;
     --primary-hover: 85 55% 25%;
 
-    /* Vibrant Sage - Secondary Actions */
-    --secondary: 85 30% 75%;
-    --secondary-foreground: 25 35% 20%;
+    /* Clean Secondary - Inspired by tryrefer buttons */
+    --secondary: 220 13% 91%;
+    --secondary-foreground: 220 15% 20%;
 
-    /* Contrasted Taupe - Supporting Elements */
-    --muted: 35 15% 90%;
-    --muted-foreground: 25 20% 45%;
+    /* Subtle Muted - Clean minimalist approach */
+    --muted: 220 13% 91%;
+    --muted-foreground: 220 10% 46%;
 
-    /* Rich Terra Cotta - Accent */
-    --accent: 25 40% 75%;
-    --accent-foreground: 25 30% 20%;
+    /* Soft Accent - Maintaining earth tones */
+    --accent: 220 13% 91%;
+    --accent-foreground: 220 15% 20%;
 
-    --destructive: 0 70% 55%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 20% 80%;
-    --input: 45 12% 92%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 85 40% 35%;
 
-    /* Elegant Earth Gradients */
-    --gradient-learning: linear-gradient(135deg, hsl(85 25% 92%), hsl(45 20% 88%));
-    --gradient-achievement: linear-gradient(135deg, hsl(25 30% 90%), hsl(85 20% 88%));
-    --gradient-focus: linear-gradient(135deg, hsl(45 15% 94%), hsl(85 15% 90%));
-    --gradient-subtle: linear-gradient(180deg, hsl(45 15% 96%), hsl(35 12% 92%));
+    /* Clean Modern Gradients - Inspired by tryrefer.com */
+    --gradient-learning: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 13% 91%));
+    --gradient-achievement: linear-gradient(135deg, hsl(85 50% 30%), hsl(85 55% 25%));
+    --gradient-focus: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 98%), hsl(220 13% 96%));
 
-    /* Olive Green + Beige Shadows */
-    --shadow-learning: 0 10px 30px -10px hsl(85 35% 35% / 0.2);
-    --shadow-achievement: 0 8px 25px -8px hsl(100 25% 55% / 0.3);
-    --shadow-card: 0 4px 12px -4px hsl(120 15% 15% / 0.1);
+    /* Clean Modern Shadows - Inspired by tryrefer.com */
+    --shadow-learning: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-achievement: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
 
     /* Terra e tons terrosos */
     --earth-base: 38 25% 15%;
@@ -146,6 +146,36 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Modern typography inspired by tryrefer.com */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium tracking-tight;
+  }
+
+  /* Pill buttons inspired by tryrefer.com */
+  .btn-pill {
+    @apply rounded-full px-6 py-3 font-medium transition-all duration-200;
+  }
+
+  /* Clean card styles */
+  .card-clean {
+    @apply bg-card border border-border/50 rounded-xl shadow-card hover:shadow-learning transition-all duration-200;
+  }
+
+  /* Avatar styles inspired by tryrefer.com */
+  .avatar-persona {
+    @apply w-20 h-20 rounded-full border-4 border-white shadow-learning;
+  }
+
+  /* Spacious section layouts */
+  .section-spacious {
+    @apply py-16 px-6;
+  }
+
+  /* Clean navigation */
+  .nav-clean {
+    @apply bg-white/95 backdrop-blur-sm border-b border-border/50;
   }
 }

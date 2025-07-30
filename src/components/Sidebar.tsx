@@ -15,9 +15,10 @@ import { cn } from '@/lib/utils';
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -73,72 +74,79 @@ const navigationItems = [
 ];
 
 export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
-  const { state } = useSidebar();
-  const collapsed = state === 'collapsed';
+  const { state } = useSidebar()
 
   return (
-    <Sidebar className={cn(collapsed ? "w-14" : "w-64")}>
-      <SidebarContent>
-        {/* Header */}
-        <div className="p-4 border-b border-border">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Brain className="w-5 h-5 text-primary" />
-            </div>
-            {!collapsed && (
-              <div>
-                <h1 className="text-lg font-bold text-foreground">Meraki</h1>
-                <p className="text-xs text-muted-foreground">Plataforma de Aprendizagem</p>
+    <Sidebar 
+      collapsible="icon" 
+      className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-14" : "w-64"}`}
+    >
+      <SidebarHeader className="border-b border-border/30 p-6">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton 
+              size="lg" 
+              className="data-[state=open]:bg-transparent hover:bg-transparent p-0"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="flex aspect-square size-10 items-center justify-center rounded-xl bg-gradient-achievement text-white shadow-md">
+                  <Brain className="size-5" />
+                </div>
+                {state !== "collapsed" && (
+                  <div className="grid flex-1 text-left leading-tight">
+                    <span className="text-lg font-semibold text-foreground">Meraki</span>
+                    <span className="text-xs text-muted-foreground font-medium">Educação Personalizada</span>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
 
-        {/* Navigation */}
+      <SidebarContent className="px-3 py-6">
         <SidebarGroup>
-          <SidebarGroupLabel>Menu Principal</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-2">
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton 
-                    asChild
-                    isActive={currentView === item.id}
+                    onClick={() => onViewChange(item.id)}
+                    className={`w-full justify-start h-11 rounded-xl transition-all duration-200 font-medium ${
+                      currentView === item.id 
+                        ? "bg-primary text-primary-foreground shadow-md" 
+                        : "hover:bg-muted text-muted-foreground hover:text-foreground"
+                    }`}
                   >
-                    <button
-                      onClick={() => onViewChange(item.id)}
-                      className={cn(
-                        "flex items-center gap-3 w-full p-2 rounded-lg transition-colors",
-                        currentView === item.id
-                          ? "bg-primary text-primary-foreground"
-                          : "hover:bg-muted"
-                      )}
-                    >
-                      <item.icon className="w-5 h-5" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </button>
+                    <item.icon className="h-5 w-5" />
+                    {state !== "collapsed" && <span className="ml-3">{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-
-        {/* User Profile */}
-        <div className="mt-auto p-4 border-t border-border">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-              <User className="w-4 h-4 text-secondary-foreground" />
-            </div>
-            {!collapsed && (
-              <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">Victor</p>
-                <p className="text-xs text-muted-foreground">Estudante</p>
-              </div>
-            )}
-          </div>
-        </div>
       </SidebarContent>
+
+      <SidebarFooter className="border-t border-border/30 p-4">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton className="w-full p-3 hover:bg-muted rounded-xl transition-colors duration-200">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-achievement flex items-center justify-center shadow-md">
+                  <span className="text-white text-sm font-semibold">V</span>
+                </div>
+                {state !== "collapsed" && (
+                  <div className="flex flex-col text-left">
+                    <span className="text-sm font-semibold text-foreground">Victor</span>
+                    <span className="text-xs text-muted-foreground">Estudante</span>
+                  </div>
+                )}
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }

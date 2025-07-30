@@ -20,6 +20,7 @@ import { useXP } from "@/contexts/XPContext";
 import { useAchievement } from "@/contexts/AchievementContext";
 import { SmartInsights } from "./SmartInsights";
 import { XPDisplay } from "./XPDisplay";
+import { AvatarPersona } from "./ui/avatar-persona";
 
 const Dashboard = () => {
   const { progress } = useProgress();
@@ -50,102 +51,132 @@ const Dashboard = () => {
       ];
 
   return (
-    <div className="p-6 space-y-6 bg-gradient-subtle min-h-screen">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Bem-vindo ao Meraki! 👋</h1>
-          <p className="text-muted-foreground">Pronto para mais uma jornada de aprendizagem, Victor?</p>
-        </div>
-        <div className="flex items-center gap-4">
-          <XPDisplay />
-          <Button variant="learning" size="sm" className="text-green-700">
-            <BookOpen className="w-4 h-4 mr-2" />
-            Continuar Estudando
-          </Button>
+    <div className="min-h-screen bg-background">
+      {/* Hero Section - Inspired by tryrefer.com */}
+      <div className="section-spacious text-center">
+        <div className="max-w-4xl mx-auto">
+          <AvatarPersona 
+            size="xl" 
+            className="mx-auto mb-8" 
+            icon={<Brain />}
+          />
+          
+          <h1 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 tracking-tight">
+            Olá, Victor!
+          </h1>
+          <h2 className="text-2xl md:text-3xl text-primary mb-6 font-medium">
+            Sua jornada de aprendizagem personalizada
+          </h2>
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+            Continue desenvolvendo suas habilidades com nossa plataforma educacional baseada no Método CPA e inteligência emocional.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <Button variant="pill" size="lg" className="min-w-48">
+              <BookOpen className="w-5 h-5 mr-2" />
+              Continuar Estudando
+            </Button>
+            <Button variant="pill-outline" size="lg" className="min-w-48">
+              <Target className="w-5 h-5 mr-2" />
+              Ver Progresso
+            </Button>
+          </div>
+
+          <div className="flex justify-center">
+            <XPDisplay />
+          </div>
         </div>
       </div>
 
-      {/* Progress Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {Object.entries(studentProgress).map(([subject, progress]) => (
-          <Card key={subject} className="p-6 shadow-card hover:shadow-learning transition-all duration-300 transform hover:-translate-y-1">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-semibold capitalize text-foreground">
+      {/* Progress Overview - Clean Cards */}
+      <div className="max-w-6xl mx-auto px-6 pb-16">
+        <h2 className="text-2xl font-semibold text-center mb-12 text-foreground">Seu Progresso</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {Object.entries(studentProgress).map(([subject, progress]) => (
+            <Card key={subject} className="card-clean p-8 text-center group">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-achievement flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                {subject === 'mathematics' && <Calculator className="w-8 h-8 text-primary-foreground" />}
+                {subject === 'reasoning' && <Brain className="w-8 h-8 text-primary-foreground" />}
+                {subject === 'creativity' && <Star className="w-8 h-8 text-primary-foreground" />}
+                {subject === 'overall' && <TrendingUp className="w-8 h-8 text-primary-foreground" />}
+              </div>
+              
+              <h3 className="text-lg font-semibold mb-4 text-foreground">
                 {subject === 'mathematics' ? 'Matemática' : 
                  subject === 'reasoning' ? 'Raciocínio Lógico' :
                  subject === 'creativity' ? 'Criatividade' :
                  subject === 'overall' ? 'Geral' : subject}
               </h3>
-              <div className="w-8 h-8 rounded-full bg-gradient-learning flex items-center justify-center">
-                {subject === 'mathematics' && <Calculator className="w-4 h-4 text-white" />}
-                {subject === 'reasoning' && <Brain className="w-4 h-4 text-primary" />}
-                {subject === 'creativity' && <Star className="w-4 h-4 text-white" />}
-                {subject === 'overall' && <TrendingUp className="w-4 h-4 text-white" />}
+              
+              <div className="space-y-3">
+                <Progress value={progress} className="h-3" />
+                <div className="text-2xl font-bold text-primary">{progress}%</div>
+                <p className="text-sm text-muted-foreground">concluído</p>
               </div>
-            </div>
-            <div className="space-y-2">
-              <Progress value={progress} className="h-2" />
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Progresso</span>
-                <span className="font-medium text-primary">{progress}%</span>
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-
-      {/* AI Insights Section */}
-      <Card className="p-6 bg-gradient-focus border border-primary/20 shadow-learning">
-        <div className="flex items-center mb-4">
-          <div className="w-12 h-12 rounded-xl bg-white/90 flex items-center justify-center mr-4 shadow-md">
-            <img src={aiInsightsIcon} alt="AI Insights" className="w-8 h-8 rounded-lg" />
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-primary">Insights de IA Personalizada</h2>
-            <p className="text-primary/70">Análise do seu padrão de aprendizagem</p>
-          </div>
-        </div>
-        
-        <SmartInsights />
-      </Card>
-
-      {/* Achievements */}
-      <Card className="p-6 shadow-card">
-        <div className="flex items-center mb-6">
-          <div className="w-10 h-10 rounded-lg bg-gradient-achievement flex items-center justify-center mr-3">
-            <img src={achievementIcon} alt="Achievements" className="w-6 h-6" />
-          </div>
-          <h2 className="text-xl font-bold text-foreground">Suas Conquistas</h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {achievements.map((achievement, index) => (
-            <div key={index} className="group">
-              <Card className="p-4 text-center hover:shadow-achievement transition-all duration-300 transform group-hover:-translate-y-1 group-hover:scale-105">
-                <div className="text-3xl mb-2 group-hover:animate-pulse-glow">{achievement.icon}</div>
-                <h3 className="font-semibold text-sm mb-1">{achievement.title}</h3>
-                <p className="text-xs text-muted-foreground">{achievement.description}</p>
-              </Card>
-            </div>
+            </Card>
           ))}
         </div>
-      </Card>
+      </div>
 
-      {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Button variant="achievement" className="h-16 text-base text-green-700">
-          <Brain className="w-5 h-5 mr-3" />
-          Método CPA
-        </Button>
-        <Button variant="achievement" className="h-16 text-base text-green-700">
-          <Target className="w-5 h-5 mr-3" />
-          Prática Personalizada
-        </Button>
-        <Button variant="achievement" className="h-16 text-base text-green-700">
-          <Award className="w-5 h-5 mr-3" />
-          Continuar Estudando
-        </Button>
+      {/* AI Insights Section - Clean Modern Design */}
+      <div className="max-w-4xl mx-auto px-6 pb-16">
+        <Card className="card-clean p-12 bg-gradient-focus">
+          <div className="text-center mb-8">
+            <AvatarPersona 
+              size="lg" 
+              className="mx-auto mb-6"
+              icon={<img src={aiInsightsIcon} alt="AI Insights" className="w-full h-full rounded-full" />}
+            />
+            
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Insights de IA Personalizada
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
+              Nossa inteligência artificial analisou seu padrão de aprendizagem e criou recomendações personalizadas para você.
+            </p>
+          </div>
+          
+          <SmartInsights />
+        </Card>
+      </div>
+
+      {/* Achievements Section - Modern Layout */}
+      <div className="max-w-6xl mx-auto px-6 pb-16">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl font-semibold text-foreground mb-4">Suas Conquistas</h2>
+          <p className="text-muted-foreground">Acompanhe seu progresso e celebrate cada conquista</p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {achievements.map((achievement, index) => (
+            <Card key={index} className="card-clean p-6 text-center group hover:shadow-achievement">
+              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-200">
+                {achievement.icon}
+              </div>
+              <h3 className="font-semibold text-base mb-2 text-foreground">{achievement.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{achievement.description}</p>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Quick Actions - Pill Buttons */}
+      <div className="max-w-4xl mx-auto px-6 pb-16">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button variant="pill" size="xl" className="min-w-56">
+            <Brain className="w-5 h-5 mr-3" />
+            Método CPA
+          </Button>
+          <Button variant="pill-outline" size="xl" className="min-w-56">
+            <Target className="w-5 h-5 mr-3" />
+            Prática Personalizada
+          </Button>
+          <Button variant="pill-secondary" size="xl" className="min-w-56">
+            <Award className="w-5 h-5 mr-3" />
+            Inteligência Emocional
+          </Button>
+        </div>
       </div>
     </div>
   );
