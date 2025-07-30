@@ -99,22 +99,22 @@ export const SmartInsights: React.FC<SmartInsightsProps> = ({ className = "" }) 
       {insights.map((insight, index) => (
         <Card key={index} className="card-interactive shadow-card bg-gradient-focus border border-primary/20 hover:shadow-xl transition-all duration-300">
           <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center">
-                  <insight.icon className="w-5 h-5 text-white" />
-                </div>
-                <div className="ml-3">
+            <div className="flex items-start gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                <insight.icon className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                   <span className="text-sm font-semibold text-foreground">
                     {getTypeLabel(insight.type)}
                   </span>
-                  <Badge variant="secondary" className="ml-2 text-xs bg-primary/10 text-primary">
+                  <Badge variant="secondary" className="text-xs bg-primary/10 text-primary w-fit">
                     {insight.confidence}% confiança
                   </Badge>
                 </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">{insight.message}</p>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">{insight.message}</p>
           </CardContent>
         </Card>
       ))}

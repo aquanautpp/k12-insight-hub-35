@@ -161,7 +161,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="text-white border-white/50 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm"
+                className="text-white border-white/50 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm bg-white/10"
                 onClick={() => onViewChange?.('cpa-method')}
               >
                 Começar Hoje

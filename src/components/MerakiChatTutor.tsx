@@ -335,7 +335,7 @@ Que estágio você gostaria de praticar mais?`,
   return (
     <div className="max-w-4xl mx-auto p-6">
       <Card className="h-[850px] flex flex-col shadow-card">
-        <CardHeader className="bg-gradient-tutor text-white rounded-t-lg">
+        <CardHeader className="bg-gradient-primary text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
@@ -433,26 +433,26 @@ Que estágio você gostaria de praticar mais?`,
             <Button 
               variant="pill" 
               size="sm"
-              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
-              onClick={() => setInputMessage("Me dê uma dica específica para resolver este problema: 27 + 15 = ?")}
+              className="bg-gradient-primary text-white hover:bg-gradient-primary/90 border-0 shadow-sm"
+              onClick={() => setInputMessage("Como Pedro pode somar 27 + 15 usando figurinhas? Me dê uma dica específica.")}
             >
-              💡 Dica para Pedro e suas Figurinhas
+              💡 Dica: Figurinhas do Pedro
             </Button>
             <Button 
               variant="pill" 
               size="sm"
-              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
+              className="bg-gradient-primary text-white hover:bg-gradient-primary/90 border-0 shadow-sm"
               onClick={() => setInputMessage("Como usar blocos base 10 para representar 27 figurinhas + 15 figurinhas?")}
             >
-              🤝 Ajuda com Blocos
+              🧱 Ajuda com Blocos
             </Button>
             <Button 
               variant="pill" 
               size="sm"
-              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
+              className="bg-gradient-primary text-white hover:bg-gradient-primary/90 border-0 shadow-sm"
               onClick={() => setInputMessage("Me explique passo a passo como Pedro pode calcular suas figurinhas usando o método CPA")}
             >
-              ✨ Dica Especial
+              🎯 Passo a Passo Pedro
             </Button>
           </div>
 
