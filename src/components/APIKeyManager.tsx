@@ -10,7 +10,7 @@ import { openaiService } from "@/services/openaiService";
 export default function APIKeyManager() {
   const [apiKey, setApiKey] = useState('');
   const [isConfigured, setIsConfigured] = useState(false);
-  const [status, setStatus] = useState<'none' | 'stored' | 'active'>('none');
+  const [status, setStatus] = useState<'none' | 'stored' | 'active' | 'error'>('none');
   const [testResult, setTestResult] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -66,7 +66,8 @@ export default function APIKeyManager() {
   const statusConfig = {
     none: { color: 'bg-red-100 text-red-800', text: 'Não configurada' },
     stored: { color: 'bg-yellow-100 text-yellow-800', text: 'Configurada' },
-    active: { color: 'bg-green-100 text-green-800', text: 'Ativa e funcionando' }
+    active: { color: 'bg-green-100 text-green-800', text: 'Ativa e funcionando' },
+    error: { color: 'bg-red-100 text-red-800', text: 'Erro na conexão' }
   };
 
   return (

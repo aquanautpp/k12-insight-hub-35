@@ -1,4 +1,5 @@
 // OpenAI Service for Real AI Tutoring via Supabase Edge Functions
+import { supabase } from '@/integrations/supabase/client';
 
 interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
@@ -12,20 +13,34 @@ interface ChatResponse {
 }
 
 class OpenAIService {
-  private apiKeyStatus: 'none' | 'stored' | 'active' = 'none';
+  private apiKeyStatus: 'none' | 'active' | 'error' = 'none';
   
   constructor() {
+    // Check if we can connect to Supabase edge function
     this.checkApiKeyStatus();
   }
 
-  private checkApiKeyStatus() {
-    const apiKey = localStorage.getItem('openai_api_key');
-    if (apiKey && apiKey.startsWith('sk-')) {
-      this.apiKeyStatus = 'stored';
+  private async checkApiKeyStatus() {
+    try {
+      // Test connection to the edge function
+      const { data, error } = await supabase.functions.invoke('chat-tutor', {
+        body: { 
+          message: 'test', 
+          context: { cpaStage: 'pictorial' } 
+        }
+      });
+      
+      if (!error) {
+        this.apiKeyStatus = 'active';
+      } else {
+        this.apiKeyStatus = 'error';
+      }
+    } catch (error) {
+      this.apiKeyStatus = 'error';
     }
   }
 
-  getApiKeyStatus(): 'none' | 'stored' | 'active' {
+  getApiKeyStatus(): 'none' | 'active' | 'error' {
     return this.apiKeyStatus;
   }
 
@@ -40,88 +55,45 @@ class OpenAIService {
   ): Promise<ChatResponse & { isRealAI?: boolean }> {
     
     try {
-      // Try direct OpenAI API call first
-      const apiKey = localStorage.getItem('openai_api_key');
-      if (apiKey && apiKey.startsWith('sk-')) {
-        console.log('🤖 Using real OpenAI API');
-        const response = await this.callOpenAIDirectly(userMessage, context, apiKey);
-        this.apiKeyStatus = 'active';
-        return { ...response, isRealAI: true };
+      console.log('🤖 Using Supabase Edge Function with OpenAI');
+      
+      const { data, error } = await supabase.functions.invoke('chat-tutor', {
+        body: { 
+          message: userMessage,
+          context: {
+            learningStyle: context.learningStyle,
+            currentLevel: context.currentLevel,
+            cpaStage: context.cpaStage,
+            previousMessages: context.previousMessages
+          }
+        }
+      });
+
+      if (error) {
+        console.error('Edge function error:', error);
+        throw new Error(`Edge function error: ${error.message}`);
       }
 
-      // If no API key available, use mock response
-      console.log('🎭 Using mock response (no API key)');
-      throw new Error('No API key configured');
+      if (data && data.message) {
+        this.apiKeyStatus = 'active';
+        return { 
+          message: data.message,
+          suggestions: data.suggestions || this.generateSuggestions(context.cpaStage || 'pictorial'),
+          confidence: data.confidence || 95,
+          isRealAI: true 
+        };
+      } else {
+        throw new Error('Invalid response from edge function');
+      }
 
     } catch (error) {
       console.error('OpenAI Service Error:', error);
-      // Fallback to mock response
       console.log('🎭 Using mock response (API error)');
+      this.apiKeyStatus = 'error';
       return { ...this.getMockResponse(userMessage, context), isRealAI: false };
     }
   }
 
-  private async callOpenAIDirectly(
-    userMessage: string,
-    context: any,
-    apiKey: string
-  ): Promise<ChatResponse> {
-    const systemPrompt = `Você é Meraki, um tutor de IA especializado em educação personalizada usando o Método CPA (Concreto-Pictórico-Abstrato).
-
-CONTEXTO DO ESTUDANTE:
-- Estilo de aprendizagem: ${context.learningStyle || 'visual'}
-- Nível atual: ${context.currentLevel || 1}
-- Estágio CPA preferido: ${context.cpaStage || 'pictorial'}
-
-INSTRUÇÕES:
-1. Adapte suas respostas ao estilo de aprendizagem do estudante
-2. Use linguagem adequada ao nível dele
-3. Quando explicar matemática, sempre mencione os 3 estágios CPA quando relevante
-4. Seja encorajador e positivo
-5. Forneça exemplos práticos e relevantes
-6. Se o estudante estiver com dificuldades, simplifique e volte ao estágio concreto
-
-FORMATO DE RESPOSTA:
-- Seja claro e objetivo (máximo 200 palavras)
-- Use emojis quando apropriado
-- Inclua dicas práticas
-- Mantenha tom amigável e motivador`;
-
-    const messages = [
-      { role: 'system', content: systemPrompt },
-      ...(context.previousMessages || []),
-      { role: 'user', content: userMessage }
-    ];
-
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-4.1-2025-04-14',
-        messages: messages,
-        max_tokens: 300,
-        temperature: 0.7,
-        presence_penalty: 0.1,
-        frequency_penalty: 0.1,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    const aiMessage = data.choices[0]?.message?.content || 'Desculpe, não consegui processar sua mensagem.';
-
-    return {
-      message: aiMessage,
-      suggestions: this.generateSuggestions(context.cpaStage || 'pictorial'),
-      confidence: 95
-    };
-  }
 
   private generateSuggestions(cpaStage: string): string[] {
     const suggestionsByStage = {
@@ -149,30 +121,6 @@ FORMATO DE RESPOSTA:
     ];
   }
 
-  private buildSystemPrompt(context: any): string {
-    let prompt = `Você é Meraki, um tutor de IA especializado em educação personalizada usando o Método CPA (Concreto-Pictórico-Abstrato).
-
-CONTEXTO DO ESTUDANTE:
-- Estilo de aprendizagem: ${context.learningStyle || 'visual'}
-- Nível atual: ${context.currentLevel || 1}
-- Estágio CPA preferido: ${context.cpaStage || 'pictorial'}
-
-INSTRUÇÕES:
-1. Adapte suas respostas ao estilo de aprendizagem do estudante
-2. Use linguagem adequada ao nível dele
-3. Quando explicar matemática, sempre mencione os 3 estágios CPA
-4. Seja encorajador e positivo
-5. Forneça exemplos práticos e relevantes
-6. Se o estudante estiver com dificuldades, simplifique e volte ao estágio concreto
-
-FORMATO DE RESPOSTA:
-- Seja claro e objetivo
-- Use emojis quando apropriado
-- Inclua dicas práticas
-- Sugira próximos passos quando relevante`;
-
-    return prompt;
-  }
 
   private getMockResponse(userMessage: string, context: any): ChatResponse {
     const responses = [

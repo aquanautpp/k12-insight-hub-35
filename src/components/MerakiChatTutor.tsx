@@ -9,7 +9,7 @@ import { openaiService } from "@/services/openaiService";
 
 // Componente para mostrar status da IA
 const AIStatusIndicator = () => {
-  const [status, setStatus] = useState<'none' | 'stored' | 'active'>('none');
+  const [status, setStatus] = useState<'none' | 'stored' | 'active' | 'error'>('none');
 
   useEffect(() => {
     setStatus(openaiService.getApiKeyStatus());
@@ -18,7 +18,8 @@ const AIStatusIndicator = () => {
   const statusConfig = {
     none: { icon: HelpCircle, color: 'text-red-400', text: 'Sem API Key' },
     stored: { icon: Zap, color: 'text-yellow-400', text: 'API Configurada' },
-    active: { icon: Zap, color: 'text-green-400', text: 'IA Ativa' }
+    active: { icon: Zap, color: 'text-green-400', text: 'IA Ativa' },
+    error: { icon: HelpCircle, color: 'text-red-400', text: 'Erro na API' }
   };
 
   const config = statusConfig[status];
