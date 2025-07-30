@@ -154,43 +154,45 @@ const EmotionalIntelligence = () => {
               key={domain.id}
               className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl ${
                 domain.isUnlocked ? 'shadow-lg' : 'opacity-60'
-              }`}
+              } bg-gradient-to-br from-gradient-start to-gradient-end`}
               onClick={() => handleDomainClick(domain.id)}
             >
-              <div className="bg-gradient-to-br from-gradient-start to-gradient-end p-6 text-white">
+              <CardContent className="p-6 text-white">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center">
+                  <div className="text-white/90">
                     {domain.icon}
-                    {!domain.isUnlocked && (
-                      <Lock className="w-4 h-4 ml-2 opacity-70" />
-                    )}
                   </div>
-                  <Badge variant="secondary" className="bg-white/20 text-white">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                     {domain.completedActivities}/{domain.activities}
                   </Badge>
                 </div>
                 
-                <h3 className="text-xl font-bold mb-2">{domain.title}</h3>
+                <h3 className="text-xl font-bold mb-2 text-white">{domain.title}</h3>
                 <p className="text-white/90 text-sm mb-4">{domain.description}</p>
                 
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
+                <div className="space-y-3 mb-4">
+                  <div className="flex justify-between text-sm text-white/90">
                     <span>Progresso</span>
                     <span>{domain.progress}%</span>
                   </div>
                   <Progress value={domain.progress} className="h-2 bg-white/20" />
                 </div>
-              </div>
-              
-              {domain.isUnlocked && (
-                <CardContent className="p-4">
-                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2">
+                
+                {domain.isUnlocked && (
+                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border-white/20">
                     <PlayCircle className="w-4 h-4" />
                     Continuar Atividades
                     <ArrowRight className="w-4 h-4" />
                   </Button>
-                </CardContent>
-              )}
+                )}
+                
+                {!domain.isUnlocked && (
+                  <div className="flex items-center justify-center gap-2 text-white/70 text-sm">
+                    <Lock className="w-4 h-4" />
+                    Bloqueado
+                  </div>
+                )}
+              </CardContent>
             </Card>
           ))}
         </div>
