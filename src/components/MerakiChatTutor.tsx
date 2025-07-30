@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, BookOpen, Calculator, Brain, Target } from "lucide-react";
+import { openaiService } from "@/services/openaiService";
 
 // Definindo os tipos para o estágio CPA
 type CPAStage = 'concrete' | 'pictorial' | 'abstract' | 'adaptive';
@@ -41,7 +42,31 @@ const MerakiChatTutor = () => {
   }, [messages]);
 
   const generateMerakiResponse = async (userMessage: string, stage: CPAStage) => {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      // Try using real OpenAI service first
+      const response = await openaiService.generateResponse(userMessage, {
+        cpaStage: stage === 'pictorial' ? 'pictorial' : stage === 'abstract' ? 'abstract' : stage === 'concrete' ? 'concrete' : 'concrete',
+        learningStyle: 'visual',
+        currentLevel: 1,
+        previousMessages: messages.slice(-3).map(msg => ({
+          role: msg.sender === 'user' ? 'user' as const : 'assistant' as const,
+          content: msg.content
+        }))
+      });
+      
+      return {
+        content: response.message,
+        stage: stage
+      };
+    } catch (error) {
+      console.error('Error getting AI response, using fallback:', error);
+      // Fallback to original logic if service fails
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return await generateFallbackResponse(userMessage, stage);
+    }
+  };
+
+  const generateFallbackResponse = async (userMessage: string, stage: CPAStage) => {
 
     // Tópicos matemáticos que podemos identificar
     const mathTopics = {

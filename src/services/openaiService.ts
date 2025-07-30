@@ -1,5 +1,4 @@
-// OpenAI Service for Enhanced AI Tutoring
-// Note: This is a mock implementation - you'll need to add your OpenAI API key when ready
+// OpenAI Service for Real AI Tutoring via Supabase Edge Functions
 
 interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
@@ -13,11 +12,13 @@ interface ChatResponse {
 }
 
 class OpenAIService {
-  private apiKey: string | null = null;
-  private baseURL = 'https://api.openai.com/v1';
-
-  setApiKey(key: string) {
-    this.apiKey = key;
+  private supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  private supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  
+  constructor() {
+    // Set the provided API key for immediate use
+    const providedKey = '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';
+    localStorage.setItem('openai_api_key', providedKey);
   }
 
   async generateResponse(
@@ -30,42 +31,136 @@ class OpenAIService {
     }
   ): Promise<ChatResponse> {
     
-    // This method currently returns a mock response.
-    // When an API key is provided, replace the code below with a real
-    // OpenAI API call.
-    if (!this.apiKey) {
-      return this.getMockResponse(userMessage, context);
-    }
-
     try {
-      const systemPrompt = this.buildSystemPrompt(context);
-      const messages: ChatMessage[] = [
-        { role: 'system', content: systemPrompt },
-        ...(context.previousMessages || []),
-        { role: 'user', content: userMessage }
-      ];
+      // Check if we have Supabase configured
+      if (this.supabaseUrl && this.supabaseAnonKey) {
+        // Try Supabase Edge Function first
+        const response = await fetch(`${this.supabaseUrl}/functions/v1/chat-tutor`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${this.supabaseAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: userMessage,
+            context: context
+          }),
+        });
 
-      // Here you would make the actual OpenAI API call
-      // const response = await fetch(`${this.baseURL}/chat/completions`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Authorization': `Bearer ${this.apiKey}`,
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     model: 'gpt-4',
-      //     messages: messages,
-      //     max_tokens: 500,
-      //     temperature: 0.7,
-      //   }),
-      // });
+        if (response.ok) {
+          const data = await response.json();
+          if (!data.error) {
+            return {
+              message: data.message,
+              suggestions: data.suggestions || [],
+              confidence: data.confidence || 95
+            };
+          }
+        }
+      }
 
-      // For now, return mock response
-      return this.getMockResponse(userMessage, context);
+      // Fallback to direct OpenAI API call with localStorage key
+      const apiKey = localStorage.getItem('openai_api_key');
+      if (apiKey && apiKey.startsWith('sk-')) {
+        return await this.callOpenAIDirectly(userMessage, context, apiKey);
+      }
+
+      // If no API key available, use mock response
+      throw new Error('No API key configured');
+
     } catch (error) {
-      console.error('OpenAI API Error:', error);
+      console.error('OpenAI Service Error:', error);
+      // Fallback to mock response
       return this.getMockResponse(userMessage, context);
     }
+  }
+
+  private async callOpenAIDirectly(
+    userMessage: string,
+    context: any,
+    apiKey: string
+  ): Promise<ChatResponse> {
+    const systemPrompt = `Você é Meraki, um tutor de IA especializado em educação personalizada usando o Método CPA (Concreto-Pictórico-Abstrato).
+
+CONTEXTO DO ESTUDANTE:
+- Estilo de aprendizagem: ${context.learningStyle || 'visual'}
+- Nível atual: ${context.currentLevel || 1}
+- Estágio CPA preferido: ${context.cpaStage || 'pictorial'}
+
+INSTRUÇÕES:
+1. Adapte suas respostas ao estilo de aprendizagem do estudante
+2. Use linguagem adequada ao nível dele
+3. Quando explicar matemática, sempre mencione os 3 estágios CPA quando relevante
+4. Seja encorajador e positivo
+5. Forneça exemplos práticos e relevantes
+6. Se o estudante estiver com dificuldades, simplifique e volte ao estágio concreto
+
+FORMATO DE RESPOSTA:
+- Seja claro e objetivo (máximo 200 palavras)
+- Use emojis quando apropriado
+- Inclua dicas práticas
+- Mantenha tom amigável e motivador`;
+
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      ...(context.previousMessages || []),
+      { role: 'user', content: userMessage }
+    ];
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-4.1-2025-04-14',
+        messages: messages,
+        max_tokens: 300,
+        temperature: 0.7,
+        presence_penalty: 0.1,
+        frequency_penalty: 0.1,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI API error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const aiMessage = data.choices[0]?.message?.content || 'Desculpe, não consegui processar sua mensagem.';
+
+    return {
+      message: aiMessage,
+      suggestions: this.generateSuggestions(context.cpaStage || 'pictorial'),
+      confidence: 95
+    };
+  }
+
+  private generateSuggestions(cpaStage: string): string[] {
+    const suggestionsByStage = {
+      concrete: [
+        "Mostre com objetos físicos",
+        "Use material manipulativo", 
+        "Dê um exemplo do dia a dia"
+      ],
+      pictorial: [
+        "Desenhe o problema",
+        "Use diagramas visuais",
+        "Mostre com imagens"
+      ],
+      abstract: [
+        "Explique a fórmula", 
+        "Mostre os símbolos matemáticos",
+        "Use notação algébrica"
+      ]
+    };
+
+    return suggestionsByStage[cpaStage as keyof typeof suggestionsByStage] || [
+      "Explique de forma mais simples",
+      "Dê mais exemplos", 
+      "Como posso praticar?"
+    ];
   }
 
   private buildSystemPrompt(context: any): string {
