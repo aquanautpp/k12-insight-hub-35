@@ -51,6 +51,15 @@ export const DynamicChallengeDisplay: React.FC = () => {
     }
   };
 
+  const translateDifficulty = (difficulty: string) => {
+    switch (difficulty) {
+      case "beginner": return "Iniciante";
+      case "intermediate": return "Intermediário";
+      case "advanced": return "Avançado";
+      default: return difficulty;
+    }
+  };
+
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'mathematics': return '🧮';
@@ -98,7 +107,7 @@ export const DynamicChallengeDisplay: React.FC = () => {
           </div>
           <div className="flex items-center gap-2">
             <Badge className={getDifficultyColor(currentChallenge.difficulty)}>
-              {currentChallenge.difficulty}
+              {translateDifficulty(currentChallenge.difficulty)}
             </Badge>
             <Badge variant="outline" className="flex items-center gap-1 text-primary border-primary">
               <Trophy className="w-3 h-3" />

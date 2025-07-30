@@ -45,6 +45,15 @@ export const ContextualExamples: React.FC<ContextualExamplesProps> = ({
     }
   };
 
+  const translateDifficulty = (difficulty: string) => {
+    switch (difficulty) {
+      case "beginner": return "Iniciante";
+      case "intermediate": return "Intermediário";
+      case "advanced": return "Avançado";
+      default: return difficulty;
+    }
+  };
+
   const filteredExamples = examples.filter(example => 
     currentSubject === "all" || example.category === currentSubject
   );
@@ -77,7 +86,7 @@ export const ContextualExamples: React.FC<ContextualExamplesProps> = ({
                       {example.title}
                     </h4>
                     <Badge className={getDifficultyColor(example.difficulty)}>
-                      {example.difficulty}
+                      {translateDifficulty(example.difficulty)}
                     </Badge>
                   </div>
                   

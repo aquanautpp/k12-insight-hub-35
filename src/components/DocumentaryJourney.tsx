@@ -87,6 +87,15 @@ export const DocumentaryLearningJourney: React.FC<DocumentaryJourneyProps> = ({
     }
   };
 
+  const translateDifficulty = (difficulty: string) => {
+    switch (difficulty) {
+      case "beginner": return "Iniciante";
+      case "intermediate": return "Intermediário";
+      case "advanced": return "Avançado";
+      default: return difficulty;
+    }
+  };
+
   const currentChapterData = chapters[currentChapter];
   const totalDuration = parseInt(currentChapterData?.duration.split(' ')[0]) * 60 || 300;
   const progressPercentage = (currentTime / totalDuration) * 100;
@@ -222,7 +231,7 @@ export const DocumentaryLearningJourney: React.FC<DocumentaryJourneyProps> = ({
                   </p>
                 </div>
                 <Badge className={getDifficultyColor(currentChapterData?.difficulty || "beginner")}>
-                  {currentChapterData?.difficulty}
+                  {translateDifficulty(currentChapterData?.difficulty || "beginner")}
                 </Badge>
               </div>
 
@@ -290,7 +299,7 @@ export const DocumentaryLearningJourney: React.FC<DocumentaryJourneyProps> = ({
                         <div className="flex items-center gap-2 mt-1">
                           <span className="text-xs text-muted-foreground">{chapter.duration}</span>
                           <Badge variant="outline" className="text-xs">
-                            {chapter.difficulty}
+                            {translateDifficulty(chapter.difficulty)}
                           </Badge>
                         </div>
                       </div>

@@ -48,6 +48,15 @@ export const CompletionFlow: React.FC<CompletionFlowProps> = ({
     }
   };
 
+  const translateDifficulty = (difficulty: string) => {
+    switch (difficulty) {
+      case "easy": return "Fácil";
+      case "medium": return "Médio";
+      case "hard": return "Difícil";
+      default: return difficulty;
+    }
+  };
+
   const completeStep = (stepId: string) => {
     if (!completedSteps.includes(stepId)) {
       setCompletedSteps([...completedSteps, stepId]);
@@ -128,9 +137,9 @@ export const CompletionFlow: React.FC<CompletionFlowProps> = ({
                       {step.title}
                     </h4>
                     <div className="flex items-center gap-2">
-                      <Badge variant="outline" className={getDifficultyColor(step.difficulty)}>
-                        {getDifficultyIcon(step.difficulty)} {step.difficulty}
-                      </Badge>
+                       <Badge variant="outline" className={getDifficultyColor(step.difficulty)}>
+                         {getDifficultyIcon(step.difficulty)} {translateDifficulty(step.difficulty)}
+                       </Badge>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Clock className="w-3 h-3" />
                         {step.estimated_time}

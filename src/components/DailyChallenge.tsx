@@ -73,6 +73,15 @@ const DailyChallenge = () => {
     }
   };
 
+  const translateDifficulty = (difficulty: string) => {
+    switch (difficulty) {
+      case "beginner": return "Iniciante";
+      case "intermediate": return "Intermediário";
+      case "advanced": return "Avançado";
+      default: return difficulty;
+    }
+  };
+
   const getHint = () => {
     const { currentChallenge } = useChallenge();
     if (!currentChallenge) return "Gere um novo desafio para ver dicas personalizadas.";

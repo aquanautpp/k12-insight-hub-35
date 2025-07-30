@@ -177,6 +177,15 @@ export const CPAIntegratedChallenge = ({
     }
   };
 
+  const translateDifficulty = (difficulty: string) => {
+    switch (difficulty) {
+      case 'beginner': return 'Iniciante';
+      case 'intermediate': return 'Intermediário';
+      case 'advanced': return 'Avançado';
+      default: return difficulty;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto space-y-6">
@@ -192,7 +201,7 @@ export const CPAIntegratedChallenge = ({
               </div>
               <div className="flex items-center gap-3">
                 <Badge className={getDifficultyColor(challenge.difficulty)}>
-                  {challenge.difficulty}
+                  {translateDifficulty(challenge.difficulty)}
                 </Badge>
                 <Button variant="outline" size="sm" onClick={resetChallenge}>
                   <RotateCcw className="w-4 h-4" />
