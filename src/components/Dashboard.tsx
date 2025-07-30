@@ -1,33 +1,18 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { 
-  Brain, 
-  TrendingUp, 
-  Target, 
-  Award,
-  BookOpen,
-  Calculator,
-  Clock,
-  Star
-} from "lucide-react";
-import aiInsightsIcon from "@/assets/ai-insights-icon.jpg";
-import achievementIcon from "@/assets/achievement-icon.jpg";
-import { useProgress } from "@/contexts/ProgressContext";
-import { useXP } from "@/contexts/XPContext";
-import { useAchievement } from "@/contexts/AchievementContext";
-import { SmartInsights } from "./SmartInsights";
-import { XPDisplay } from "./XPDisplay";
-import { AvatarPersona } from "./ui/avatar-persona";
-import { AdaptiveLearningPath } from "./AdaptiveLearningPath";
-import { QuickWinMessage } from "./QuickWinMessage";
-import { ContextualExamples, sampleContextualExamples } from "./ContextualExamples";
-import { BrandPersonalityShowcase } from "./ArtisticBranding";
-import { DocumentaryLearningJourney, sampleDocumentaryChapters } from "./DocumentaryJourney";
-import { AuthenticAITutor, sampleTutorPersonality } from "./AuthenticTutor";
-import { NarrativeProgressVisualization, sampleProgressMilestones } from "./NarrativeProgress";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
+import { Brain, BookOpen, Target, TrendingUp, Award, BarChart3, MessageCircle, User, Calendar, Clock, Lightbulb, Zap, ArrowRight, Activity, Shield, HardHat, Code, Cpu, Layers } from 'lucide-react';
+import { useProgress } from '@/contexts/ProgressContext';
+import { useXP } from '@/contexts/XPContext';
+import { useAchievement } from '@/contexts/AchievementContext';
+import { SmartInsights } from './SmartInsights';
+import { QuickWinMessage } from './QuickWinMessage';
+import { AdaptiveLearningPath } from './AdaptiveLearningPath';
+import { AnimatedCounter } from './AnimatedCounter';
+import { useScrollHijack } from '@/hooks/useScrollHijack';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface DashboardProps {
   onViewChange?: (view: string) => void;
@@ -37,181 +22,395 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
   const { progress } = useProgress();
   const { xpData } = useXP();
   const { unlockedAchievements, checkAchievements } = useAchievement();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isMobile = useIsMobile();
+  const featuresRef = useRef<HTMLDivElement>(null);
+  
+  const features = [
+    {
+      icon: Brain,
+      title: "Método CPA",
+      description: "Aprendizagem visual e progressiva baseada no método Singapura"
+    },
+    {
+      icon: MessageCircle,
+      title: "Tutor IA",
+      description: "Assistente inteligente personalizado para sua jornada"
+    },
+    {
+      icon: Target,
+      title: "Inteligência Emocional",
+      description: "Desenvolvimento de habilidades socioemocionais"
+    },
+    {
+      icon: BookOpen,
+      title: "Leitura Personalizada",
+      description: "Recomendações baseadas no seu perfil de aprendizagem"
+    }
+  ];
 
-  // Update achievements based on current progress
+  const { currentIndex } = useScrollHijack(featuresRef, features.length);
+
   React.useEffect(() => {
     checkAchievements(progress, xpData);
-  }, [progress.completedActivities, progress.currentStreak, xpData.currentLevel, progress.chatInteractions]);
+  }, [progress, checkAchievements, xpData]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Calculate dynamic progress based on actual data
-  const studentProgress = React.useMemo(() => ({
-    mathematics: Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3),
-    reasoning: progress.skillsProgress.find(s => s.skill === 'Raciocínio Lógico')?.level || 75,
-    overall: Math.round((progress.completedActivities / progress.totalActivities) * 100)
-  }), [progress]);
+  const mathProgress = React.useMemo(() => {
+    return Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3);
+  }, [progress.cpaProgress]);
 
-  // Use recent unlocked achievements, fallback to static ones if none
-  const achievements = unlockedAchievements.length > 0 
-    ? unlockedAchievements.slice(-4)
-    : [
-        { title: "Mestre do Método CPA", description: "Completou todos os estágios", icon: "🏆" },
-        { title: "Streak de 7 dias", description: "Praticou matemática 7 dias seguidos", icon: "🔥" },
-        { title: "Pensador Visual", description: "Resolveu 50 problemas pictóricos", icon: "👁️" },
-        { title: "Explorador de IA", description: "Utilizou todas as recomendações de IA", icon: "🤖" }
-      ];
+  const reasoningProgress = React.useMemo(() => {
+    return progress.skillsProgress.find(s => s.skill === 'Raciocínio Lógico')?.level || 75;
+  }, [progress.skillsProgress]);
+
+  const overallProgress = React.useMemo(() => {
+    return Math.round((progress.completedActivities / Math.max(progress.totalActivities, 1)) * 100);
+  }, [progress.completedActivities, progress.totalActivities]);
+
+  const displayAchievements = unlockedAchievements.length > 0 ? unlockedAchievements.slice(-4) : [
+    { title: 'Primeiro Passo', description: 'Complete sua primeira atividade', icon: '🎯' },
+    { title: 'Mente Curiosa', description: 'Faça 5 perguntas ao tutor', icon: '🤔' },
+    { title: 'Aprendiz Diário', description: 'Estude por 3 dias consecutivos', icon: '📚' },
+    { title: 'Solucionador', description: 'Resolva 10 problemas', icon: '💡' }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3,
+        duration: 0.8
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { duration: 0.6 }
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section - Clean & Focused */}
-      <div className="section-spacious text-center">
-        <div className="max-w-3xl mx-auto">
-          <AvatarPersona 
-            size="lg" 
-            className="mx-auto mb-6" 
-            icon={<Brain className="w-8 h-8" />}
-          />
-          
-          <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-3 tracking-tight animate-fade-in">
-            Bem-vindo de volta! 👋
-          </h1>
-          <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed animate-fade-in">
-            Continue sua jornada de aprendizagem com o método CPA
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
-            <Button variant="pill" size="lg" className="min-w-40 hover-scale animate-fade-in" onClick={() => onViewChange?.('cpa-method')}>
-              <BookOpen className="w-4 h-4 mr-2" />
-              Estudar Hoje
-            </Button>
-            <Button variant="pill-outline" size="lg" className="min-w-40 hover-scale animate-fade-in" onClick={() => onViewChange?.('progress')}>
-              <Target className="w-4 h-4 mr-2" />
-              Ver Progresso
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Progress Overview - Simplified */}
-      <div className="max-w-4xl mx-auto px-6 pb-12">
-        <div className="relative">
-          <XPDisplay className="absolute top-0 right-0" />
-          <h2 className="text-xl font-semibold mb-8 text-foreground">
-            Seu Progresso
-          </h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {Object.entries(studentProgress).map(([subject, progress]) => (
-            <Card key={subject} className="card-clean p-6 text-center group hover-scale">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-achievement flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                {subject === 'mathematics' && <Calculator className="w-6 h-6 text-primary-foreground" />}
-                {subject === 'reasoning' && <Brain className="w-6 h-6 text-primary-foreground" />}
-                {subject === 'overall' && <TrendingUp className="w-6 h-6 text-primary-foreground" />}
-              </div>
-              
-              <h3 className="text-base font-semibold mb-3 text-foreground">
-                {subject === 'mathematics' ? 'Matemática' : 
-                 subject === 'reasoning' ? 'Raciocínio' :
-                 subject === 'overall' ? 'Geral' : subject}
-              </h3>
-              
-              <div className="space-y-2">
-                <Progress value={progress} className="h-2" />
-                <div className="text-xl font-bold text-primary">{progress}%</div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* AI Insights Section - Integrated */}
-      <div className="max-w-4xl mx-auto px-6 pb-12">
-        <Card className="card-clean p-8 bg-gradient-focus border-2 border-primary/20 shadow-card">
-          <div className="text-center mb-6">
-            <h2 className="text-xl font-semibold text-primary mb-2">
-              Insights Personalizados
-            </h2>
-            <p className="text-muted-foreground">
-              Recomendações baseadas no seu progresso
+    <div className="min-h-screen">
+      {/* Hero Section com gradiente */}
+      <div className="banner-container relative overflow-hidden h-[60vh] md:h-[500px] lg:h-[550px] w-full">
+        <div className="banner-overlay">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="flex flex-col items-center space-y-6"
+          >
+            <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 animate-pulse-glow">
+              <Brain className="w-10 h-10 text-white" />
+            </div>
+            <h1 className="banner-title">
+              Bem-vindo ao Meraki
+            </h1>
+            <p className="banner-subtitle">
+              Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
             </p>
-          </div>
-          
-          <SmartInsights />
-          
-          {/* Integrated Quick Win Message */}
-          <div className="mt-4">
-            <QuickWinMessage type="daily" />
-          </div>
-        </Card>
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <Button 
+                size="lg" 
+                className="bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm"
+                onClick={() => onViewChange?.('progress')}
+              >
+                Ver Progresso
+                <TrendingUp className="ml-2 h-4 w-4" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-transparent hover:bg-white/10 text-white border-white/50 hover:border-white/70"
+                onClick={() => onViewChange?.('cpa-method')}
+              >
+                Começar Hoje
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Trilha Personalizada - Consolidated */}
-      <div className="max-w-4xl mx-auto px-6 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Estatísticas Principais */}
+      <motion.section 
+        className="py-16 bg-gradient-to-b from-background to-secondary/30"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div className="text-center mb-12" variants={itemVariants}>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Seu Progresso em Números
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Acompanhe seu desenvolvimento através de métricas personalizadas
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <motion.div variants={itemVariants} className="card-interactive rounded-xl p-6 text-center hover-scale">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
+                <AnimatedCounter end={Math.round(overallProgress)} suffix="%" />
+              </h3>
+              <p className="text-muted-foreground">Progresso Geral</p>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="card-interactive rounded-xl p-6 text-center hover-scale">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
+                <AnimatedCounter end={xpData.totalXP} />
+              </h3>
+              <p className="text-muted-foreground">XP Total</p>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="card-interactive rounded-xl p-6 text-center hover-scale">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Target className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
+                <AnimatedCounter end={xpData.currentLevel} />
+              </h3>
+              <p className="text-muted-foreground">Nível Atual</p>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="card-interactive rounded-xl p-6 text-center hover-scale">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
+                <AnimatedCounter end={progress.completedActivities} />
+              </h3>
+              <p className="text-muted-foreground">Atividades</p>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Features com Scroll Hijacking */}
+      <motion.section 
+        ref={featuresRef}
+        className="py-16 bg-gradient-to-b from-secondary/30 to-background"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div className="text-center mb-12" variants={itemVariants}>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Recursos de Aprendizagem
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Descubra as ferramentas que tornam o aprendizado mais eficaz e envolvente
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className={`card-gradient p-6 rounded-xl hover-scale transition-all duration-500 ${
+                  !isMobile && currentIndex === index ? 'ring-2 ring-primary shadow-lg' : ''
+                }`}
+              >
+                <div className="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-lg text-primary mb-4">
+                  <feature.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2 text-foreground">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Conteúdo Principal */}
+      <motion.div 
+        className="max-w-7xl mx-auto p-6 space-y-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {/* Progresso Detalhado */}
+        <motion.div variants={itemVariants}>
+          <Card className="card-gradient">
+            <CardHeader className="text-center">
+              <CardTitle className="flex items-center justify-center gap-3 text-2xl">
+                <BarChart3 className="h-6 w-6 text-primary" />
+                Visão Geral do Progresso
+              </CardTitle>
+              <CardDescription>
+                Acompanhe seu desenvolvimento em diferentes áreas do conhecimento
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium flex items-center gap-2">
+                      <Brain className="h-4 w-4 text-primary" />
+                      Matemática
+                    </span>
+                    <span className="text-sm text-muted-foreground">{Math.round(mathProgress)}%</span>
+                  </div>
+                  <Progress value={mathProgress} className="h-2" />
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium flex items-center gap-2">
+                      <Lightbulb className="h-4 w-4 text-primary" />
+                      Raciocínio
+                    </span>
+                    <span className="text-sm text-muted-foreground">{Math.round(reasoningProgress)}%</span>
+                  </div>
+                  <Progress value={reasoningProgress} className="h-2" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Insights e Quick Wins */}
+        <div className="grid gap-6 md:grid-cols-2">
+          <motion.div variants={itemVariants}>
+            <SmartInsights className="h-full" />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <QuickWinMessage />
+          </motion.div>
+        </div>
+
+        {/* Caminho Adaptativo */}
+        <motion.div variants={itemVariants}>
           <AdaptiveLearningPath 
-            currentLevel={studentProgress.overall}
+            currentLevel={overallProgress}
             completedModules={["Números Básicos", "Operações Simples"]}
             nextModules={["Percentuais", "Geometria Visual"]}
             successRate={87}
           />
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Próximos Passos</h3>
-            <div className="space-y-3">
-              <div className="p-3 bg-gradient-subtle rounded-lg border">
-                <div className="flex items-center gap-2 mb-1">
-                  <Target className="w-4 h-4 text-primary" />
-                  <span className="font-medium text-sm">Meta Diária</span>
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  15 minutos de prática hoje
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </motion.div>
 
-      {/* Achievements Section - Simplified */}
-      <div className="max-w-4xl mx-auto px-6 pb-12">
-        <div className="text-center mb-8">
-          <h2 className="text-xl font-semibold text-foreground mb-2">Conquistas 🏆</h2>
-          <p className="text-muted-foreground text-sm">Suas últimas realizações</p>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
-          {achievements.slice(0, 4).map((achievement, index) => (
-            <Card key={index} className="card-clean p-4 text-center group hover-scale">
-              <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-200">
-                {achievement.icon}
+        {/* Conquistas */}
+        <motion.div variants={itemVariants}>
+          <Card className="card-gradient">
+            <CardHeader className="text-center">
+              <CardTitle className="flex items-center justify-center gap-3 text-xl">
+                <Award className="h-5 w-5 text-primary" />
+                Suas Conquistas
+              </CardTitle>
+              <CardDescription>
+                Celebre seus marcos de aprendizagem
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {displayAchievements.map((achievement, index) => (
+                  <div 
+                    key={index} 
+                    className="text-center p-4 rounded-lg transition-all hover-scale bg-primary/10 border border-primary/20"
+                  >
+                    <div className="text-2xl mb-2">{achievement.icon}</div>
+                    <h4 className="font-medium text-sm mb-1">{achievement.title}</h4>
+                    <p className="text-xs text-muted-foreground">{achievement.description}</p>
+                  </div>
+                ))}
               </div>
-              <h3 className="font-medium text-sm mb-1 text-foreground">{achievement.title}</h3>
-              <p className="text-xs text-muted-foreground">{achievement.description}</p>
-            </Card>
-          ))}
-        </div>
-      </div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-      {/* Quick Actions - Simplified */}
-      <div className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="text-center mb-6">
-          <h2 className="text-xl font-semibold text-foreground mb-2">Continuar Aprendendo</h2>
-        </div>
-        
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button variant="pill" size="lg" className="min-w-40 hover-scale" onClick={() => onViewChange?.('cpa-method')}>
-            <Brain className="w-4 h-4 mr-2" />
-            Método CPA
-          </Button>
-          <Button variant="pill-outline" size="lg" className="min-w-40 hover-scale" onClick={() => onViewChange?.('activities')}>
-            <Target className="w-4 h-4 mr-2" />
-            Prática Rápida
-          </Button>
-          <Button variant="pill" size="lg" className="min-w-40 hover-scale" onClick={() => onViewChange?.('emotional-intelligence')}>
-            <Award className="w-4 h-4 mr-2" />
-            Int. Emocional
-          </Button>
-        </div>
-      </div>
+        {/* Ações Rápidas */}
+        <motion.div variants={itemVariants}>
+          <Card className="card-gradient">
+            <CardHeader className="text-center">
+              <CardTitle className="flex items-center justify-center gap-3 text-xl">
+                <Zap className="h-5 w-5 text-primary" />
+                Ações Rápidas
+              </CardTitle>
+              <CardDescription>
+                Continue sua jornada de aprendizagem
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <Button 
+                  variant="outline" 
+                  className="h-auto p-4 flex flex-col items-center gap-2 hover-scale"
+                  onClick={() => onViewChange?.('cpa-method')}
+                >
+                  <Brain className="h-6 w-6 text-primary" />
+                  <span className="font-medium">Método CPA</span>
+                  <span className="text-xs text-muted-foreground text-center">
+                    Aprendizagem visual progressiva
+                  </span>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="h-auto p-4 flex flex-col items-center gap-2 hover-scale"
+                  onClick={() => onViewChange?.('emotional-intelligence')}
+                >
+                  <Target className="h-6 w-6 text-primary" />
+                  <span className="font-medium">Int. Emocional</span>
+                  <span className="text-xs text-muted-foreground text-center">
+                    Desenvolvimento pessoal
+                  </span>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="h-auto p-4 flex flex-col items-center gap-2 hover-scale"
+                  onClick={() => onViewChange?.('chat-tutor')}
+                >
+                  <MessageCircle className="h-6 w-6 text-primary" />
+                  <span className="font-medium">Tutor IA</span>
+                  <span className="text-xs text-muted-foreground text-center">
+                    Assistente personalizado
+                  </span>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="h-auto p-4 flex flex-col items-center gap-2 hover-scale"
+                  onClick={() => onViewChange?.('reading-recommendations')}
+                >
+                  <BookOpen className="h-6 w-6 text-primary" />
+                  <span className="font-medium">Leitura</span>
+                  <span className="text-xs text-muted-foreground text-center">
+                    Recomendações personalizadas
+                  </span>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

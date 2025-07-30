@@ -1,0 +1,75 @@
+import { useEffect, useState, useRef, RefObject } from 'react';
+
+interface UseScrollHijackReturn {
+  isHijacked: boolean;
+  currentIndex: number;
+  scrollProgress: number;
+}
+
+export const useScrollHijack = (
+  sectionRef: RefObject<HTMLElement>,
+  itemCount: number
+): UseScrollHijackReturn => {
+  const [isHijacked, setIsHijacked] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const isScrollingRef = useRef(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHijacked(entry.isIntersecting);
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(section);
+
+    const handleWheel = (e: WheelEvent) => {
+      if (!isHijacked || isScrollingRef.current) return;
+
+      e.preventDefault();
+      isScrollingRef.current = true;
+
+      if (e.deltaY > 0 && currentIndex < itemCount - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else if (e.deltaY < 0 && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
+      }
+
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 800);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isHijacked || isScrollingRef.current) return;
+
+      if (e.key === 'ArrowDown' && currentIndex < itemCount - 1) {
+        e.preventDefault();
+        setCurrentIndex(prev => prev + 1);
+      } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+        e.preventDefault();
+        setCurrentIndex(prev => prev - 1);
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isHijacked, currentIndex, itemCount, sectionRef]);
+
+  useEffect(() => {
+    setScrollProgress((currentIndex / Math.max(itemCount - 1, 1)) * 100);
+  }, [currentIndex, itemCount]);
+
+  return { isHijacked, currentIndex, scrollProgress };
+};
