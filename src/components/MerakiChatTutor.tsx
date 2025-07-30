@@ -433,23 +433,24 @@ Que estágio você gostaria de praticar mais?`,
             <Button 
               variant="pill" 
               size="sm"
-              className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/30"
+              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
               onClick={() => setInputMessage("Me dê uma dica específica para resolver este problema: 27 + 15 = ?")}
             >
-              💡 Dica para 27 + 15
+              💡 Dica para Pedro e suas Figurinhas
             </Button>
             <Button 
               variant="pill" 
               size="sm"
-              className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/30"
-              onClick={() => setInputMessage("Como posso usar blocos base 10 para resolver 27 + 15?")}
+              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
+              onClick={() => setInputMessage("Como usar blocos base 10 para representar 27 figurinhas + 15 figurinhas?")}
             >
-              🤝 Blocos Base 10
+              🤝 Ajuda com Blocos
             </Button>
             <Button 
               variant="pill" 
               size="sm"
-              onClick={() => setInputMessage("Me explique passo a passo como resolver 27 + 15 usando o método CPA")}
+              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
+              onClick={() => setInputMessage("Me explique passo a passo como Pedro pode calcular suas figurinhas usando o método CPA")}
             >
               ✨ Dica Especial
             </Button>

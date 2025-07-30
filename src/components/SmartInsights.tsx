@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Brain, Target, Clock, TrendingUp, Lightbulb } from "lucide-react";
 import { useProgress } from "@/contexts/ProgressContext";
@@ -95,22 +95,28 @@ export const SmartInsights: React.FC<SmartInsightsProps> = ({ className = "" }) 
   };
 
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-${Math.min(insights.length, 3)} gap-4 ${className}`}>
+    <div className={`grid grid-cols-1 md:grid-cols-${Math.min(insights.length, 3)} gap-6 ${className}`}>
       {insights.map((insight, index) => (
-        <div key={index} className="bg-white/80 rounded-lg p-4 backdrop-blur-sm">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center">
-              <insight.icon className={`w-4 h-4 ${getTypeColor(insight.type)} mr-2`} />
-              <span className="text-sm font-medium">
-                {getTypeLabel(insight.type)}
-              </span>
+        <Card key={index} className="card-interactive shadow-card bg-gradient-focus border border-primary/20 hover:shadow-xl transition-all duration-300">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center">
+                  <insight.icon className="w-5 h-5 text-white" />
+                </div>
+                <div className="ml-3">
+                  <span className="text-sm font-semibold text-foreground">
+                    {getTypeLabel(insight.type)}
+                  </span>
+                  <Badge variant="secondary" className="ml-2 text-xs bg-primary/10 text-primary">
+                    {insight.confidence}% confiança
+                  </Badge>
+                </div>
+              </div>
             </div>
-            <Badge variant="outline" className="text-xs">
-              {insight.confidence}% confiança
-            </Badge>
-          </div>
-          <p className="text-sm text-foreground">{insight.message}</p>
-        </div>
+            <p className="text-sm text-muted-foreground leading-relaxed">{insight.message}</p>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );

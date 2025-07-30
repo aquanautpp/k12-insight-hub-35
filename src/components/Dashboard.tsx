@@ -13,6 +13,7 @@ import { AdaptiveLearningPath } from './AdaptiveLearningPath';
 import { AnimatedCounter } from './AnimatedCounter';
 import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
+import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
 
 interface DashboardProps {
   onViewChange?: (view: string) => void;
@@ -122,28 +123,36 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section com gradiente */}
-      <div className="banner-container relative overflow-hidden h-[60vh] md:h-[500px] lg:h-[550px] w-full">
-        <div className="banner-overlay">
+      {/* Hero Section with Educational Video */}
+      <div className="relative overflow-hidden h-[60vh] md:h-[500px] lg:h-[550px] w-full rounded-2xl mb-8 shadow-card">
+        <div className="absolute inset-0">
+          <img 
+            src={educationalHeroVideo} 
+            alt="Educational background" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/70 to-primary/60"></div>
+        </div>
+        <div className="relative z-10 h-full flex items-center justify-center">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="flex flex-col items-center space-y-6"
+            className="flex flex-col items-center space-y-6 max-w-4xl mx-auto px-6 text-center"
           >
             <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 animate-pulse-glow">
               <Brain className="w-10 h-10 text-white" />
             </div>
-            <h1 className="banner-title">
-              Bem-vindo ao Meraki
+            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
+              Bem-vindo ao <span className="text-gold">Meraki</span>
             </h1>
-            <p className="banner-subtitle">
+            <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto mb-8">
               Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <Button 
                 size="lg" 
-                className="bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm"
+                className="bg-white text-primary hover:bg-white/90 text-lg px-8"
                 onClick={() => onViewChange?.('progress')}
               >
                 Ver Progresso
@@ -152,7 +161,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="bg-transparent hover:bg-white/10 text-white border-white/50 hover:border-white/70"
+                className="text-white border-white/50 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm"
                 onClick={() => onViewChange?.('cpa-method')}
               >
                 Começar Hoje

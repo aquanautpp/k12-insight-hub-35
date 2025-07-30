@@ -190,20 +190,20 @@ export const CPAIntegratedChallenge = ({
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header do Desafio */}
-        <Card className="shadow-card border-2 border-primary/20 bg-gradient-focus">
-          <CardHeader>
+        <Card className="shadow-card border-2 border-primary/20 bg-gradient-focus card-interactive">
+          <CardHeader className="bg-gradient-primary text-white rounded-t-lg">
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-2xl font-bold text-foreground">
+                <CardTitle className="text-2xl font-bold text-white">
                   {challenge.title}
                 </CardTitle>
-                <p className="text-muted-foreground mt-2">{challenge.description}</p>
+                <p className="text-white/90 mt-2">{challenge.description}</p>
               </div>
               <div className="flex items-center gap-3">
-                <Badge className={getDifficultyColor(challenge.difficulty)}>
+                <Badge className="bg-white/20 text-white border-white/30">
                   {translateDifficulty(challenge.difficulty)}
                 </Badge>
-                <Button variant="outline" size="sm" onClick={resetChallenge}>
+                <Button variant="outline" size="sm" onClick={resetChallenge} className="border-white/30 text-white hover:bg-white/20">
                   <RotateCcw className="w-4 h-4" />
                 </Button>
               </div>
@@ -273,26 +273,26 @@ export const CPAIntegratedChallenge = ({
         </div>
 
         {/* Estatísticas e feedback */}
-        <Card className="shadow-card">
-          <CardContent className="p-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-              <div className="flex items-center justify-center gap-2">
-                <Timer className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">
-                  Tempo total: {Math.floor((new Date().getTime() - startTime.getTime()) / 1000)}s
+        <Card className="shadow-card card-interactive bg-gradient-focus border border-primary/20">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
+                <Timer className="w-5 h-5 text-primary" />
+                <span className="text-sm font-medium text-foreground">
+                  Tempo: {Math.floor((new Date().getTime() - startTime.getTime()) / 1000)}s
                 </span>
               </div>
               
-              <div className="flex items-center justify-center gap-2">
-                <Brain className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">
-                  Estágio atual: {getStageTitle(currentStage)}
+              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
+                <Brain className="w-5 h-5 text-primary" />
+                <span className="text-sm font-medium text-foreground">
+                  {getStageTitle(currentStage)}
                 </span>
               </div>
               
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-sm text-muted-foreground">
-                  Total de tentativas: {Object.values(stageAttempts).reduce((a, b) => a + b, 0)}
+              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
+                <span className="text-sm font-medium text-foreground">
+                  Tentativas: {Object.values(stageAttempts).reduce((a, b) => a + b, 0)}
                 </span>
               </div>
             </div>
