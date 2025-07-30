@@ -170,10 +170,12 @@ export const ProgressProvider: React.FC<ProgressProviderProps> = ({ children }) 
       insights.push("Seu nível de engajamento está ótimo! Continue assim.");
     }
     
-    const strongestSkill = progress.skillsProgress.reduce((max, skill) => 
-      skill.level > max.level ? skill : max
-    );
-    insights.push(`Você está se destacando em ${strongestSkill.skill}!`);
+    if (progress.skillsProgress.length > 0) {
+      const strongestSkill = progress.skillsProgress.reduce((max, skill) =>
+        skill.level > max.level ? skill : max
+      );
+      insights.push(`Você está se destacando em ${strongestSkill.skill}!`);
+    }
     
     return insights;
   };
