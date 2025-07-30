@@ -270,7 +270,7 @@ const AutoconscienciaModule = ({ onBack }: AutoconscienciaModuleProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-subtle">
+    <div className="min-h-screen bg-gradient-to-br from-gradient-start to-gradient-end">
       <div className="max-w-6xl mx-auto p-6">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">

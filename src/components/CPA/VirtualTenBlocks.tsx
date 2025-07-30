@@ -162,49 +162,42 @@ export const VirtualTenBlocks = ({ problem, onComplete }: VirtualTenBlocksProps)
 
   const getBlockStyle = (block: Block) => {
     const baseStyle = {
-      position: 'absolute' as const,
-      left: block.x,
-      top: block.y,
+      left: Math.max(0, Math.min(block.x, 400)),
+      top: Math.max(0, Math.min(block.y, 150)),
       cursor: 'grab',
-      borderRadius: '4px',
+      borderRadius: '6px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       fontWeight: 'bold',
-      color: 'white',
-      userSelect: 'none' as const
+      userSelect: 'none' as const,
+      transition: 'all 0.2s ease'
     };
 
     switch (block.type) {
       case 'hundred':
         return {
           ...baseStyle,
-          width: '80px',
-          height: '80px',
-          backgroundColor: 'hsl(var(--primary))',
-          fontSize: '16px',
-          border: '2px solid hsl(var(--primary-foreground))',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          width: '70px',
+          height: '70px',
+          fontSize: '14px',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
         };
       case 'ten':
         return {
           ...baseStyle,
-          width: '60px',
-          height: '24px',
-          backgroundColor: 'hsl(var(--secondary))',
-          fontSize: '14px',
-          border: '2px solid hsl(var(--secondary-foreground))',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          width: '50px',
+          height: '20px',
+          fontSize: '12px',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.15)'
         };
       case 'unit':
         return {
           ...baseStyle,
-          width: '24px',
-          height: '24px',
-          backgroundColor: 'hsl(var(--accent))',
-          fontSize: '12px',
-          border: '2px solid hsl(var(--accent-foreground))',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          width: '20px',
+          height: '20px',
+          fontSize: '10px',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.15)'
         };
     }
   };
@@ -221,20 +214,30 @@ export const VirtualTenBlocks = ({ problem, onComplete }: VirtualTenBlocksProps)
       
       <CardContent className="space-y-6">
         {/* Área de Blocos Disponíveis */}
-        <div className="border-2 border-primary/50 rounded-lg p-4 min-h-[200px] relative bg-muted/10 shadow-inner"
+        <div className="border-2 border-primary/50 rounded-lg p-4 min-h-[200px] relative bg-muted/10 shadow-inner overflow-hidden"
              onDrop={(e) => handleDrop(e, 'blocks')}
              onDragOver={(e) => e.preventDefault()}>
-          <h3 className="font-semibold mb-2 text-foreground">Blocos Disponíveis</h3>
-          {blocks.map(block => (
-            <div
-              key={block.id}
-              style={getBlockStyle(block)}
-              draggable
-              onDragStart={() => handleDragStart(block.id)}
-            >
-              {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
-            </div>
-          ))}
+          <h3 className="font-semibold mb-4 text-foreground">Blocos Disponíveis</h3>
+          <div className="relative w-full h-full">
+            {blocks.map(block => (
+              <div
+                key={block.id}
+                style={{
+                  ...getBlockStyle(block),
+                  border: '2px solid hsl(var(--primary))',
+                  color: 'hsl(var(--foreground))',
+                  backgroundColor: block.type === 'hundred' ? 'hsl(var(--primary))' :
+                                   block.type === 'ten' ? 'hsl(var(--secondary))' :
+                                   'hsl(var(--accent))',
+                  position: 'absolute'
+                }}
+                draggable
+                onDragStart={() => handleDragStart(block.id)}
+              >
+                {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Área de Trabalho */}
