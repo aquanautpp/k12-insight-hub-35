@@ -18,7 +18,7 @@ const Index = () => {
   const renderView = () => {
     switch (currentView) {
       case 'dashboard':
-        return <Dashboard />;
+        return <Dashboard onViewChange={setCurrentView} />;
       case 'cpa-method':
         return <CPAMethod />;
       case 'learning-test':
@@ -34,7 +34,7 @@ const Index = () => {
       case 'reading':
         return <ReadingRecommendations />;
       default:
-        return <Dashboard />;
+        return <Dashboard onViewChange={setCurrentView} />;
     }
   };
 

@@ -29,7 +29,11 @@ import { DocumentaryLearningJourney, sampleDocumentaryChapters } from "./Documen
 import { AuthenticAITutor, sampleTutorPersonality } from "./AuthenticTutor";
 import { NarrativeProgressVisualization, sampleProgressMilestones } from "./NarrativeProgress";
 
-const Dashboard = () => {
+interface DashboardProps {
+  onViewChange?: (view: string) => void;
+}
+
+const Dashboard = ({ onViewChange }: DashboardProps) => {
   const { progress } = useProgress();
   const { xpData } = useXP();
   const { unlockedAchievements, checkAchievements } = useAchievement();
@@ -64,7 +68,7 @@ const Dashboard = () => {
           <AvatarPersona 
             size="lg" 
             className="mx-auto mb-6" 
-            icon={<Brain />}
+            icon={<Brain className="w-8 h-8" />}
           />
           
           <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-3 tracking-tight animate-fade-in">
@@ -75,11 +79,11 @@ const Dashboard = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
-            <Button variant="pill" size="lg" className="min-w-40 hover-scale animate-fade-in">
+            <Button variant="pill" size="lg" className="min-w-40 hover-scale animate-fade-in" onClick={() => onViewChange?.('cpa-method')}>
               <BookOpen className="w-4 h-4 mr-2" />
               Estudar Hoje
             </Button>
-            <Button variant="pill-outline" size="lg" className="min-w-40 hover-scale animate-fade-in">
+            <Button variant="pill-outline" size="lg" className="min-w-40 hover-scale animate-fade-in" onClick={() => onViewChange?.('progress')}>
               <Target className="w-4 h-4 mr-2" />
               Ver Progresso
             </Button>
@@ -122,7 +126,7 @@ const Dashboard = () => {
 
       {/* AI Insights Section - Integrated */}
       <div className="max-w-4xl mx-auto px-6 pb-12">
-        <Card className="card-clean p-8 bg-gradient-focus">
+        <Card className="card-clean p-8 bg-gradient-focus border-2 border-primary/20 shadow-card">
           <div className="text-center mb-6">
             <h2 className="text-xl font-semibold text-primary mb-2">
               Insights Personalizados
@@ -174,7 +178,7 @@ const Dashboard = () => {
           <p className="text-muted-foreground text-sm">Suas últimas realizações</p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
           {achievements.slice(0, 4).map((achievement, index) => (
             <Card key={index} className="card-clean p-4 text-center group hover-scale">
               <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-200">
@@ -194,15 +198,15 @@ const Dashboard = () => {
         </div>
         
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button variant="pill" size="lg" className="min-w-40 hover-scale">
+          <Button variant="pill" size="lg" className="min-w-40 hover-scale" onClick={() => onViewChange?.('cpa-method')}>
             <Brain className="w-4 h-4 mr-2" />
             Método CPA
           </Button>
-          <Button variant="pill-outline" size="lg" className="min-w-40 hover-scale">
+          <Button variant="pill-outline" size="lg" className="min-w-40 hover-scale" onClick={() => onViewChange?.('activities')}>
             <Target className="w-4 h-4 mr-2" />
             Prática Rápida
           </Button>
-          <Button variant="pill-secondary" size="lg" className="min-w-40 hover-scale">
+          <Button variant="pill" size="lg" className="min-w-40 hover-scale" onClick={() => onViewChange?.('emotional-intelligence')}>
             <Award className="w-4 h-4 mr-2" />
             Int. Emocional
           </Button>

@@ -431,31 +431,27 @@ Que estágio você gostaria de praticar mais?`,
           {/* Botões de Ação Rápida */}
           <div className="flex gap-2 mb-3 flex-wrap">
             <Button 
-              variant="outline" 
+              variant="pill" 
               size="sm"
-              onClick={() => setInputMessage("Quanto é 24 × 24?")}
-              className="flex items-center gap-1"
+              className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/30"
+              onClick={() => setInputMessage("Me dê uma dica específica para resolver este problema: 27 + 15 = ?")}
             >
-              <Calculator className="w-3 h-3" />
-              Cálculo Rápido
+              💡 Dica para 27 + 15
             </Button>
             <Button 
-              variant="outline" 
+              variant="pill" 
               size="sm"
-              onClick={() => setInputMessage("Explique o teorema de Pitágoras")}
-              className="flex items-center gap-1"
+              className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/30"
+              onClick={() => setInputMessage("Como posso usar blocos base 10 para resolver 27 + 15?")}
             >
-              <BookOpen className="w-3 h-3" />
-              Teoremas
+              🤝 Blocos Base 10
             </Button>
             <Button 
-              variant="outline" 
+              variant="pill" 
               size="sm"
-              onClick={() => setInputMessage("Como resolver frações?")}
-              className="flex items-center gap-1"
+              onClick={() => setInputMessage("Me explique passo a passo como resolver 27 + 15 usando o método CPA")}
             >
-              <Target className="w-3 h-3" />
-              Problemas
+              ✨ Dica Especial
             </Button>
           </div>
 
