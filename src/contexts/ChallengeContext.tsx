@@ -39,7 +39,7 @@ interface ChallengeProviderProps {
 }
 
 export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }) => {
-  const [challenges] = useState<Challenge[]>([
+  const [challenges, setChallenges] = useState<Challenge[]>([
     {
       id: "math-001",
       title: "Orçamento Familiar Inteligente",
@@ -121,7 +121,17 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }
         isCompleted: true,
         completedAt: new Date()
       };
+
+      // mark challenge as completed in main list
+      setChallenges(prev =>
+        prev.map(c => (c.id === challengeId ? completedChallenge : c))
+      );
+
+      // add to completed list
       setCompletedChallenges(prev => [...prev, completedChallenge]);
+
+      // reset current challenge
+      setCurrentChallenge(null);      
     }
   };
 
