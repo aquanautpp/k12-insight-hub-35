@@ -65,6 +65,10 @@ All colors MUST be HSL.
     /* Animation Variables */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Success micro-interaction gradients */
+    --gradient-success: linear-gradient(135deg, hsl(142, 76%, 36%), hsl(142, 76%, 26%));
+    --gradient-celebration: linear-gradient(135deg, hsl(51, 100%, 50%), hsl(45, 100%, 45%));
 
     --radius: 0.5rem;
 
@@ -177,5 +181,30 @@ All colors MUST be HSL.
   /* Clean navigation */
   .nav-clean {
     @apply bg-white/95 backdrop-blur-sm border-b border-border/50;
+  }
+
+  /* Storytelling micro-interactions inspired by creative agencies */
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .celebration-bounce {
+    animation: celebration 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes celebration {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15) rotate(5deg); }
+    100% { transform: scale(1); }
+  }
+
+  /* Progress narrative indicators */
+  .progress-glow {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  /* Action-oriented button states */
+  .btn-action-ready {
+    @apply bg-gradient-achievement text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200;
   }
 }

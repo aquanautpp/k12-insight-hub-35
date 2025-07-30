@@ -317,8 +317,8 @@ const LearningStyleTest = () => {
                   <Trophy className="w-8 h-8 text-white" />
                 </div>
               </div>
-               <CardTitle className="text-2xl text-green-700 mb-2">
-                  Teste de Aprendizagem 🎯
+               <CardTitle className="text-2xl text-green-700 mb-2 animate-fade-in">
+                  🎯 Descubra Seu Superpoder de Aprender!
                 </CardTitle>
             </CardHeader>
             
@@ -329,11 +329,11 @@ const LearningStyleTest = () => {
                     <profileData.icon className="w-10 h-10 text-white" />
                   </div>
                 </div>
-                <h2 className="text-3xl font-bold text-foreground mb-4">
-                  Você é um {profileData.title}!
+                <h2 className="text-3xl font-bold text-foreground mb-4 animate-scale-in">
+                  🎉 Você é um {profileData.title}!
                 </h2>
-                <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  {profileData.description}
+                <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto animate-fade-in">
+                  {profileData.description} Agora você tem o poder de aprender de forma ainda mais eficaz! ✨
                 </p>
               </div>
 

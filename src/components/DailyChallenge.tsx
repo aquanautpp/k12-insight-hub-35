@@ -119,33 +119,33 @@ const DailyChallenge = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Answer Input Section */}
         <div className="bg-card border border-border rounded-lg p-6 space-y-4">
-          <h3 className="text-lg font-semibold text-foreground">Sua Resposta</h3>
+          <h3 className="text-lg font-semibold text-foreground">💡 Sua Solução Genial</h3>
           <textarea
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
-            placeholder="Digite sua solução detalhada aqui..."
-            className="w-full h-32 p-4 border border-border rounded-lg resize-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground bg-background"
+            placeholder="Mostre sua estratégia! Cada ideia conta para resolver este desafio..."
+            className="w-full h-32 p-4 border border-border rounded-lg resize-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground bg-background transition-all duration-200 hover:shadow-md"
           />
           
           {/* Action Buttons */}
           <div className="flex gap-3">
             <button
               onClick={handleSubmitAnswer}
-              className="flex-1 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors font-medium"
+              className="flex-1 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-all duration-200 font-medium hover-scale"
             >
-              Enviar Resposta
+              🚀 Enviar Minha Solução
             </button>
             <button
               onClick={() => setShowHint(!showHint)}
-              className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors"
+              className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-all duration-200 hover-scale"
             >
-              {showHint ? 'Ocultar Dica' : 'Ver Dica'}
+              {showHint ? 'Ocultar Dica' : '💡 Dica Especial'}
             </button>
             <button
               onClick={() => setShowTutorHelp(!showTutorHelp)}
-              className="px-4 py-2 border border-secondary text-secondary rounded-lg hover:bg-secondary/10 transition-colors"
+              className="px-4 py-2 border border-secondary text-secondary rounded-lg hover:bg-secondary/10 transition-all duration-200 hover-scale"
             >
-              {showTutorHelp ? 'Ocultar Tutor' : 'Tutor IA'}
+              {showTutorHelp ? 'Ocultar Tutor' : '🤖 Tutor IA'}
             </button>
           </div>
         </div>

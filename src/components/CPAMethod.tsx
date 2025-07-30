@@ -73,11 +73,11 @@ const CPAMethod = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/60 flex items-center">
             <div className="px-8">
-              <h1 className="text-4xl font-bold text-white mb-4">
-                Método CPA (Concreto-Pictórico-Abstrato)
+              <h1 className="text-4xl font-bold text-white mb-4 animate-fade-in">
+                🇸🇬 Método CPA - Sua Jornada Rumo à Maestria
               </h1>
-              <p className="text-xl text-white/90 mb-4">
-                Abordagem pedagógica comprovada do Sistema Educacional de Singapura
+              <p className="text-xl text-white/90 mb-4 animate-fade-in">
+                Domine matemática em 3 estágios - como 1 milhão de estudantes de Singapura! 🚀
               </p>
               <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 text-white">
                 <p className="text-sm mb-2">
@@ -94,12 +94,15 @@ const CPAMethod = () => {
         <Card className="mb-8 shadow-card">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-foreground">Seu Progresso no Método CPA</h2>
-              <Badge variant="secondary">{completedStages.length}/3 estágios concluídos</Badge>
+              <h2 className="text-xl font-bold text-foreground">🎯 Sua Jornada de Maestria CPA</h2>
+              <Badge variant="secondary" className="animate-pulse">{completedStages.length}/3 estágios dominados</Badge>
             </div>
-            <Progress value={progressPercentage} className="h-3 mb-2" />
+            <Progress value={progressPercentage} className="h-3 mb-2 animate-scale-in" />
             <p className="text-sm text-muted-foreground">
-              Continue praticando cada estágio para dominar completamente o método CPA
+              {progressPercentage === 100 ? '🏆 Parabéns! Você dominou completamente o método CPA!' :
+               progressPercentage >= 66 ? '🚀 Quase lá! Finalize sua jornada épica!' :
+               progressPercentage >= 33 ? '💪 Excelente progresso! Continue assim!' :
+               '🌱 Sua aventura está começando - cada passo te aproxima da maestria!'}
             </p>
           </CardContent>
         </Card>

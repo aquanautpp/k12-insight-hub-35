@@ -61,24 +61,24 @@ const Dashboard = () => {
             icon={<Brain />}
           />
           
-          <h1 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 tracking-tight">
-            Olá, Victor!
+          <h1 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 tracking-tight animate-fade-in">
+            Bem-vindo de volta, Victor! 👋
           </h1>
-          <h2 className="text-2xl md:text-3xl text-primary mb-6 font-medium">
-            Sua jornada de aprendizagem personalizada
+          <h2 className="text-2xl md:text-3xl text-primary mb-6 font-medium animate-fade-in">
+            Dominar matemática em <span className="text-secondary font-bold">5 minutos por dia</span>
           </h2>
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-            Continue desenvolvendo suas habilidades com nossa plataforma educacional baseada no Método CPA e inteligência emocional.
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in">
+            Sua próxima conquista está a apenas alguns cliques de distância. Continue sua jornada épica de descobertas! 🚀
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button variant="pill" size="lg" className="min-w-48">
+            <Button variant="pill" size="lg" className="min-w-48 hover-scale animate-fade-in">
               <BookOpen className="w-5 h-5 mr-2" />
-              Continuar Estudando
+              Alcançar Minha Meta Hoje
             </Button>
-            <Button variant="pill-outline" size="lg" className="min-w-48">
+            <Button variant="pill-outline" size="lg" className="min-w-48 hover-scale animate-fade-in">
               <Target className="w-5 h-5 mr-2" />
-              Ver Progresso
+              Celebrar Progresso
             </Button>
           </div>
 
@@ -90,12 +90,14 @@ const Dashboard = () => {
 
       {/* Progress Overview - Clean Cards */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
-        <h2 className="text-2xl font-semibold text-center mb-12 text-foreground">Seu Progresso</h2>
+        <h2 className="text-2xl font-semibold text-center mb-12 text-foreground">
+          Sua História de Conquistas ⭐
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {Object.entries(studentProgress).map(([subject, progress]) => (
-            <Card key={subject} className="card-clean p-8 text-center group">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-achievement flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+            <Card key={subject} className="card-clean p-8 text-center group hover-scale animate-fade-in">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-achievement flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 {subject === 'mathematics' && <Calculator className="w-8 h-8 text-primary-foreground" />}
                 {subject === 'reasoning' && <Brain className="w-8 h-8 text-primary-foreground" />}
                 {subject === 'creativity' && <Star className="w-8 h-8 text-primary-foreground" />}
@@ -103,16 +105,20 @@ const Dashboard = () => {
               </div>
               
               <h3 className="text-lg font-semibold mb-4 text-foreground">
-                {subject === 'mathematics' ? 'Matemática' : 
-                 subject === 'reasoning' ? 'Raciocínio Lógico' :
-                 subject === 'creativity' ? 'Criatividade' :
-                 subject === 'overall' ? 'Geral' : subject}
+                {subject === 'mathematics' ? '🧮 Matemática' : 
+                 subject === 'reasoning' ? '🧠 Raciocínio Lógico' :
+                 subject === 'creativity' ? '✨ Criatividade' :
+                 subject === 'overall' ? '🎯 Jornada Geral' : subject}
               </h3>
               
               <div className="space-y-3">
-                <Progress value={progress} className="h-3" />
-                <div className="text-2xl font-bold text-primary">{progress}%</div>
-                <p className="text-sm text-muted-foreground">concluído</p>
+                <Progress value={progress} className="h-3 animate-scale-in" />
+                <div className="text-2xl font-bold text-primary animate-fade-in">{progress}%</div>
+                <p className="text-sm text-muted-foreground">
+                  {progress >= 80 ? '🏆 Quase dominado!' : 
+                   progress >= 50 ? '🚀 Em progresso' : 
+                   '🌱 Crescendo'}
+                </p>
               </div>
             </Card>
           ))}
@@ -144,8 +150,8 @@ const Dashboard = () => {
       {/* Achievements Section - Modern Layout */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
         <div className="text-center mb-12">
-          <h2 className="text-2xl font-semibold text-foreground mb-4">Suas Conquistas</h2>
-          <p className="text-muted-foreground">Acompanhe seu progresso e celebrate cada conquista</p>
+          <h2 className="text-2xl font-semibold text-foreground mb-4">Troféus Conquistados 🏆</h2>
+          <p className="text-muted-foreground">Cada conquista te aproxima do próximo nível de maestria</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -163,20 +169,25 @@ const Dashboard = () => {
 
       {/* Quick Actions - Pill Buttons */}
       <div className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="pill" size="xl" className="min-w-56">
-            <Brain className="w-5 h-5 mr-3" />
-            Método CPA
-          </Button>
-          <Button variant="pill-outline" size="xl" className="min-w-56">
-            <Target className="w-5 h-5 mr-3" />
-            Prática Personalizada
-          </Button>
-          <Button variant="pill-secondary" size="xl" className="min-w-56">
-            <Award className="w-5 h-5 mr-3" />
-            Inteligência Emocional
-          </Button>
-        </div>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-semibold text-foreground mb-4">Pronto para Sua Próxima Aventura? 🎮</h2>
+            <p className="text-muted-foreground">Escolha seu caminho de aprendizagem e vamos juntos!</p>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="pill" size="xl" className="min-w-56 hover-scale animate-fade-in">
+              <Brain className="w-5 h-5 mr-3" />
+              🚀 Dominar CPA Hoje
+            </Button>
+            <Button variant="pill-outline" size="xl" className="min-w-56 hover-scale animate-fade-in">
+              <Target className="w-5 h-5 mr-3" />
+              ⚡ Prática de 5min
+            </Button>
+            <Button variant="pill-secondary" size="xl" className="min-w-56 hover-scale animate-fade-in">
+              <Award className="w-5 h-5 mr-3" />
+              💪 Fortalecer Emoções
+            </Button>
+          </div>
       </div>
     </div>
   );
