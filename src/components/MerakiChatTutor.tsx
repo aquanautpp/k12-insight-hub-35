@@ -468,7 +468,7 @@ Que estágio você gostaria de praticar mais?`,
             <Button 
               onClick={handleSendMessage}
               disabled={!inputMessage.trim() || isLoading}
-              className="px-3"
+              className="px-3 bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0"
             >
               <Send className="w-4 h-4" />
             </Button>

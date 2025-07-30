@@ -272,28 +272,55 @@ export const CPAIntegratedChallenge = ({
           )}
         </div>
 
-        {/* Estatísticas e feedback */}
-        <Card className="shadow-card card-interactive bg-gradient-focus border border-primary/20">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
-                <Timer className="w-5 h-5 text-primary" />
-                <span className="text-sm font-medium text-foreground">
-                  Tempo: {Math.floor((new Date().getTime() - startTime.getTime()) / 1000)}s
-                </span>
+        {/* Estatísticas e feedback - Pronto para Desafio */}
+        <Card className="shadow-card card-interactive bg-gradient-to-br from-gradient-start to-gradient-end border-2 border-primary/30">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-xl font-bold text-center text-primary">
+              🚀 Pronto para o Desafio!
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white/80 backdrop-blur-sm border-2 border-primary/20 rounded-xl p-4 hover:shadow-lg transition-all">
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Timer className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-foreground">
+                      {Math.floor((new Date().getTime() - startTime.getTime()) / 1000)}s
+                    </div>
+                    <div className="text-xs text-muted-foreground">Tempo</div>
+                  </div>
+                </div>
               </div>
               
-              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
-                <Brain className="w-5 h-5 text-primary" />
-                <span className="text-sm font-medium text-foreground">
-                  {getStageTitle(currentStage)}
-                </span>
+              <div className="bg-white/80 backdrop-blur-sm border-2 border-primary/20 rounded-xl p-4 hover:shadow-lg transition-all">
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Brain className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="text-center">
+                    <div className="text-sm font-bold text-foreground">
+                      {getStageTitle(currentStage)}
+                    </div>
+                    <div className="text-xs text-muted-foreground">Estágio Atual</div>
+                  </div>
+                </div>
               </div>
               
-              <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-primary/10">
-                <span className="text-sm font-medium text-foreground">
-                  Tentativas: {Object.values(stageAttempts).reduce((a, b) => a + b, 0)}
-                </span>
+              <div className="bg-white/80 backdrop-blur-sm border-2 border-primary/20 rounded-xl p-4 hover:shadow-lg transition-all">
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                    <span className="text-sm font-bold text-primary">
+                      {Object.values(stageAttempts).reduce((a, b) => a + b, 0)}
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-sm font-bold text-foreground">Tentativas</div>
+                    <div className="text-xs text-muted-foreground">Total</div>
+                  </div>
+                </div>
               </div>
             </div>
           </CardContent>
