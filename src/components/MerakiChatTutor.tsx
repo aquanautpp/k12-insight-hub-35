@@ -4,8 +4,33 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, BookOpen, Calculator, Brain, Target } from "lucide-react";
+import { Send, BookOpen, Calculator, Brain, Target, Zap, HelpCircle } from "lucide-react";
 import { openaiService } from "@/services/openaiService";
+
+// Componente para mostrar status da IA
+const AIStatusIndicator = () => {
+  const [status, setStatus] = useState<'none' | 'stored' | 'active'>('none');
+
+  useEffect(() => {
+    setStatus(openaiService.getApiKeyStatus());
+  }, []);
+
+  const statusConfig = {
+    none: { icon: HelpCircle, color: 'text-red-400', text: 'Sem API Key' },
+    stored: { icon: Zap, color: 'text-yellow-400', text: 'API Configurada' },
+    active: { icon: Zap, color: 'text-green-400', text: 'IA Ativa' }
+  };
+
+  const config = statusConfig[status];
+  const Icon = config.icon;
+
+  return (
+    <div className="flex items-center gap-1 text-xs">
+      <Icon className={`w-3 h-3 ${config.color}`} />
+      <span className="text-white/80">{config.text}</span>
+    </div>
+  );
+};
 
 // Definindo os tipos para o estágio CPA
 type CPAStage = 'concrete' | 'pictorial' | 'abstract' | 'adaptive';
@@ -56,13 +81,18 @@ const MerakiChatTutor = () => {
       
       return {
         content: response.message,
-        stage: stage
+        stage: stage,
+        isRealAI: response.isRealAI
       };
     } catch (error) {
       console.error('Error getting AI response, using fallback:', error);
       // Fallback to original logic if service fails
       await new Promise(resolve => setTimeout(resolve, 1000));
-      return await generateFallbackResponse(userMessage, stage);
+      const fallbackResponse = await generateFallbackResponse(userMessage, stage);
+      return {
+        ...fallbackResponse,
+        isRealAI: false
+      };
     }
   };
 
@@ -317,6 +347,9 @@ Que estágio você gostaria de praticar mais?`,
                   {stageInfo[currentStage].title}
                 </p>
               </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <AIStatusIndicator />
             </div>
           </div>
         </CardHeader>

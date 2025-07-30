@@ -12,13 +12,21 @@ interface ChatResponse {
 }
 
 class OpenAIService {
-  private supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-  private supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  private apiKeyStatus: 'none' | 'stored' | 'active' = 'none';
   
   constructor() {
-    // Set the provided API key for immediate use
-    const providedKey = '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';
-    localStorage.setItem('openai_api_key', providedKey);
+    this.checkApiKeyStatus();
+  }
+
+  private checkApiKeyStatus() {
+    const apiKey = localStorage.getItem('openai_api_key');
+    if (apiKey && apiKey.startsWith('sk-')) {
+      this.apiKeyStatus = 'stored';
+    }
+  }
+
+  getApiKeyStatus(): 'none' | 'stored' | 'active' {
+    return this.apiKeyStatus;
   }
 
   async generateResponse(
@@ -29,49 +37,27 @@ class OpenAIService {
       cpaStage?: 'concrete' | 'pictorial' | 'abstract';
       previousMessages?: ChatMessage[];
     }
-  ): Promise<ChatResponse> {
+  ): Promise<ChatResponse & { isRealAI?: boolean }> {
     
     try {
-      // Check if we have Supabase configured
-      if (this.supabaseUrl && this.supabaseAnonKey) {
-        // Try Supabase Edge Function first
-        const response = await fetch(`${this.supabaseUrl}/functions/v1/chat-tutor`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${this.supabaseAnonKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            message: userMessage,
-            context: context
-          }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (!data.error) {
-            return {
-              message: data.message,
-              suggestions: data.suggestions || [],
-              confidence: data.confidence || 95
-            };
-          }
-        }
-      }
-
-      // Fallback to direct OpenAI API call with localStorage key
+      // Try direct OpenAI API call first
       const apiKey = localStorage.getItem('openai_api_key');
       if (apiKey && apiKey.startsWith('sk-')) {
-        return await this.callOpenAIDirectly(userMessage, context, apiKey);
+        console.log('🤖 Using real OpenAI API');
+        const response = await this.callOpenAIDirectly(userMessage, context, apiKey);
+        this.apiKeyStatus = 'active';
+        return { ...response, isRealAI: true };
       }
 
       // If no API key available, use mock response
+      console.log('🎭 Using mock response (no API key)');
       throw new Error('No API key configured');
 
     } catch (error) {
       console.error('OpenAI Service Error:', error);
       // Fallback to mock response
-      return this.getMockResponse(userMessage, context);
+      console.log('🎭 Using mock response (API error)');
+      return { ...this.getMockResponse(userMessage, context), isRealAI: false };
     }
   }
 
