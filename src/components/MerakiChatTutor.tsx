@@ -333,7 +333,7 @@ Que estágio você gostaria de praticar mais?`,
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6">
       <Card className="h-[850px] flex flex-col shadow-card">
         <CardHeader className="bg-gradient-tutor text-white rounded-t-lg">
           <div className="flex items-center justify-between">
@@ -428,49 +428,69 @@ Que estágio você gostaria de praticar mais?`,
 
         {/* Área de Input */}
         <div className="p-4 border-t bg-background">
-          {/* Botões de Ação Rápida */}
-          <div className="flex gap-2 mb-3 flex-wrap">
+          {/* Botões de Dica e Ajuda Específicos */}
+          <div className="flex gap-2 mb-3 justify-center">
             <Button 
-              variant="pill" 
+              variant="outline" 
               size="sm"
-              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
-              onClick={() => setInputMessage("Me dê uma dica específica para resolver este problema: 27 + 15 = ?")}
+              className="bg-yellow-50 text-yellow-800 border-yellow-200 hover:bg-yellow-100"
+              onClick={() => setInputMessage("Preciso de uma dica específica para resolver: Pedro tem 27 figurinhas e ganhou 15 mais. Quantas figurinhas ele tem agora? Use o método CPA para me explicar.")}
             >
-              💡 Dica para Pedro e suas Figurinhas
+              💡 Dica para este problema
             </Button>
             <Button 
-              variant="pill" 
+              variant="outline" 
               size="sm"
-              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
-              onClick={() => setInputMessage("Como usar blocos base 10 para representar 27 figurinhas + 15 figurinhas?")}
+              className="bg-blue-50 text-blue-800 border-blue-200 hover:bg-blue-100"
+              onClick={() => setInputMessage("Tutor IA, me ajude com este problema específico: 27 + 15. Explique detalhadamente usando blocos virtuais, diagramas e símbolos matemáticos.")}
             >
-              🤝 Ajuda com Blocos
-            </Button>
-            <Button 
-              variant="pill" 
-              size="sm"
-              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm"
-              onClick={() => setInputMessage("Me explique passo a passo como Pedro pode calcular suas figurinhas usando o método CPA")}
-            >
-              ✨ Dica Especial
+              🤖 Ajuda do Tutor IA
             </Button>
           </div>
 
-          <div className="flex gap-2">
+          {/* Input Principal com largura máxima */}
+          <div className="flex gap-3 max-w-full">
             <Input
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
+              placeholder="Digite sua pergunta específica sobre o problema das figurinhas do Pedro..."
               onKeyPress={handleKeyPress}
-              placeholder="Digite sua pergunta de matemática..."
-              className="flex-1"
-              disabled={isLoading}
+              className="flex-1 bg-white border-primary/20 focus:border-primary min-h-[44px]"
             />
             <Button 
               onClick={handleSendMessage}
               disabled={!inputMessage.trim() || isLoading}
-              className="px-3 bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0"
+              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm px-6"
             >
               <Send className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Sugestões de Perguntas Rápidas */}
+          <div className="flex gap-2 mt-3 flex-wrap justify-center">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="text-xs text-muted-foreground hover:text-primary"
+              onClick={() => setInputMessage("Não entendi como fazer 27 + 15 com blocos virtuais")}
+            >
+              "Como usar blocos virtuais?"
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="text-xs text-muted-foreground hover:text-primary"
+              onClick={() => setInputMessage("Qual é a melhor estratégia para somar 27 + 15?")}
+            >
+              "Estratégia para somar?"
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="text-xs text-muted-foreground hover:text-primary"
+              onClick={() => setInputMessage("Me explique o estágio concreto para este problema")}
+            >
+              "Explique estágio concreto"
             </Button>
           </div>
         </div>

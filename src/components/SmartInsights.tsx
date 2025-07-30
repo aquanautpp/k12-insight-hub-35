@@ -100,8 +100,8 @@ export const SmartInsights: React.FC<SmartInsightsProps> = ({ className = "" }) 
         <Card key={index} className="card-interactive shadow-card bg-gradient-focus border border-primary/20 hover:shadow-xl transition-all duration-300 h-32">
           <CardContent className="p-4 h-full">
             <div className="flex items-center gap-3 h-full">
-              <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                <insight.icon className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gradient-start to-gradient-end flex items-center justify-center flex-shrink-0">
+                <insight.icon className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
                 <div className="flex items-center justify-between gap-2">
