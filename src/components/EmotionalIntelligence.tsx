@@ -154,15 +154,18 @@ const EmotionalIntelligence = () => {
               key={domain.id}
               className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl ${
                 domain.isUnlocked ? 'shadow-lg' : 'opacity-60'
-              } bg-gradient-to-br from-gradient-start to-gradient-end`}
+              }`}
               onClick={() => handleDomainClick(domain.id)}
+              style={{
+                background: 'linear-gradient(135deg, hsl(67, 45%, 35%), hsl(67, 55%, 25%))'
+              }}
             >
               <CardContent className="p-6 text-white">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="text-white/90">
+                  <div className="text-white">
                     {domain.icon}
                   </div>
-                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 font-medium">
                     {domain.completedActivities}/{domain.activities}
                   </Badge>
                 </div>
@@ -175,11 +178,16 @@ const EmotionalIntelligence = () => {
                     <span>Progresso</span>
                     <span>{domain.progress}%</span>
                   </div>
-                  <Progress value={domain.progress} className="h-2 bg-white/20" />
+                  <div className="w-full bg-white/20 rounded-full h-2">
+                    <div 
+                      className="bg-white/80 h-2 rounded-full transition-all duration-300" 
+                      style={{ width: `${domain.progress}%` }}
+                    ></div>
+                  </div>
                 </div>
                 
                 {domain.isUnlocked && (
-                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border-white/20">
+                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-medium">
                     <PlayCircle className="w-4 h-4" />
                     Continuar Atividades
                     <ArrowRight className="w-4 h-4" />
