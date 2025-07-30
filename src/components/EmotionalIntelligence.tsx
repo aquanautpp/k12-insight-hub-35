@@ -157,7 +157,7 @@ const EmotionalIntelligence = () => {
               }`}
               onClick={() => handleDomainClick(domain.id)}
             >
-              <div className={`${domain.bgGradient} p-6 text-white`}>
+              <div className="bg-gradient-to-br from-gradient-start to-gradient-end p-6 text-white">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
                     {domain.icon}
