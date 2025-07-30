@@ -86,12 +86,8 @@ export const SmartInsights: React.FC<SmartInsightsProps> = ({ className = "" }) 
   };
 
   const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'pontos_fortes': return 'text-secondary';
-      case 'recomendacao': return 'text-primary';
-      case 'padrao': return 'text-accent';
-      default: return 'text-foreground';
-    }
+    // Todas as categorias usam a cor verde oliva (primary)
+    return 'text-primary';
   };
 
   return (
