@@ -6,17 +6,23 @@ import { ProgressProvider } from './contexts/ProgressContext'
 import { XPProvider } from './contexts/XPContext'
 import { ChallengeProvider } from './contexts/ChallengeContext'
 import { AchievementProvider } from './contexts/AchievementContext'
+import { FeatureFlagsProvider } from './contexts/FeatureFlagsContext'
+import { TelemetryProvider } from './contexts/TelemetryContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ProgressProvider>
-      <XPProvider>
-        <ChallengeProvider>
-          <AchievementProvider>
-            <App />
-          </AchievementProvider>
-        </ChallengeProvider>
-      </XPProvider>
-    </ProgressProvider>
+    <TelemetryProvider>
+      <FeatureFlagsProvider>
+        <ProgressProvider>
+          <XPProvider>
+            <ChallengeProvider>
+              <AchievementProvider>
+                <App />
+              </AchievementProvider>
+            </ChallengeProvider>
+          </XPProvider>
+        </ProgressProvider>
+      </FeatureFlagsProvider>
+    </TelemetryProvider>
   </StrictMode>,
 )

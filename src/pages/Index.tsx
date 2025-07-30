@@ -10,6 +10,7 @@ import ProgressView from "@/components/ProgressView";
 import DailyChallenge from "@/components/DailyChallenge";
 import EmotionalIntelligence from "@/components/EmotionalIntelligence";
 import ReadingRecommendations from "@/components/ReadingRecommendations";
+import { FeatureFlagsDebugPanel } from "@/components/FeatureFlagsDebugPanel";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -73,6 +74,7 @@ const Index = () => {
           </main>
         </div>
       </div>
+      <FeatureFlagsDebugPanel />
     </SidebarProvider>
   );
 };

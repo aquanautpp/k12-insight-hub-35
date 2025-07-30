@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator } from "lucide-react";
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
+import { CPAExplanationTooltip } from "./CPAExplanationTooltip";
+import { useFeatureFlags } from "@/contexts/FeatureFlagsContext";
 
 type Stage = 'concrete' | 'pictorial' | 'abstract';
 
@@ -14,6 +16,8 @@ const CPAMethod = () => {
   const [completedStages, setCompletedStages] = useState<Stage[]>([]);
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showInteractiveChallenge, setShowInteractiveChallenge] = useState(false);
+  
+  const { isEnabled } = useFeatureFlags();
 
   const stages = {
     concrete: {
@@ -175,10 +179,15 @@ const CPAMethod = () => {
             className="w-full h-64 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/60 flex items-center">
-            <div className="px-8">
-              <h1 className="text-4xl font-bold text-white mb-4">
+          <div className="px-8">
+            <div className="flex items-center gap-3 mb-4">
+              <h1 className="text-4xl font-bold text-white">
                 Método CPA (Concreto-Pictórico-Abstrato)
               </h1>
+              {isEnabled('cpaExplanationTooltip') && (
+                <CPAExplanationTooltip />
+              )}
+            </div>
               <p className="text-xl text-white/90 mb-4">
                 Abordagem pedagógica comprovada do Sistema Educacional de Singapura
               </p>
