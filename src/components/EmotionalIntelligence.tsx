@@ -157,29 +157,31 @@ const EmotionalIntelligence = () => {
               } bg-white`}
               onClick={() => handleDomainClick(domain.id)}
             >
-              {/* Parte superior com fundo verde */}
+              {/* Parte superior com fundo verde oliva mais claro - padronizada */}
               <div 
-                className="p-6 text-white"
+                className="p-6 text-white h-48 flex flex-col justify-between"
                 style={{
-                  background: 'linear-gradient(135deg, hsl(67, 40%, 35%), hsl(67, 45%, 30%))'
+                  background: 'linear-gradient(135deg, hsl(67, 35%, 45%), hsl(67, 40%, 40%))'
                 }}
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="text-white">
+                  <div className="text-white text-2xl">
                     {domain.icon}
                   </div>
-                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 font-medium">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 font-medium text-xs px-2 py-1">
                     {domain.completedActivities}/{domain.activities}
                   </Badge>
                 </div>
                 
-                <h3 className="text-xl font-bold mb-2 text-white">{domain.title}</h3>
-                <p className="text-white/90 text-sm mb-4">{domain.description}</p>
+                <div className="flex-1 flex flex-col justify-center">
+                  <h3 className="text-xl font-bold mb-3 text-white leading-tight">{domain.title}</h3>
+                  <p className="text-white/90 text-sm mb-4 leading-relaxed">{domain.description}</p>
+                </div>
                 
-                <div className="space-y-3">
-                  <div className="flex justify-between text-sm text-white/90">
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center text-sm text-white/90">
                     <span>Progresso</span>
-                    <span>{domain.progress}%</span>
+                    <span className="font-medium">{domain.progress}%</span>
                   </div>
                   <div className="w-full bg-white/20 rounded-full h-2">
                     <div 
@@ -190,10 +192,10 @@ const EmotionalIntelligence = () => {
                 </div>
               </div>
 
-              {/* Parte inferior com fundo branco */}
-              <CardContent className="p-4 bg-white">
+              {/* Parte inferior com fundo branco - padronizada */}
+              <CardContent className="p-4 bg-white h-16 flex items-center justify-center">
                 {domain.isUnlocked && (
-                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2 text-foreground hover:bg-muted font-medium">
+                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2 text-foreground hover:bg-muted font-medium text-sm">
                     <PlayCircle className="w-4 h-4" />
                     Continuar Atividades
                     <ArrowRight className="w-4 h-4" />
