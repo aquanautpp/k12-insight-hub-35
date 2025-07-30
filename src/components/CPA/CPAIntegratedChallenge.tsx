@@ -204,7 +204,7 @@ export const CPAIntegratedChallenge = ({
                   {translateDifficulty(challenge.difficulty)}
                 </Badge>
                 <Button variant="outline" size="sm" onClick={resetChallenge} className="border-white/30 text-white hover:bg-white hover:text-primary">
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-4 h-4 text-primary hover:text-primary" />
                 </Button>
               </div>
             </div>
@@ -229,7 +229,7 @@ export const CPAIntegratedChallenge = ({
                   key={stage}
                   variant={currentStage === stage ? "default" : "outline"}
                   onClick={() => goToStage(stage)}
-                  className="flex items-center gap-2 p-4 h-auto min-h-[70px] justify-start"
+                  className="flex items-center gap-2 p-3 h-auto min-h-[60px] justify-start"
                   disabled={stage === 'pictorial' && !completedStages.includes('concrete') ||
                            stage === 'abstract' && !completedStages.includes('pictorial')}
                 >
@@ -273,55 +273,58 @@ export const CPAIntegratedChallenge = ({
         </div>
 
         {/* Estatísticas e feedback - Pronto para Desafio */}
-        <Card className="shadow-card card-interactive bg-gradient-to-br from-gradient-start to-gradient-end border-2 border-primary/30">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-xl font-bold text-center text-primary flex items-center justify-center gap-2">
-              🚀 Pronto para o Desafio!
+        <Card className="shadow-lg border-2 border-primary/30 bg-gradient-to-br from-gradient-start to-gradient-end overflow-hidden">
+          <CardHeader className="pb-4 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 backdrop-blur-sm">
+            <CardTitle className="text-xl font-bold text-center text-primary flex items-center justify-center gap-3 mb-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center shadow-lg">
+                🚀
+              </div>
+              Pronto para o Desafio!
             </CardTitle>
-            <p className="text-center text-primary/80 text-sm">
+            <p className="text-center text-primary/80 text-sm font-medium">
               Acompanhe seu progresso e estatísticas em tempo real
             </p>
           </CardHeader>
-          <CardContent className="pt-0">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="bg-white/95 backdrop-blur-sm border-2 border-primary/40 rounded-xl p-3 hover:shadow-lg transition-all">
-                <div className="flex flex-col items-center gap-1">
-                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center border border-primary/40">
-                    <Timer className="w-4 h-4 text-primary" />
+          <CardContent className="pt-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl p-4 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-md">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full flex items-center justify-center border-2 border-primary/40 shadow-inner">
+                    <Timer className="w-5 h-5 text-primary" />
                   </div>
                   <div className="text-center">
-                    <div className="text-base font-bold text-foreground">
+                    <div className="text-lg font-bold text-foreground">
                       {Math.floor((new Date().getTime() - startTime.getTime()) / 1000)}s
                     </div>
-                    <div className="text-xs text-foreground/80 font-medium">Tempo Total</div>
+                    <div className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">Tempo Total</div>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-white/95 backdrop-blur-sm border-2 border-primary/40 rounded-xl p-3 hover:shadow-lg transition-all">
-                <div className="flex flex-col items-center gap-1">
-                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center border border-primary/40">
-                    <Brain className="w-4 h-4 text-primary" />
+              <div className="bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl p-4 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-md">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full flex items-center justify-center border-2 border-primary/40 shadow-inner">
+                    <Brain className="w-5 h-5 text-primary" />
                   </div>
                   <div className="text-center">
                     <div className="text-sm font-bold text-foreground">
                       {getStageTitle(currentStage)}
                     </div>
-                    <div className="text-xs text-foreground/80 font-medium">Estágio Atual</div>
+                    <div className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">Estágio Atual</div>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-white/95 backdrop-blur-sm border-2 border-primary/40 rounded-xl p-3 hover:shadow-lg transition-all">
-                <div className="flex flex-col items-center gap-1">
-                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center border border-primary/40">
+              <div className="bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl p-4 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-md">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full flex items-center justify-center border-2 border-primary/40 shadow-inner">
                     <span className="text-sm font-bold text-primary">
                       {Object.values(stageAttempts).reduce((a, b) => a + b, 0)}
                     </span>
                   </div>
                   <div className="text-center">
                     <div className="text-sm font-bold text-foreground">Tentativas</div>
-                    <div className="text-xs text-foreground/80 font-medium">Total</div>
+                    <div className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">Total</div>
                   </div>
                 </div>
               </div>

@@ -214,7 +214,7 @@ export const VirtualTenBlocks = ({ problem, onComplete }: VirtualTenBlocksProps)
       
       <CardContent className="space-y-6">
         {/* Área de Blocos Disponíveis */}
-        <div className="border-2 border-primary/50 rounded-lg p-4 min-h-[200px] relative bg-muted/10 shadow-inner"
+        <div className="border-2 border-primary/50 rounded-lg p-4 min-h-[200px] relative bg-muted/10 shadow-inner overflow-hidden"
              onDrop={(e) => handleDrop(e, 'blocks')}
              onDragOver={(e) => e.preventDefault()}>
           <h3 className="font-semibold mb-4 text-foreground">Blocos Disponíveis</h3>
@@ -223,8 +223,8 @@ export const VirtualTenBlocks = ({ problem, onComplete }: VirtualTenBlocksProps)
               key={block.id}
               style={{
                 position: 'absolute',
-                left: block.x,
-                top: block.y + 30,
+                left: Math.max(10, Math.min(block.x, 450)),
+                top: Math.max(40, Math.min(block.y + 30, 160)),
                 width: block.type === 'hundred' ? '70px' : block.type === 'ten' ? '50px' : '20px',
                 height: block.type === 'hundred' ? '70px' : '20px',
                 backgroundColor: 'hsl(var(--primary))',
