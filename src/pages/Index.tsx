@@ -7,6 +7,7 @@ import CPAMethod from "@/components/CPAMethodNew";
 import ManthaChatTutor from "@/components/ManthaChatTutor";
 import LearningStyleTest from "@/components/LearningStyleTest";
 import ProgressView from "@/components/ProgressView";
+import ComprehensibleInput from "@/components/ComprehensibleInput";
 import DailyChallenge from "@/components/DailyChallenge";
 import EmotionalIntelligence from "@/components/EmotionalIntelligence";
 import ReadingRecommendations from "@/components/ReadingRecommendations";
@@ -23,8 +24,10 @@ const Index = () => {
         return <CPAMethod />;
       case 'learning-test':
         return <LearningStyleTest />;
-    case 'mantha-chat':
-      return <ManthaChatTutor />;
+      case 'comprehensible-input':
+        return <ComprehensibleInput />;
+      case 'mantha-chat':
+        return <ManthaChatTutor />;
       case 'emotional-intelligence':
         return <EmotionalIntelligence />;
       case 'progress':
@@ -51,6 +54,7 @@ const Index = () => {
                 {currentView === 'dashboard' && 'Painel de Controle'}
                 {currentView === 'cpa-method' && 'Método CPA'}
                 {currentView === 'learning-test' && 'Teste de Aprendizagem'}
+                {currentView === 'comprehensible-input' && 'Aprender com Comprehensible Input'}
                 {currentView === 'mantha-chat' && 'Tutor IA'}
                 {currentView === 'emotional-intelligence' && 'Inteligência Emocional'}
                 {currentView === 'progress' && 'Progresso'}

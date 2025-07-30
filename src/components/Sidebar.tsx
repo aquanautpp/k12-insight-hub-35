@@ -47,6 +47,11 @@ const navigationItems = [
     icon: Target,
   },
   {
+    id: 'comprehensible-input',
+    title: 'Comprehensible Input',
+    icon: BookOpen,
+  },
+  {
     id: 'mantha-chat',
     title: 'Tutor IA',
     icon: MessageSquare,
