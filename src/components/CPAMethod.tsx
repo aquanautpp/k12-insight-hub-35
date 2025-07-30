@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator } from "lucide-react";
+import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, Sparkles } from "lucide-react";
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 
 type Stage = 'concrete' | 'pictorial' | 'abstract';
@@ -117,22 +117,27 @@ const CPAMethod = () => {
             return (
               <Card 
                 key={key}
-                className={`cursor-pointer transition-all duration-300 hover:shadow-learning ${
-                  isActive ? 'ring-2 ring-primary shadow-learning' : ''
-                } ${isCompleted ? 'bg-gradient-achievement' : ''}`}
+                className={`cursor-pointer transition-all duration-300 magnetic-hover thoughtful-interaction ${
+                  isActive ? 'ring-2 ring-primary shadow-learning artistic-emphasis' : ''
+                } ${isCompleted ? 'premium-gradient-morph' : ''}`}
                 onClick={() => handleStageClick(stageKey)}
               >
-                <CardContent className="p-6 text-center">
+                <CardContent className="p-6 text-center sophisticated-reveal">
                   <div className="flex items-center justify-center mb-3">
-                    <div className={`text-4xl mr-3 ${isCompleted ? 'animate-pulse' : ''}`}>
+                    <div className={`text-4xl mr-3 ${isCompleted ? 'float-animation' : ''} ${isActive ? 'human-touch' : ''}`}>
                       {stage.icon}
                     </div>
-                    {isCompleted && <CheckCircle className="w-6 h-6 text-white" />}
+                    {isCompleted && (
+                      <div className="relative">
+                        <CheckCircle className="w-6 h-6 text-white" />
+                        <Sparkles className="w-4 h-4 text-yellow-300 absolute -top-1 -right-1 animate-pulse" />
+                      </div>
+                    )}
                   </div>
-                   <h3 className={`font-bold mb-2 ${isCompleted ? 'text-white' : 'text-green-700'}`}>
-                     {stage.title}
-                   </h3>
-                  <p className={`text-sm ${isCompleted ? 'text-white/80' : 'text-muted-foreground'}`}>
+                   <h3 className={`font-bold mb-2 elegant-text-reveal ${isCompleted ? 'text-white' : 'text-green-700'}`}>
+                      {stage.title}
+                    </h3>
+                  <p className={`text-sm digital-maker-glow ${isCompleted ? 'text-white/80' : 'text-muted-foreground'}`}>
                     {stage.description}
                   </p>
                 </CardContent>
@@ -142,30 +147,30 @@ const CPAMethod = () => {
         </div>
 
         {/* Current Stage Details */}
-        <Card className="mb-8 shadow-card">
+        <Card className="mb-8 shadow-card sophisticated-reveal magnetic-hover">
           <CardHeader>
             <CardTitle className="flex items-center gap-3">
-              <span className="text-3xl">{stages[currentStage].icon}</span>
+              <span className="text-3xl float-animation">{stages[currentStage].icon}</span>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">{stages[currentStage].title}</h2>
-                <p className="text-muted-foreground">{stages[currentStage].description}</p>
+                <h2 className="text-2xl font-bold text-foreground elegant-text-reveal">{stages[currentStage].title}</h2>
+                <p className="text-muted-foreground elegant-text-reveal">{stages[currentStage].description}</p>
               </div>
             </CardTitle>
           </CardHeader>
           
           <CardContent className="space-y-6">
             {/* Exemplo Prático */}
-            <div className="bg-gradient-subtle rounded-lg p-6">
-              <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+            <div className="bg-gradient-subtle rounded-lg p-6 thoughtful-interaction">
+              <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2 elegant-text-reveal">
                 <BookOpen className="w-5 h-5" />
                 Exemplo Prático
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+                <div className="artistic-emphasis">
                   <h4 className="font-medium text-foreground mb-2">Problema:</h4>
                   <p className="text-foreground">{stages[currentStage].problem}</p>
                 </div>
-                <div>
+                <div className="artistic-emphasis">
                   <h4 className="font-medium text-foreground mb-2">Solução:</h4>
                   <p className="text-foreground">{stages[currentStage].solution}</p>
                 </div>
