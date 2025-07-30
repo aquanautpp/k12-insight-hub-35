@@ -159,7 +159,7 @@ const EmotionalIntelligence = () => {
             >
               {/* Parte superior com fundo verde oliva mais claro - padronizada */}
               <div 
-                className="p-6 text-white h-48 flex flex-col justify-between"
+                className="p-6 text-white h-56 flex flex-col justify-between"
                 style={{
                   background: 'linear-gradient(135deg, hsl(67, 35%, 45%), hsl(67, 40%, 40%))'
                 }}
