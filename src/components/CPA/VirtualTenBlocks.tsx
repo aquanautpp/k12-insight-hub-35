@@ -214,30 +214,38 @@ export const VirtualTenBlocks = ({ problem, onComplete }: VirtualTenBlocksProps)
       
       <CardContent className="space-y-6">
         {/* Área de Blocos Disponíveis */}
-        <div className="border-2 border-primary/50 rounded-lg p-4 min-h-[200px] relative bg-muted/10 shadow-inner overflow-hidden"
+        <div className="border-2 border-primary/50 rounded-lg p-4 min-h-[200px] relative bg-muted/10 shadow-inner"
              onDrop={(e) => handleDrop(e, 'blocks')}
              onDragOver={(e) => e.preventDefault()}>
           <h3 className="font-semibold mb-4 text-foreground">Blocos Disponíveis</h3>
-          <div className="relative w-full h-full">
-            {blocks.map(block => (
-              <div
-                key={block.id}
-                style={{
-                  ...getBlockStyle(block),
-                  border: '2px solid hsl(var(--primary))',
-                  color: 'hsl(var(--foreground))',
-                  backgroundColor: block.type === 'hundred' ? 'hsl(var(--primary))' :
-                                   block.type === 'ten' ? 'hsl(var(--secondary))' :
-                                   'hsl(var(--accent))',
-                  position: 'absolute'
-                }}
-                draggable
-                onDragStart={() => handleDragStart(block.id)}
-              >
-                {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
-              </div>
-            ))}
-          </div>
+          {blocks.map(block => (
+            <div
+              key={block.id}
+              style={{
+                position: 'absolute',
+                left: block.x,
+                top: block.y + 30,
+                width: block.type === 'hundred' ? '70px' : block.type === 'ten' ? '50px' : '20px',
+                height: block.type === 'hundred' ? '70px' : '20px',
+                backgroundColor: 'hsl(var(--primary))',
+                color: 'white',
+                border: '2px solid hsl(var(--primary))',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                fontSize: block.type === 'hundred' ? '14px' : '12px',
+                cursor: 'grab',
+                userSelect: 'none',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
+              }}
+              draggable
+              onDragStart={() => handleDragStart(block.id)}
+            >
+              {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
+            </div>
+          ))}
         </div>
 
         {/* Área de Trabalho */}

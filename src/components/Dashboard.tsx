@@ -152,7 +152,8 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <Button 
                 size="lg" 
-                className="bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm text-lg px-8"
+                variant="outline"
+                className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm"
                 onClick={() => onViewChange?.('progress')}
               >
                 Ver Progresso
