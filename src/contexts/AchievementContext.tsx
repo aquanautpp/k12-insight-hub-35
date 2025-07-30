@@ -152,36 +152,37 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
     achievements.filter(a => a.isUnlocked)
   );
 
-  const checkAchievements = (progressData: any, xpData: any) => {
+  const checkAchievements = React.useCallback((progressData: any, xpData: any) => {
     const newlyUnlocked: Achievement[] = [];
     
-    setAchievements(prev => prev.map(achievement => {
+    const updatedAchievements = achievements.map(achievement => {
       if (achievement.isUnlocked) return achievement;
       
       let shouldUnlock = false;
+      const updatedAchievement = { ...achievement };
       
       switch (achievement.requirement.type) {
         case 'complete_activities':
-          achievement.requirement.current = progressData.completedActivities;
+          updatedAchievement.requirement.current = progressData.completedActivities;
           shouldUnlock = progressData.completedActivities >= achievement.requirement.target;
           break;
         case 'maintain_streak':
-          achievement.requirement.current = progressData.currentStreak;
+          updatedAchievement.requirement.current = progressData.currentStreak;
           shouldUnlock = progressData.currentStreak >= achievement.requirement.target;
           break;
         case 'reach_level':
-          achievement.requirement.current = xpData.currentLevel;
+          updatedAchievement.requirement.current = xpData.currentLevel;
           shouldUnlock = xpData.currentLevel >= achievement.requirement.target;
           break;
         case 'use_feature':
-          achievement.requirement.current = progressData.chatInteractions;
+          updatedAchievement.requirement.current = progressData.chatInteractions;
           shouldUnlock = progressData.chatInteractions >= achievement.requirement.target;
           break;
       }
       
       if (shouldUnlock) {
         const unlockedAchievement = {
-          ...achievement,
+          ...updatedAchievement,
           isUnlocked: true,
           unlockedAt: new Date()
         };
@@ -189,15 +190,25 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
         return unlockedAchievement;
       }
       
-      return achievement;
-    }));
+      return updatedAchievement;
+    });
+    
+    // Only update state if there are actual changes
+    const hasChanges = updatedAchievements.some((achievement, index) => 
+      achievement.requirement.current !== achievements[index].requirement.current ||
+      achievement.isUnlocked !== achievements[index].isUnlocked
+    );
+    
+    if (hasChanges) {
+      setAchievements(updatedAchievements);
+    }
     
     if (newlyUnlocked.length > 0) {
       setUnlockedAchievements(prev => [...prev, ...newlyUnlocked]);
     }
     
     return newlyUnlocked;
-  };
+  }, [achievements]);
 
   const unlockAchievement = (achievementId: string) => {
     setAchievements(prev => prev.map(achievement => 

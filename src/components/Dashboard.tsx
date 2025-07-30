@@ -65,11 +65,11 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
   const { currentIndex } = useScrollHijack(featuresRef, features.length);
 
   React.useEffect(() => {
-    // Só chama checkAchievements se os dados estão disponíveis e não causará loop
+    // Só chama checkAchievements se os dados estão disponíveis e mudaram
     if (progress?.completedActivities !== undefined && xpData?.currentLevel !== undefined) {
       checkAchievements(progress, xpData);
     }
-  }, [progress?.completedActivities, xpData?.currentLevel, checkAchievements]);
+  }, [progress?.completedActivities, xpData?.currentLevel]);
 
   useEffect(() => {
     const handleScroll = () => {

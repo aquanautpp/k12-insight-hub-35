@@ -333,9 +333,9 @@ Que estágio você gostaria de praticar mais?`,
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="w-full max-w-none mx-auto p-6">
       <Card className="h-[850px] flex flex-col shadow-card">
-        <CardHeader className="bg-gradient-tutor text-white rounded-t-lg">
+        <CardHeader className="bg-gradient-to-r from-primary via-primary-hover to-primary text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
@@ -361,7 +361,7 @@ Que estágio você gostaria de praticar mais?`,
             {Object.entries(stageInfo).map(([key, info]) => (
               <Button
                 key={key}
-                variant={currentStage === key ? "learning" : "outline"}
+                variant={currentStage === key ? "default" : "outline"}
                 size="sm"
                 onClick={() => setCurrentStage(key as CPAStage)}
                 className="flex items-center gap-1"
@@ -426,71 +426,82 @@ Que estágio você gostaria de praticar mais?`,
           </ScrollArea>
         </CardContent>
 
-        {/* Área de Input */}
+        {/* Área de Input com botões específicos */}
         <div className="p-4 border-t bg-background">
           {/* Botões de Dica e Ajuda Específicos */}
-          <div className="flex gap-2 mb-3 justify-center">
+          <div className="flex gap-2 mb-3 justify-center flex-wrap">
             <Button 
               variant="outline" 
               size="sm"
-              className="bg-yellow-50 text-yellow-800 border-yellow-200 hover:bg-yellow-100"
-              onClick={() => setInputMessage("Preciso de uma dica específica para resolver: Pedro tem 27 figurinhas e ganhou 15 mais. Quantas figurinhas ele tem agora? Use o método CPA para me explicar.")}
+              className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10"
+              onClick={() => {
+                const lastUserMessage = messages.filter(m => m.sender === 'user').pop();
+                const problemContext = lastUserMessage ? lastUserMessage.content : "este problema";
+                setInputMessage(`Preciso de uma dica específica para resolver: ${problemContext}. Use o método CPA para me dar uma estratégia.`);
+              }}
             >
               💡 Dica para este problema
             </Button>
             <Button 
               variant="outline" 
               size="sm"
-              className="bg-blue-50 text-blue-800 border-blue-200 hover:bg-blue-100"
-              onClick={() => setInputMessage("Tutor IA, me ajude com este problema específico: 27 + 15. Explique detalhadamente usando blocos virtuais, diagramas e símbolos matemáticos.")}
+              className="bg-secondary/5 text-secondary border-secondary/20 hover:bg-secondary/10"
+              onClick={() => {
+                const lastUserMessage = messages.filter(m => m.sender === 'user').pop();
+                const problemContext = lastUserMessage ? lastUserMessage.content : "este problema matemático";
+                setInputMessage(`Preciso de ajuda detalhada do tutor IA para resolver: ${problemContext}. Pode me explicar passo a passo?`);
+              }}
             >
               🤖 Ajuda do Tutor IA
             </Button>
           </div>
-
-          {/* Input Principal com largura máxima */}
-          <div className="flex gap-3 max-w-full">
+          
+          <div className="flex space-x-2">
             <Input
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Digite sua pergunta específica sobre o problema das figurinhas do Pedro..."
+              placeholder="Digite sua pergunta de matemática..."
               onKeyPress={handleKeyPress}
-              className="flex-1 bg-white border-primary/20 focus:border-primary min-h-[44px]"
+              disabled={isLoading}
+              className="flex-1"
             />
             <Button 
-              onClick={handleSendMessage}
-              disabled={!inputMessage.trim() || isLoading}
-              className="bg-gradient-primary text-white hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary border-0 shadow-sm px-6"
+              onClick={handleSendMessage} 
+              disabled={isLoading || !inputMessage.trim()}
+              className="px-4"
             >
               <Send className="w-4 h-4" />
             </Button>
           </div>
-
-          {/* Sugestões de Perguntas Rápidas */}
+          
+          {/* Botões de Exemplo */}
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             <Button 
               variant="ghost" 
               size="sm"
-              className="text-xs text-muted-foreground hover:text-primary"
-              onClick={() => setInputMessage("Não entendi como fazer 27 + 15 com blocos virtuais")}
+              className="text-xs"
+              onClick={() => setInputMessage("Como resolver 15 × 8 usando o método visual?")}
             >
-              "Como usar blocos virtuais?"
+              <Calculator className="w-3 h-3 mr-1" />
+              Multiplicação Visual
             </Button>
             <Button 
               variant="ghost" 
               size="sm"
-              className="text-xs text-muted-foreground hover:text-primary"
-              onClick={() => setInputMessage("Qual é a melhor estratégia para somar 27 + 15?")}
+              className="text-xs"
+              onClick={() => setInputMessage("Explique frações usando objetos concretos")}
             >
-              "Estratégia para somar?"
+              <Target className="w-3 h-3 mr-1" />
+              Frações Concretas
             </Button>
             <Button 
               variant="ghost" 
               size="sm"
-              className="text-xs text-muted-foreground hover:text-primary"
-              onClick={() => setInputMessage("Me explique o estágio concreto para este problema")}
+              className="text-xs"
+              onClick={() => setInputMessage("Como usar o Teorema de Pitágoras na prática?")}
             >
-              "Explique estágio concreto"
+              <BookOpen className="w-3 h-3 mr-1" />
+              Teoremas
             </Button>
           </div>
         </div>

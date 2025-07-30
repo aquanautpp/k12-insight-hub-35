@@ -95,31 +95,37 @@ export const SmartInsights: React.FC<SmartInsightsProps> = ({ className = "" }) 
   };
 
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-${Math.min(insights.length, 3)} gap-4 ${className}`}>
-      {insights.map((insight, index) => (
-        <Card key={index} className="card-interactive shadow-card bg-gradient-focus border border-primary/20 hover:shadow-xl transition-all duration-300 h-32">
-          <CardContent className="p-4 h-full">
-            <div className="flex items-center gap-3 h-full">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gradient-start to-gradient-end flex items-center justify-center flex-shrink-0">
-                <insight.icon className="w-6 h-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-sm font-semibold text-foreground truncate">
-                    {getTypeLabel(insight.type)}
-                  </span>
-                  <Badge variant="secondary" className="text-xs bg-primary/10 text-primary flex-shrink-0">
-                    {insight.confidence}%
-                  </Badge>
+    <Card className="bg-card shadow-card border border-border">
+      <CardContent className="p-6">
+        <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+          <TrendingUp className="w-5 h-5 text-primary" />
+          Insights Inteligentes
+        </h3>
+        <div className="grid grid-cols-1 gap-4">
+          {insights.map((insight, index) => (
+            <div key={index} className="bg-card shadow-card border border-border hover:shadow-lg transition-all duration-300 rounded-lg p-4">
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <insight.icon className="w-5 h-5 text-primary" />
                 </div>
-                <p className="text-sm text-muted-foreground leading-tight line-clamp-3 flex-1">
-                  {insight.message}
-                </p>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`text-xs font-medium px-2 py-1 rounded-full bg-primary/10 ${getTypeColor(insight.type)}`}>
+                      {getTypeLabel(insight.type)}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {insight.confidence}% confiança
+                    </span>
+                  </div>
+                  <p className="text-sm text-foreground leading-relaxed">
+                    {insight.message}
+                  </p>
+                </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
