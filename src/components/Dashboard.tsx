@@ -37,7 +37,7 @@ const Dashboard = () => {
   // Update achievements based on current progress
   React.useEffect(() => {
     checkAchievements(progress, xpData);
-  }, [progress.completedActivities, progress.currentStreak, xpData.currentLevel, progress.chatInteractions, checkAchievements]);
+  }, [progress.completedActivities, progress.currentStreak, xpData.currentLevel, progress.chatInteractions]);
 
   // Calculate dynamic progress based on actual data
   const studentProgress = React.useMemo(() => ({
