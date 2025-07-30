@@ -144,7 +144,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
               <Brain className="w-10 h-10 text-white" />
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
-              Bem-vindo ao <span className="text-gold">Meraki</span>
+              Bem-vindo ao <span className="text-gold">Mantha</span>
             </h1>
             <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto mb-8">
               Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas

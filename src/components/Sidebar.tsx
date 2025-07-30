@@ -47,7 +47,7 @@ const navigationItems = [
     icon: Target,
   },
   {
-    id: 'meraki-chat',
+    id: 'mantha-chat',
     title: 'Tutor IA',
     icon: MessageSquare,
   },
@@ -94,7 +94,7 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
                 </div>
                 {state !== "collapsed" && (
                   <div className="grid flex-1 text-left leading-tight">
-                    <span className="text-lg font-semibold text-foreground">Meraki</span>
+                    <span className="text-lg font-semibold text-foreground">Mantha</span>
                     <span className="text-xs text-muted-foreground font-medium">Educação Personalizada</span>
                   </div>
                 )}

@@ -20,7 +20,7 @@ Uma plataforma educacional avançada focada em aprendizagem personalizada e dese
 - **Tipos**: Visual, Auditivo, Cinestésico, Leitura/Escrita
 - **Resultado**: Personalização da experiência de aprendizado
 
-### 3. Tutor de IA (Meraki Chat)
+### 3. Tutor de IA (Mantha Chat)
 - **Funcionalidade**: Chat interativo com IA especializada em educação
 - **Adaptabilidade**: Respostas baseadas no estágio CPA selecionado
 - **Especialidades**: Matemática, resolução de problemas, explicações personalizadas

@@ -167,7 +167,7 @@ const ChatTutor = () => {
             <StageIcon className="w-8 h-8 text-white" />
           </div>
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">Meraki - Tutora de IA</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-2">Mantha - Tutora de IA</h1>
             <p className="text-lg text-muted-foreground">
               Método de Singapura com IA
             </p>

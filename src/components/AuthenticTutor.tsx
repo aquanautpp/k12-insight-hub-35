@@ -354,9 +354,9 @@ export const AuthenticAITutor: React.FC<AuthenticTutorProps> = ({
 
 // Sample tutor personality
 export const sampleTutorPersonality: TutorPersonality = {
-  name: "Professor Meraki",
+  name: "Professor Mantha",
   avatar: "/tutor-avatar.jpg",
   traits: ["Empático", "Paciente", "Inspirador", "Criativo"],
   specialties: ["Método CPA", "Matemática Visual", "Resolução de Problemas"],
-  greetingMessage: "Olá! Sou o Professor Meraki, seu guia nesta jornada de descobertas matemáticas! 🌟"
+  greetingMessage: "Olá! Sou o Professor Mantha, seu guia nesta jornada de descobertas matemáticas! 🌟"
 };

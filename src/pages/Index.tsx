@@ -4,7 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Dashboard from "@/components/Dashboard";
 import CPAMethod from "@/components/CPAMethodNew";
-import MerakiChatTutor from "@/components/MerakiChatTutor";
+import ManthaChatTutor from "@/components/ManthaChatTutor";
 import LearningStyleTest from "@/components/LearningStyleTest";
 import ProgressView from "@/components/ProgressView";
 import DailyChallenge from "@/components/DailyChallenge";
@@ -23,8 +23,8 @@ const Index = () => {
         return <CPAMethod />;
       case 'learning-test':
         return <LearningStyleTest />;
-      case 'meraki-chat':
-        return <MerakiChatTutor />;
+    case 'mantha-chat':
+      return <ManthaChatTutor />;
       case 'emotional-intelligence':
         return <EmotionalIntelligence />;
       case 'progress':
@@ -51,7 +51,7 @@ const Index = () => {
                 {currentView === 'dashboard' && 'Painel de Controle'}
                 {currentView === 'cpa-method' && 'Método CPA'}
                 {currentView === 'learning-test' && 'Teste de Aprendizagem'}
-                {currentView === 'meraki-chat' && 'Tutor IA'}
+                {currentView === 'mantha-chat' && 'Tutor IA'}
                 {currentView === 'emotional-intelligence' && 'Inteligência Emocional'}
                 {currentView === 'progress' && 'Progresso'}
                 {currentView === 'activities' && 'Atividades'}

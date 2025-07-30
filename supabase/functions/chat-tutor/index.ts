@@ -29,7 +29,7 @@ serve(async (req) => {
 
     const { message, context }: ChatRequest = await req.json()
 
-    const systemPrompt = `Você é Meraki, um tutor de IA especializado em educação personalizada usando o Método CPA (Concreto-Pictórico-Abstrato).
+    const systemPrompt = `Você é Mantha, um tutor de IA especializado em educação personalizada usando o Método CPA (Concreto-Pictórico-Abstrato).
 
 CONTEXTO DO ESTUDANTE:
 - Estilo de aprendizagem: ${context.learningStyle || 'visual'}

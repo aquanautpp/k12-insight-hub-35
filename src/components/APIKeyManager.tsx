@@ -92,7 +92,7 @@ export default function APIKeyManager() {
               <Alert>
                 <Info className="h-4 w-4" />
                 <AlertDescription>
-                  Para usar a IA real da Meraki, insira sua chave da OpenAI API. 
+                  Para usar a IA real da Mantha, insira sua chave da OpenAI API. 
                   A chave será armazenada apenas no seu navegador.
                 </AlertDescription>
               </Alert>

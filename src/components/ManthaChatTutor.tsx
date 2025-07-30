@@ -40,18 +40,18 @@ type CPAStage = 'concrete' | 'pictorial' | 'abstract' | 'adaptive';
 interface Message {
   id: string;
   content: string;
-  sender: 'user' | 'meraki';
+  sender: 'user' | 'mantha';
   timestamp: Date;
   stage?: CPAStage;
   hasVisual?: boolean;
 }
 
-const MerakiChatTutor = () => {
+const ManthaChatTutor = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: 'Olá! Eu sou a Meraki, sua tutora de matemática! 🎓 Estou aqui para te ajudar a aprender usando o Método de Singapura (CPA). Que pergunta de matemática você tem hoje?',
-      sender: 'meraki',
+      content: 'Olá! Eu sou a Mantha, sua tutora de matemática! 🎓 Estou aqui para te ajudar a aprender usando o Método de Singapura (CPA). Que pergunta de matemática você tem hoje?',
+      sender: 'mantha',
       timestamp: new Date(),
       stage: 'adaptive'
     }
@@ -67,7 +67,7 @@ const MerakiChatTutor = () => {
     }
   }, [messages]);
 
-  const generateMerakiResponse = async (userMessage: string, stage: CPAStage) => {
+  const generateManthaResponse = async (userMessage: string, stage: CPAStage) => {
     try {
       // Try using real OpenAI service first
       const response = await openaiService.generateResponse(userMessage, {
@@ -306,18 +306,18 @@ Que estágio você gostaria de praticar mais?`,
     setIsLoading(true);
 
     try {
-      const response = await generateMerakiResponse(inputMessage, currentStage);
+      const response = await generateManthaResponse(inputMessage, currentStage);
       
-      const merakiMessage: Message = {
+      const manthaMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: response.content,
-        sender: 'meraki',
+        sender: 'mantha',
         timestamp: new Date(),
         stage: response.stage as CPAStage,
         hasVisual: response.content.includes('Visual') || response.content.includes('Desenhe')
       };
 
-      setMessages(prev => [...prev, merakiMessage]);
+      setMessages(prev => [...prev, manthaMessage]);
     } catch (error) {
       console.error('Erro ao gerar resposta:', error);
     } finally {
@@ -342,7 +342,7 @@ Que estágio você gostaria de praticar mais?`,
                 <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl font-bold text-white">Meraki - Tutor de IA</CardTitle>
+                <CardTitle className="text-xl font-bold text-white">Mantha - Tutor de IA</CardTitle>
                 <p className="text-white/90 text-sm flex items-center">
                   <span className="mr-2">{stageInfo[currentStage].icon}</span>
                   {stageInfo[currentStage].title}
@@ -417,7 +417,7 @@ Que estágio você gostaria de praticar mais?`,
                   <div className="bg-muted rounded-lg p-3 max-w-[80%]">
                     <div className="flex items-center space-x-2">
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
-                      <span className="text-sm text-muted-foreground">Meraki está pensando...</span>
+                      <span className="text-sm text-muted-foreground">Mantha está pensando...</span>
                     </div>
                   </div>
                 </div>
@@ -437,72 +437,58 @@ Que estágio você gostaria de praticar mais?`,
               onClick={() => {
                 const lastUserMessage = messages.filter(m => m.sender === 'user').pop();
                 const problemContext = lastUserMessage ? lastUserMessage.content : "este problema";
-                setInputMessage(`Preciso de uma dica específica para resolver: ${problemContext}. Use o método CPA para me dar uma estratégia.`);
+                setInputMessage(`Explique ${problemContext} de forma mais visual`);
               }}
             >
-              💡 Dica para este problema
+              <Target className="w-3 h-3 mr-1" />
+              Mais Visual
             </Button>
             <Button 
               variant="outline" 
               size="sm"
-              className="bg-secondary/5 text-secondary border-secondary/20 hover:bg-secondary/10"
+              className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10"
               onClick={() => {
-                const lastUserMessage = messages.filter(m => m.sender === 'user').pop();
-                const problemContext = lastUserMessage ? lastUserMessage.content : "este problema matemático";
-                setInputMessage(`Preciso de ajuda detalhada do tutor IA para resolver: ${problemContext}. Pode me explicar passo a passo?`);
+                setInputMessage("Como posso usar objetos físicos para entender melhor?");
               }}
             >
-              🤖 Ajuda do Tutor IA
+              <BookOpen className="w-3 h-3 mr-1" />
+              Concreto
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10"
+              onClick={() => {
+                setInputMessage("Mostre-me a fórmula matemática");
+              }}
+            >
+              <Calculator className="w-3 h-3 mr-1" />
+              Fórmula
             </Button>
           </div>
-          
-          <div className="flex space-x-2">
+
+          {/* Input */}
+          <div className="flex gap-2">
             <Input
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Digite sua pergunta de matemática..."
               onKeyPress={handleKeyPress}
-              disabled={isLoading}
+              placeholder="Digite sua pergunta de matemática..."
               className="flex-1"
+              disabled={isLoading}
             />
             <Button 
-              onClick={handleSendMessage} 
-              disabled={isLoading || !inputMessage.trim()}
-              className="px-4"
+              onClick={handleSendMessage}
+              disabled={!inputMessage.trim() || isLoading}
+              size="icon"
             >
               <Send className="w-4 h-4" />
             </Button>
           </div>
           
-          {/* Botões de Exemplo */}
-          <div className="flex gap-2 mt-3 flex-wrap justify-center">
-            <Button 
-              variant="ghost" 
-              size="sm"
-              className="text-xs"
-              onClick={() => setInputMessage("Como resolver 15 × 8 usando o método visual?")}
-            >
-              <Calculator className="w-3 h-3 mr-1" />
-              Multiplicação Visual
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              className="text-xs"
-              onClick={() => setInputMessage("Explique frações usando objetos concretos")}
-            >
-              <Target className="w-3 h-3 mr-1" />
-              Frações Concretas
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              className="text-xs"
-              onClick={() => setInputMessage("Como usar o Teorema de Pitágoras na prática?")}
-            >
-              <BookOpen className="w-3 h-3 mr-1" />
-              Teoremas
-            </Button>
+          {/* Exemplos de perguntas */}
+          <div className="mt-3 text-xs text-muted-foreground text-center">
+            Experimente: "Quanto é 7 × 8?", "Como resolver frações?", "Teorema de Pitágoras"
           </div>
         </div>
       </Card>
@@ -510,4 +496,4 @@ Que estágio você gostaria de praticar mais?`,
   );
 };
 
-export default MerakiChatTutor;
+export default ManthaChatTutor;

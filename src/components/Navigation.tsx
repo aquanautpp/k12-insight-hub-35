@@ -26,7 +26,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
     { id: 'dashboard', label: 'Dashboard', icon: Home, badge: null },
     { id: 'singapore-method', label: 'Método CPA', icon: Brain, badge: 'Novo' },
     { id: 'learning-test', label: 'Descubra Seu Superpoder de Aprender!', icon: Target, badge: 'Superpoder' },
-    { id: 'meraki-chat', label: 'Meraki Chat', icon: MessageSquare, badge: 'IA' },
+    { id: 'mantha-chat', label: 'Mantha Chat', icon: MessageSquare, badge: 'IA' },
     { id: 'progress', label: 'Progresso', icon: TrendingUp, badge: null },
     { id: 'activities', label: 'Atividades', icon: BookOpen, badge: '3' },
     { id: 'profile', label: 'Perfil', icon: User, badge: null },
@@ -42,7 +42,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">Meraki</h1>
+              <h1 className="text-xl font-bold text-foreground">Mantha</h1>
               <p className="text-xs text-muted-foreground">Plataforma Educacional Adaptativa</p>
             </div>
           </div>
@@ -96,7 +96,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
             <div className="w-8 h-8 rounded-lg bg-gradient-learning flex items-center justify-center">
               <Target className="w-5 h-5 text-white" />
             </div>
-            <h1 className="text-lg font-bold text-foreground">Meraki</h1>
+            <h1 className="text-lg font-bold text-foreground">Mantha</h1>
           </div>
           
           <Button
