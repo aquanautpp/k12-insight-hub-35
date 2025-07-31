@@ -271,8 +271,9 @@ const ReadingRecommendations = () => {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {books.filter(book => book.tags.some(tag => tag.includes('empreendedorismo') || tag.includes('negócios') || tag.includes('protagonismo'))).map((book) => (
-                   <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
-                     <CardContent className="p-6">
+                  <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
+                    <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
+                    <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
@@ -293,7 +294,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-black' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -352,8 +353,9 @@ const ReadingRecommendations = () => {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {books.filter(book => book.tags.some(tag => tag.includes('mulheres') || tag.includes('inspiração') || tag.includes('liderança'))).map((book) => (
-                   <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
-                     <CardContent className="p-6">
+                  <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
+                    <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
+                    <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
@@ -374,7 +376,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-black' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -433,8 +435,9 @@ const ReadingRecommendations = () => {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {books.filter(book => book.tags.some(tag => tag.includes('dinheiro') || tag.includes('poupança') || tag.includes('investimento'))).map((book) => (
-                   <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
-                     <CardContent className="p-6">
+                  <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
+                    <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
+                    <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
@@ -455,7 +458,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-black' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -514,8 +517,9 @@ const ReadingRecommendations = () => {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {books.filter(book => book.tags.some(tag => tag.includes('emoções') || tag.includes('inteligência-emocional') || tag.includes('autoconhecimento') || tag.includes('paciência') || tag.includes('gestão-emocional') || tag.includes('jogos') || tag.includes('expressão'))).map((book) => (
-                   <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
-                     <CardContent className="p-6">
+                  <Card key={book.id} className="overflow-hidden shadow-card hover:shadow-lg transition-shadow border-primary/10">
+                    <div className={`h-4 bg-gradient-to-r ${book.color}`}></div>
+                    <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
@@ -536,7 +540,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-black' : 'text-muted-foreground'}`} />
+                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
