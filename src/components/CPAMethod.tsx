@@ -138,39 +138,62 @@ const CPAMethod = () => {
               </p>
             </div>
 
-            <div className="ultra-modern-practice-section">
-              <div className="modern-header-container">
-                <div className="icon-wrapper">
+            <div className="optimized-practice-section">
+              <div className="practice-header">
+                <div className="practice-icon-wrapper">
                   <PlayCircle className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="modern-title">Como funciona na prática?</h3>
+                <h3 className="practice-title">Como funciona na prática?</h3>
               </div>
               
-              <p className="modern-description">
+              <p className="practice-description">
                 Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram 
                 imagens e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
               </p>
 
-              <div className="practice-steps-grid">
-                <div className="step-card">
-                  <div className="step-number">1</div>
-                  <div className="step-icon">🍕</div>
-                  <h5 className="step-title">Primeiro</h5>
-                  <p className="step-description">Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.</p>
+              <div className="practice-subtitle">Por exemplo, para aprender frações:</div>
+
+              <div className="practice-cards-grid">
+                <div className="practice-card">
+                  <div className="card-number">1</div>
+                  <div className="card-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 26L16 8L28 26H4Z" fill="#FF6B35" stroke="#D4500F" strokeWidth="2"/>
+                      <path d="M10 20L16 14L22 20H10Z" fill="#FFE8A3"/>
+                      <circle cx="16" cy="18" r="2" fill="#8B4513"/>
+                    </svg>
+                  </div>
+                  <h5 className="card-title">Primeiro</h5>
+                  <p className="card-description">Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.</p>
                 </div>
                 
-                <div className="step-card">
-                  <div className="step-number">2</div>
-                  <div className="step-icon">✏️</div>
-                  <h5 className="step-title">Depois</h5>
-                  <p className="step-description">Desenha as fatias no papel, visualizando as partes da pizza.</p>
+                <div className="practice-card">
+                  <div className="card-number">2</div>
+                  <div className="card-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="4" y="8" width="24" height="2" fill="#2D3748" rx="1"/>
+                      <rect x="4" y="12" width="20" height="2" fill="#2D3748" rx="1"/>
+                      <rect x="4" y="16" width="22" height="2" fill="#2D3748" rx="1"/>
+                      <rect x="4" y="20" width="18" height="2" fill="#2D3748" rx="1"/>
+                      <circle cx="26" cy="6" r="4" fill="#FF6B35"/>
+                    </svg>
+                  </div>
+                  <h5 className="card-title">Depois</h5>
+                  <p className="card-description">Desenha as fatias no papel, visualizando as partes da pizza.</p>
                 </div>
                 
-                <div className="step-card">
-                  <div className="step-number">3</div>
-                  <div className="step-icon">📝</div>
-                  <h5 className="step-title">Por último</h5>
-                  <p className="step-description">Só então faz a conta com números e símbolos matemáticos.</p>
+                <div className="practice-card">
+                  <div className="card-number">3</div>
+                  <div className="card-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="6" y="4" width="20" height="24" fill="#F7FAFC" stroke="#2D3748" strokeWidth="2" rx="2"/>
+                      <text x="16" y="14" textAnchor="middle" fill="#2D3748" fontSize="8" fontWeight="600">1/2</text>
+                      <text x="16" y="22" textAnchor="middle" fill="#2D3748" fontSize="8" fontWeight="600">+ 1/4</text>
+                      <line x1="8" y1="16" x2="24" y2="16" stroke="#2D3748" strokeWidth="1"/>
+                    </svg>
+                  </div>
+                  <h5 className="card-title">Por último</h5>
+                  <p className="card-description">Só então faz a conta com números e símbolos matemáticos.</p>
                 </div>
               </div>
             </div>
