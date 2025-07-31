@@ -202,6 +202,157 @@ const CPAMethod = () => {
           </div>
         </div>
 
+        {/* O que é o Método CPA */}
+        <Card className="mb-8 shadow-card">
+          <CardContent className="p-8">
+            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">O que é o Método CPA?</h2>
+            <p className="text-lg text-muted-foreground mb-6 text-center max-w-4xl mx-auto">
+              O Método CPA é uma forma diferente (e muito mais legal!) de aprender matemática. 
+              Em vez de começar direto com números e fórmulas, você passa por três etapas:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="group p-6 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
+                <div className="text-6xl mb-4">🧱</div>
+                <h3 className="text-xl font-bold text-foreground mb-3">1. Concreto</h3>
+                <p className="text-muted-foreground">
+                  Você manipula objetos reais, como cubos, blocos ou fichas.
+                </p>
+              </div>
+              
+              <div className="group p-6 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
+                <div className="text-6xl mb-4">🎨</div>
+                <h3 className="text-xl font-bold text-foreground mb-3">2. Pictórico</h3>
+                <p className="text-muted-foreground">
+                  Você vê desenhos e imagens, como os famosos modelos de barras.
+                </p>
+              </div>
+              
+              <div className="group p-6 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
+                <div className="text-6xl mb-4">🔢</div>
+                <h3 className="text-xl font-bold text-foreground mb-3">3. Abstrato</h3>
+                <p className="text-muted-foreground">
+                  Só depois você usa números e símbolos, como fazemos em contas.
+                </p>
+              </div>
+            </div>
+            
+            <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
+              <p className="text-foreground text-center">
+                <strong>🇸🇬 Sucesso Internacional:</strong> Essa ideia veio de estudos sobre como aprendemos melhor. 
+                Singapura foi um dos primeiros países a usar esse método em todas as escolas, e deu super certo: 
+                os alunos de lá estão entre os melhores do mundo em matemática!
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Como funciona na prática */}
+        <Card className="mb-8 shadow-card">
+          <CardContent className="p-8">
+            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Como funciona na prática?</h2>
+            <p className="text-lg text-muted-foreground mb-8 text-center max-w-4xl mx-auto">
+              Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram imagens 
+              e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
+            </p>
+            
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold text-foreground text-center mb-6">Por exemplo, para aprender frações:</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">1</div>
+                    <h4 className="text-lg font-semibold text-foreground">Primeiro</h4>
+                  </div>
+                  <div className="text-4xl mb-3 text-center">🍕</div>
+                  <p className="text-muted-foreground">
+                    Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">2</div>
+                    <h4 className="text-lg font-semibold text-foreground">Depois</h4>
+                  </div>
+                  <div className="text-4xl mb-3 text-center">✏️</div>
+                  <p className="text-muted-foreground">
+                    Desenha as fatias no papel, visualizando as partes da pizza.
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">3</div>
+                    <h4 className="text-lg font-semibold text-foreground">Por último</h4>
+                  </div>
+                  <div className="text-4xl mb-3 text-center">📝</div>
+                  <p className="text-muted-foreground">
+                    Só então faz a conta com números e símbolos matemáticos.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Por que isso funciona */}
+        <Card className="mb-8 shadow-card">
+          <CardContent className="p-8">
+            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Por que isso funciona?</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gradient-soft border border-primary/20">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Brain className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Compreensão Real</h4>
+                  <p className="text-muted-foreground text-sm">Você entende melhor, em vez de só memorizar.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gradient-soft border border-primary/20">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Puzzle className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Autonomia</h4>
+                  <p className="text-muted-foreground text-sm">Aprende a resolver problemas sozinho, sem decorar fórmula.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gradient-soft border border-primary/20">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Clareza</h4>
+                  <p className="text-muted-foreground text-sm">Evita confusões porque cada passo tem sentido.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gradient-soft border border-primary/20">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Trophy className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2">Confiança</h4>
+                  <p className="text-muted-foreground text-sm">Fica mais confiante para usar a matemática no mundo real.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-primary/10 rounded-lg p-6 border border-primary/30 text-center">
+              <p className="text-foreground">
+                <strong>🏆 Resultados Comprovados:</strong> O CPA é usado em Singapura há décadas — e os alunos de lá sempre estão no topo dos rankings internacionais. 
+                Não é porque são gênios: é porque o método respeita o seu tempo de aprender e ajuda você a realmente pensar com a matemática, e não só repetir.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Progress Indicator */}
         <Card className="mb-8 shadow-card">
           <CardContent className="p-6">
