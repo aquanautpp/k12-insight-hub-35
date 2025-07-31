@@ -372,11 +372,13 @@ const ComprehensibleInput = () => {
 
       {/* Key Messages */}
       <div className="grid md:grid-cols-3 gap-4">
-        <Card className="bg-gradient-learning text-white">
+        <Card className="bg-white border border-primary/20 rounded-lg shadow-sm">
           <CardContent className="p-6 text-center">
-            <Star className="w-8 h-8 mx-auto mb-3" />
-            <h3 className="font-semibold mb-2">Entender é vencer</h3>
-            <p className="text-sm opacity-90">O resto vem junto</p>
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Star className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-semibold mb-2 text-foreground">Entender é vencer</h3>
+            <p className="text-sm text-muted-foreground">O resto vem junto</p>
           </CardContent>
         </Card>
         
