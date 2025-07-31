@@ -247,9 +247,9 @@ const CPAMethod = () => {
               
               <div className="relative z-10">
                 <div className="flex items-center gap-6 mb-8">
-                  {/* Ícone com Pulsação Avançada */}
+                  {/* Ícone com Pulsação Avançada - Tamanho Reduzido */}
                   <motion.div
-                    className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/30 shadow-lg"
+                    className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/30 shadow-lg"
                     animate={{ 
                       scale: [1, 1.05, 1],
                       boxShadow: [
@@ -269,16 +269,16 @@ const CPAMethod = () => {
                       transition: { duration: 0.5 }
                     }}
                   >
-                    <Brain className="w-10 h-10 text-white filter drop-shadow-lg" />
+                    <Brain className="w-8 h-8 text-white filter drop-shadow-lg" />
                   </motion.div>
                   
                   <div className="flex-1">
-                    {/* Título com Efeito de Surgimento */}
+                    {/* Título com Efeito de Surgimento - Tamanho Reduzido */}
                     <motion.h1
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.3 }}
-                      className="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight"
+                      className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight"
                       style={{ 
                         textShadow: "0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1)"
                       }}
