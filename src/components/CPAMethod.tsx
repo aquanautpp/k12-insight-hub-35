@@ -206,54 +206,36 @@ const CPAMethod = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card className="bg-white border border-green-500 rounded-lg shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Brain className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1 text-foreground">Compreensão Profunda</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Desenvolve entendimento conceitual sólido antes da abstração matemática
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-achievement flex items-center justify-center mx-auto mb-4">
+                  <Brain className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Compreensão Profunda</h3>
+                <p className="text-sm text-muted-foreground">
+                  Desenvolve entendimento conceitual sólido antes da abstração matemática
+                </p>
+              </div>
               
-              <Card className="bg-white border border-green-500 rounded-lg shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Calculator className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1 text-foreground">Resolução de Problemas</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Ensina múltiplas estratégias para abordar desafios matemáticos complexos
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="text-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-achievement flex items-center justify-center mx-auto mb-4">
+                  <Calculator className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Resolução de Problemas</h3>
+                <p className="text-sm text-muted-foreground">
+                  Ensina múltiplas estratégias para abordar desafios matemáticos complexos
+                </p>
+              </div>
               
-              <Card className="bg-white border border-green-500 rounded-lg shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Eye className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1 text-foreground">Visualização</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Fortalece capacidade de representar e visualizar conceitos matemáticos
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="text-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-focus flex items-center justify-center mx-auto mb-4">
+                  <Eye className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Visualização</h3>
+                <p className="text-sm text-muted-foreground">
+                  Fortalece capacidade de representar e visualizar conceitos matemáticos
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
