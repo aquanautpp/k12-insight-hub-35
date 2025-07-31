@@ -198,10 +198,6 @@ const CPAMethod = () => {
                 <p className="text-xl text-white/90 mb-4 leading-relaxed text-justify">
                   Abordagem pedagógica comprovada do Sistema Educacional de Singapura que revoluciona o ensino da matemática através de uma progressão natural e intuitiva.
                 </p>
-                
-                <p className="text-lg text-white/85 leading-relaxed text-justify">
-                  O Método CPA guia o aprendizado através de três estágios fundamentais: primeiro, você manipula objetos físicos reais (Concreto), desenvolvendo uma compreensão tátil e visual dos conceitos. Em seguida, trabalha com representações visuais e diagramas (Pictórico), criando conexões mentais entre o concreto e o abstrato. Por fim, domina os símbolos e operações matemáticas formais (Abstrato), construindo sobre a base sólida estabelecida nos estágios anteriores.
-                </p>
               </div>
             </div>
           </div>
