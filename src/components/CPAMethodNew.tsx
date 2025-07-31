@@ -173,7 +173,7 @@ const CPAMethod = () => {
       <div className="max-w-6xl mx-auto p-6">
         {/* Hero Section Melhorado */}
         <div className="relative mb-8 rounded-2xl overflow-hidden shadow-card">
-          <div className="relative bg-gradient-to-br from-primary via-primary-variant to-secondary p-8 md:p-12">
+          <div className="relative bg-gradient-to-br from-primary/90 via-primary/85 to-secondary/90 p-8 md:p-12">
             <div className="absolute inset-0 pattern-bg opacity-20"></div>
             
             <div className="relative z-10">
@@ -244,7 +244,7 @@ const CPAMethod = () => {
             
             <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
               <p className="text-foreground text-center">
-                <strong>🇸🇬 Sucesso Internacional:</strong> Essa ideia veio de estudos sobre como aprendemos melhor. 
+                <strong>SG Sucesso Internacional:</strong> Essa ideia veio de estudos sobre como aprendemos melhor. 
                 Singapura foi um dos primeiros países a usar esse método em todas as escolas, e deu super certo: 
                 os alunos de lá estão entre os melhores do mundo em matemática!
               </p>
