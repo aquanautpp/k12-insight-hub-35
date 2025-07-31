@@ -363,4 +363,82 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-primary);
     transform: translateY(-2px);
   }
+
+  /* Mantha Logo Animations */
+  .mantha-logo-container {
+    perspective: 1000px;
+    will-change: transform;
+  }
+
+  .mantha-logo-main {
+    width: 220px;
+    height: auto;
+    max-width: 100%;
+    filter: drop-shadow(0 0 20px hsl(var(--primary) / 0.3));
+    animation: manthaFloat 3s ease-in-out infinite, manthaFadeIn 1s ease-out;
+    will-change: transform;
+    transform: translateZ(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mantha-logo-main:hover {
+    transform: scale(1.05) rotate(5deg) translateZ(0);
+    filter: drop-shadow(0 0 30px hsl(var(--primary) / 0.5));
+  }
+
+  .pulse-dot {
+    animation: manthaPulse 2s ease-in-out infinite;
+    will-change: opacity;
+  }
+
+  @keyframes manthaFloat {
+    0%, 100% { 
+      transform: translateY(0px) translateZ(0); 
+    }
+    50% { 
+      transform: translateY(-10px) translateZ(0); 
+    }
+  }
+
+  @keyframes manthaFadeIn {
+    0% { 
+      opacity: 0; 
+      transform: scale(0.9) translateZ(0); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: scale(1) translateZ(0); 
+    }
+  }
+
+  @keyframes manthaPulse {
+    0%, 100% { 
+      opacity: 0.7; 
+    }
+    50% { 
+      opacity: 1; 
+    }
+  }
+
+  /* Responsividade do Logo */
+  @media (max-width: 768px) {
+    .mantha-logo-main {
+      width: 150px;
+    }
+  }
+
+  /* Otimização para prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .mantha-logo-main {
+      animation: none;
+    }
+    
+    .mantha-logo-main:hover {
+      transform: none;
+    }
+
+    .pulse-dot {
+      animation: none;
+    }
+  }
 }
