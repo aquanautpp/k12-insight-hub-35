@@ -180,8 +180,8 @@ const CPAMethod = () => {
           className="relative mb-8 rounded-2xl overflow-hidden"
         >
           <div className="relative">
-            {/* Gradiente Animado de Fundo */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-secondary/70 animate-gradient-shift bg-400% opacity-90"></div>
+            {/* Gradiente Mais Escuro */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/80 to-primary/85 animate-gradient-shift bg-400% opacity-95"></div>
             
             {/* Mais Elementos Flutuantes Geométricos */}
             <div className="absolute inset-0 overflow-hidden">
@@ -351,7 +351,7 @@ const CPAMethod = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 1 }}
-                    className="text-2xl text-white/95 leading-relaxed text-justify font-light tracking-wide"
+                    className="text-2xl text-white/95 leading-relaxed text-justify font-light"
                     style={{ 
                       textShadow: "0 2px 10px rgba(0,0,0,0.2)"
                     }}

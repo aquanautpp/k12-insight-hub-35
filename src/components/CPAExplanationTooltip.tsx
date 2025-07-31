@@ -131,20 +131,11 @@ export const CPAExplanationTooltip: React.FC<CPAExplanationTooltipProps> = ({
               </Card>
             </div>
 
-            <div className="flex gap-2 pt-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLearnMore}
-                className="flex-1 text-xs"
-              >
-                <ExternalLink className="w-3 h-3 mr-1" />
-                Saiba mais
-              </Button>
+            <div className="flex justify-center pt-2">
               <Button
                 onClick={handleUnderstood}
                 size="sm"
-                className="flex-1 text-xs"
+                className="text-xs px-6"
               >
                 Entendi!
               </Button>
