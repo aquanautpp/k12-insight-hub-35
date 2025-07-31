@@ -71,7 +71,7 @@ const CPAMethod = () => {
             alt="Método CPA - Concreto, Pictórico, Abstrato"
             className="w-full h-64 object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-primary/75">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/100 to-primary/90">
             <div className="px-8 py-6 h-full flex items-center">
               <div className="w-full">
                 <h1 className="text-4xl font-bold text-white mb-4">
@@ -86,7 +86,7 @@ const CPAMethod = () => {
         </div>
 
         {/* O que é o Método CPA */}
-        <Card className="mb-8 shadow-card">
+        <Card className="mb-8 shadow-card transform scale-95">
           <CardContent className="p-8">
             <h2 className="text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
               <Brain className="w-8 h-8 text-primary" />
@@ -138,32 +138,43 @@ const CPAMethod = () => {
               </p>
             </div>
 
-            <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-              <PlayCircle className="w-6 h-6 text-primary" />
-              Como funciona na prática?
-            </h3>
-            
-            <p className="text-foreground mb-4 leading-relaxed">
-              Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram 
-              imagens e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
-            </p>
+            <div className="sophisticated-practice-section bg-gradient-to-br from-card via-primary/5 to-secondary/10 rounded-2xl p-8 shadow-lg border border-primary/20">
+              <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+                <div className="p-2 bg-primary/10 rounded-full">
+                  <PlayCircle className="w-6 h-6 text-primary" />
+                </div>
+                Como funciona na prática?
+              </h3>
+              
+              <p className="text-foreground mb-6 leading-relaxed text-lg">
+                Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram 
+                imagens e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
+              </p>
 
-            <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 mb-6">
-              <h4 className="font-bold text-foreground mb-3">Por exemplo:</h4>
-              <ul className="space-y-2 text-foreground">
-                <li className="flex items-start gap-2">
-                  <ArrowRight className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.
-                </li>
-                <li className="flex items-start gap-2">
-                  <ArrowRight className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  Depois, desenha as fatias.
-                </li>
-                <li className="flex items-start gap-2">
-                  <ArrowRight className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  Só então faz a conta com números.
-                </li>
-              </ul>
+              <div className="bg-gradient-to-r from-white/80 to-primary/5 backdrop-blur-sm border border-primary/20 rounded-xl p-6 mb-6">
+                <h4 className="font-bold text-foreground mb-4 text-lg flex items-center gap-2">
+                  <span className="text-primary">📚</span>
+                  Por exemplo, para aprender frações:
+                </h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="text-center p-4 bg-white/50 rounded-lg border border-primary/10">
+                    <div className="text-3xl mb-2">🍕</div>
+                    <h5 className="font-semibold text-primary mb-1">1. Primeiro</h5>
+                    <p className="text-sm text-foreground">Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.</p>
+                  </div>
+                  <div className="text-center p-4 bg-white/50 rounded-lg border border-primary/10">
+                    <div className="text-3xl mb-2">✏️</div>
+                    <h5 className="font-semibold text-primary mb-1">2. Depois</h5>
+                    <p className="text-sm text-foreground">Desenha as fatias no papel, visualizando as partes da pizza.</p>
+                  </div>
+                  <div className="text-center p-4 bg-white/50 rounded-lg border border-primary/10">
+                    <div className="text-3xl mb-2">📝</div>
+                    <h5 className="font-semibold text-primary mb-1">3. Por último</h5>
+                    <p className="text-sm text-foreground">Só então faz a conta com números e símbolos matemáticos.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-3">

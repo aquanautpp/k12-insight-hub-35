@@ -427,6 +427,20 @@ All colors MUST be HSL.
     }
   }
 
+  /* Seção prática sofisticada */
+  .sophisticated-practice-section {
+    transform: scale(0.92);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+  }
+
+  .sophisticated-practice-section:hover {
+    transform: scale(0.95);
+    box-shadow: 
+      0 10px 40px -10px hsl(var(--primary) / 0.2),
+      0 0 0 1px hsl(var(--primary) / 0.05);
+  }
+
   /* Otimização para prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {
     .mantha-logo-main {
