@@ -515,55 +515,290 @@ const CPAMethod = () => {
           </Card>
         </motion.div>
 
-        {/* Como funciona na prática */}
-        <Card className="mb-8 shadow-card">
-          <CardContent className="p-8">
-            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Como funciona na prática?</h2>
-            <p className="text-lg text-muted-foreground mb-8 text-center max-w-4xl mx-auto">
-              Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram imagens 
-              e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
-            </p>
-            
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-foreground text-center mb-6">Por exemplo, para aprender frações:</h3>
+        {/* Como funciona na prática - Timeline Interativo */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mb-8"
+        >
+          <Card className="shadow-2xl border-0 bg-gradient-to-br from-background via-background/95 to-background/90 backdrop-blur-sm overflow-hidden">
+            <CardContent className="p-12 relative">
+              {/* Elementos de Fundo Decorativos */}
+              <div className="absolute inset-0 overflow-hidden">
+                {[...Array(15)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-primary/10 rounded-full"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      scale: [0, 1, 0],
+                      opacity: [0, 0.8, 0],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      delay: Math.random() * 4,
+                    }}
+                  />
+                ))}
+              </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">1</div>
-                    <h4 className="text-lg font-semibold text-foreground">Primeiro</h4>
-                  </div>
-                  <div className="text-4xl mb-3 text-center">🍕</div>
-                  <p className="text-muted-foreground">
-                    Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.
-                  </p>
+              {/* Títulos com Animação */}
+              <motion.h2
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="text-4xl font-bold text-foreground mb-8 text-center relative z-10"
+              >
+                Como funciona na prática?
+              </motion.h2>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1 }}
+                className="text-xl text-muted-foreground mb-12 text-center max-w-5xl mx-auto leading-relaxed relative z-10"
+              >
+                Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram imagens 
+                e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
+              </motion.p>
+              
+              <motion.h3
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                className="text-3xl font-bold text-foreground text-center mb-12 relative z-10"
+              >
+                Por exemplo, para aprender frações:
+              </motion.h3>
+              
+              {/* Timeline Horizontal Interativo */}
+              <div className="relative">
+                {/* Linha de Conexão Animada */}
+                <div className="hidden md:block absolute top-20 left-0 right-0 h-1 mx-32">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 2, delay: 1.5, ease: "easeInOut" }}
+                    className="w-full h-full bg-gradient-to-r from-blue-500 via-green-500 to-purple-500 rounded-full origin-left"
+                  />
+                  
+                  {/* Pontos de Conexão Animados */}
+                  {[33, 66].map((position, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ scale: 0, rotate: -180 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ 
+                        duration: 0.5, 
+                        delay: 1.8 + index * 0.2,
+                        type: "spring",
+                        stiffness: 200
+                      }}
+                      className="absolute top-1/2 w-4 h-4 bg-white border-2 border-primary rounded-full transform -translate-y-1/2 shadow-lg"
+                      style={{ left: `${position}%` }}
+                    />
+                  ))}
                 </div>
                 
-                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">2</div>
-                    <h4 className="text-lg font-semibold text-foreground">Depois</h4>
-                  </div>
-                  <div className="text-4xl mb-3 text-center">✏️</div>
-                  <p className="text-muted-foreground">
-                    Desenha as fatias no papel, visualizando as partes da pizza.
-                  </p>
-                </div>
-                
-                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">3</div>
-                    <h4 className="text-lg font-semibold text-foreground">Por último</h4>
-                  </div>
-                  <div className="text-4xl mb-3 text-center">📝</div>
-                  <p className="text-muted-foreground">
-                    Só então faz a conta com números e símbolos matemáticos.
-                  </p>
+                {/* Cards das Etapas */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative z-10">
+                  {[
+                    {
+                      number: "1",
+                      title: "Primeiro",
+                      icon: "🍕",
+                      description: "Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.",
+                      gradient: "from-blue-500/20 to-blue-600/10",
+                      borderColor: "border-blue-500/30",
+                      glowColor: "hover:shadow-blue-500/25",
+                      delay: 1.4,
+                      iconAnimation: {
+                        initial: { rotate: 0, scale: 1 },
+                        animate: { 
+                          rotate: [0, -10, 10, -5, 0],
+                          scale: [1, 1.1, 0.95, 1.05, 1]
+                        }
+                      }
+                    },
+                    {
+                      number: "2",
+                      title: "Depois",
+                      icon: "✏️",
+                      description: "Desenha as fatias no papel, visualizando as partes da pizza.",
+                      gradient: "from-green-500/20 to-green-600/10",
+                      borderColor: "border-green-500/30",
+                      glowColor: "hover:shadow-green-500/25",
+                      delay: 1.6,
+                      iconAnimation: {
+                        initial: { x: -20, opacity: 0 },
+                        animate: { 
+                          x: [0, 10, -5, 0],
+                          opacity: 1
+                        }
+                      }
+                    },
+                    {
+                      number: "3",
+                      title: "Por último",
+                      icon: "📝",
+                      description: "Só então faz a conta com números e símbolos matemáticos.",
+                      gradient: "from-purple-500/20 to-purple-600/10",
+                      borderColor: "border-purple-500/30",
+                      glowColor: "hover:shadow-purple-500/25",
+                      delay: 1.8,
+                      iconAnimation: {
+                        initial: { y: 20, opacity: 0 },
+                        animate: { 
+                          y: [0, -10, 5, 0],
+                          opacity: 1
+                        }
+                      }
+                    }
+                  ].map((step, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 50, rotateX: -20 }}
+                      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                      transition={{ 
+                        duration: 0.8, 
+                        delay: step.delay,
+                        type: "spring",
+                        stiffness: 100
+                      }}
+                      whileHover={{ 
+                        y: -8,
+                        scale: 1.03,
+                        rotateY: 5,
+                        transition: { duration: 0.3 }
+                      }}
+                      className={`group relative p-8 rounded-3xl bg-gradient-to-br ${step.gradient} border-2 ${step.borderColor} hover:border-opacity-60 transition-all duration-500 hover:shadow-2xl ${step.glowColor} backdrop-blur-sm cursor-pointer`}
+                    >
+                      {/* Glow Effect Animado */}
+                      <motion.div
+                        className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{
+                          background: `linear-gradient(45deg, transparent, ${step.borderColor.replace('border-', '').replace('/30', '/10')}, transparent)`,
+                          backgroundSize: "200% 200%",
+                        }}
+                        animate={{
+                          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                      />
+                      
+                      {/* Número Animado com SVG */}
+                      <div className="flex items-center gap-4 mb-6">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ 
+                            duration: 0.6, 
+                            delay: step.delay + 0.2,
+                            type: "spring",
+                            stiffness: 200
+                          }}
+                          className="relative"
+                        >
+                          <svg width="60" height="60" className="transform -rotate-90">
+                            <motion.circle
+                              cx="30"
+                              cy="30"
+                              r="25"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                              fill="none"
+                              className="text-primary/20"
+                            />
+                            <motion.circle
+                              cx="30"
+                              cy="30"
+                              r="25"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                              fill="none"
+                              className="text-primary"
+                              initial={{ pathLength: 0 }}
+                              animate={{ pathLength: 1 }}
+                              transition={{ 
+                                duration: 1.5, 
+                                delay: step.delay + 0.4,
+                                ease: "easeInOut"
+                              }}
+                              style={{
+                                strokeDasharray: "157.08",
+                                strokeLinecap: "round",
+                              }}
+                            />
+                          </svg>
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: step.delay + 0.8, type: "spring" }}
+                            className="absolute inset-0 flex items-center justify-center text-2xl font-black text-primary"
+                          >
+                            {step.number}
+                          </motion.div>
+                        </motion.div>
+                        
+                        <motion.h4
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: step.delay + 0.6 }}
+                          className="text-2xl font-bold text-foreground relative z-10"
+                        >
+                          {step.title}
+                        </motion.h4>
+                      </div>
+                      
+                      {/* Ícone Animado */}
+                      <motion.div 
+                        initial={step.iconAnimation.initial}
+                        animate={step.iconAnimation.animate}
+                        transition={{ 
+                          duration: 1,
+                          delay: step.delay + 1,
+                          type: "spring",
+                          stiffness: 150
+                        }}
+                        className="text-7xl mb-6 text-center relative z-10"
+                      >
+                        {step.icon}
+                      </motion.div>
+                      
+                      {/* Descrição com Animação */}
+                      <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: step.delay + 1.2 }}
+                        className="text-muted-foreground leading-relaxed text-lg relative z-10 text-center"
+                      >
+                        {step.description}
+                      </motion.p>
+                      
+                      {/* Indicador de Hover */}
+                      <motion.div
+                        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        initial={{ y: 10 }}
+                        whileHover={{ y: 0 }}
+                      >
+                        <div className="text-xs text-primary font-medium">Click para mais detalhes</div>
+                      </motion.div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </motion.div>
 
         {/* Por que isso funciona */}
         <Card className="mb-8 shadow-card">
