@@ -112,8 +112,13 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
       transition: { duration: 0.6, delay: 0.3 }
     },
     hover: {
-      rotateY: [0, 5, -5, 0],
-      transition: { duration: 2, repeat: Infinity }
+      rotateY: [0, 5],
+      transition: { 
+        duration: 1, 
+        repeat: Infinity, 
+        repeatType: "reverse" as const,
+        ease: "easeInOut" 
+      }
     },
     pulse: {
       filter: "drop-shadow(0 0 20px rgba(76, 175, 80, 0.6))",
@@ -125,8 +130,8 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
   const rippleVariants = {
     initial: { scale: 0, opacity: 0.6 },
     animate: {
-      scale: [0, 1, 1.5],
-      opacity: [0.6, 0.3, 0],
+      scale: [0, 1.5],
+      opacity: [0.6, 0],
       transition: { duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }
     }
   };
@@ -163,8 +168,8 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
         <motion.div
           className="absolute inset-0 rounded-full bg-primary/20"
           animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.4, 0.2]
+            scale: [1, 1.1],
+            opacity: [0.2, 0.4]
           }}
           transition={{
             duration: 4,
@@ -181,8 +186,8 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
               className="absolute inset-0 rounded-full border-2 border-primary/40"
               initial={{ scale: 0, opacity: 0.6 }}
               animate={{ 
-                scale: [0, 1, 1.5],
-                opacity: [0.6, 0.3, 0]
+                scale: [0, 1.5],
+                opacity: [0.6, 0]
               }}
               exit={{ scale: 0, opacity: 0 }}
               transition={{ duration: 1.5 }}
@@ -197,7 +202,7 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
           animate={{ 
             scale: showTooltip ? 1.05 : 1, 
             opacity: 1,
-            rotateY: isHovered ? [0, 5, -5, 0] : 0,
+            rotateY: isHovered ? [0, 5] : 0,
             filter: showTooltip ? "drop-shadow(0 0 20px rgba(76, 175, 80, 0.6))" : "none"
           }}
           transition={{ 
@@ -377,7 +382,7 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
                   <motion.div
                     animate={{
                       x: [-20, 300],
-                      y: [0, -5, 0, 5, 0]
+                      y: [0, -5]
                     }}
                     transition={{
                       duration: 8,
