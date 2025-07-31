@@ -14,7 +14,7 @@ import { AnimatedCounter } from './AnimatedCounter';
 import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
 import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
-import logoImage from '@/assets/mantha-logo-corrected.png';
+import { ManthaLogoInteractive } from './ManthaLogoInteractive';
 
 interface DashboardProps {
   onViewChange?: (view: string) => void;
@@ -141,13 +141,26 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
             transition={{ duration: 1, delay: 0.2 }}
             className="flex flex-col items-center space-y-6 max-w-4xl mx-auto px-6 text-center"
           >
-            <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 animate-pulse-glow">
-              <img 
-                src={logoImage}
-                alt="MANTHA Logo" 
-                className="w-12 h-12 object-contain"
-              />
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="mb-6 flex flex-col items-center"
+            >
+              <ManthaLogoInteractive size="lg" showTooltipOnce={true} />
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                className="text-3xl font-bold text-white mt-4 tracking-wider"
+                style={{ 
+                  fontFamily: 'Georgia, serif',
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                }}
+              >
+                MANTHA
+              </motion.h2>
+            </motion.div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
               Bem-vindo ao <span className="text-gold">Mantha</span>
             </h1>
