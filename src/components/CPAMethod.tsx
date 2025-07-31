@@ -86,55 +86,55 @@ const CPAMethod = () => {
         </div>
 
         {/* O que é o Método CPA */}
-        <Card className="mb-8 shadow-card transform scale-95">
-          <CardContent className="p-8">
-            <h2 className="text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
-              <Brain className="w-8 h-8 text-primary" />
+        <Card className="mb-8 shadow-card transform scale-90">
+          <CardContent className="p-6">
+            <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+              <Brain className="w-6 h-6 text-primary" />
               O que é o Método CPA?
             </h2>
             
-            <p className="text-lg text-foreground mb-6 leading-relaxed">
+            <p className="text-base text-foreground mb-4 leading-relaxed">
               O Método CPA é uma forma diferente (e muito mais legal!) de aprender matemática. 
               Em vez de começar direto com números e fórmulas, você passa por três etapas:
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-gradient-subtle rounded-lg p-6 border border-border">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">🧱</span>
-                  <h3 className="text-xl font-bold text-primary">1. Concreto</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-gradient-subtle rounded-lg p-4 border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">🧱</span>
+                  <h3 className="text-lg font-bold text-primary">1. Concreto</h3>
                 </div>
-                <p className="text-foreground">
+                <p className="text-sm text-foreground">
                   Você manipula objetos reais, como cubos, blocos ou fichas.
                 </p>
               </div>
 
-              <div className="bg-gradient-subtle rounded-lg p-6 border border-border">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">🎨</span>
-                  <h3 className="text-xl font-bold text-primary">2. Pictórico</h3>
+              <div className="bg-gradient-subtle rounded-lg p-4 border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">🎨</span>
+                  <h3 className="text-lg font-bold text-primary">2. Pictórico</h3>
                 </div>
-                <p className="text-foreground">
+                <p className="text-sm text-foreground">
                   Você vê desenhos e imagens, como os famosos modelos de barras.
                 </p>
               </div>
 
-              <div className="bg-gradient-subtle rounded-lg p-6 border border-border">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">🔢</span>
-                  <h3 className="text-xl font-bold text-primary">3. Abstrato</h3>
+              <div className="bg-gradient-subtle rounded-lg p-4 border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">🔢</span>
+                  <h3 className="text-lg font-bold text-primary">3. Abstrato</h3>
                 </div>
-                <p className="text-foreground">
+                <p className="text-sm text-foreground">
                   Só depois você usa números e símbolos, como fazemos em contas.
                 </p>
               </div>
             </div>
 
-            <div className="bg-muted/50 rounded-lg p-6 mb-6">
-              <p className="text-foreground leading-relaxed">
-                Essa ideia veio de estudos sobre como aprendemos melhor. Singapura foi um dos primeiros países 
-                a usar esse método em todas as escolas, e deu super certo: <strong>os alunos de lá estão entre 
-                os melhores do mundo em matemática!</strong>
+            <div className="bg-muted/50 rounded-lg p-4 mb-4">
+              <p className="text-sm text-foreground leading-relaxed">
+                <strong>🏆 SG Sucesso Internacional:</strong> Essa ideia veio de estudos sobre como aprendemos melhor. Singapura foi um dos primeiros países 
+                a usar esse método em todas as escolas, e deu super certo: os alunos de lá estão entre 
+                os melhores do mundo em matemática!
               </p>
             </div>
 
