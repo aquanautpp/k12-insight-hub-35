@@ -368,7 +368,7 @@ const CPAMethod = () => {
               </CardHeader>
               <CardContent className="p-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-primary hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                       <Brain className="w-6 h-6 text-primary" />
                     </div>
@@ -378,7 +378,7 @@ const CPAMethod = () => {
                     </p>
                   </div>
                   
-                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-primary hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                       <Users className="w-6 h-6 text-primary" />
                     </div>
@@ -388,7 +388,7 @@ const CPAMethod = () => {
                     </p>
                   </div>
                   
-                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-primary hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                       <Puzzle className="w-6 h-6 text-primary" />
                     </div>
@@ -398,7 +398,7 @@ const CPAMethod = () => {
                     </p>
                   </div>
                   
-                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-primary hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                       <Heart className="w-6 h-6 text-primary" />
                     </div>
@@ -408,7 +408,7 @@ const CPAMethod = () => {
                     </p>
                   </div>
                   
-                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-primary hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                       <Trophy className="w-6 h-6 text-primary" />
                     </div>
