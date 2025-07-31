@@ -145,7 +145,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
               <img 
                 src={logoImage}
                 alt="MANTHA Logo" 
-                className="w-12 h-12 object-contain filter brightness-0 invert"
+                className="w-12 h-12 object-contain"
               />
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
