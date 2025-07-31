@@ -96,21 +96,48 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
               className="data-[state=open]:bg-transparent hover:bg-transparent p-0"
             >
               <div className="flex items-center space-x-3">
-                 <div className="flex aspect-square size-10 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
-                    <img 
-                      src={logoImage} 
-                      alt="MANTHA Logo" 
-                      className="size-8 object-contain"
-                      onLoad={() => console.log('Logo carregado com sucesso')}
-                      onError={(e) => {
-                        console.error('Erro ao carregar logo:', e);
-                        // Fallback para texto se a imagem falhar
-                        e.currentTarget.style.display = 'none';
-                        if (e.currentTarget.parentElement) {
-                          e.currentTarget.parentElement.innerHTML = '<span class="text-primary font-bold text-sm">M</span>';
-                        }
-                      }}
-                    />
+                 <div className="flex aspect-square size-10 items-center justify-center">
+                    {/* SVG da Arraia-Manta */}
+                    <svg 
+                      width={state === "collapsed" ? "24" : "40"} 
+                      height={state === "collapsed" ? "24" : "40"} 
+                      viewBox="0 0 200 200" 
+                      className={`transition-all duration-200 ${state === "collapsed" ? "hover:scale-110" : ""}`}
+                    >
+                      {/* Forma da Arraia-Manta */}
+                      <path
+                        d="M100 20 C80 20, 30 40, 20 80 C20 100, 30 120, 50 130 C70 135, 90 140, 100 160 C110 140, 130 135, 150 130 C170 120, 180 100, 180 80 C170 40, 120 20, 100 20 Z"
+                        fill="hsl(var(--primary))"
+                      />
+                      {/* Estrutura Neural/Árvore no interior */}
+                      <g transform="translate(100, 80)">
+                        {/* Tronco central */}
+                        <line x1="0" y1="0" x2="0" y2="40" stroke="white" strokeWidth="3"/>
+                        {/* Galhos principais */}
+                        <line x1="0" y1="10" x2="-15" y2="5" stroke="white" strokeWidth="2"/>
+                        <line x1="0" y1="10" x2="15" y2="5" stroke="white" strokeWidth="2"/>
+                        <line x1="0" y1="20" x2="-20" y2="15" stroke="white" strokeWidth="2"/>
+                        <line x1="0" y1="20" x2="20" y2="15" stroke="white" strokeWidth="2"/>
+                        <line x1="0" y1="30" x2="-10" y2="35" stroke="white" strokeWidth="2"/>
+                        <line x1="0" y1="30" x2="10" y2="35" stroke="white" strokeWidth="2"/>
+                        {/* Galhos secundários */}
+                        <line x1="-15" y1="5" x2="-25" y2="0" stroke="white" strokeWidth="1.5"/>
+                        <line x1="-15" y1="5" x2="-20" y2="-5" stroke="white" strokeWidth="1.5"/>
+                        <line x1="15" y1="5" x2="25" y2="0" stroke="white" strokeWidth="1.5"/>
+                        <line x1="15" y1="5" x2="20" y2="-5" stroke="white" strokeWidth="1.5"/>
+                        {/* Pontos neurais (extremidades) */}
+                        <circle cx="0" cy="0" r="3" fill="white"/>
+                        <circle cx="-25" cy="0" r="2.5" fill="white"/>
+                        <circle cx="-20" cy="-5" r="2.5" fill="white"/>
+                        <circle cx="25" cy="0" r="2.5" fill="white"/>
+                        <circle cx="20" cy="-5" r="2.5" fill="white"/>
+                        <circle cx="-20" cy="15" r="2" fill="white"/>
+                        <circle cx="20" cy="15" r="2" fill="white"/>
+                        <circle cx="-10" cy="35" r="2" fill="white"/>
+                        <circle cx="10" cy="35" r="2" fill="white"/>
+                        <circle cx="0" cy="40" r="2.5" fill="white"/>
+                      </g>
+                    </svg>
                  </div>
                 {state !== "collapsed" && (
                   <div className="grid flex-1 text-left leading-tight">
