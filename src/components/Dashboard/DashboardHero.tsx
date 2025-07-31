@@ -11,7 +11,7 @@ interface DashboardHeroProps {
 
 export const DashboardHero: React.FC<DashboardHeroProps> = ({ onViewChange }) => {
   return (
-    <div className="relative overflow-hidden h-[60vh] md:h-[500px] lg:h-[550px] w-full rounded-2xl mb-8 shadow-card">
+    <div className="relative h-[60vh] md:h-[500px] lg:h-[550px] w-full rounded-2xl mb-32 shadow-card overflow-visible">{/* Aumentei mb para o tooltip */}
       <div className="absolute inset-0">
         <img 
           src={educationalHeroVideo} 

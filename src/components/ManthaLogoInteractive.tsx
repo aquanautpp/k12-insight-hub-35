@@ -152,7 +152,7 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
 
   return (
     <motion.div 
-      className="relative" 
+      className="relative z-50" 
       ref={logoRef}
       style={{ y, scale }}
     >
@@ -217,89 +217,138 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
             ease: "easeInOut"
           }}
         >
-          {/* SVG Manta Ray - Baseado no logo Mantha */}
+          {/* SVG Arraia-Manta Completa - Baseado no logo Mantha */}
           <svg
             viewBox="0 0 100 100"
             className="w-full h-full"
             style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.1))" }}
           >
-            {/* Manta Ray Body - Formato mais fiel ao logo */}
+            {/* Corpo principal da Arraia-Manta */}
             <path
-              d="M50 15 C20 15, 10 35, 15 55 C18 68, 30 75, 50 75 C70 75, 82 68, 85 55 C90 35, 80 15, 50 15 Z"
-              fill="#7A8B47"
+              d="M50 20 C30 18, 15 25, 12 35 C8 45, 10 55, 15 62 C20 70, 30 75, 50 75 C70 75, 80 70, 85 62 C90 55, 92 45, 88 35 C85 25, 70 18, 50 20 Z"
+              fill="#4A5D23"
               className="transition-all duration-300"
             />
             
-            {/* Tail of the manta ray */}
+            {/* Asas laterais da arraia */}
             <path
-              d="M50 75 L50 85"
-              stroke="#7A8B47"
-              strokeWidth="3"
-              fill="none"
+              d="M15 35 C10 30, 5 35, 8 45 C12 50, 18 48, 20 45 Z"
+              fill="#4A5D23"
+              className="transition-all duration-300"
+            />
+            <path
+              d="M85 35 C95 30, 100 35, 97 45 C93 50, 87 48, 85 45 Z"
+              fill="#4A5D23"
+              className="transition-all duration-300"
             />
             
-            {/* Central tree structure */}
+            {/* Cauda da arraia */}
             <path
-              d="M50 45 L50 65"
+              d="M50 75 Q50 85 52 90"
+              stroke="#4A5D23"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+            />
+            
+            {/* Estrutura Neural Central - Tronco principal */}
+            <motion.path
+              d="M50 35 L50 65"
               stroke="white"
               strokeWidth="2.5"
               fill="none"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
             />
             
-            {/* Branch structure - more organic like the logo */}
+            {/* Ramificações neurais - Nível superior */}
             <motion.path
-              d="M50 50 L42 45"
+              d="M50 40 L42 35"
               stroke="white"
               strokeWidth="2"
               fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            />
-            <motion.path
-              d="M50 50 L58 45"
-              stroke="white"
-              strokeWidth="2"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            />
-            <motion.path
-              d="M50 55 L40 50"
-              stroke="white"
-              strokeWidth="1.8"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            />
-            <motion.path
-              d="M50 55 L60 50"
-              stroke="white"
-              strokeWidth="1.8"
-              fill="none"
+              strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ duration: 0.5, delay: 0.9 }}
             />
             <motion.path
-              d="M50 60 L38 55"
+              d="M50 40 L58 35"
               stroke="white"
-              strokeWidth="1.5"
+              strokeWidth="2"
               fill="none"
+              strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ duration: 0.5, delay: 1.0 }}
             />
+            
+            {/* Ramificações neurais - Nível médio */}
             <motion.path
-              d="M50 60 L62 55"
+              d="M50 48 L38 43"
               stroke="white"
-              strokeWidth="1.5"
+              strokeWidth="1.8"
               fill="none"
+              strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ duration: 0.5, delay: 1.1 }}
+            />
+            <motion.path
+              d="M50 48 L62 43"
+              stroke="white"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+            />
+            
+            {/* Ramificações neurais - Nível inferior */}
+            <motion.path
+              d="M50 56 L35 51"
+              stroke="white"
+              strokeWidth="1.5"
+              fill="none"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.5, delay: 1.3 }}
+            />
+            <motion.path
+              d="M50 56 L65 51"
+              stroke="white"
+              strokeWidth="1.5"
+              fill="none"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.5, delay: 1.4 }}
+            />
+            
+            {/* Ramificações neurais - Nível mais baixo */}
+            <motion.path
+              d="M50 62 L40 58"
+              stroke="white"
+              strokeWidth="1.2"
+              fill="none"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.5, delay: 1.5 }}
+            />
+            <motion.path
+              d="M50 62 L60 58"
+              stroke="white"
+              strokeWidth="1.2"
+              fill="none"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.5, delay: 1.6 }}
             />
           </svg>
 
@@ -342,7 +391,8 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 10 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 z-50"
+            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 z-[9999]"
+            style={{ position: 'absolute' }}
           >
             {/* Arrow pointing to logo */}
             <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-card border-l border-t border-border rotate-45" />
