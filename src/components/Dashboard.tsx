@@ -94,10 +94,10 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
   }, [progress?.completedActivities, progress?.totalActivities]);
 
   const displayAchievements = (unlockedAchievements && unlockedAchievements.length > 0) ? unlockedAchievements.slice(-4) : [
-    { title: 'Primeiro Passo', description: 'Complete sua primeira atividade', icon: '🎯' },
+    { title: 'Primeiros Passos', description: 'Complete sua primeira atividade', icon: '🌱' },
+    { title: 'Explorador', description: 'Alcance o nível 10', icon: '📖' },
     { title: 'Mente Curiosa', description: 'Faça 5 perguntas ao tutor', icon: '🤔' },
-    { title: 'Aprendiz Diário', description: 'Estude por 3 dias consecutivos', icon: '📚' },
-    { title: 'Solucionador', description: 'Resolva 10 problemas', icon: '💡' }
+    { title: 'Aprendiz Diário', description: 'Estude por 3 dias consecutivos', icon: '📚' }
   ];
 
   const containerVariants = {
@@ -374,68 +374,6 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
           </Card>
         </motion.div>
 
-        {/* Ações Rápidas */}
-        <motion.div variants={itemVariants}>
-          <Card className="card-gradient">
-            <CardHeader className="text-center">
-              <CardTitle className="flex items-center justify-center gap-3 text-xl">
-                <Zap className="h-5 w-5 text-primary" />
-                Ações Rápidas
-              </CardTitle>
-              <CardDescription>
-                Continue sua jornada de aprendizagem
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <Button 
-                  variant="outline" 
-                  className="h-auto p-4 flex flex-col items-center gap-2 hover-scale"
-                  onClick={() => onViewChange?.('cpa-method')}
-                >
-                  <Brain className="h-6 w-6 text-primary" />
-                  <span className="font-medium">Método CPA</span>
-                  <span className="text-xs text-muted-foreground text-center">
-                    Aprendizagem visual progressiva
-                  </span>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="h-auto p-4 flex flex-col items-center gap-2 hover-scale"
-                  onClick={() => onViewChange?.('emotional-intelligence')}
-                >
-                  <Target className="h-6 w-6 text-primary" />
-                  <span className="font-medium">Int. Emocional</span>
-                  <span className="text-xs text-muted-foreground text-center">
-                    Desenvolvimento pessoal
-                  </span>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="h-auto p-4 flex flex-col items-center gap-2 hover-scale"
-                  onClick={() => onViewChange?.('chat-tutor')}
-                >
-                  <MessageCircle className="h-6 w-6 text-primary" />
-                  <span className="font-medium">Tutor IA</span>
-                  <span className="text-xs text-muted-foreground text-center">
-                    Assistente personalizado
-                  </span>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="h-auto p-4 flex flex-col items-center gap-2 hover-scale"
-                  onClick={() => onViewChange?.('reading-recommendations')}
-                >
-                  <BookOpen className="h-6 w-6 text-primary" />
-                  <span className="font-medium">Leitura</span>
-                  <span className="text-xs text-muted-foreground text-center">
-                    Recomendações personalizadas
-                  </span>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
       </motion.div>
     </div>
   );
