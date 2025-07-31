@@ -203,7 +203,7 @@ export const CPAIntegratedChallenge = ({
                 <Badge className="bg-white/30 text-white border-white/40">
                   {translateDifficulty(challenge.difficulty)}
                 </Badge>
-                <Button variant="ghost" size="sm" onClick={resetChallenge} className="bg-gradient-achievement text-white hover:opacity-90 shadow-achievement">
+                <Button variant="ghost" size="sm" onClick={resetChallenge} className="bg-primary text-primary-foreground hover:bg-primary-hover shadow-primary">
                   <RotateCcw className="w-4 h-4 text-white" />
                 </Button>
               </div>
@@ -231,7 +231,7 @@ export const CPAIntegratedChallenge = ({
                   onClick={() => goToStage(stage)}
                   className={`flex items-center gap-2 p-3 h-auto min-h-[60px] justify-start ${
                     currentStage === stage 
-                      ? 'bg-gradient-achievement text-white hover:opacity-90 shadow-achievement' 
+                      ? 'bg-primary text-primary-foreground hover:bg-primary-hover shadow-primary' 
                       : ''
                   }`}
                   disabled={stage === 'pictorial' && !completedStages.includes('concrete') ||
