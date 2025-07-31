@@ -138,41 +138,39 @@ const CPAMethod = () => {
               </p>
             </div>
 
-            <div className="sophisticated-practice-section bg-gradient-to-br from-card via-primary/5 to-secondary/10 rounded-2xl p-8 shadow-lg border border-primary/20">
-              <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-                <div className="p-2 bg-primary/10 rounded-full">
-                  <PlayCircle className="w-6 h-6 text-primary" />
+            <div className="ultra-modern-practice-section">
+              <div className="modern-header-container">
+                <div className="icon-wrapper">
+                  <PlayCircle className="w-5 h-5 text-primary" />
                 </div>
-                Como funciona na prática?
-              </h3>
+                <h3 className="modern-title">Como funciona na prática?</h3>
+              </div>
               
-              <p className="text-foreground mb-6 leading-relaxed text-lg">
+              <p className="modern-description">
                 Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram 
                 imagens e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
               </p>
 
-              <div className="bg-gradient-to-r from-white/80 to-primary/5 backdrop-blur-sm border border-primary/20 rounded-xl p-6 mb-6">
-                <h4 className="font-bold text-foreground mb-4 text-lg flex items-center gap-2">
-                  <span className="text-primary">📚</span>
-                  Por exemplo, para aprender frações:
-                </h4>
+              <div className="practice-steps-grid">
+                <div className="step-card">
+                  <div className="step-number">1</div>
+                  <div className="step-icon">🍕</div>
+                  <h5 className="step-title">Primeiro</h5>
+                  <p className="step-description">Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.</p>
+                </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="text-center p-4 bg-white/50 rounded-lg border border-primary/10">
-                    <div className="text-3xl mb-2">🍕</div>
-                    <h5 className="font-semibold text-primary mb-1">1. Primeiro</h5>
-                    <p className="text-sm text-foreground">Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/50 rounded-lg border border-primary/10">
-                    <div className="text-3xl mb-2">✏️</div>
-                    <h5 className="font-semibold text-primary mb-1">2. Depois</h5>
-                    <p className="text-sm text-foreground">Desenha as fatias no papel, visualizando as partes da pizza.</p>
-                  </div>
-                  <div className="text-center p-4 bg-white/50 rounded-lg border border-primary/10">
-                    <div className="text-3xl mb-2">📝</div>
-                    <h5 className="font-semibold text-primary mb-1">3. Por último</h5>
-                    <p className="text-sm text-foreground">Só então faz a conta com números e símbolos matemáticos.</p>
-                  </div>
+                <div className="step-card">
+                  <div className="step-number">2</div>
+                  <div className="step-icon">✏️</div>
+                  <h5 className="step-title">Depois</h5>
+                  <p className="step-description">Desenha as fatias no papel, visualizando as partes da pizza.</p>
+                </div>
+                
+                <div className="step-card">
+                  <div className="step-number">3</div>
+                  <div className="step-icon">📝</div>
+                  <h5 className="step-title">Por último</h5>
+                  <p className="step-description">Só então faz a conta com números e símbolos matemáticos.</p>
                 </div>
               </div>
             </div>
