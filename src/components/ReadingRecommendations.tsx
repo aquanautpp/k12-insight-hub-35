@@ -294,7 +294,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-600 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -311,29 +311,6 @@ const ReadingRecommendations = () => {
                             <Badge key={tag} variant="secondary" className="text-xs bg-primary/10 text-primary">{tag}</Badge>
                           ))}
                         </div>
-                      </div>
-                      
-                      <div className="flex gap-2 mt-4">
-                        <Button 
-                          variant="outline"
-                          className="flex-1 text-primary border-primary hover:bg-primary/10"
-                          onClick={() => toggleRead(book.id)}
-                        >
-                          {book.hasRead ? (
-                            <>
-                              <CheckCircle className="w-4 h-4 mr-2" />
-                              Já li!
-                            </>
-                          ) : (
-                            <>
-                              <BookOpen className="w-4 h-4 mr-2" />
-                              Quero ler
-                            </>
-                          )}
-                        </Button>
-                        <Button variant="outline" size="sm" className="text-primary border-primary">
-                          <Bookmark className="w-4 h-4" />
-                        </Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -376,7 +353,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-600 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -393,29 +370,6 @@ const ReadingRecommendations = () => {
                             <Badge key={tag} variant="secondary" className="text-xs bg-primary/10 text-primary">{tag}</Badge>
                           ))}
                         </div>
-                      </div>
-                      
-                      <div className="flex gap-2 mt-4">
-                        <Button 
-                          variant="outline"
-                          className="flex-1 text-primary border-primary hover:bg-primary/10"
-                          onClick={() => toggleRead(book.id)}
-                        >
-                          {book.hasRead ? (
-                            <>
-                              <CheckCircle className="w-4 h-4 mr-2" />
-                              Já li!
-                            </>
-                          ) : (
-                            <>
-                              <BookOpen className="w-4 h-4 mr-2" />
-                              Quero ler
-                            </>
-                          )}
-                        </Button>
-                        <Button variant="outline" size="sm" className="text-primary border-primary">
-                          <Bookmark className="w-4 h-4" />
-                        </Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -458,7 +412,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-600 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -475,29 +429,6 @@ const ReadingRecommendations = () => {
                             <Badge key={tag} variant="secondary" className="text-xs bg-primary/10 text-primary">{tag}</Badge>
                           ))}
                         </div>
-                      </div>
-                      
-                      <div className="flex gap-2 mt-4">
-                        <Button 
-                          variant="outline"
-                          className="flex-1 text-primary border-primary hover:bg-primary/10"
-                          onClick={() => toggleRead(book.id)}
-                        >
-                          {book.hasRead ? (
-                            <>
-                              <CheckCircle className="w-4 h-4 mr-2" />
-                              Já li!
-                            </>
-                          ) : (
-                            <>
-                              <BookOpen className="w-4 h-4 mr-2" />
-                              Quero ler
-                            </>
-                          )}
-                        </Button>
-                        <Button variant="outline" size="sm" className="text-primary border-primary">
-                          <Bookmark className="w-4 h-4" />
-                        </Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -540,7 +471,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
+                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-600 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -557,29 +488,6 @@ const ReadingRecommendations = () => {
                             <Badge key={tag} variant="secondary" className="text-xs bg-primary/10 text-primary">{tag}</Badge>
                           ))}
                         </div>
-                      </div>
-                      
-                      <div className="flex gap-2 mt-4">
-                        <Button 
-                          variant="outline"
-                          className="flex-1 text-primary border-primary hover:bg-primary/10"
-                          onClick={() => toggleRead(book.id)}
-                        >
-                          {book.hasRead ? (
-                            <>
-                              <CheckCircle className="w-4 h-4 mr-2" />
-                              Já li!
-                            </>
-                          ) : (
-                            <>
-                              <BookOpen className="w-4 h-4 mr-2" />
-                              Quero ler
-                            </>
-                          )}
-                        </Button>
-                        <Button variant="outline" size="sm" className="text-primary border-primary">
-                          <Bookmark className="w-4 h-4" />
-                        </Button>
                       </div>
                     </CardContent>
                   </Card>
