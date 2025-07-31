@@ -406,16 +406,16 @@ const LearningStyleTest = () => {
       <div className="max-w-4xl mx-auto">
         <Card className="border-0 shadow-card">
           <CardHeader className="bg-gradient-learning rounded-t-lg">
-            <div className="flex items-center justify-between text-green-700">
+            <div className="flex items-center justify-between text-primary">
               <div>
-                <CardTitle className="text-xl mb-2 text-green-700">Descobrir Como Eu Aprendo! 🧠</CardTitle>
-                <p className="text-green-700">
+                <CardTitle className="text-xl mb-2 text-primary">Descobrir Como Eu Aprendo! 🧠</CardTitle>
+                <p className="text-primary">
                   Pergunta {currentQuestion + 1} de {questions.length}
                 </p>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-green-700">{Math.round(((currentQuestion) / questions.length) * 100)}%</div>
-                <div className="text-sm text-green-700">Completo</div>
+                <div className="text-2xl font-bold text-primary">{Math.round(((currentQuestion) / questions.length) * 100)}%</div>
+                <div className="text-sm text-primary">Completo</div>
               </div>
             </div>
             <Progress value={(currentQuestion / questions.length) * 100} className="mt-4" />
@@ -467,7 +467,7 @@ const LearningStyleTest = () => {
                 onClick={handleNextQuestion}
                 disabled={!selectedAnswer}
                 variant="outline"
-                className="text-green-700 border-green-700 hover:bg-green-50"
+                className="text-primary border-primary hover:bg-primary hover:text-primary-foreground"
               >
                 {currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima'}
               </Button>
