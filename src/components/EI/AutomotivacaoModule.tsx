@@ -14,7 +14,11 @@ import {
   PlayCircle,
   Plus,
   Star,
-  TrendingUp
+  TrendingUp,
+  Edit2,
+  Trash2,
+  Save,
+  X
 } from "lucide-react";
 
 interface AutomotivacaoModuleProps {
@@ -24,6 +28,8 @@ interface AutomotivacaoModuleProps {
 const AutomotivacaoModule = ({ onBack }: AutomotivacaoModuleProps) => {
   const [currentActivity, setCurrentActivity] = useState<string | null>(null);
   const [newGoal, setNewGoal] = useState('');
+  const [editingGoal, setEditingGoal] = useState<number | null>(null);
+  const [editText, setEditText] = useState('');
   const [goals, setGoals] = useState([
     { id: 1, text: 'Melhorar minhas notas em matemática', completed: false, progress: 60 },
     { id: 2, text: 'Fazer novos amigos na escola', completed: true, progress: 100 },
@@ -104,16 +110,82 @@ const AutomotivacaoModule = ({ onBack }: AutomotivacaoModuleProps) => {
               <Card key={goal.id} className="border-l-4 border-l-primary">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className={`text-sm ${goal.completed ? 'line-through text-muted-foreground' : ''}`}>
-                      {goal.text}
-                    </span>
-                    {goal.completed ? (
-                      <CheckCircle className="w-5 h-5 text-green-600" />
+                    {editingGoal === goal.id ? (
+                      <div className="flex gap-2 flex-1">
+                        <Input
+                          value={editText}
+                          onChange={(e) => setEditText(e.target.value)}
+                          className="flex-1"
+                        />
+                        <Button
+                          size="sm"
+                          onClick={() => {
+                            setGoals(goals.map(g => 
+                              g.id === goal.id ? { ...g, text: editText } : g
+                            ));
+                            setEditingGoal(null);
+                            setEditText('');
+                          }}
+                        >
+                          <Save className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setEditingGoal(null);
+                            setEditText('');
+                          }}
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
                     ) : (
-                      <Badge variant="outline">{goal.progress}%</Badge>
+                      <>
+                        <span className={`text-sm flex-1 ${goal.completed ? 'line-through text-muted-foreground' : ''}`}>
+                          {goal.text}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          {goal.completed ? (
+                            <CheckCircle className="w-5 h-5 text-green-600" />
+                          ) : (
+                            <Badge variant="outline">{goal.progress}%</Badge>
+                          )}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              setGoals(goals.map(g => 
+                                g.id === goal.id ? { ...g, completed: !g.completed, progress: g.completed ? goal.progress : 100 } : g
+                              ));
+                            }}
+                          >
+                            <CheckCircle className={`w-4 h-4 ${goal.completed ? 'text-green-600' : 'text-gray-400'}`} />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              setEditingGoal(goal.id);
+                              setEditText(goal.text);
+                            }}
+                          >
+                            <Edit2 className="w-4 h-4 text-blue-600" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              setGoals(goals.filter(g => g.id !== goal.id));
+                            }}
+                          >
+                            <Trash2 className="w-4 h-4 text-red-600" />
+                          </Button>
+                        </div>
+                      </>
                     )}
                   </div>
-                  {!goal.completed && (
+                  {!goal.completed && editingGoal !== goal.id && (
                     <Progress value={goal.progress} className="h-2" />
                   )}
                 </CardContent>

@@ -333,7 +333,7 @@ Que estágio você gostaria de praticar mais?`,
   };
 
   return (
-    <div className="w-full max-w-none mx-auto p-6">
+    <div className="w-full max-w-4xl mx-auto p-6">
       <Card className="h-[850px] flex flex-col shadow-card">
         <CardHeader className="bg-gradient-to-r from-primary via-primary-hover to-primary text-white rounded-t-lg">
           <div className="flex items-center justify-between">
@@ -342,7 +342,7 @@ Que estágio você gostaria de praticar mais?`,
                 <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl font-bold text-white">Mantha - Tutor de IA</CardTitle>
+                <CardTitle className="text-xl font-bold text-white">Mantha - Tutor IA</CardTitle>
                 <p className="text-white/90 text-sm flex items-center">
                   <span className="mr-2">{stageInfo[currentStage].icon}</span>
                   {stageInfo[currentStage].title}

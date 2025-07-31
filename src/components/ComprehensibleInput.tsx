@@ -138,9 +138,27 @@ const ComprehensibleInput = () => {
       {/* Header */}
       <div className="text-center space-y-4">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-learning text-white mb-4">
-          <Globe className="w-8 h-8" style={{ color: 'hsl(84, 50%, 40%)' }} />
+          <Globe className="w-8 h-8 text-olive-700" />
         </div>
         <h1 className="text-3xl font-bold text-foreground">Como Aprender Línguas Estrangeiras</h1>
+        <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
+          Descubra métodos eficazes para dominar novos idiomas através do Comprehensible Input
+        </p>
+        <div className="mb-6 p-4 bg-white/80 rounded-lg max-w-4xl mx-auto">
+          <h3 className="font-semibold text-emerald-800 mb-3">📚 O que é Comprehensible Input?</h3>
+          <p className="mb-3 text-emerald-700">
+            O Comprehensible Input é uma teoria fundamental na aquisição de segunda língua, popularizada pelo linguista Stephen Krashen. A hipótese central de Krashen é que a aquisição de uma segunda língua ocorre quando os aprendizes são expostos a uma linguagem que eles podem entender, mesmo que contenha estruturas e vocabulário ligeiramente além de seu nível atual de proficiência.
+          </p>
+          <p className="mb-3 text-emerald-700">
+            Ao contrário de abordagens tradicionais que enfatizam a gramática explícita e a produção forçada, o CI sugere que a aquisição da linguagem é um processo subconsciente, semelhante à forma como as crianças adquirem sua primeira língua. O foco está na compreensão da mensagem, e não na análise formal da linguagem.
+          </p>
+          <p className="mb-3 text-emerald-700">
+            Quando os aprendizes se concentram em entender o significado, a gramática e o vocabulário são adquiridos naturalmente como um subproduto desse processo. É um processo subconsciente, natural e implícito, semelhante à forma como as crianças adquirem sua língua materna.
+          </p>
+          <p className="font-medium text-emerald-800">
+            Ocorre quando o aprendiz se concentra na comunicação e na compreensão da mensagem, sem estar ciente de que está adquirindo novas regras gramaticais ou vocabulário. É um processo "sentir" a linguagem.
+          </p>
+        </div>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
           Você aprende de verdade quando entende o que ouve e lê. Escolha conteúdos que estejam "um degrau acima do confortável": você entende quase tudo, mas existem algumas coisas novas que dão leve desafio — sem travar.
         </p>
@@ -229,7 +247,7 @@ const ComprehensibleInput = () => {
                     {level.activities.map((activity, index) => {
                       const Icon = activity.icon;
                       return (
-                        <Card key={index} className="hover:shadow-md transition-shadow">
+                        <Card key={index} className="bg-white/80 hover:bg-white/90 hover:shadow-lg transition-all">
                           <CardContent className="p-4">
                             <div className="flex items-start gap-3">
                               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">

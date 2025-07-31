@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
 import { 
   ArrowLeft, 
   Heart, 
@@ -271,6 +272,89 @@ const AutorregulacaoModule = ({ onBack }: AutorregulacaoModuleProps) => {
     );
   };
 
+  const renderThoughtRedirect = () => (
+    <Card className="shadow-card">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Brain className="w-6 h-6 text-purple-500" />
+          Redirecionamento de Pensamentos
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <p className="text-muted-foreground">
+          Aprenda a transformar pensamentos negativos em positivos através de técnicas práticas.
+        </p>
+        
+        <div className="bg-purple-50 rounded-lg p-4">
+          <h4 className="font-semibold text-purple-800 mb-3">🧠 Como funciona:</h4>
+          <ol className="text-sm text-purple-700 space-y-2">
+            <li>1. <strong>Identifique</strong> o pensamento negativo</li>
+            <li>2. <strong>Questione</strong> se é realmente verdade</li>
+            <li>3. <strong>Reformule</strong> de forma mais equilibrada</li>
+            <li>4. <strong>Substitua</strong> pelo pensamento positivo</li>
+          </ol>
+        </div>
+
+        <div className="space-y-4">
+          <div className="bg-red-50 rounded-lg p-4 border-l-4 border-red-400">
+            <h4 className="font-semibold text-red-800 mb-2">❌ Pensamento Negativo:</h4>
+            <p className="text-red-700">"Eu sempre falho em tudo que tento"</p>
+          </div>
+          
+          <div className="text-center">
+            <div className="w-8 h-8 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
+              <span className="text-yellow-600">↓</span>
+            </div>
+          </div>
+          
+          <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-400">
+            <h4 className="font-semibold text-green-800 mb-2">✅ Pensamento Reformulado:</h4>
+            <p className="text-green-700">"Às vezes eu não consigo de primeira, mas posso aprender e melhorar"</p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <h4 className="font-semibold">💭 Pratique você mesmo:</h4>
+          
+          <div>
+            <label className="text-sm font-medium text-muted-foreground mb-2 block">
+              Escreva um pensamento negativo que você teve recentemente:
+            </label>
+            <Textarea 
+              placeholder="Ex: Não sou bom o suficiente..."
+              className="min-h-20"
+            />
+          </div>
+          
+          <div>
+            <label className="text-sm font-medium text-muted-foreground mb-2 block">
+              Agora reformule esse pensamento de forma mais positiva e realista:
+            </label>
+            <Textarea 
+              placeholder="Ex: Estou aprendendo e posso melhorar com prática..."
+              className="min-h-20"
+            />
+          </div>
+        </div>
+
+        <div className="bg-blue-50 rounded-lg p-4">
+          <h4 className="font-semibold text-blue-800 mb-2">💡 Dicas importantes:</h4>
+          <ul className="text-sm text-blue-700 space-y-1">
+            <li>• Pratique diariamente, mesmo com pensamentos pequenos</li>
+            <li>• Seja paciente - mudança de pensamento leva tempo</li>
+            <li>• Substitua "sempre/nunca" por "às vezes/algumas vezes"</li>
+            <li>• Foque no que você pode controlar e mudar</li>
+          </ul>
+        </div>
+        
+        <Button className="w-full" variant="learning">
+          <CheckCircle className="w-4 h-4 mr-2" />
+          Salvar Minha Prática
+        </Button>
+      </CardContent>
+    </Card>
+  );
+
   const completedCount = activities.filter(a => a.isCompleted).length;
   const progressPercentage = (completedCount / activities.length) * 100;
 
@@ -292,6 +376,7 @@ const AutorregulacaoModule = ({ onBack }: AutorregulacaoModuleProps) => {
 
           {currentActivity === 'breathing_exercise' && renderBreathingExercise()}
           {currentActivity === 'scenario_simulation' && renderScenarioSimulation()}
+          {currentActivity === 'thought_redirect' && renderThoughtRedirect()}
         </div>
       </div>
     );

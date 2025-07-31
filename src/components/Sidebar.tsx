@@ -49,7 +49,7 @@ const navigationItems = [
   },
   {
     id: 'comprehensible-input',
-    title: 'Como Aprender Línguas Estrangeiras',
+    title: 'Línguas Estrangeiras',
     icon: Globe,
   },
   {

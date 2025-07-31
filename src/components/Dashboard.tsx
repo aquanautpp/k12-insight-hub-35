@@ -96,8 +96,8 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
   const displayAchievements = (unlockedAchievements && unlockedAchievements.length > 0) ? unlockedAchievements.slice(-4) : [
     { title: 'Conhecedor', description: 'Complete sua primeira atividade', icon: '🌱' },
     { title: 'Especialista', description: 'Alcance o nível 10', icon: '📖' },
-    { title: 'Mente Curiosa', description: 'Faça 5 perguntas ao tutor', icon: '🤔' },
-    { title: 'Aprendiz Diário', description: 'Estude por 3 dias consecutivos', icon: '📚' }
+    { title: 'Mentor', description: 'Ajude 5 colegas com dúvidas', icon: '🤝' },
+    { title: 'Estrategista', description: 'Complete 10 desafios avançados', icon: '🧠' }
   ];
 
   const containerVariants = {
