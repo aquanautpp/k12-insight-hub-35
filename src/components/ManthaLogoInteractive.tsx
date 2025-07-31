@@ -42,12 +42,18 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
       }
     };
 
+    // Debounce event listeners
+    let timeoutId: NodeJS.Timeout;
+    
     if (showTooltip) {
-      document.addEventListener('keydown', handleEscape);
-      document.addEventListener('mousedown', handleClickOutside);
+      timeoutId = setTimeout(() => {
+        document.addEventListener('keydown', handleEscape);
+        document.addEventListener('mousedown', handleClickOutside);
+      }, 100);
     }
 
     return () => {
+      clearTimeout(timeoutId);
       document.removeEventListener('keydown', handleEscape);
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -153,18 +159,19 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
         initial="initial"
         animate="animate"
       >
-        {/* Glow Background */}
+        {/* Glow Background - Reduce animation frequency */}
         <motion.div
           className="absolute inset-0 rounded-full bg-primary/20"
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3]
+            scale: [1, 1.1, 1],
+            opacity: [0.2, 0.4, 0.2]
           }}
           transition={{
-            duration: 3,
+            duration: 4,
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform, opacity' }}
         />
 
         {/* Ripple Effect on Click */}
