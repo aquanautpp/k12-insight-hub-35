@@ -8,6 +8,7 @@ import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
 import { CPAExplanationTooltip } from "./CPAExplanationTooltip";
 import { useFeatureFlags } from "@/contexts/FeatureFlagsContext";
+import { ManthaLogoInteractive } from "./ManthaLogoInteractive";
 import { motion } from "framer-motion";
 
 type Stage = 'concrete' | 'pictorial' | 'abstract';
@@ -246,38 +247,23 @@ const CPAMethod = () => {
               ></motion.div>
               
               <div className="relative z-10">
-                <div className="flex items-center gap-6 mb-8">
-                  {/* Ícone com Pulsação Avançada - Tamanho Reduzido */}
+                <div className="flex flex-col items-center gap-8 mb-8">
+                  {/* Logo Mantha Interativo Central */}
                   <motion.div
-                    className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/30 shadow-lg"
-                    animate={{ 
-                      scale: [1, 1.05, 1],
-                      boxShadow: [
-                        "0 4px 20px rgba(255,255,255,0.1)",
-                        "0 8px 30px rgba(255,255,255,0.2)",
-                        "0 4px 20px rgba(255,255,255,0.1)"
-                      ]
-                    }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    whileHover={{ 
-                      rotate: [0, 5, -5, 0], 
-                      scale: 1.1,
-                      transition: { duration: 0.5 }
-                    }}
+                    initial={{ opacity: 0, y: -30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.2 }}
+                    className="mb-4"
                   >
-                    <Brain className="w-8 h-8 text-white filter drop-shadow-lg" />
+                    <ManthaLogoInteractive size="large" />
                   </motion.div>
                   
-                  <div className="flex-1">
+                  <div className="text-center">
                     {/* Título com Efeito de Surgimento - Tamanho Reduzido */}
                     <motion.h1
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.3 }}
+                      transition={{ duration: 0.8, delay: 0.6 }}
                       className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight"
                       style={{ 
                         textShadow: "0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1)"
@@ -287,11 +273,11 @@ const CPAMethod = () => {
                     </motion.h1>
                     
                     {/* Subtítulo com Animações Sequenciais Melhoradas */}
-                    <div className="text-xl text-white/95 flex items-center gap-3 flex-wrap">
+                    <div className="text-xl text-white/95 flex items-center justify-center gap-3 flex-wrap">
                       <motion.span
                         initial={{ opacity: 0, y: 15, rotateX: -90 }}
                         animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6, type: "spring" }}
+                        transition={{ duration: 0.5, delay: 0.9, type: "spring" }}
                         className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20"
                       >
                         Concreto
@@ -300,7 +286,7 @@ const CPAMethod = () => {
                       <motion.span
                         initial={{ opacity: 0, scale: 0, rotate: -180 }}
                         animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.4, delay: 0.9, type: "spring", stiffness: 200 }}
+                        transition={{ duration: 0.4, delay: 1.2, type: "spring", stiffness: 200 }}
                         className="text-white/80 text-2xl"
                       >
                         →
@@ -309,7 +295,7 @@ const CPAMethod = () => {
                       <motion.span
                         initial={{ opacity: 0, y: 15, rotateX: -90 }}
                         animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                        transition={{ duration: 0.5, delay: 1.1, type: "spring" }}
+                        transition={{ duration: 0.5, delay: 1.4, type: "spring" }}
                         className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20"
                       >
                         Pictórico
@@ -318,7 +304,7 @@ const CPAMethod = () => {
                       <motion.span
                         initial={{ opacity: 0, scale: 0, rotate: -180 }}
                         animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.4, delay: 1.4, type: "spring", stiffness: 200 }}
+                        transition={{ duration: 0.4, delay: 1.7, type: "spring", stiffness: 200 }}
                         className="text-white/80 text-2xl"
                       >
                         →
@@ -327,7 +313,7 @@ const CPAMethod = () => {
                       <motion.span
                         initial={{ opacity: 0, y: 15, rotateX: -90 }}
                         animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                        transition={{ duration: 0.5, delay: 1.6, type: "spring" }}
+                        transition={{ duration: 0.5, delay: 1.9, type: "spring" }}
                         className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20"
                       >
                         Abstrato
@@ -336,7 +322,13 @@ const CPAMethod = () => {
                   </div>
                   
                   {isEnabled('cpaExplanationTooltip') && (
-                    <CPAExplanationTooltip />
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, delay: 2.2 }}
+                    >
+                      <CPAExplanationTooltip />
+                    </motion.div>
                   )}
                 </div>
                 
@@ -344,13 +336,13 @@ const CPAMethod = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.7 }}
-                  className="max-w-5xl"
+                  transition={{ duration: 0.8, delay: 1.0 }}
+                  className="max-w-5xl mx-auto text-center"
                 >
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 1 }}
+                    transition={{ duration: 1, delay: 1.3 }}
                     className="text-2xl text-white/95 leading-relaxed text-justify font-light"
                     style={{ 
                       textShadow: "0 2px 10px rgba(0,0,0,0.2)"
