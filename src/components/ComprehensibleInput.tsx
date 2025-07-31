@@ -11,7 +11,7 @@ import {
   ArrowUp, 
   ArrowDown, 
   CheckCircle, 
-  Brain,
+  Globe,
   Headphones,
   BookOpen,
   Tv,
@@ -138,9 +138,9 @@ const ComprehensibleInput = () => {
       {/* Header */}
       <div className="text-center space-y-4">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-learning text-white mb-4">
-          <Brain className="w-8 h-8" />
+          <Globe className="w-8 h-8" style={{ color: 'hsl(84, 50%, 40%)' }} />
         </div>
-        <h1 className="text-3xl font-bold text-foreground">Aprender com Comprehensible Input</h1>
+        <h1 className="text-3xl font-bold text-foreground">Como Aprender Línguas Estrangeiras</h1>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
           Você aprende de verdade quando entende o que ouve e lê. Escolha conteúdos que estejam "um degrau acima do confortável": você entende quase tudo, mas existem algumas coisas novas que dão leve desafio — sem travar.
         </p>

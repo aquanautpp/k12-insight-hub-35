@@ -33,13 +33,13 @@ export const BarModelEditor = ({ problem, onComplete }: BarModelEditorProps) => 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const colors = [
-    'hsl(var(--primary))',
-    'hsl(var(--secondary))',
-    'hsl(var(--accent))',
-    '#10B981',
-    '#F59E0B',
-    '#EF4444',
-    '#8B5CF6'
+    'hsl(84, 50%, 40%)', // Verde oliva
+    'hsl(84, 60%, 45%)', // Verde oliva mais claro
+    'hsl(84, 40%, 35%)', // Verde oliva mais escuro
+    'hsl(84, 55%, 42%)', // Variação do verde oliva
+    'hsl(84, 45%, 38%)', // Outra variação
+    'hsl(84, 65%, 48%)', // Verde oliva mais vibrante
+    'hsl(84, 35%, 32%)'  // Verde oliva mais sóbrio
   ];
 
   useEffect(() => {
@@ -73,8 +73,8 @@ export const BarModelEditor = ({ problem, onComplete }: BarModelEditorProps) => 
         ctx.strokeRect(xOffset, yOffset, segment.width, barHeight);
         
         // Label e valor
-        ctx.fillStyle = '#000';
-        ctx.font = '12px Arial';
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 12px Arial';
         ctx.textAlign = 'center';
         ctx.fillText(
           `${segment.label}: ${segment.value}`,
@@ -104,8 +104,8 @@ export const BarModelEditor = ({ problem, onComplete }: BarModelEditorProps) => 
         ctx.lineWidth = 1;
         ctx.strokeRect(xOffset, yOffset, segment.width, barHeight);
         
-        ctx.fillStyle = '#000';
-        ctx.font = '12px Arial';
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 12px Arial';
         ctx.textAlign = 'center';
         ctx.fillText(
           `${segment.label}: ${segment.value}`,

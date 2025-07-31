@@ -9,7 +9,8 @@ import {
   BookOpen,
   Heart,
   Book,
-  User
+  User,
+  Globe
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
@@ -48,8 +49,8 @@ const navigationItems = [
   },
   {
     id: 'comprehensible-input',
-    title: 'Comprehensible Input',
-    icon: BookOpen,
+    title: 'Como Aprender Línguas Estrangeiras',
+    icon: Globe,
   },
   {
     id: 'mantha-chat',

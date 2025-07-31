@@ -317,18 +317,18 @@ const LearningStyleTest = () => {
                   <Trophy className="w-8 h-8 text-white" />
                 </div>
               </div>
-               <CardTitle className="text-2xl text-green-700 mb-2 animate-fade-in">
+               <CardTitle className="text-2xl text-white mb-2 animate-fade-in">
                   🎯 Descubra Seu Superpoder de Aprender!
                 </CardTitle>
             </CardHeader>
             
             <CardContent className="p-8">
               <div className="text-center mb-8">
-                <div className="flex justify-center mb-4">
-                  <div className={`w-20 h-20 rounded-full bg-gradient-learning flex items-center justify-center`}>
-                    <profileData.icon className="w-10 h-10 text-white" />
-                  </div>
-                </div>
+                 <div className="flex justify-center mb-4">
+                   <div className={`w-20 h-20 rounded-full bg-gradient-learning flex items-center justify-center`}>
+                     <profileData.icon className="w-10 h-10" style={{ color: 'hsl(84, 50%, 40%)' }} />
+                   </div>
+                 </div>
                 <h2 className="text-3xl font-bold text-foreground mb-4 animate-scale-in">
                   🎉 Você é um {profileData.title}!
                 </h2>

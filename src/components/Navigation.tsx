@@ -11,7 +11,8 @@ import {
   X,
   BookOpen,
   Target,
-  MessageSquare
+  MessageSquare,
+  Globe
 } from "lucide-react";
 
 interface NavigationProps {
@@ -26,7 +27,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
     { id: 'dashboard', label: 'Dashboard', icon: Home, badge: null },
     { id: 'singapore-method', label: 'Método CPA', icon: Brain, badge: 'Novo' },
     { id: 'learning-test', label: 'Descubra Seu Superpoder de Aprender!', icon: Target, badge: 'Superpoder' },
-    { id: 'comprehensible-input', label: 'Comprehensible Input', icon: BookOpen, badge: 'Novo' },
+    { id: 'comprehensible-input', label: 'Como Aprender Línguas Estrangeiras', icon: Globe, badge: 'Novo' },
     { id: 'mantha-chat', label: 'Mantha Chat', icon: MessageSquare, badge: 'IA' },
     { id: 'progress', label: 'Progresso', icon: TrendingUp, badge: null },
     { id: 'activities', label: 'Atividades', icon: BookOpen, badge: '3' },
