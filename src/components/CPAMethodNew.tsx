@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator } from "lucide-react";
+import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, Users, Puzzle, Heart, Trophy } from "lucide-react";
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
 import { CPAExplanationTooltip } from "./CPAExplanationTooltip";
@@ -370,7 +370,7 @@ const CPAMethod = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                      <Brain className="w-6 h-6 text-primary" />
                     </div>
                     <h4 className="font-semibold text-foreground mb-3 text-lg">Compreensão Profunda</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -380,7 +380,7 @@ const CPAMethod = () => {
                   
                   <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                      <Users className="w-6 h-6 text-primary" />
                     </div>
                     <h4 className="font-semibold text-foreground mb-3 text-lg">Acessibilidade</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -390,7 +390,7 @@ const CPAMethod = () => {
                   
                   <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                      <Puzzle className="w-6 h-6 text-primary" />
                     </div>
                     <h4 className="font-semibold text-foreground mb-3 text-lg">Resolução de Problemas</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -400,7 +400,7 @@ const CPAMethod = () => {
                   
                   <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                      <Heart className="w-6 h-6 text-primary" />
                     </div>
                     <h4 className="font-semibold text-foreground mb-3 text-lg">Redução da Ansiedade</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -410,7 +410,7 @@ const CPAMethod = () => {
                   
                   <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                      <Trophy className="w-6 h-6 text-primary" />
                     </div>
                     <h4 className="font-semibold text-foreground mb-3 text-lg">Retenção a Longo Prazo</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -418,12 +418,12 @@ const CPAMethod = () => {
                     </p>
                   </div>
                   
-                  <div className="group p-6 rounded-xl bg-gradient-primary text-primary-foreground border border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 md:col-span-2 lg:col-span-1">
-                    <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
-                      <div className="w-6 h-6 rounded-full bg-white"></div>
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-primary hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <CheckCircle className="w-6 h-6 text-primary" />
                     </div>
-                    <h4 className="font-semibold mb-3 text-lg">Resumo</h4>
-                    <p className="text-primary-foreground/90 text-sm leading-relaxed">
+                    <h4 className="font-semibold text-foreground mb-3 text-lg">Resumo</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       O método CPA de Singapura constrói o conhecimento matemático de forma incremental e significativa, promovendo uma compreensão duradoura e aplicável.
                     </p>
                   </div>
