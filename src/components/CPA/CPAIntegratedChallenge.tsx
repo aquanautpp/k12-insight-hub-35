@@ -203,8 +203,8 @@ export const CPAIntegratedChallenge = ({
                 <Badge className="bg-white/30 text-white border-white/40">
                   {translateDifficulty(challenge.difficulty)}
                 </Badge>
-                <Button variant="outline" size="sm" onClick={resetChallenge} className="border-white/30 text-white hover:bg-white hover:text-primary">
-                  <RotateCcw className="w-4 h-4 text-primary hover:text-primary" />
+                <Button variant="ghost" size="sm" onClick={resetChallenge} className="bg-green-600 text-white hover:bg-green-700 border border-green-600">
+                  <RotateCcw className="w-4 h-4 text-white" />
                 </Button>
               </div>
             </div>
@@ -227,9 +227,13 @@ export const CPAIntegratedChallenge = ({
               {(['concrete', 'pictorial', 'abstract'] as CPAStage[]).map((stage) => (
                 <Button
                   key={stage}
-                  variant={currentStage === stage ? "default" : "outline"}
+                  variant="outline"
                   onClick={() => goToStage(stage)}
-                  className="flex items-center gap-2 p-3 h-auto min-h-[60px] justify-start"
+                  className={`flex items-center gap-2 p-3 h-auto min-h-[60px] justify-start ${
+                    currentStage === stage 
+                      ? 'bg-green-400 text-white hover:bg-green-500 border-green-400' 
+                      : ''
+                  }`}
                   disabled={stage === 'pictorial' && !completedStages.includes('concrete') ||
                            stage === 'abstract' && !completedStages.includes('pictorial')}
                 >
