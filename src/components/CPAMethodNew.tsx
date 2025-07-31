@@ -171,32 +171,57 @@ const CPAMethod = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto p-6">
-        {/* Hero Section */}
+        {/* Hero Section Melhorado */}
         <div className="relative mb-8 rounded-2xl overflow-hidden shadow-card">
-          <img 
-            src={cpaMethodHero}
-            alt="Método CPA - Concreto, Pictórico, Abstrato"
-            className="w-full h-64 object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/60 flex items-center">
-          <div className="px-8">
-            <div className="flex items-center gap-3 mb-4">
-              <h1 className="text-4xl font-bold text-white">
-                Método CPA (Concreto-Pictórico-Abstrato)
-              </h1>
-              {isEnabled('cpaExplanationTooltip') && (
-                <CPAExplanationTooltip />
-              )}
-            </div>
-              <p className="text-xl text-white/90 mb-4">
+          <div className="relative bg-gradient-to-br from-primary via-primary-variant to-secondary p-8 md:p-12">
+            <div className="absolute inset-0 pattern-bg opacity-20"></div>
+            
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                  <Brain className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                    Método CPA
+                  </h1>
+                  <p className="text-lg text-white/90">
+                    Concreto → Pictórico → Abstrato
+                  </p>
+                </div>
+                {isEnabled('cpaExplanationTooltip') && (
+                  <CPAExplanationTooltip />
+                )}
+              </div>
+              
+              <p className="text-xl text-white/90 mb-6 max-w-3xl">
                 Abordagem pedagógica comprovada do Sistema Educacional de Singapura
               </p>
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 text-white">
-                <p className="text-sm mb-2">
-                  <strong>Como funciona:</strong> O método CPA guia o aprendizado através de três estágios sequenciais: 
-                  manipulação física (Concreto), representações visuais (Pictórico) e símbolos matemáticos (Abstrato). 
-                  Esta progressão garante compreensão profunda antes da abstração.
-                </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="text-2xl">🧱</div>
+                    <h3 className="font-semibold text-white">Concreto</h3>
+                  </div>
+                  <p className="text-white/80 text-sm">Manipulação física de objetos reais</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="text-2xl">🎨</div>
+                    <h3 className="font-semibold text-white">Pictórico</h3>
+                  </div>
+                  <p className="text-white/80 text-sm">Representações visuais e diagramas</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="text-2xl">🔢</div>
+                    <h3 className="font-semibold text-white">Abstrato</h3>
+                  </div>
+                  <p className="text-white/80 text-sm">Símbolos e operações matemáticas</p>
+                </div>
               </div>
             </div>
           </div>

@@ -14,7 +14,7 @@ import { AnimatedCounter } from './AnimatedCounter';
 import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
 import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
-import logoImage from '@/assets/mantha-logo.png';
+import logoImage from '@/assets/mantha-logo-corrected.png';
 
 interface DashboardProps {
   onViewChange?: (view: string) => void;

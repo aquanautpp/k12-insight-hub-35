@@ -297,6 +297,12 @@ All colors MUST be HSL.
     }
   }
 
+  /* Pattern background for CPA hero */
+  .pattern-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+
   @keyframes slide-up {
     from {
       opacity: 0;
