@@ -209,16 +209,16 @@ const ReadingRecommendations = () => {
           <h1 className="text-4xl font-bold text-foreground mb-4">
             Recomendações de Leitura 📚
           </h1>
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-6 border border-green-600">
-            <p className="text-lg text-foreground leading-relaxed text-justify">
-              Descubra livros incríveis que vão desenvolver seu espírito empreendedor e inteligência emocional! 
-              Cada livro foi escolhido especialmente para jovens pensadores como você. 💡
-            </p>
-            <p className="text-lg text-muted-foreground mt-3 text-justify">
-              Explore histórias inspiradoras, aprenda sobre dinheiro, emoções e como transformar 
-              suas ideias em realidade. <strong>Vamos nessa jornada literária?</strong> 🌟
-            </p>
-          </div>
+           <div className="max-w-4xl mx-auto bg-white rounded-2xl p-6 border border-green-600">
+             <p className="text-lg text-foreground leading-relaxed text-justify">
+               Descubra livros incríveis que vão desenvolver seu espírito empreendedor e inteligência emocional! 
+               Cada livro foi escolhido especialmente para jovens pensadores como você. 💡
+             </p>
+             <p className="text-lg text-muted-foreground mt-3 text-justify">
+               Explore histórias inspiradoras, aprenda sobre dinheiro, emoções e como transformar 
+               suas ideias em realidade. <strong>Vamos nessa jornada literária?</strong> 🌟
+             </p>
+           </div>
         </div>
 
         {/* Estatísticas */}
@@ -294,7 +294,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-green-400' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -376,7 +376,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-green-400' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -458,7 +458,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-green-400' : 'text-muted-foreground'}`} />
+                             <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>
@@ -540,7 +540,7 @@ const ReadingRecommendations = () => {
                             onClick={() => toggleRead(book.id)}
                             className="p-2"
                           >
-                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-green-400' : 'text-muted-foreground'}`} />
+                            <CheckCircle className={`w-4 h-4 ${book.hasRead ? 'fill-green-400 text-white' : 'text-muted-foreground'}`} />
                           </Button>
                         </div>
                       </div>

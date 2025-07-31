@@ -95,13 +95,14 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
               className="data-[state=open]:bg-transparent hover:bg-transparent p-0"
             >
               <div className="flex items-center space-x-3">
-                <div className="flex aspect-square size-10 items-center justify-center rounded-xl bg-white border shadow-md">
-                  <img 
-                    src="/lovable-uploads/2639b08c-e703-4d6d-a73b-7b0cb9566448.png" 
-                    alt="MANTHA Logo" 
-                    className="size-6 object-contain"
-                  />
-                </div>
+                 <div className="flex aspect-square size-10 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
+                   <img 
+                     src="/lovable-uploads/2639b08c-e703-4d6d-a73b-7b0cb9566448.png" 
+                     alt="MANTHA Logo" 
+                     className="size-6 object-contain brightness-0 invert-0 filter-none"
+                     style={{ filter: 'none' }}
+                   />
+                 </div>
                 {state !== "collapsed" && (
                   <div className="grid flex-1 text-left leading-tight">
                     <span className="text-lg font-semibold text-foreground">Mantha</span>
