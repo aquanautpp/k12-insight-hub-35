@@ -99,8 +99,13 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
                    <img 
                      src="/lovable-uploads/2639b08c-e703-4d6d-a73b-7b0cb9566448.png" 
                      alt="MANTHA Logo" 
-                     className="size-6 object-contain brightness-0 invert-0 filter-none"
-                     style={{ filter: 'none' }}
+                     className="size-8 object-contain"
+                     onError={(e) => {
+                       console.log('Erro ao carregar logo:', e);
+                       // Fallback para texto se a imagem falhar
+                       e.currentTarget.style.display = 'none';
+                       e.currentTarget.parentElement!.innerHTML = '<span class="text-primary font-bold text-sm">M</span>';
+                     }}
                    />
                  </div>
                 {state !== "collapsed" && (
