@@ -141,13 +141,47 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
             transition={{ duration: 1, delay: 0.2 }}
             className="flex flex-col items-center space-y-6 max-w-4xl mx-auto px-6 text-center"
           >
-            {/* Logo Mantha Completo */}
+            {/* Logo Mantha Completo com Animações */}
             <div className="mantha-logo-container mb-6">
-              <img 
-                src="/lovable-uploads/a662b683-a35d-4b67-a2e2-1c514e14dd38.png" 
-                alt="Mantha Logo" 
-                className="mantha-logo"
-              />
+              <svg 
+                className="mantha-logo-main" 
+                viewBox="0 0 400 300" 
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="MANTHA - Educação Personalizada"
+              >
+                {/* Arraia (Manta Ray) */}
+                <path 
+                  d="M200 80 C140 90, 100 120, 80 160 C90 180, 120 190, 160 185 L200 180 L240 185 C280 190, 310 180, 320 160 C300 120, 260 90, 200 80 Z" 
+                  fill="#6B7C32" 
+                  className="manta-body"
+                />
+                
+                {/* Pontos brancos (nervuras) com animação pulse */}
+                <g className="manta-dots">
+                  <circle cx="170" cy="130" r="4" fill="white" className="pulse-dot" />
+                  <circle cx="190" cy="135" r="4" fill="white" className="pulse-dot" style={{ animationDelay: '0.2s' }} />
+                  <circle cx="210" cy="135" r="4" fill="white" className="pulse-dot" style={{ animationDelay: '0.4s' }} />
+                  <circle cx="230" cy="130" r="4" fill="white" className="pulse-dot" style={{ animationDelay: '0.6s' }} />
+                  <circle cx="200" cy="150" r="5" fill="white" className="pulse-dot" style={{ animationDelay: '0.8s' }} />
+                  <circle cx="180" cy="155" r="3" fill="white" className="pulse-dot" style={{ animationDelay: '1s' }} />
+                  <circle cx="220" cy="155" r="3" fill="white" className="pulse-dot" style={{ animationDelay: '1.2s' }} />
+                </g>
+                
+                {/* Linhas conectoras (nervuras) */}
+                <g className="manta-veins" stroke="white" strokeWidth="2" fill="none" opacity="0.8">
+                  <path d="M200 150 L170 130" />
+                  <path d="M200 150 L190 135" />
+                  <path d="M200 150 L210 135" />
+                  <path d="M200 150 L230 130" />
+                  <path d="M200 150 L180 155" />
+                  <path d="M200 150 L220 155" />
+                </g>
+                
+                {/* Texto MANTHA */}
+                <text x="200" y="240" textAnchor="middle" className="mantha-text" fill="#6B7C32" fontSize="48" fontWeight="bold" fontFamily="Arial, sans-serif">
+                  MANTHA
+                </text>
+              </svg>
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
               Bem-vindo ao <span className="text-gold">Mantha</span>
