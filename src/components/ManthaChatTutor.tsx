@@ -333,7 +333,7 @@ Que estágio você gostaria de praticar mais?`,
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6">
+    <div className="w-full max-w-5xl mx-auto p-6">
       <Card className="h-[850px] flex flex-col shadow-card">
         <CardHeader className="bg-gradient-to-r from-primary via-primary-hover to-primary text-white rounded-t-lg">
           <div className="flex items-center justify-between">

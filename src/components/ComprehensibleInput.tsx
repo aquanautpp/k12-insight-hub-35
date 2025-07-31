@@ -144,18 +144,18 @@ const ComprehensibleInput = () => {
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
           Descubra métodos eficazes para dominar novos idiomas através do Comprehensible Input
         </p>
-        <div className="mb-6 p-4 bg-white/80 rounded-lg max-w-4xl mx-auto">
-          <h3 className="font-semibold text-emerald-800 mb-3">📚 O que é Comprehensible Input?</h3>
-          <p className="mb-3 text-emerald-700">
+        <div className="mb-6 p-6 bg-white/90 rounded-lg max-w-6xl mx-auto border border-emerald-200">
+          <h3 className="font-semibold text-emerald-800 mb-4 text-lg">📚 O que é Comprehensible Input?</h3>
+          <p className="mb-4 text-emerald-700 text-justify leading-relaxed">
             O Comprehensible Input é uma teoria fundamental na aquisição de segunda língua, popularizada pelo linguista Stephen Krashen. A hipótese central de Krashen é que a aquisição de uma segunda língua ocorre quando os aprendizes são expostos a uma linguagem que eles podem entender, mesmo que contenha estruturas e vocabulário ligeiramente além de seu nível atual de proficiência.
           </p>
-          <p className="mb-3 text-emerald-700">
+          <p className="mb-4 text-emerald-700 text-justify leading-relaxed">
             Ao contrário de abordagens tradicionais que enfatizam a gramática explícita e a produção forçada, o CI sugere que a aquisição da linguagem é um processo subconsciente, semelhante à forma como as crianças adquirem sua primeira língua. O foco está na compreensão da mensagem, e não na análise formal da linguagem.
           </p>
-          <p className="mb-3 text-emerald-700">
+          <p className="mb-4 text-emerald-700 text-justify leading-relaxed">
             Quando os aprendizes se concentram em entender o significado, a gramática e o vocabulário são adquiridos naturalmente como um subproduto desse processo. É um processo subconsciente, natural e implícito, semelhante à forma como as crianças adquirem sua língua materna.
           </p>
-          <p className="font-medium text-emerald-800">
+          <p className="font-medium text-emerald-800 text-justify leading-relaxed">
             Ocorre quando o aprendiz se concentra na comunicação e na compreensão da mensagem, sem estar ciente de que está adquirindo novas regras gramaticais ou vocabulário. É um processo "sentir" a linguagem.
           </p>
         </div>

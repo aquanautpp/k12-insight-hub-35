@@ -79,9 +79,9 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
     },
     {
       id: "level_explorer",
-      title: "Explorador",
-      description: "Alcance o nível 10",
-      icon: "🗺️",
+      title: "Mentor",
+      description: "Ajude 5 colegas com dúvidas",
+      icon: "🤝",
       category: "exploration",
       requirement: {
         type: "reach_level",
@@ -96,9 +96,9 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
     },
     {
       id: "method_master",
-      title: "Mestre do Método CPA",
-      description: "Complete todas as etapas do método CPA",
-      icon: "🏆",
+      title: "Estrategista",
+      description: "Complete 10 desafios avançados",
+      icon: "🧠",
       category: "mastery",
       requirement: {
         type: "complete_activities",
