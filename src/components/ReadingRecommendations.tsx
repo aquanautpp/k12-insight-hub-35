@@ -209,7 +209,7 @@ const ReadingRecommendations = () => {
           <h1 className="text-4xl font-bold text-foreground mb-4">
             Recomendações de Leitura 📚
           </h1>
-           <div className="max-w-4xl mx-auto bg-white rounded-2xl p-6 border border-green-600">
+           <div className="max-w-4xl mx-auto bg-white rounded-2xl p-6 border border-primary">
              <p className="text-lg text-foreground leading-relaxed text-justify">
                Descubra livros incríveis que vão desenvolver seu espírito empreendedor e inteligência emocional! 
                Cada livro foi escolhido especialmente para jovens pensadores como você. 💡
