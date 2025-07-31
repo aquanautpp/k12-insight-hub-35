@@ -144,7 +144,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
             {/* Logo Mantha Completo */}
             <div className="mantha-logo-container mb-6">
               <img 
-                src="/lovable-uploads/ab8b2cfa-92ff-468b-9c30-db73c2207811.png"
+                src="/lovable-uploads/c71199a0-54e7-4fc4-ba67-15522364df93.png"
                 alt="MANTHA - Educação Personalizada"
                 className="mantha-logo-main w-[120px] md:w-[160px] lg:w-[200px] h-auto mx-auto"
               />
