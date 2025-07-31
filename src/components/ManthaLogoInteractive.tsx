@@ -68,7 +68,7 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
     }
   };
 
-  const leafVariants = {
+  const neuralPointVariants = {
     initial: (index: number) => ({
       scale: 0,
       opacity: 0,
@@ -84,22 +84,24 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
         damping: 15
       }
     }),
-    hover: (index: number) => ({
-      y: Math.sin(index * 0.5) * 2,
-      x: Math.cos(index * 0.5) * 1,
-      scale: 1.1,
+    synapseFlow: (index: number) => ({
+      scale: [1, 1.3],
+      opacity: [1, 0.7],
+      filter: "brightness(1.5) drop-shadow(0 0 6px rgba(255,255,255,0.9))",
       transition: {
-        duration: 0.3,
+        duration: 0.8,
         repeat: Infinity,
         repeatType: "reverse" as const,
+        delay: index * 0.15,
         ease: "easeInOut"
       }
     }),
-    glow: (index: number) => ({
-      filter: "brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.8))",
+    pulseGlow: (index: number) => ({
+      filter: "brightness(2) drop-shadow(0 0 12px rgba(255,255,255,1))",
+      scale: 1.2,
       transition: { 
         delay: index * 0.1,
-        duration: 0.3
+        duration: 0.4
       }
     })
   };
@@ -136,8 +138,8 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
     }
   };
 
-  // Coordenadas das "folhas" (pontos brancos) baseadas no logo
-  const leafPositions = [
+  // Coordenadas dos pontos neurais (conexões da rede neural) baseadas no logo
+  const neuralConnectionPoints = [
     { x: 50, y: 35 }, // topo centro
     { x: 45, y: 42 }, // esquerda alta
     { x: 55, y: 42 }, // direita alta
@@ -202,13 +204,17 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
           animate={{ 
             scale: showTooltip ? 1.05 : 1, 
             opacity: 1,
-            rotateY: isHovered ? [0, 5] : 0,
+            // Movimento de natação da arraia-manta
+            rotateY: isHovered ? [0, 3] : 0,
+            skewX: isHovered ? [0, 1] : 0,
             filter: showTooltip ? "drop-shadow(0 0 20px rgba(76, 175, 80, 0.6))" : "none"
           }}
           transition={{ 
-            duration: showTooltip ? 0.5 : isHovered ? 2 : 0.6,
+            duration: showTooltip ? 0.5 : isHovered ? 3 : 0.6,
             delay: showTooltip ? 0 : 0.3,
-            repeat: isHovered ? Infinity : 0
+            repeat: isHovered ? Infinity : 0,
+            repeatType: "reverse",
+            ease: "easeInOut"
           }}
         >
           {/* SVG Manta Ray - Baseado no logo Mantha */}
@@ -297,8 +303,8 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
             />
           </svg>
 
-          {/* Animated Leaves (white dots) */}
-          {leafPositions.map((pos, index) => (
+          {/* Pontos Neurais (conexões da rede neural) */}
+          {neuralConnectionPoints.map((pos, index) => (
             <motion.div
               key={index}
               className="absolute w-2 h-2 bg-white rounded-full"
@@ -309,13 +315,12 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
               }}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ 
-                scale: 1, 
-                opacity: 1,
-                y: isHovered ? Math.sin(index * 0.5) * 2 : 0,
-                x: isHovered ? Math.cos(index * 0.5) * 1 : 0,
-                filter: showTooltip ? "brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.8))" : "none"
+                // Pulso neural quando tooltip ativo, senão animação padrão
+                scale: showTooltip ? [1, 1.4] : 1, 
+                opacity: showTooltip ? [1, 0.6] : 1,
+                filter: showTooltip ? "brightness(2) drop-shadow(0 0 12px rgba(255,255,255,1))" : "none"
               }}
-              transition={{ 
+              transition={{
                 delay: index * 0.1,
                 duration: showTooltip ? 0.3 : isHovered ? 0.3 : 0.6,
                 type: "spring",
@@ -361,10 +366,10 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
               {/* Content */}
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Mantha deriva de <span className="font-medium text-primary">μανθάνω (manthano)</span>, 
-                  que significa "aprender" em grego antigo. O símbolo da arraia é uma referência criativa 
-                  à arraia-manta, unindo o conceito de aprendizagem com a elegância e fluidez deste 
-                  majestoso animal marinho.
+                  O símbolo une dois conceitos: a majestosa arraia-manta, conhecida por sua inteligência 
+                  e movimentos fluidos, com uma rede neural em seu interior - representando como o aprendizado 
+                  cria conexões em nossa mente. Mantha deriva de <span className="font-medium text-primary">μανθάνω (manthano)</span>, 
+                  "aprender" em grego antigo.
                 </p>
 
                 {/* Greek Characters Animation */}
