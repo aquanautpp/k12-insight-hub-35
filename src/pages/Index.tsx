@@ -11,6 +11,7 @@ import ComprehensibleInput from "@/components/ComprehensibleInput";
 import DailyChallenge from "@/components/DailyChallenge";
 import EmotionalIntelligence from "@/components/EmotionalIntelligence";
 import ReadingRecommendations from "@/components/ReadingRecommendations";
+import { BackgroundRemover } from "@/components/BackgroundRemover";
 import { FeatureFlagsDebugPanel } from "@/components/FeatureFlagsDebugPanel";
 
 const Index = () => {
@@ -36,6 +37,8 @@ const Index = () => {
         return <DailyChallenge />;
       case 'reading':
         return <ReadingRecommendations />;
+      case 'background-remover':
+        return <BackgroundRemover />;
       default:
         return <Dashboard onViewChange={setCurrentView} />;
     }
@@ -60,6 +63,7 @@ const Index = () => {
                 {currentView === 'progress' && 'Progresso'}
                 {currentView === 'activities' && 'Atividades'}
                 {currentView === 'reading' && 'Recomendações de Leitura'}
+                {currentView === 'background-remover' && 'Remover Fundo de Imagem'}
               </div>
             </div>
             
