@@ -366,7 +366,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
                 {displayAchievements.map((achievement, index) => (
                   <div 
                     key={index} 
-                    className="text-center p-4 rounded-lg transition-all hover-scale bg-primary/10 border border-primary/20"
+                    className="text-center p-4 rounded-lg transition-all hover-scale bg-white border border-primary"
                   >
                     <div className="text-2xl mb-2">{achievement.icon}</div>
                     <h4 className="font-medium text-sm mb-1">{achievement.title}</h4>
