@@ -96,46 +96,67 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
               className="data-[state=open]:bg-transparent hover:bg-transparent p-0"
             >
               <div className="flex items-center space-x-3">
-                 <div className="flex aspect-square size-10 items-center justify-center">
-                    {/* SVG da Arraia-Manta */}
+                 <div className="flex flex-col items-center justify-center">
+                    {/* Logo Completo MANTHA */}
                     <svg 
-                      width={state === "collapsed" ? "24" : "40"} 
-                      height={state === "collapsed" ? "24" : "40"} 
-                      viewBox="0 0 200 200" 
-                      className={`transition-all duration-200 ${state === "collapsed" ? "hover:scale-110" : ""}`}
+                      width={state === "collapsed" ? "48" : "80"} 
+                      height={state === "collapsed" ? "64" : "106"} 
+                      viewBox="0 0 200 265" 
+                      className={`transition-all duration-200 ${state === "collapsed" ? "hover:scale-105" : ""}`}
                     >
-                      {/* Forma da Arraia-Manta */}
+                      {/* Arraia-Manta */}
                       <path
-                        d="M100 20 C80 20, 30 40, 20 80 C20 100, 30 120, 50 130 C70 135, 90 140, 100 160 C110 140, 130 135, 150 130 C170 120, 180 100, 180 80 C170 40, 120 20, 100 20 Z"
-                        fill="hsl(var(--primary))"
+                        d="M100 40 C75 35, 25 50, 15 95 C10 120, 20 140, 40 155 C60 165, 80 170, 100 195 C120 170, 140 165, 160 155 C180 140, 190 120, 185 95 C175 50, 125 35, 100 40 Z"
+                        fill="#6B7A47"
                       />
+                      
                       {/* Estrutura Neural/Árvore no interior */}
-                      <g transform="translate(100, 80)">
+                      <g transform="translate(100, 120)">
                         {/* Tronco central */}
-                        <line x1="0" y1="0" x2="0" y2="40" stroke="white" strokeWidth="3"/>
+                        <path d="M0,-20 L0,30" stroke="white" strokeWidth="3" fill="none"/>
+                        
                         {/* Galhos principais */}
-                        <line x1="0" y1="10" x2="-15" y2="5" stroke="white" strokeWidth="2"/>
-                        <line x1="0" y1="10" x2="15" y2="5" stroke="white" strokeWidth="2"/>
-                        <line x1="0" y1="20" x2="-20" y2="15" stroke="white" strokeWidth="2"/>
-                        <line x1="0" y1="20" x2="20" y2="15" stroke="white" strokeWidth="2"/>
-                        <line x1="0" y1="30" x2="-10" y2="35" stroke="white" strokeWidth="2"/>
-                        <line x1="0" y1="30" x2="10" y2="35" stroke="white" strokeWidth="2"/>
+                        <path d="M0,-10 L-20,-20" stroke="white" strokeWidth="2.5" fill="none"/>
+                        <path d="M0,-10 L20,-20" stroke="white" strokeWidth="2.5" fill="none"/>
+                        <path d="M0,0 L-25,-5" stroke="white" strokeWidth="2.5" fill="none"/>
+                        <path d="M0,0 L25,-5" stroke="white" strokeWidth="2.5" fill="none"/>
+                        <path d="M0,10 L-20,20" stroke="white" strokeWidth="2.5" fill="none"/>
+                        <path d="M0,10 L20,20" stroke="white" strokeWidth="2.5" fill="none"/>
+                        
                         {/* Galhos secundários */}
-                        <line x1="-15" y1="5" x2="-25" y2="0" stroke="white" strokeWidth="1.5"/>
-                        <line x1="-15" y1="5" x2="-20" y2="-5" stroke="white" strokeWidth="1.5"/>
-                        <line x1="15" y1="5" x2="25" y2="0" stroke="white" strokeWidth="1.5"/>
-                        <line x1="15" y1="5" x2="20" y2="-5" stroke="white" strokeWidth="1.5"/>
-                        {/* Pontos neurais (extremidades) */}
-                        <circle cx="0" cy="0" r="3" fill="white"/>
-                        <circle cx="-25" cy="0" r="2.5" fill="white"/>
-                        <circle cx="-20" cy="-5" r="2.5" fill="white"/>
-                        <circle cx="25" cy="0" r="2.5" fill="white"/>
-                        <circle cx="20" cy="-5" r="2.5" fill="white"/>
-                        <circle cx="-20" cy="15" r="2" fill="white"/>
-                        <circle cx="20" cy="15" r="2" fill="white"/>
-                        <circle cx="-10" cy="35" r="2" fill="white"/>
-                        <circle cx="10" cy="35" r="2" fill="white"/>
-                        <circle cx="0" cy="40" r="2.5" fill="white"/>
+                        <path d="M-20,-20 L-30,-30" stroke="white" strokeWidth="2" fill="none"/>
+                        <path d="M-20,-20 L-35,-15" stroke="white" strokeWidth="2" fill="none"/>
+                        <path d="M20,-20 L30,-30" stroke="white" strokeWidth="2" fill="none"/>
+                        <path d="M20,-20 L35,-15" stroke="white" strokeWidth="2" fill="none"/>
+                        <path d="M-25,-5 L-35,0" stroke="white" strokeWidth="2" fill="none"/>
+                        <path d="M25,-5 L35,0" stroke="white" strokeWidth="2" fill="none"/>
+                        
+                        {/* Pontos neurais */}
+                        <circle cx="0" cy="-20" r="3" fill="white"/>
+                        <circle cx="-30" cy="-30" r="2.5" fill="white"/>
+                        <circle cx="-35" cy="-15" r="2.5" fill="white"/>
+                        <circle cx="30" cy="-30" r="2.5" fill="white"/>
+                        <circle cx="35" cy="-15" r="2.5" fill="white"/>
+                        <circle cx="-35" cy="0" r="2.5" fill="white"/>
+                        <circle cx="35" cy="0" r="2.5" fill="white"/>
+                        <circle cx="-20" cy="20" r="2.5" fill="white"/>
+                        <circle cx="20" cy="20" r="2.5" fill="white"/>
+                        <circle cx="0" cy="30" r="3" fill="white"/>
+                      </g>
+                      
+                      {/* Texto MANTHA */}
+                      <g transform="translate(100, 240)" textAnchor="middle">
+                        <text 
+                          x="0" 
+                          y="0" 
+                          fontSize={state === "collapsed" ? "18" : "24"} 
+                          fontWeight="700" 
+                          fill="#6B7A47" 
+                          fontFamily="system-ui, -apple-system, sans-serif"
+                          letterSpacing="1px"
+                        >
+                          MANTHA
+                        </text>
                       </g>
                     </svg>
                  </div>
