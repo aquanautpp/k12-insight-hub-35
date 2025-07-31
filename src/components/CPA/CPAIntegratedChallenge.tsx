@@ -231,7 +231,7 @@ export const CPAIntegratedChallenge = ({
                   onClick={() => goToStage(stage)}
                   className={`flex items-center gap-2 p-3 h-auto min-h-[60px] justify-start ${
                     currentStage === stage 
-                      ? 'bg-green-400 text-white hover:bg-green-500 border-green-400' 
+                      ? 'bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 border-green-600 shadow-lg' 
                       : ''
                   }`}
                   disabled={stage === 'pictorial' && !completedStages.includes('concrete') ||
