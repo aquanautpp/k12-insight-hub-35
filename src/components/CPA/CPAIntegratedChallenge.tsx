@@ -203,7 +203,7 @@ export const CPAIntegratedChallenge = ({
                 <Badge className="bg-white/30 text-white border-white/40">
                   {translateDifficulty(challenge.difficulty)}
                 </Badge>
-                <Button variant="ghost" size="sm" onClick={resetChallenge} className="bg-green-600 text-white hover:bg-green-700 border border-green-600">
+                <Button variant="ghost" size="sm" onClick={resetChallenge} className="bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 border border-green-600 shadow-lg">
                   <RotateCcw className="w-4 h-4 text-white" />
                 </Button>
               </div>
