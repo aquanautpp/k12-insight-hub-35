@@ -337,22 +337,97 @@ const CPAMethod = () => {
         ) : (
           <>
             {/* Call to Action para Desafio Interativo */}
-            <Card className="shadow-card bg-gradient-primary text-primary-foreground">
+            <Card className="shadow-card border-2 border-primary bg-gradient-soft">
               <CardContent className="p-8 text-center">
                 <h3 className="text-2xl font-bold mb-4 text-foreground">Pronto para o Desafio?</h3>
-                <p className="text-lg mb-6 text-foreground/90">
+                <p className="text-lg mb-6 text-muted-foreground">
                   Agora que você conhece a teoria, experimente resolver um problema real 
                   usando os três estágios do método CPA de forma interativa!
                 </p>
                 <Button 
                   size="lg" 
-                  variant="secondary"
+                  variant="outline"
                   onClick={() => setShowInteractiveChallenge(true)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 text-primary border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg"
                 >
                   <PlayCircle className="w-5 h-5" />
                   Iniciar Desafio Interativo
                 </Button>
+              </CardContent>
+            </Card>
+
+            {/* Vantagens do Método CPA */}
+            <Card className="shadow-card mt-8">
+              <CardHeader className="text-center pb-2">
+                <CardTitle className="text-3xl font-bold text-foreground mb-2">
+                  Por que o Método CPA é Revolucionário?
+                </CardTitle>
+                <p className="text-muted-foreground text-lg">
+                  Descubra as vantagens comprovadas do método de Singapura
+                </p>
+              </CardHeader>
+              <CardContent className="p-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-3 text-lg">Compreensão Profunda</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Garante que os alunos desenvolvam uma compreensão conceitual sólida antes de avançarem para a memorização de procedimentos.
+                    </p>
+                  </div>
+                  
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-3 text-lg">Acessibilidade</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Torna a matemática mais acessível a uma gama mais ampla de alunos, contemplando diferentes estilos de aprendizagem.
+                    </p>
+                  </div>
+                  
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-3 text-lg">Resolução de Problemas</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Fortalece as habilidades de resolução de problemas, pois os alunos aprendem a modelar e visualizar situações antes de aplicar soluções abstratas.
+                    </p>
+                  </div>
+                  
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-3 text-lg">Redução da Ansiedade</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Ao construir confiança por meio de etapas tangíveis, o método CPA contribui para a redução da ansiedade em relação à matemática.
+                    </p>
+                  </div>
+                  
+                  <div className="group p-6 rounded-xl bg-gradient-soft border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <div className="w-6 h-6 rounded-full bg-primary"></div>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-3 text-lg">Retenção a Longo Prazo</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      A progressão lógica e a construção de significado resultam em uma retenção significativamente maior do conhecimento matemático.
+                    </p>
+                  </div>
+                  
+                  <div className="group p-6 rounded-xl bg-gradient-primary text-primary-foreground border border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 md:col-span-2 lg:col-span-1">
+                    <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4">
+                      <div className="w-6 h-6 rounded-full bg-white"></div>
+                    </div>
+                    <h4 className="font-semibold mb-3 text-lg">Resumo</h4>
+                    <p className="text-primary-foreground/90 text-sm leading-relaxed">
+                      O método CPA de Singapura constrói o conhecimento matemático de forma incremental e significativa, promovendo uma compreensão duradoura e aplicável.
+                    </p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
