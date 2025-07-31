@@ -194,34 +194,14 @@ const CPAMethod = () => {
                 )}
               </div>
               
-              <p className="text-xl text-white/90 mb-6 max-w-3xl">
-                Abordagem pedagógica comprovada do Sistema Educacional de Singapura
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="text-2xl">🧱</div>
-                    <h3 className="font-semibold text-white">Concreto</h3>
-                  </div>
-                  <p className="text-white/80 text-sm">Manipulação física de objetos reais</p>
-                </div>
+              <div className="max-w-4xl">
+                <p className="text-xl text-white/90 mb-4 leading-relaxed">
+                  Abordagem pedagógica comprovada do Sistema Educacional de Singapura que revoluciona o ensino da matemática através de uma progressão natural e intuitiva.
+                </p>
                 
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="text-2xl">🎨</div>
-                    <h3 className="font-semibold text-white">Pictórico</h3>
-                  </div>
-                  <p className="text-white/80 text-sm">Representações visuais e diagramas</p>
-                </div>
-                
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="text-2xl">🔢</div>
-                    <h3 className="font-semibold text-white">Abstrato</h3>
-                  </div>
-                  <p className="text-white/80 text-sm">Símbolos e operações matemáticas</p>
-                </div>
+                <p className="text-lg text-white/85 leading-relaxed">
+                  O Método CPA guia o aprendizado através de três estágios fundamentais: primeiro, você manipula objetos físicos reais (Concreto), desenvolvendo uma compreensão tátil e visual dos conceitos. Em seguida, trabalha com representações visuais e diagramas (Pictórico), criando conexões mentais entre o concreto e o abstrato. Por fim, domina os símbolos e operações matemáticas formais (Abstrato), construindo sobre a base sólida estabelecida nos estágios anteriores.
+                </p>
               </div>
             </div>
           </div>
