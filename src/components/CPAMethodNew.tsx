@@ -8,6 +8,7 @@ import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
 import { CPAExplanationTooltip } from "./CPAExplanationTooltip";
 import { useFeatureFlags } from "@/contexts/FeatureFlagsContext";
+import { motion } from "framer-motion";
 
 type Stage = 'concrete' | 'pictorial' | 'abstract';
 
@@ -171,37 +172,135 @@ const CPAMethod = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto p-6">
-        {/* Hero Section Melhorado */}
-        <div className="relative mb-8 rounded-2xl overflow-hidden shadow-card">
-          <div className="relative bg-gradient-to-br from-primary/95 via-primary/90 to-secondary/95 p-8 md:p-12">
-            <div className="absolute inset-0 pattern-bg opacity-20"></div>
+        {/* Hero Section com Glassmorphism */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative mb-8 rounded-2xl overflow-hidden"
+        >
+          <div className="relative">
+            {/* Gradiente Dinâmico de Fundo */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-secondary/70"></div>
             
-            <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                  <Brain className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                    Método CPA
-                  </h1>
-                  <p className="text-lg text-white/90">
-                    Concreto → Pictórico → Abstrato
-                  </p>
-                </div>
-                {isEnabled('cpaExplanationTooltip') && (
-                  <CPAExplanationTooltip />
-                )}
-              </div>
-              
-              <div className="max-w-4xl">
-                <p className="text-xl text-white/90 mb-4 leading-relaxed text-justify">
-                  Abordagem pedagógica comprovada do Sistema Educacional de Singapura que revoluciona o ensino da matemática através de uma progressão natural e intuitiva.
-                </p>
-              </div>
+            {/* Elementos Flutuantes */}
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(12)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-white/20 rounded-full"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [0, -10, 0],
+                    x: [0, 5, 0],
+                    opacity: [0.2, 0.5, 0.2],
+                  }}
+                  transition={{
+                    duration: 3 + Math.random() * 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2,
+                  }}
+                />
+              ))}
             </div>
+            
+            {/* Card Glassmorphism */}
+            <motion.div
+              className="relative backdrop-blur-lg bg-white/10 border border-white/20 p-8 md:p-12 m-4 rounded-xl shadow-2xl"
+              whileHover={{
+                y: -5,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 20px rgba(255, 255, 255, 0.1)",
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Brilho nas Bordas */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <motion.div
+                    className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/30"
+                    whileHover={{ rotate: 15, scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Brain className="w-8 h-8 text-white" />
+                  </motion.div>
+                  <div>
+                    <motion.h1
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      className="text-3xl md:text-4xl font-black text-white mb-2"
+                    >
+                      Método CPA
+                    </motion.h1>
+                    
+                    {/* Subtítulo com Animação Sequencial */}
+                    <div className="text-lg text-white/90 flex items-center gap-2">
+                      <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.4 }}
+                        className="font-medium"
+                      >
+                        Concreto
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: 0.7 }}
+                        className="text-white/70"
+                      >
+                        →
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.8 }}
+                        className="font-medium"
+                      >
+                        Pictórico
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: 1.1 }}
+                        className="text-white/70"
+                      >
+                        →
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 1.2 }}
+                        className="font-medium"
+                      >
+                        Abstrato
+                      </motion.span>
+                    </div>
+                  </div>
+                  {isEnabled('cpaExplanationTooltip') && (
+                    <CPAExplanationTooltip />
+                  )}
+                </div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="max-w-4xl"
+                >
+                  <p className="text-xl text-white/95 leading-relaxed text-justify font-light">
+                    Abordagem pedagógica comprovada do Sistema Educacional de Singapura que revoluciona o ensino da matemática através de uma progressão natural e intuitiva.
+                  </p>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* O que é o Método CPA */}
         <Card className="mb-6 shadow-card">
