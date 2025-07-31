@@ -372,31 +372,45 @@ const ComprehensibleInput = () => {
 
       {/* Key Messages */}
       <div className="grid md:grid-cols-3 gap-4">
-        <Card className="bg-gradient-learning text-white">
-          <CardContent className="p-6 text-center">
-            <Star className="w-8 h-8 mx-auto mb-3" />
-            <h3 className="font-semibold mb-2">Entender é vencer</h3>
-            <p className="text-sm opacity-90">O resto vem junto</p>
+        <Card className="bg-white border border-green-500 rounded-lg shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Star className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-foreground">Entender é vencer</h3>
+                <p className="text-sm text-muted-foreground">O resto vem junto</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
         
-        <Card className="bg-white border border-primary/20 rounded-lg shadow-sm">
-          <CardContent className="p-6 text-center">
-            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-              <Target className="w-6 h-6 text-primary" />
+        <Card className="bg-white border border-green-500 rounded-lg shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Target className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-foreground">Um degrau acima</h3>
+                <p className="text-sm text-muted-foreground">A história flui, mas tem pitadas novas</p>
+              </div>
             </div>
-            <h3 className="font-semibold mb-2 text-foreground">Um degrau acima</h3>
-            <p className="text-sm text-muted-foreground">A história flui, mas tem pitadas novas</p>
           </CardContent>
         </Card>
         
-        <Card className="bg-white border border-primary/20 rounded-lg shadow-sm">
-          <CardContent className="p-6 text-center">
-            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-              <Heart className="w-6 h-6 text-primary" />
+        <Card className="bg-white border border-green-500 rounded-lg shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Heart className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-foreground">Sem pressa, sem provas</h3>
+                <p className="text-sm text-muted-foreground">Só você, a língua e conteúdos que fazem sentido</p>
+              </div>
             </div>
-            <h3 className="font-semibold mb-2 text-foreground">Sem pressa, sem provas</h3>
-            <p className="text-sm text-muted-foreground">Só você, a língua e conteúdos que fazem sentido</p>
           </CardContent>
         </Card>
       </div>
