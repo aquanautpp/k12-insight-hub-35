@@ -173,7 +173,7 @@ const CPAMethod = () => {
       <div className="max-w-6xl mx-auto p-6">
         {/* Hero Section Melhorado */}
         <div className="relative mb-8 rounded-2xl overflow-hidden shadow-card">
-          <div className="relative bg-gradient-to-br from-primary/90 via-primary/85 to-secondary/90 p-8 md:p-12">
+          <div className="relative bg-gradient-to-br from-primary/95 via-primary/90 to-secondary/95 p-8 md:p-12">
             <div className="absolute inset-0 pattern-bg opacity-20"></div>
             
             <div className="relative z-10">
@@ -195,11 +195,11 @@ const CPAMethod = () => {
               </div>
               
               <div className="max-w-4xl">
-                <p className="text-xl text-white/90 mb-4 leading-relaxed">
+                <p className="text-xl text-white/90 mb-4 leading-relaxed text-justify">
                   Abordagem pedagógica comprovada do Sistema Educacional de Singapura que revoluciona o ensino da matemática através de uma progressão natural e intuitiva.
                 </p>
                 
-                <p className="text-lg text-white/85 leading-relaxed">
+                <p className="text-lg text-white/85 leading-relaxed text-justify">
                   O Método CPA guia o aprendizado através de três estágios fundamentais: primeiro, você manipula objetos físicos reais (Concreto), desenvolvendo uma compreensão tátil e visual dos conceitos. Em seguida, trabalha com representações visuais e diagramas (Pictórico), criando conexões mentais entre o concreto e o abstrato. Por fim, domina os símbolos e operações matemáticas formais (Abstrato), construindo sobre a base sólida estabelecida nos estágios anteriores.
                 </p>
               </div>
@@ -208,41 +208,41 @@ const CPAMethod = () => {
         </div>
 
         {/* O que é o Método CPA */}
-        <Card className="mb-8 shadow-card">
-          <CardContent className="p-8">
-            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">O que é o Método CPA?</h2>
-            <p className="text-lg text-muted-foreground mb-6 text-center max-w-4xl mx-auto">
+        <Card className="mb-6 shadow-card">
+          <CardContent className="p-6">
+            <h2 className="text-2xl font-bold text-foreground mb-4 text-center">O que é o Método CPA?</h2>
+            <p className="text-base text-muted-foreground mb-4 text-center max-w-4xl mx-auto">
               O Método CPA é uma forma diferente (e muito mais legal!) de aprender matemática. 
               Em vez de começar direto com números e fórmulas, você passa por três etapas:
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="group p-6 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
-                <div className="text-6xl mb-4">🧱</div>
-                <h3 className="text-xl font-bold text-foreground mb-3">1. Concreto</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="group p-4 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
+                <div className="text-4xl mb-3">🧱</div>
+                <h3 className="text-lg font-bold text-foreground mb-2">1. Concreto</h3>
                 <p className="text-muted-foreground">
                   Você manipula objetos reais, como cubos, blocos ou fichas.
                 </p>
               </div>
               
-              <div className="group p-6 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
-                <div className="text-6xl mb-4">🎨</div>
-                <h3 className="text-xl font-bold text-foreground mb-3">2. Pictórico</h3>
+              <div className="group p-4 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
+                <div className="text-4xl mb-3">🎨</div>
+                <h3 className="text-lg font-bold text-foreground mb-2">2. Pictórico</h3>
                 <p className="text-muted-foreground">
                   Você vê desenhos e imagens, como os famosos modelos de barras.
                 </p>
               </div>
               
-              <div className="group p-6 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
-                <div className="text-6xl mb-4">🔢</div>
-                <h3 className="text-xl font-bold text-foreground mb-3">3. Abstrato</h3>
+              <div className="group p-4 rounded-xl bg-gradient-soft border border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center">
+                <div className="text-4xl mb-3">🔢</div>
+                <h3 className="text-lg font-bold text-foreground mb-2">3. Abstrato</h3>
                 <p className="text-muted-foreground">
                   Só depois você usa números e símbolos, como fazemos em contas.
                 </p>
               </div>
             </div>
             
-            <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
+            <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
               <p className="text-foreground text-center">
                 <strong>SG Sucesso Internacional:</strong> Essa ideia veio de estudos sobre como aprendemos melhor. 
                 Singapura foi um dos primeiros países a usar esse método em todas as escolas, e deu super certo: 
