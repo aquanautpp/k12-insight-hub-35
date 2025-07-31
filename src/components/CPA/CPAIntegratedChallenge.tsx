@@ -283,7 +283,7 @@ export const CPAIntegratedChallenge = ({
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center shadow-lg">
                 🚀
               </div>
-              Pronto para o Desafio!
+              Aceita um Desafio!
             </CardTitle>
             <p className="text-center text-primary/80 text-sm font-medium">
               Acompanhe seu progresso e estatísticas em tempo real

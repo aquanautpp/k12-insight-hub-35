@@ -339,7 +339,7 @@ const CPAMethod = () => {
             {/* Call to Action para Desafio Interativo */}
             <Card className="shadow-card border-2 border-primary bg-gradient-soft">
               <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Pronto para o Desafio?</h3>
+                <h3 className="text-2xl font-bold mb-4 text-foreground">Aceita um Desafio?</h3>
                 <p className="text-lg mb-6 text-muted-foreground">
                   Agora que você conhece a teoria, experimente resolver um problema real 
                   usando os três estágios do método CPA de forma interativa!
