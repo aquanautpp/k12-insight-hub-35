@@ -79,58 +79,6 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
     },
     {
       id: "level_explorer",
-      title: "Mentor",
-      description: "Ajude 5 colegas com dúvidas",
-      icon: "🤝",
-      category: "exploration",
-      requirement: {
-        type: "reach_level",
-        target: 10,
-        current: 0
-      },
-      isUnlocked: false,
-      reward: {
-        xp: 150,
-        benefits: ["Dicas personalizadas", "Análise de padrões"]
-      }
-    },
-    {
-      id: "method_master",
-      title: "Estrategista",
-      description: "Complete 10 desafios avançados",
-      icon: "🧠",
-      category: "mastery",
-      requirement: {
-        type: "complete_activities",
-        target: 15,
-        current: 0
-      },
-      isUnlocked: true,
-      unlockedAt: new Date('2024-01-15'),
-      reward: {
-        xp: 200,
-        benefits: ["Acesso a problemas avançados"]
-      }
-    },
-    {
-      id: "visual_thinker",
-      title: "Pensador Visual",
-      description: "Resolva 50 problemas pictóricos",
-      icon: "👁️",
-      category: "mastery",
-      requirement: {
-        type: "complete_activities",
-        target: 50,
-        current: 35
-      },
-      isUnlocked: false,
-      reward: {
-        xp: 175,
-        benefits: ["Visualizações aprimoradas"]
-      }
-    },
-    {
-      id: "ai_explorer",
       title: "Explorador de IA",
       description: "Use o tutor IA 20 vezes",
       icon: "🤖",
@@ -144,6 +92,24 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
       reward: {
         xp: 125,
         benefits: ["Respostas IA mais detalhadas"]
+      }
+    },
+    {
+      id: "method_master",
+      title: "Pensador Visual",
+      description: "Resolva 50 problemas pictóricos",
+      icon: "👁️",
+      category: "mastery",
+      requirement: {
+        type: "complete_activities",
+        target: 50,
+        current: 35
+      },
+      isUnlocked: true,
+      unlockedAt: new Date('2024-01-15'),
+      reward: {
+        xp: 175,
+        benefits: ["Visualizações aprimoradas"]
       }
     }
   ]);

@@ -380,19 +380,23 @@ const ComprehensibleInput = () => {
           </CardContent>
         </Card>
         
-        <Card className="bg-gradient-achievement text-white">
+        <Card className="bg-white border border-primary/20 rounded-lg shadow-sm">
           <CardContent className="p-6 text-center">
-            <Target className="w-8 h-8 mx-auto mb-3" />
-            <h3 className="font-semibold mb-2">Um degrau acima</h3>
-            <p className="text-sm opacity-90">A história flui, mas tem pitadas novas</p>
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Target className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-semibold mb-2 text-foreground">Um degrau acima</h3>
+            <p className="text-sm text-muted-foreground">A história flui, mas tem pitadas novas</p>
           </CardContent>
         </Card>
         
-        <Card className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+        <Card className="bg-white border border-primary/20 rounded-lg shadow-sm">
           <CardContent className="p-6 text-center">
-            <Heart className="w-8 h-8 mx-auto mb-3" />
-            <h3 className="font-semibold mb-2">Sem pressa, sem provas</h3>
-            <p className="text-sm opacity-90">Só você, a língua e conteúdos que fazem sentido</p>
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Heart className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-semibold mb-2 text-foreground">Sem pressa, sem provas</h3>
+            <p className="text-sm text-muted-foreground">Só você, a língua e conteúdos que fazem sentido</p>
           </CardContent>
         </Card>
       </div>
