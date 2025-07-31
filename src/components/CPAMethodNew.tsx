@@ -756,7 +756,7 @@ const CPAMethod = () => {
         ) : (
           <>
             {/* Call to Action para Desafio Interativo */}
-            <Card className="shadow-card border-2 border-primary bg-gradient-soft">
+            <Card className="shadow-card border-2 border-primary bg-gradient-soft rounded-2xl">
               <CardContent className="p-8 text-center">
                 <h3 className="text-2xl font-bold mb-4 text-foreground">Aceita um Desafio?</h3>
                 <p className="text-lg mb-6 text-muted-foreground">
