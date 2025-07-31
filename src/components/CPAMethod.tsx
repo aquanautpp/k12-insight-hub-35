@@ -211,7 +211,7 @@ const CPAMethod = () => {
               <h2 className="text-xl font-bold text-foreground">🎯 Sua Jornada de Maestria CPA</h2>
               <Badge variant="secondary" className="animate-pulse">{completedStages.length}/3 estágios dominados</Badge>
             </div>
-            <Progress value={progressPercentage} className="h-3 mb-2" />
+            <Progress value={progressPercentage} className="h-3 mb-2 animate-scale-in" />
             <p className="text-sm text-muted-foreground">
               {progressPercentage === 100 ? '🏆 Parabéns! Você dominou completamente o método CPA!' :
                progressPercentage >= 66 ? '🚀 Quase lá! Finalize sua jornada épica!' :
