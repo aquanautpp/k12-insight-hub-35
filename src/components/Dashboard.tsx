@@ -22,10 +22,10 @@ interface DashboardProps {
 const Dashboard = ({ onViewChange }: DashboardProps) => {
   const { progress } = useProgress();
   const { xpData } = useXP();
-  const { unlockedAchievements, checkAchievements } = useAchievement();
+  const { achievements, unlockedAchievements, checkAchievements } = useAchievement();
   
   // Early return com loading se dados essenciais não estão disponíveis
-  if (!progress || !xpData || !unlockedAchievements) {
+  if (!progress || !xpData || !achievements) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -93,11 +93,11 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
     return Math.round(((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1)) * 100);
   }, [progress?.completedActivities, progress?.totalActivities]);
 
-  const displayAchievements = (unlockedAchievements && unlockedAchievements.length > 0) ? unlockedAchievements.slice(-4) : [
-    { title: 'Conhecedor', description: 'Complete sua primeira atividade', icon: '🌱' },
-    { title: 'Especialista', description: 'Alcance o nível 10', icon: '📖' },
-    { title: 'Mentor', description: 'Ajude 5 colegas com dúvidas', icon: '🤝' },
-    { title: 'Estrategista', description: 'Complete 10 desafios avançados', icon: '🧠' }
+  const displayAchievements = (achievements && achievements.length > 0) ? achievements.slice(0, 4) : [
+    { title: 'Primeiro Passo', description: 'Complete sua primeira atividade', icon: '🌱' },
+    { title: 'Explorador', description: 'Alcance o nível 5', icon: '🧭' },
+    { title: 'Dedicado', description: 'Estude por 7 dias seguidos', icon: '⚡' },
+    { title: 'Pensador', description: 'Resolva 50 problemas pictóricos', icon: '👁️' }
   ];
 
   const containerVariants = {
