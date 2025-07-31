@@ -74,11 +74,11 @@ const CPAMethod = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-primary/75">
             <div className="px-8 py-6 h-full flex items-center">
               <div className="w-full">
-                <h1 className="text-4xl font-bold text-white mb-4 animate-fade-in">
-                  Método CPA (Concreto-Pictórico-Abstrato)
+                <h1 className="text-4xl font-bold text-white mb-4">
+                  🎯 Método CPA: Aprenda Matemática de Verdade!
                 </h1>
-                <p className="text-lg text-white/95 mb-6 animate-fade-in">
-                  Abordagem pedagógica comprovada do Sistema Educacional de Singapura
+                <p className="text-lg text-white/95 mb-6">
+                  O segredo educacional de Singapura chegou até você - prepare-se para uma revolução no seu aprendizado!
                 </p>
               </div>
             </div>
