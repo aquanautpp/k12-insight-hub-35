@@ -64,31 +64,145 @@ const CPAMethod = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto p-6">
-        {/* Hero Section */}
+        {/* Hero Section - Introdução ao Método CPA */}
         <div className="relative mb-8 rounded-2xl overflow-hidden shadow-card">
           <img 
             src={cpaMethodHero}
             alt="Método CPA - Concreto, Pictórico, Abstrato"
             className="w-full h-64 object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/60 flex items-center">
-            <div className="px-8">
-              <h1 className="text-4xl font-bold text-white mb-4 animate-fade-in">
-                🇸🇬 Método CPA - Sua Jornada Rumo à Maestria
-              </h1>
-              <p className="text-xl text-white/90 mb-4 animate-fade-in">
-                Domine matemática em 3 estágios - como 1 milhão de estudantes de Singapura! 🚀
-              </p>
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 text-white">
-                <p className="text-sm mb-2">
-                  <strong>Como funciona:</strong> O método CPA guia o aprendizado através de três estágios sequenciais: 
-                  manipulação física (Concreto), representações visuais (Pictórico) e símbolos matemáticos (Abstrato). 
-                  Esta progressão garante compreensão profunda antes da abstração.
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-primary/75">
+            <div className="px-8 py-6 h-full flex items-center">
+              <div className="w-full">
+                <h1 className="text-4xl font-bold text-white mb-4 animate-fade-in">
+                  Método CPA (Concreto-Pictórico-Abstrato)
+                </h1>
+                <p className="text-lg text-white/95 mb-6 animate-fade-in">
+                  Abordagem pedagógica comprovada do Sistema Educacional de Singapura
                 </p>
               </div>
             </div>
           </div>
         </div>
+
+        {/* O que é o Método CPA */}
+        <Card className="mb-8 shadow-card">
+          <CardContent className="p-8">
+            <h2 className="text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
+              <Brain className="w-8 h-8 text-primary" />
+              O que é o Método CPA?
+            </h2>
+            
+            <p className="text-lg text-foreground mb-6 leading-relaxed">
+              O Método CPA é uma forma diferente (e muito mais legal!) de aprender matemática. 
+              Em vez de começar direto com números e fórmulas, você passa por três etapas:
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-gradient-subtle rounded-lg p-6 border border-border">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🧱</span>
+                  <h3 className="text-xl font-bold text-primary">1. Concreto</h3>
+                </div>
+                <p className="text-foreground">
+                  Você manipula objetos reais, como cubos, blocos ou fichas.
+                </p>
+              </div>
+
+              <div className="bg-gradient-subtle rounded-lg p-6 border border-border">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🎨</span>
+                  <h3 className="text-xl font-bold text-primary">2. Pictórico</h3>
+                </div>
+                <p className="text-foreground">
+                  Você vê desenhos e imagens, como os famosos modelos de barras.
+                </p>
+              </div>
+
+              <div className="bg-gradient-subtle rounded-lg p-6 border border-border">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🔢</span>
+                  <h3 className="text-xl font-bold text-primary">3. Abstrato</h3>
+                </div>
+                <p className="text-foreground">
+                  Só depois você usa números e símbolos, como fazemos em contas.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-muted/50 rounded-lg p-6 mb-6">
+              <p className="text-foreground leading-relaxed">
+                Essa ideia veio de estudos sobre como aprendemos melhor. Singapura foi um dos primeiros países 
+                a usar esse método em todas as escolas, e deu super certo: <strong>os alunos de lá estão entre 
+                os melhores do mundo em matemática!</strong>
+              </p>
+            </div>
+
+            <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+              <PlayCircle className="w-6 h-6 text-primary" />
+              Como funciona na prática?
+            </h3>
+            
+            <p className="text-foreground mb-4 leading-relaxed">
+              Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram 
+              imagens e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
+            </p>
+
+            <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 mb-6">
+              <h4 className="font-bold text-foreground mb-3">Por exemplo:</h4>
+              <ul className="space-y-2 text-foreground">
+                <li className="flex items-start gap-2">
+                  <ArrowRight className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                  Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.
+                </li>
+                <li className="flex items-start gap-2">
+                  <ArrowRight className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                  Depois, desenha as fatias.
+                </li>
+                <li className="flex items-start gap-2">
+                  <ArrowRight className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                  Só então faz a conta com números.
+                </li>
+              </ul>
+            </div>
+
+            <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+              <CheckCircle className="w-6 h-6 text-primary" />
+              Por que isso funciona?
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                <span className="text-foreground">Você entende melhor, em vez de só memorizar.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                <span className="text-foreground">Aprende a resolver problemas sozinho, sem decorar fórmula.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                <span className="text-foreground">Evita confusões porque cada passo tem sentido.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                <span className="text-foreground">Fica mais confiante para usar a matemática no mundo real.</span>
+              </div>
+            </div>
+
+            <div className="bg-gradient-achievement rounded-lg p-6 text-white">
+              <h4 className="font-bold mb-3 flex items-center gap-2">
+                <Sparkles className="w-5 h-5" />
+                O Segredo do Sucesso de Singapura
+              </h4>
+              <p className="leading-relaxed">
+                O CPA é usado em Singapura há décadas — e os alunos de lá sempre estão no topo dos rankings 
+                internacionais. Não é porque são gênios: é porque o método respeita o seu tempo de aprender 
+                e ajuda você a realmente <strong>pensar com a matemática</strong>, e não só repetir.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Progress Indicator */}
         <Card className="mb-8 shadow-card">
