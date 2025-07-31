@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, Sparkles } from "lucide-react";
+import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, Sparkles, Pizza, Edit3, FileText } from "lucide-react";
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 
 type Stage = 'concrete' | 'pictorial' | 'abstract';
@@ -138,39 +138,45 @@ const CPAMethod = () => {
               </p>
             </div>
 
-            <div className="ultra-modern-practice-section">
-              <div className="modern-header-container">
-                <div className="icon-wrapper">
-                  <PlayCircle className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="modern-title">Como funciona na prática?</h3>
+            <div className="practice-section">
+              <div className="flex items-center gap-3 mb-4">
+                <PlayCircle className="w-5 h-5 text-primary" />
+                <h3 className="text-xl font-semibold text-foreground">Como funciona na prática?</h3>
               </div>
               
-              <p className="modern-description">
+              <p className="text-foreground mb-6 leading-relaxed">
                 Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram 
                 imagens e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
               </p>
 
-              <div className="practice-steps-grid">
-                <div className="step-card">
-                  <div className="step-number">1</div>
-                  <div className="step-icon">🍕</div>
-                  <h5 className="step-title">Primeiro</h5>
-                  <p className="step-description">Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.</p>
+              <h4 className="text-lg font-medium text-foreground mb-6">Por exemplo, para aprender frações:</h4>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="practice-card">
+                  <div className="practice-number">1</div>
+                  <div className="practice-icon-wrapper">
+                    <Pizza className="w-6 h-6 text-primary practice-icon" />
+                  </div>
+                  <h5 className="practice-title">Primeiro</h5>
+                  <p className="practice-description">Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.</p>
                 </div>
                 
-                <div className="step-card">
-                  <div className="step-number">2</div>
-                  <div className="step-icon">✏️</div>
-                  <h5 className="step-title">Depois</h5>
-                  <p className="step-description">Desenha as fatias no papel, visualizando as partes da pizza.</p>
+                <div className="practice-card">
+                  <div className="practice-number">2</div>
+                  <div className="practice-icon-wrapper">
+                    <Edit3 className="w-6 h-6 text-primary practice-icon" />
+                  </div>
+                  <h5 className="practice-title">Depois</h5>
+                  <p className="practice-description">Desenha as fatias no papel, visualizando as partes da pizza.</p>
                 </div>
                 
-                <div className="step-card">
-                  <div className="step-number">3</div>
-                  <div className="step-icon">📝</div>
-                  <h5 className="step-title">Por último</h5>
-                  <p className="step-description">Só então faz a conta com números e símbolos matemáticos.</p>
+                <div className="practice-card">
+                  <div className="practice-number">3</div>
+                  <div className="practice-icon-wrapper">
+                    <FileText className="w-6 h-6 text-primary practice-icon" />
+                  </div>
+                  <h5 className="practice-title">Por último</h5>
+                  <p className="practice-description">Só então faz a conta com números e símbolos matemáticos.</p>
                 </div>
               </div>
             </div>
