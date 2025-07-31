@@ -144,7 +144,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
               <img 
                 src="/lovable-uploads/2639b08c-e703-4d6d-a73b-7b0cb9566448.png" 
                 alt="MANTHA Logo" 
-                className="w-12 h-12 object-contain"
+                className="w-12 h-12 object-contain filter brightness-0 invert"
               />
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">

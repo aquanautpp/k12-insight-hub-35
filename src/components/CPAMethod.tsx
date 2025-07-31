@@ -199,10 +199,10 @@ const CPAMethod = () => {
         </Card>
 
         {/* Benefits Section */}
-        <div className="mt-24">
+        <div className="mt-16">
           <h2 className="text-xl font-bold text-foreground mb-6">Benefícios do Método CPA</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="bg-white border border-green-600 rounded-lg shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="border border-green-600 bg-green-50/50 rounded-lg shadow-sm">
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Brain className="w-6 h-6 text-green-600" />
@@ -214,7 +214,7 @@ const CPAMethod = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-white border border-green-600 rounded-lg shadow-sm">
+            <Card className="border border-green-600 bg-green-50/50 rounded-lg shadow-sm">
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Calculator className="w-6 h-6 text-green-600" />
@@ -226,7 +226,7 @@ const CPAMethod = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-white border border-green-600 rounded-lg shadow-sm">
+            <Card className="border border-green-600 bg-green-50/50 rounded-lg shadow-sm">
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Eye className="w-6 h-6 text-green-600" />
