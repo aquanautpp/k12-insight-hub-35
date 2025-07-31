@@ -141,7 +141,11 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
             className="flex flex-col items-center space-y-6 max-w-4xl mx-auto px-6 text-center"
           >
             <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 animate-pulse-glow">
-              <Brain className="w-10 h-10 text-white" />
+              <img 
+                src="/lovable-uploads/2639b08c-e703-4d6d-a73b-7b0cb9566448.png" 
+                alt="MANTHA Logo" 
+                className="w-12 h-12 object-contain"
+              />
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
               Bem-vindo ao <span className="text-gold">Mantha</span>
