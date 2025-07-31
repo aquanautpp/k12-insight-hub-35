@@ -3,7 +3,7 @@ import { AppSidebar } from "@/components/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Dashboard from "@/components/Dashboard";
-import CPAMethod from "@/components/CPAMethodNew";
+import CPAMethod from "@/components/CPAMethodSimple";
 import ManthaChatTutor from "@/components/ManthaChatTutor";
 import LearningStyleTest from "@/components/LearningStyleTest";
 import ProgressView from "@/components/ProgressView";

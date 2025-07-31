@@ -415,7 +415,7 @@ export const ManthaLogoInteractive: React.FC<ManthaLogoInteractiveProps> = ({
 
               {/* Content */}
               <div className="space-y-3">
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed text-justify">
                   O símbolo une dois conceitos: a majestosa arraia-manta, conhecida por sua inteligência 
                   e movimentos fluidos, com uma rede neural em seu interior - representando como o aprendizado 
                   cria conexões em nossa mente. Mantha deriva de <span className="font-medium text-primary">μανθάνω (manthano)</span>, 
