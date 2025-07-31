@@ -14,6 +14,7 @@ import { AnimatedCounter } from './AnimatedCounter';
 import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
 import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
+import logoImage from '@/assets/mantha-logo.png';
 
 interface DashboardProps {
   onViewChange?: (view: string) => void;
@@ -142,7 +143,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
           >
             <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 animate-pulse-glow">
               <img 
-                src="/lovable-uploads/2639b08c-e703-4d6d-a73b-7b0cb9566448.png" 
+                src={logoImage}
                 alt="MANTHA Logo" 
                 className="w-12 h-12 object-contain filter brightness-0 invert"
               />

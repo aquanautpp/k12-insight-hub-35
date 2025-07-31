@@ -13,6 +13,7 @@ import {
   Globe
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import logoImage from '@/assets/mantha-logo.png';
 import {
   Sidebar,
   SidebarContent,
@@ -96,17 +97,20 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
             >
               <div className="flex items-center space-x-3">
                  <div className="flex aspect-square size-10 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
-                   <img 
-                     src="/lovable-uploads/2639b08c-e703-4d6d-a73b-7b0cb9566448.png" 
-                     alt="MANTHA Logo" 
-                     className="size-8 object-contain"
-                     onError={(e) => {
-                       console.log('Erro ao carregar logo:', e);
-                       // Fallback para texto se a imagem falhar
-                       e.currentTarget.style.display = 'none';
-                       e.currentTarget.parentElement!.innerHTML = '<span class="text-primary font-bold text-sm">M</span>';
-                     }}
-                   />
+                    <img 
+                      src={logoImage} 
+                      alt="MANTHA Logo" 
+                      className="size-8 object-contain"
+                      onLoad={() => console.log('Logo carregado com sucesso')}
+                      onError={(e) => {
+                        console.error('Erro ao carregar logo:', e);
+                        // Fallback para texto se a imagem falhar
+                        e.currentTarget.style.display = 'none';
+                        if (e.currentTarget.parentElement) {
+                          e.currentTarget.parentElement.innerHTML = '<span class="text-primary font-bold text-sm">M</span>';
+                        }
+                      }}
+                    />
                  </div>
                 {state !== "collapsed" && (
                   <div className="grid flex-1 text-left leading-tight">
