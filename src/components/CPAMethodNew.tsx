@@ -152,8 +152,8 @@ const CPAMethod = () => {
         ease: "easeOut"
       }} className="relative mb-8 rounded-2xl overflow-hidden">
           <div className="relative">
-            {/* Gradiente Mais Escuro */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/80 to-primary/85 animate-gradient-shift bg-400% opacity-95"></div>
+             {/* Fundo sólido com cor primária */}
+             <div className="absolute inset-0 bg-primary"></div>
             
             {/* Mais Elementos Flutuantes Geométricos */}
             <div className="absolute inset-0 overflow-hidden">
