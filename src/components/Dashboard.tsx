@@ -154,7 +154,7 @@ const Dashboard = ({
             {/* Logo Mantha Completo */}
             <div className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full">
               <div className="w-[180px] md:w-[220px] lg:w-[260px] h-[120px] md:h-[140px] lg:h-[160px] flex items-center justify-center mx-auto bg-transparent">
-                <img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[220px] md:w-[260px] lg:w-[300px] h-auto p-2" />
+                <img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2" />
               </div>
             </div>
             <div className="mt-0">
