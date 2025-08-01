@@ -86,7 +86,7 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
   return (
     <Sidebar 
       collapsible="icon" 
-      className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-20" : "w-64"}`}
+      className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-24" : "w-64"}`}
     >
       <SidebarHeader className="border-b border-border/30 p-6">
         <SidebarMenu>
