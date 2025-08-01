@@ -151,12 +151,14 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
                 />
               </div>
             </div>
-            <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-              Bem-vindo à Mantha!
-            </h1>
-            <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto mb-8">
-              Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
-            </p>
+            <div className="-mt-20">
+              <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
+                Bem-vindo à Mantha!
+              </h1>
+              <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto mb-8">
+                Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
+              </p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <Button 
                 size="lg" 
