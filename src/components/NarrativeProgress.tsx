@@ -15,7 +15,8 @@ import {
   Users,
   Lightbulb,
   Calendar,
-  BarChart3
+  BarChart3,
+  Sparkles
 } from "lucide-react";
 
 interface NarrativeMilestone {
@@ -306,28 +307,28 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
               
               <div className="space-y-2">
                 {[
-                  { key: "joy", label: "Alegria", icon: "Target" },
-                  { key: "pride", label: "Orgulho", icon: "Brain" }, 
-                  { key: "determination", label: "Determinação", icon: "Target" },
-                  { key: "wonder", label: "Admiração", icon: "Users" }
-                ].map((emotion) => {
-                  const count = milestones.filter(m => m.emotion === emotion.key).length;
-                  const percentage = milestones.length > 0 ? (count / milestones.length) * 100 : 0;
+                  { key: "autoconsciencia", label: "Autoconsciência Emocional", icon: "Brain", progress: 75 },
+                  { key: "autorregulacao", label: "Autorregulação Emocional", icon: "Heart", progress: 50 }, 
+                  { key: "automotivacao", label: "Automotivação & Resiliência", icon: "Target", progress: 30 },
+                  { key: "empatia", label: "Empatia & Consciência Social", icon: "Users", progress: 10 },
+                  { key: "habilidades_sociais", label: "Habilidades Sociais", icon: "Sparkles", progress: 0 }
+                ].map((component) => {
                   
-                  const IconComponent = emotion.icon === "Target" ? Target : 
-                                       emotion.icon === "Brain" ? Brain :
-                                       emotion.icon === "Users" ? Users : Target;
+                  const IconComponent = component.icon === "Brain" ? Brain : 
+                                       component.icon === "Heart" ? Heart :
+                                       component.icon === "Target" ? Target :
+                                       component.icon === "Users" ? Users : Sparkles;
                   
                   return (
-                    <div key={emotion.key} className="space-y-1">
+                    <div key={component.key} className="space-y-1">
                       <div className="flex justify-between items-center text-sm">
                         <div className="flex items-center gap-2">
                           <IconComponent className="w-4 h-4 text-primary" />
-                          <span>{emotion.label}</span>
+                          <span>{component.label}</span>
                         </div>
-                        <span className="text-primary font-medium">{count}</span>
+                        <span className="text-primary font-medium">{component.progress}%</span>
                       </div>
-                      <Progress value={percentage} className="h-1" />
+                      <Progress value={component.progress} className="h-1" />
                     </div>
                   );
                 })}
