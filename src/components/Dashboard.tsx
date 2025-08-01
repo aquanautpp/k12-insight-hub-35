@@ -163,7 +163,7 @@ const Dashboard = ({
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 -mt-4">
+            <div className="flex flex-col sm:flex-row gap-4 -mt-8">
               <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}>
                 Ver Progresso
                 <TrendingUp className="ml-2 h-4 w-4" />
