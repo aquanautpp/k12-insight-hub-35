@@ -144,7 +144,7 @@ const ComprehensibleInput = () => {
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
           Descubra métodos eficazes para dominar novos idiomas através do Comprehensible Input
         </p>
-        <div className="mb-6 p-6 bg-white/90 rounded-lg max-w-6xl mx-auto border border-primary">
+        <div className="mb-6 p-6 bg-white/90 rounded-2xl max-w-6xl mx-auto border border-primary">
           <h3 className="font-semibold text-black mb-4 text-lg">📚 O que é Comprehensible Input?</h3>
           <p className="mb-4 text-black text-justify leading-relaxed">
             O Comprehensible Input é uma teoria fundamental na aquisição de segunda língua, popularizada pelo linguista Stephen Krashen. A hipótese central de Krashen é que a aquisição de uma segunda língua ocorre quando os aprendizes são expostos a uma linguagem que eles podem entender, mesmo que contenha estruturas e vocabulário ligeiramente além de seu nível atual de proficiência.
