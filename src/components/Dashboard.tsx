@@ -337,7 +337,7 @@ const Dashboard = ({
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {displayAchievements.map((achievement, index) => <div key={index} className="text-center p-4 rounded-lg transition-all hover-scale bg-white border border-primary">
+                {displayAchievements.map((achievement, index) => <div key={index} className="text-center p-4 rounded-xl transition-all hover-scale bg-white border border-primary">
                     <div className="text-2xl mb-2">{achievement.icon}</div>
                     <h4 className="font-medium text-sm mb-1">{achievement.title}</h4>
                     <p className="text-xs text-muted-foreground">{achievement.description}</p>
