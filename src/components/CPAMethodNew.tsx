@@ -187,7 +187,7 @@ const CPAMethod = () => {
             ease: "easeOut"
           }}>
               {/* Brilho Dinâmico nas Bordas */}
-              <motion.div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
+              <motion.div style={{
               background: "linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.1), transparent)",
               backgroundSize: "200% 200%"
             }} animate={{
@@ -196,12 +196,12 @@ const CPAMethod = () => {
               duration: 3,
               repeat: Infinity,
               ease: "linear"
-            }}></motion.div>
+            }} className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#77874a]/45"></motion.div>
               
               <div className="relative z-10">
                 <div className="flex items-center gap-6 mb-8">
                   {/* Ícone com Pulsação Avançada - Tamanho Reduzido */}
-                  <motion.div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/30 shadow-lg" animate={{
+                  <motion.div animate={{
                   scale: [1, 1.05, 1],
                   boxShadow: ["0 4px 20px rgba(255,255,255,0.1)", "0 8px 30px rgba(255,255,255,0.2)", "0 4px 20px rgba(255,255,255,0.1)"]
                 }} transition={{
@@ -214,7 +214,7 @@ const CPAMethod = () => {
                   transition: {
                     duration: 0.5
                   }
-                }}>
+                }} className="w-16 h-16 bg-white/20 flex items-center justify-center backdrop-blur-sm border border-white/30 shadow-lg rounded-lg">
                     <Brain className="w-8 h-8 text-white filter drop-shadow-lg" />
                   </motion.div>
                   
@@ -229,9 +229,9 @@ const CPAMethod = () => {
                   }} transition={{
                     duration: 0.8,
                     delay: 0.3
-                  }} className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight" style={{
+                  }} style={{
                     textShadow: "0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1)"
-                  }}>
+                  }} className="text-3xl md:text-4xl text-white mb-3 tracking-tight font-semibold">
                       Método CPA
                     </motion.h1>
                     
@@ -249,7 +249,7 @@ const CPAMethod = () => {
                       duration: 0.5,
                       delay: 0.6,
                       type: "spring"
-                    }} className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                    }} className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20 text-white">
                         Concreto
                       </motion.span>
                       
