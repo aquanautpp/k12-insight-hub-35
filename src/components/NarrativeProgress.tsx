@@ -120,20 +120,20 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
           {/* Key Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-primary">{currentLevel}</div>
-              <div className="text-sm text-primary/70">Nível Atual</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{currentLevel}</div>
+              <div className="text-sm text-foreground/70">Nível Atual</div>
             </div>
             <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-primary">{totalXP.toLocaleString()}</div>
-              <div className="text-sm text-primary/70">XP Total</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{totalXP.toLocaleString()}</div>
+              <div className="text-sm text-foreground/70">XP Total</div>
             </div>
             <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-primary">{streak}</div>
-              <div className="text-sm text-primary/70">Dias Seguidos</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{streak}</div>
+              <div className="text-sm text-foreground/70">Dias Seguidos</div>
             </div>
             <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-primary">{milestones.length}</div>
-              <div className="text-sm text-primary/70">Marcos Históricos</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{milestones.length}</div>
+              <div className="text-sm text-foreground/70">Marcos Históricos</div>
             </div>
           </div>
         </div>
