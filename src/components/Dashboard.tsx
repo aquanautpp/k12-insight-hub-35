@@ -151,7 +151,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
                 />
               </div>
             </div>
-            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
               Bem-vindo à Mantha!
             </h1>
             <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto mb-8">
