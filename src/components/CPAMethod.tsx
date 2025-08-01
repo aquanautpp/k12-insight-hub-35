@@ -144,41 +144,46 @@ const CPAMethod = () => {
                 <h3 className="text-xl font-semibold text-foreground">Como funciona na prática?</h3>
               </div>
               
-              <p className="text-foreground mb-6 leading-relaxed">
+              <p className="text-foreground mb-4 text-sm leading-relaxed">
                 Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram 
                 imagens e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
               </p>
 
-              <h4 className="text-lg font-medium text-foreground mb-6">Por exemplo, para aprender frações:</h4>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="practice-card">
-                  <div className="practice-number">1</div>
-                  <div className="practice-icon-wrapper">
-                    <Pizza className="w-6 h-6 text-primary practice-icon" />
-                  </div>
-                  <h5 className="practice-title">Primeiro</h5>
-                  <p className="practice-description">Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.</p>
-                </div>
+              <details className="group bg-muted/30 rounded-lg p-4 border border-border hover:bg-muted/50 transition-all duration-200 cursor-pointer">
+                <summary className="font-medium text-foreground flex items-center gap-2 list-none">
+                  <ArrowRight className="w-4 h-4 transition-transform group-open:rotate-90" />
+                  Por exemplo, para aprender frações:
+                </summary>
                 
-                <div className="practice-card">
-                  <div className="practice-number">2</div>
-                  <div className="practice-icon-wrapper">
-                    <Edit3 className="w-6 h-6 text-primary practice-icon" />
+                <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="practice-card-compact">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="practice-number-small">1</div>
+                      <Pizza className="w-4 h-4 text-primary" />
+                    </div>
+                    <h5 className="text-sm font-medium text-foreground mb-1">Primeiro</h5>
+                    <p className="text-xs text-muted-foreground">Corta uma pizza de brinquedo</p>
                   </div>
-                  <h5 className="practice-title">Depois</h5>
-                  <p className="practice-description">Desenha as fatias no papel, visualizando as partes da pizza.</p>
-                </div>
-                
-                <div className="practice-card">
-                  <div className="practice-number">3</div>
-                  <div className="practice-icon-wrapper">
-                    <FileText className="w-6 h-6 text-primary practice-icon" />
+                  
+                  <div className="practice-card-compact">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="practice-number-small">2</div>
+                      <Edit3 className="w-4 h-4 text-primary" />
+                    </div>
+                    <h5 className="text-sm font-medium text-foreground mb-1">Depois</h5>
+                    <p className="text-xs text-muted-foreground">Desenha as fatias no papel</p>
                   </div>
-                  <h5 className="practice-title">Por último</h5>
-                  <p className="practice-description">Só então faz a conta com números e símbolos matemáticos.</p>
+                  
+                  <div className="practice-card-compact">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="practice-number-small">3</div>
+                      <FileText className="w-4 h-4 text-primary" />
+                    </div>
+                    <h5 className="text-sm font-medium text-foreground mb-1">Por último</h5>
+                    <p className="text-xs text-muted-foreground">Faz a conta com números</p>
+                  </div>
                 </div>
-              </div>
+              </details>
             </div>
 
             <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
