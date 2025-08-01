@@ -108,8 +108,8 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
       <Card className="sophisticated-reveal premium-gradient-morph">
         <div className="p-8 text-center text-primary-foreground">
           <div className="mb-6">
-            <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4 float-animation">
-              <BarChart3 className="w-10 h-10 text-primary-foreground" />
+            <div className="w-20 h-20 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mx-auto mb-4 float-animation">
+              <BarChart3 className="w-10 h-10 text-primary" />
             </div>
             <h2 className="text-2xl font-bold mb-2 elegant-text-reveal text-foreground">Sua História de Conquistas</h2>
             <p className="text-foreground/90 elegant-text-reveal">
@@ -119,21 +119,21 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
 
           {/* Key Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="thoughtful-interaction bg-white/10 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-foreground">{currentLevel}</div>
-              <div className="text-sm text-foreground/80">Nível Atual</div>
+            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
+              <div className="text-2xl font-bold mb-1 text-primary">{currentLevel}</div>
+              <div className="text-sm text-primary/70">Nível Atual</div>
             </div>
-            <div className="thoughtful-interaction bg-white/10 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-foreground">{totalXP.toLocaleString()}</div>
-              <div className="text-sm text-foreground/80">XP Total</div>
+            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
+              <div className="text-2xl font-bold mb-1 text-primary">{totalXP.toLocaleString()}</div>
+              <div className="text-sm text-primary/70">XP Total</div>
             </div>
-            <div className="thoughtful-interaction bg-white/10 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-foreground">{streak}</div>
-              <div className="text-sm text-foreground/80">Dias Seguidos</div>
+            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
+              <div className="text-2xl font-bold mb-1 text-primary">{streak}</div>
+              <div className="text-sm text-primary/70">Dias Seguidos</div>
             </div>
-            <div className="thoughtful-interaction bg-white/10 rounded-lg p-4">
-              <div className="text-2xl font-bold mb-1 text-foreground">{milestones.length}</div>
-              <div className="text-sm text-foreground/80">Marcos Históricos</div>
+            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
+              <div className="text-2xl font-bold mb-1 text-primary">{milestones.length}</div>
+              <div className="text-sm text-primary/70">Marcos Históricos</div>
             </div>
           </div>
         </div>
@@ -305,15 +305,27 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
               <h4 className="font-semibold text-foreground mb-3">Jornada Emocional</h4>
               
               <div className="space-y-2">
-                {["joy", "pride", "determination", "wonder"].map((emotion) => {
-                  const count = milestones.filter(m => m.emotion === emotion).length;
+                {[
+                  { key: "joy", label: "Alegria", icon: "Target" },
+                  { key: "pride", label: "Orgulho", icon: "Brain" }, 
+                  { key: "determination", label: "Determinação", icon: "Target" },
+                  { key: "wonder", label: "Admiração", icon: "Users" }
+                ].map((emotion) => {
+                  const count = milestones.filter(m => m.emotion === emotion.key).length;
                   const percentage = milestones.length > 0 ? (count / milestones.length) * 100 : 0;
                   
+                  const IconComponent = emotion.icon === "Target" ? Target : 
+                                       emotion.icon === "Brain" ? Brain :
+                                       emotion.icon === "Users" ? Users : Target;
+                  
                   return (
-                    <div key={emotion} className="space-y-1">
-                      <div className="flex justify-between text-sm">
-                        <span className="capitalize">{emotion === "joy" ? "Alegria" : emotion === "pride" ? "Orgulho" : emotion === "determination" ? "Determinação" : "Admiração"}</span>
-                        <span>{count}</span>
+                    <div key={emotion.key} className="space-y-1">
+                      <div className="flex justify-between items-center text-sm">
+                        <div className="flex items-center gap-2">
+                          <IconComponent className="w-4 h-4 text-primary" />
+                          <span>{emotion.label}</span>
+                        </div>
+                        <span className="text-primary font-medium">{count}</span>
                       </div>
                       <Progress value={percentage} className="h-1" />
                     </div>
