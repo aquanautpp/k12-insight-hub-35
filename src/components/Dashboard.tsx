@@ -158,15 +158,13 @@ const Dashboard = ({
                 opacity: 0,
                 y: 80,
                 x: -60,
-                scale: 0.8,
-                rotate: -12
+                scale: 0.8
               }}
               animate={{ 
                 opacity: 1,
                 y: [80, 60, 40, 20, 5, 0],
                 x: [-60, -40, -20, 10, 5, 0],
-                scale: [0.8, 0.85, 0.92, 0.98, 1.02, 1],
-                rotate: [-12, -8, -4, 2, 1, 0]
+                scale: [0.8, 0.85, 0.92, 0.98, 1.02, 1]
               }}
               transition={{
                 duration: 3.5,
@@ -189,11 +187,6 @@ const Dashboard = ({
                   duration: 3.5,
                   ease: "easeOut",
                   times: [0, 0.2, 0.4, 0.6, 0.8, 1]
-                },
-                rotate: {
-                  duration: 3.5,
-                  ease: "easeInOut",
-                  times: [0, 0.2, 0.4, 0.6, 0.8, 1]
                 }
               }}
             >
@@ -203,13 +196,9 @@ const Dashboard = ({
                   alt="MANTHA - Educação Personalizada" 
                   className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2"
                   initial={{ 
-                    rotateY: 15,
-                    rotateX: 8,
                     scale: 0.95
                   }}
                   animate={{ 
-                    rotateY: [15, 10, 5, -2, 1, 0],
-                    rotateX: [8, 5, 2, -1, 0.5, 0],
                     scale: [0.95, 0.96, 0.98, 1.01, 1.005, 1]
                   }}
                   transition={{
