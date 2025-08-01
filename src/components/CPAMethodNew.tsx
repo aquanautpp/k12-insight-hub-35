@@ -196,7 +196,7 @@ const CPAMethod = () => {
               duration: 3,
               repeat: Infinity,
               ease: "linear"
-            }} className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#77874a]/45"></motion.div>
+            }} className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#7d8e4d]/[0.72]"></motion.div>
               
               <div className="relative z-10">
                 <div className="flex items-center gap-6 mb-8">
