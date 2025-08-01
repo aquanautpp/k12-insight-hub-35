@@ -156,37 +156,27 @@ const Dashboard = ({
               className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full"
               initial={{ 
                 opacity: 0,
-                y: 60,
-                x: -30,
-                scale: 0.8,
-                rotate: -15
+                y: 80,
+                x: -60,
+                scale: 0.7,
+                rotate: -20
               }}
               animate={{ 
-                opacity: 1,
-                y: 0,
-                x: 0,
-                scale: 1,
-                rotate: 0
+                opacity: [0, 0.3, 0.7, 1],
+                y: [80, 40, -10, 5, 0],
+                x: [-60, -20, 15, -5, 0],
+                scale: [0.7, 0.85, 1.05, 0.98, 1],
+                rotate: [-20, -10, 8, -3, 0],
+                rotateY: [30, -15, 10, -5, 0]
               }}
               transition={{
-                duration: 3.5,
-                ease: [0.16, 1, 0.3, 1],
+                duration: 4,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                times: [0, 0.3, 0.6, 0.85, 1],
                 y: {
                   type: "spring",
-                  stiffness: 50,
-                  damping: 10
-                },
-                x: {
-                  duration: 3,
-                  ease: "easeOut"
-                },
-                rotate: {
-                  duration: 2.5,
-                  ease: "easeOut"
-                },
-                scale: {
-                  duration: 2,
-                  ease: "easeOut"
+                  stiffness: 40,
+                  damping: 8
                 }
               }}
             >
@@ -195,17 +185,14 @@ const Dashboard = ({
                   src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" 
                   alt="MANTHA - Educação Personalizada" 
                   className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2"
-                  initial={{ 
-                    rotateY: 25,
-                    rotateX: 10 
-                  }}
                   animate={{ 
-                    rotateY: 0,
-                    rotateX: 0 
+                    rotateX: [0, -5, 3, -2, 0],
+                    skewX: [0, 2, -1, 0.5, 0]
                   }}
                   transition={{
-                    duration: 3.5,
-                    ease: [0.16, 1, 0.3, 1],
+                    duration: 4,
+                    ease: "easeInOut",
+                    times: [0, 0.25, 0.5, 0.75, 1],
                     delay: 0.5
                   }}
                 />
