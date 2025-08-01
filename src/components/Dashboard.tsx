@@ -153,11 +153,11 @@ const Dashboard = ({
         }} className="flex flex-col items-center space-y-6 max-w-2xl mx-auto px-6 text-center">
             {/* Logo Mantha Completo */}
             <div className="mantha-logo-container mb-0 mx-0 px-0 my-0 py-0">
-              <div className="w-[200px] md:w-[260px] lg:w-[320px] h-[200px] md:h-[260px] lg:h-[320px] rounded-full flex items-center justify-center mx-auto bg-transparent -mt-8 my-[2px]">
-                <img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[180px] md:w-[220px] lg:w-[260px] h-auto p-2" />
+              <div className="w-[240px] md:w-[300px] lg:w-[360px] h-[240px] md:h-[300px] lg:h-[360px] rounded-full flex items-center justify-center mx-auto bg-transparent -mt-12 my-[2px]">
+                <img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[220px] md:w-[260px] lg:w-[300px] h-auto p-2" />
               </div>
             </div>
-            <div className="-mt-24 my-0">
+            <div className="-mt-28 my-0">
               <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">Bem-vindo à <span className="text-yellow-400">Mantha</span>!</h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mb-2 mx-0 my-0">
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
