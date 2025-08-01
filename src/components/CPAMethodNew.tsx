@@ -9,140 +9,117 @@ import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
 import { CPAExplanationTooltip } from "./CPAExplanationTooltip";
 import { useFeatureFlags } from "@/contexts/FeatureFlagsContext";
 import { motion } from "framer-motion";
-
 type Stage = 'concrete' | 'pictorial' | 'abstract';
-
 const CPAMethod = () => {
   const [currentStage, setCurrentStage] = useState<Stage>('concrete');
   const [completedStages, setCompletedStages] = useState<Stage[]>([]);
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showInteractiveChallenge, setShowInteractiveChallenge] = useState(false);
-  
-  const { isEnabled } = useFeatureFlags();
-
+  const {
+    isEnabled
+  } = useFeatureFlags();
   const stages = {
     concrete: {
       title: "Estágio Concreto",
       description: "Aprendizagem através da manipulação física de objetos",
       icon: "🧱",
-      examples: [
-        {
-          problem: "Ana tem 5 maçãs. Ela deu 2 para seu irmão. Quantas maçãs sobraram?",
-          solution: "5 - 2 = 3 maçãs",
-          visualization: "🍎🍎🍎🍎🍎 → 🍎🍎🍎 (3 maçãs restantes)",
-          explanation: "Use maçãs reais ou objetos físicos para contar e subtrair."
-        },
-        {
-          problem: "João coletou 8 conchas na praia. Ele perdeu 3 no caminho. Quantas sobraram?",
-          solution: "8 - 3 = 5 conchas",
-          visualization: "🐚🐚🐚🐚🐚🐚🐚🐚 → 🐚🐚🐚🐚🐚 (5 conchas restantes)",
-          explanation: "Manipule conchas reais para visualizar a subtração."
-        },
-        {
-          problem: "Maria tem 6 lápis. Ela comprou mais 4. Quantos lápis ela tem agora?",
-          solution: "6 + 4 = 10 lápis",
-          visualization: "✏️✏️✏️✏️✏️✏️ + ✏️✏️✏️✏️ = 10 lápis",
-          explanation: "Use lápis reais para somar e contar o total."
-        },
-        {
-          problem: "Pedro dividiu 12 biscoitos igualmente entre 3 amigos. Quantos cada um recebeu?",
-          solution: "12 ÷ 3 = 4 biscoitos",
-          visualization: "🍪🍪🍪🍪 | 🍪🍪🍪🍪 | 🍪🍪🍪🍪 (4 para cada)",
-          explanation: "Distribua biscoitos reais em grupos iguais."
-        },
-        {
-          problem: "Uma caixa tem 15 bolas. Se tiramos 7 bolas, quantas ficam?",
-          solution: "15 - 7 = 8 bolas",
-          visualization: "⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽ → ⚽⚽⚽⚽⚽⚽⚽⚽ (8 bolas)",
-          explanation: "Use bolas físicas para remover e contar o que sobra."
-        }
-      ]
+      examples: [{
+        problem: "Ana tem 5 maçãs. Ela deu 2 para seu irmão. Quantas maçãs sobraram?",
+        solution: "5 - 2 = 3 maçãs",
+        visualization: "🍎🍎🍎🍎🍎 → 🍎🍎🍎 (3 maçãs restantes)",
+        explanation: "Use maçãs reais ou objetos físicos para contar e subtrair."
+      }, {
+        problem: "João coletou 8 conchas na praia. Ele perdeu 3 no caminho. Quantas sobraram?",
+        solution: "8 - 3 = 5 conchas",
+        visualization: "🐚🐚🐚🐚🐚🐚🐚🐚 → 🐚🐚🐚🐚🐚 (5 conchas restantes)",
+        explanation: "Manipule conchas reais para visualizar a subtração."
+      }, {
+        problem: "Maria tem 6 lápis. Ela comprou mais 4. Quantos lápis ela tem agora?",
+        solution: "6 + 4 = 10 lápis",
+        visualization: "✏️✏️✏️✏️✏️✏️ + ✏️✏️✏️✏️ = 10 lápis",
+        explanation: "Use lápis reais para somar e contar o total."
+      }, {
+        problem: "Pedro dividiu 12 biscoitos igualmente entre 3 amigos. Quantos cada um recebeu?",
+        solution: "12 ÷ 3 = 4 biscoitos",
+        visualization: "🍪🍪🍪🍪 | 🍪🍪🍪🍪 | 🍪🍪🍪🍪 (4 para cada)",
+        explanation: "Distribua biscoitos reais em grupos iguais."
+      }, {
+        problem: "Uma caixa tem 15 bolas. Se tiramos 7 bolas, quantas ficam?",
+        solution: "15 - 7 = 8 bolas",
+        visualization: "⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽ → ⚽⚽⚽⚽⚽⚽⚽⚽ (8 bolas)",
+        explanation: "Use bolas físicas para remover e contar o que sobra."
+      }]
     },
     pictorial: {
-      title: "Estágio Pictórico", 
+      title: "Estágio Pictórico",
       description: "Representação visual através de desenhos e diagramas",
       icon: "🎨",
-      examples: [
-        {
-          problem: "Em uma fazenda há 3 grupos de vacas. Cada grupo tem 4 vacas. Quantas vacas há no total?",
-          solution: "3 × 4 = 12 vacas",
-          visualization: "🐄🐄🐄🐄 🐄🐄🐄🐄 🐄🐄🐄🐄 = 12 vacas",
-          explanation: "Desenhe grupos de vacas para visualizar a multiplicação."
-        },
-        {
-          problem: "Uma pizza foi cortada em 8 fatias. Carlos comeu 3 fatias. Que fração da pizza sobrou?",
-          solution: "5/8 da pizza sobrou",
-          visualization: "🍕: ████████ → █████░░░ (5 fatias de 8)",
-          explanation: "Desenhe uma pizza dividida em 8 partes e marque as partes restantes."
-        },
-        {
-          problem: "Em um estacionamento há 5 fileiras com 6 carros cada. Quantos carros há no total?",
-          solution: "5 × 6 = 30 carros",
-          visualization: "🚗🚗🚗🚗🚗🚗\n🚗🚗🚗🚗🚗🚗\n🚗🚗🚗🚗🚗🚗\n🚗🚗🚗🚗🚗🚗\n🚗🚗🚗🚗🚗🚗",
-          explanation: "Desenhe uma grade de carros organizados em fileiras."
-        },
-        {
-          problem: "Ana tem 24 adesivos para distribuir igualmente em 4 páginas. Quantos adesivos por página?",
-          solution: "24 ÷ 4 = 6 adesivos",
-          visualization: "📄: ⭐⭐⭐⭐⭐⭐ | 📄: ⭐⭐⭐⭐⭐⭐ | 📄: ⭐⭐⭐⭐⭐⭐ | 📄: ⭐⭐⭐⭐⭐⭐",
-          explanation: "Desenhe 4 páginas com 6 adesivos distribuídos igualmente."
-        },
-        {
-          problem: "Um jardim retangular tem 8 metros de comprimento e 5 metros de largura. Qual é a área?",
-          solution: "8 × 5 = 40 metros quadrados",
-          visualization: "▦▦▦▦▦▦▦▦\n▦▦▦▦▦▦▦▦\n▦▦▦▦▦▦▦▦\n▦▦▦▦▦▦▦▦\n▦▦▦▦▦▦▦▦ (8×5 = 40)",
-          explanation: "Desenhe um retângulo dividido em quadrados unitários."
-        }
-      ]
+      examples: [{
+        problem: "Em uma fazenda há 3 grupos de vacas. Cada grupo tem 4 vacas. Quantas vacas há no total?",
+        solution: "3 × 4 = 12 vacas",
+        visualization: "🐄🐄🐄🐄 🐄🐄🐄🐄 🐄🐄🐄🐄 = 12 vacas",
+        explanation: "Desenhe grupos de vacas para visualizar a multiplicação."
+      }, {
+        problem: "Uma pizza foi cortada em 8 fatias. Carlos comeu 3 fatias. Que fração da pizza sobrou?",
+        solution: "5/8 da pizza sobrou",
+        visualization: "🍕: ████████ → █████░░░ (5 fatias de 8)",
+        explanation: "Desenhe uma pizza dividida em 8 partes e marque as partes restantes."
+      }, {
+        problem: "Em um estacionamento há 5 fileiras com 6 carros cada. Quantos carros há no total?",
+        solution: "5 × 6 = 30 carros",
+        visualization: "🚗🚗🚗🚗🚗🚗\n🚗🚗🚗🚗🚗🚗\n🚗🚗🚗🚗🚗🚗\n🚗🚗🚗🚗🚗🚗\n🚗🚗🚗🚗🚗🚗",
+        explanation: "Desenhe uma grade de carros organizados em fileiras."
+      }, {
+        problem: "Ana tem 24 adesivos para distribuir igualmente em 4 páginas. Quantos adesivos por página?",
+        solution: "24 ÷ 4 = 6 adesivos",
+        visualization: "📄: ⭐⭐⭐⭐⭐⭐ | 📄: ⭐⭐⭐⭐⭐⭐ | 📄: ⭐⭐⭐⭐⭐⭐ | 📄: ⭐⭐⭐⭐⭐⭐",
+        explanation: "Desenhe 4 páginas com 6 adesivos distribuídos igualmente."
+      }, {
+        problem: "Um jardim retangular tem 8 metros de comprimento e 5 metros de largura. Qual é a área?",
+        solution: "8 × 5 = 40 metros quadrados",
+        visualization: "▦▦▦▦▦▦▦▦\n▦▦▦▦▦▦▦▦\n▦▦▦▦▦▦▦▦\n▦▦▦▦▦▦▦▦\n▦▦▦▦▦▦▦▦ (8×5 = 40)",
+        explanation: "Desenhe um retângulo dividido em quadrados unitários."
+      }]
     },
     abstract: {
       title: "Estágio Abstrato",
-      description: "Uso de símbolos e operações matemáticas formais", 
+      description: "Uso de símbolos e operações matemáticas formais",
       icon: "🔢",
-      examples: [
-        {
-          problem: "Resolva: 2x + 5 = 13",
-          solution: "x = 4",
-          visualization: "2x + 5 = 13 → 2x = 8 → x = 4",
-          explanation: "Resolva algebricamente isolando a variável x."
-        },
-        {
-          problem: "Calcule a área de um círculo com raio de 7 cm (π ≈ 3,14)",
-          solution: "A = πr² = 3,14 × 7² = 153,86 cm²",
-          visualization: "A = π × r² = 3,14 × 49 = 153,86",
-          explanation: "Aplique a fórmula da área do círculo diretamente."
-        },
-        {
-          problem: "Se f(x) = 3x - 7, calcule f(5)",
-          solution: "f(5) = 3(5) - 7 = 15 - 7 = 8",
-          visualization: "f(5) = 3(5) - 7 = 15 - 7 = 8",
-          explanation: "Substitua x por 5 na função e calcule."
-        },
-        {
-          problem: "Resolva o sistema: x + y = 10 e 2x - y = 5",
-          solution: "x = 5, y = 5",
-          visualization: "x + y = 10\n2x - y = 5\n→ 3x = 15 → x = 5, y = 5",
-          explanation: "Use métodos algébricos como adição ou substituição."
-        },
-        {
-          problem: "Calcule: lim(x→2) (x² - 4)/(x - 2)",
-          solution: "= lim(x→2) (x + 2) = 4",
-          visualization: "(x² - 4)/(x - 2) = (x+2)(x-2)/(x-2) = x + 2 → 4",
-          explanation: "Simplifique a expressão e aplique o limite."
-        }
-      ]
+      examples: [{
+        problem: "Resolva: 2x + 5 = 13",
+        solution: "x = 4",
+        visualization: "2x + 5 = 13 → 2x = 8 → x = 4",
+        explanation: "Resolva algebricamente isolando a variável x."
+      }, {
+        problem: "Calcule a área de um círculo com raio de 7 cm (π ≈ 3,14)",
+        solution: "A = πr² = 3,14 × 7² = 153,86 cm²",
+        visualization: "A = π × r² = 3,14 × 49 = 153,86",
+        explanation: "Aplique a fórmula da área do círculo diretamente."
+      }, {
+        problem: "Se f(x) = 3x - 7, calcule f(5)",
+        solution: "f(5) = 3(5) - 7 = 15 - 7 = 8",
+        visualization: "f(5) = 3(5) - 7 = 15 - 7 = 8",
+        explanation: "Substitua x por 5 na função e calcule."
+      }, {
+        problem: "Resolva o sistema: x + y = 10 e 2x - y = 5",
+        solution: "x = 5, y = 5",
+        visualization: "x + y = 10\n2x - y = 5\n→ 3x = 15 → x = 5, y = 5",
+        explanation: "Use métodos algébricos como adição ou substituição."
+      }, {
+        problem: "Calcule: lim(x→2) (x² - 4)/(x - 2)",
+        solution: "= lim(x→2) (x + 2) = 4",
+        visualization: "(x² - 4)/(x - 2) = (x+2)(x-2)/(x-2) = x + 2 → 4",
+        explanation: "Simplifique a expressão e aplique o limite."
+      }]
     }
   };
-
-  const progressPercentage = (completedStages.length / 3) * 100;
+  const progressPercentage = completedStages.length / 3 * 100;
   const currentStageData = stages[currentStage];
   const currentExample = currentStageData.examples[currentExampleIndex];
-
   const handleStageComplete = () => {
     if (!completedStages.includes(currentStage)) {
       setCompletedStages([...completedStages, currentStage]);
     }
-    
     if (currentStage === 'concrete') {
       setCurrentStage('pictorial');
       setCurrentExampleIndex(0);
@@ -151,218 +128,232 @@ const CPAMethod = () => {
       setCurrentExampleIndex(0);
     }
   };
-
   const handleStageClick = (stage: Stage) => {
     setCurrentStage(stage);
     setCurrentExampleIndex(0);
   };
-
   const nextExample = () => {
-    setCurrentExampleIndex((prev) => 
-      prev < currentStageData.examples.length - 1 ? prev + 1 : 0
-    );
+    setCurrentExampleIndex(prev => prev < currentStageData.examples.length - 1 ? prev + 1 : 0);
   };
-
   const prevExample = () => {
-    setCurrentExampleIndex((prev) => 
-      prev > 0 ? prev - 1 : currentStageData.examples.length - 1
-    );
+    setCurrentExampleIndex(prev => prev > 0 ? prev - 1 : currentStageData.examples.length - 1);
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto p-6">
         {/* Hero Section com Glassmorphism Avançado */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative mb-8 rounded-2xl overflow-hidden"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8,
+        ease: "easeOut"
+      }} className="relative mb-8 rounded-2xl overflow-hidden">
           <div className="relative">
             {/* Gradiente Mais Escuro */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/80 to-primary/85 animate-gradient-shift bg-400% opacity-95"></div>
             
             {/* Mais Elementos Flutuantes Geométricos */}
             <div className="absolute inset-0 overflow-hidden">
-              {[...Array(20)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className={`absolute ${
-                    i % 3 === 0 ? 'w-3 h-3 rounded-full bg-white/15' :
-                    i % 3 === 1 ? 'w-2 h-2 rotate-45 bg-white/20' :
-                    'w-1 h-6 bg-white/10 rounded-full'
-                  }`}
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                  }}
-                  animate={{
-                    y: [0, -20, 0],
-                    x: [0, 10, 0],
-                    opacity: [0.1, 0.6, 0.1],
-                    rotate: i % 2 === 0 ? [0, 360, 0] : [360, 0, 360],
-                  }}
-                  transition={{
-                    duration: 4 + Math.random() * 3,
-                    repeat: Infinity,
-                    delay: Math.random() * 3,
-                    ease: "easeInOut",
-                  }}
-                />
-              ))}
+              {[...Array(20)].map((_, i) => <motion.div key={i} className={`absolute ${i % 3 === 0 ? 'w-3 h-3 rounded-full bg-white/15' : i % 3 === 1 ? 'w-2 h-2 rotate-45 bg-white/20' : 'w-1 h-6 bg-white/10 rounded-full'}`} style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`
+            }} animate={{
+              y: [0, -20, 0],
+              x: [0, 10, 0],
+              opacity: [0.1, 0.6, 0.1],
+              rotate: i % 2 === 0 ? [0, 360, 0] : [360, 0, 360]
+            }} transition={{
+              duration: 4 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+              ease: "easeInOut"
+            }} />)}
             </div>
             
             {/* Card Glassmorphism Premium */}
-            <motion.div
-              className="relative backdrop-blur-xl bg-white/15 border border-white/25 p-8 md:p-12 m-4 rounded-2xl shadow-2xl group"
-              style={{
-                background: "linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))",
-                backdropFilter: "blur(15px)",
-              }}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-                boxShadow: "0 30px 60px -12px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.15)",
-                borderColor: "rgba(255, 255, 255, 0.4)",
-              }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
+            <motion.div className="relative backdrop-blur-xl bg-white/15 border border-white/25 p-8 md:p-12 m-4 rounded-2xl shadow-2xl group" style={{
+            background: "linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))",
+            backdropFilter: "blur(15px)"
+          }} whileHover={{
+            y: -8,
+            scale: 1.02,
+            boxShadow: "0 30px 60px -12px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.15)",
+            borderColor: "rgba(255, 255, 255, 0.4)"
+          }} transition={{
+            duration: 0.4,
+            ease: "easeOut"
+          }}>
               {/* Brilho Dinâmico nas Bordas */}
-              <motion.div 
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background: "linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.1), transparent)",
-                  backgroundSize: "200% 200%",
-                }}
-                animate={{
-                  backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              ></motion.div>
+              <motion.div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
+              background: "linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.1), transparent)",
+              backgroundSize: "200% 200%"
+            }} animate={{
+              backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"]
+            }} transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear"
+            }}></motion.div>
               
               <div className="relative z-10">
                 <div className="flex items-center gap-6 mb-8">
                   {/* Ícone com Pulsação Avançada - Tamanho Reduzido */}
-                  <motion.div
-                    className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/30 shadow-lg"
-                    animate={{ 
-                      scale: [1, 1.05, 1],
-                      boxShadow: [
-                        "0 4px 20px rgba(255,255,255,0.1)",
-                        "0 8px 30px rgba(255,255,255,0.2)",
-                        "0 4px 20px rgba(255,255,255,0.1)"
-                      ]
-                    }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    whileHover={{ 
-                      rotate: [0, 5, -5, 0], 
-                      scale: 1.1,
-                      transition: { duration: 0.5 }
-                    }}
-                  >
+                  <motion.div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/30 shadow-lg" animate={{
+                  scale: [1, 1.05, 1],
+                  boxShadow: ["0 4px 20px rgba(255,255,255,0.1)", "0 8px 30px rgba(255,255,255,0.2)", "0 4px 20px rgba(255,255,255,0.1)"]
+                }} transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }} whileHover={{
+                  rotate: [0, 5, -5, 0],
+                  scale: 1.1,
+                  transition: {
+                    duration: 0.5
+                  }
+                }}>
                     <Brain className="w-8 h-8 text-white filter drop-shadow-lg" />
                   </motion.div>
                   
                   <div className="flex-1">
                     {/* Título com Efeito de Surgimento - Tamanho Reduzido */}
-                    <motion.h1
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.3 }}
-                      className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight"
-                      style={{ 
-                        textShadow: "0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1)"
-                      }}
-                    >
+                    <motion.h1 initial={{
+                    opacity: 0,
+                    y: -20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} transition={{
+                    duration: 0.8,
+                    delay: 0.3
+                  }} className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight" style={{
+                    textShadow: "0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1)"
+                  }}>
                       Método CPA
                     </motion.h1>
                     
                     {/* Subtítulo com Animações Sequenciais Melhoradas */}
                     <div className="text-xl text-white/95 flex items-center gap-3 flex-wrap">
-                      <motion.span
-                        initial={{ opacity: 0, y: 15, rotateX: -90 }}
-                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6, type: "spring" }}
-                        className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20"
-                      >
+                      <motion.span initial={{
+                      opacity: 0,
+                      y: 15,
+                      rotateX: -90
+                    }} animate={{
+                      opacity: 1,
+                      y: 0,
+                      rotateX: 0
+                    }} transition={{
+                      duration: 0.5,
+                      delay: 0.6,
+                      type: "spring"
+                    }} className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
                         Concreto
                       </motion.span>
                       
-                      <motion.span
-                        initial={{ opacity: 0, scale: 0, rotate: -180 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.4, delay: 0.9, type: "spring", stiffness: 200 }}
-                        className="text-white/80 text-2xl"
-                      >
+                      <motion.span initial={{
+                      opacity: 0,
+                      scale: 0,
+                      rotate: -180
+                    }} animate={{
+                      opacity: 1,
+                      scale: 1,
+                      rotate: 0
+                    }} transition={{
+                      duration: 0.4,
+                      delay: 0.9,
+                      type: "spring",
+                      stiffness: 200
+                    }} className="text-white/80 text-2xl">
                         →
                       </motion.span>
                       
-                      <motion.span
-                        initial={{ opacity: 0, y: 15, rotateX: -90 }}
-                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                        transition={{ duration: 0.5, delay: 1.1, type: "spring" }}
-                        className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20"
-                      >
+                      <motion.span initial={{
+                      opacity: 0,
+                      y: 15,
+                      rotateX: -90
+                    }} animate={{
+                      opacity: 1,
+                      y: 0,
+                      rotateX: 0
+                    }} transition={{
+                      duration: 0.5,
+                      delay: 1.1,
+                      type: "spring"
+                    }} className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
                         Pictórico
                       </motion.span>
                       
-                      <motion.span
-                        initial={{ opacity: 0, scale: 0, rotate: -180 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.4, delay: 1.4, type: "spring", stiffness: 200 }}
-                        className="text-white/80 text-2xl"
-                      >
+                      <motion.span initial={{
+                      opacity: 0,
+                      scale: 0,
+                      rotate: -180
+                    }} animate={{
+                      opacity: 1,
+                      scale: 1,
+                      rotate: 0
+                    }} transition={{
+                      duration: 0.4,
+                      delay: 1.4,
+                      type: "spring",
+                      stiffness: 200
+                    }} className="text-white/80 text-2xl">
                         →
                       </motion.span>
                       
-                      <motion.span
-                        initial={{ opacity: 0, y: 15, rotateX: -90 }}
-                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                        transition={{ duration: 0.5, delay: 1.6, type: "spring" }}
-                        className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20"
-                      >
+                      <motion.span initial={{
+                      opacity: 0,
+                      y: 15,
+                      rotateX: -90
+                    }} animate={{
+                      opacity: 1,
+                      y: 0,
+                      rotateX: 0
+                    }} transition={{
+                      duration: 0.5,
+                      delay: 1.6,
+                      type: "spring"
+                    }} className="font-semibold px-3 py-1 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
                         Abstrato
                       </motion.span>
                     </div>
                   </div>
                   
-                  {isEnabled('cpaExplanationTooltip') && (
-                    <CPAExplanationTooltip />
-                  )}
+                  {isEnabled('cpaExplanationTooltip') && <CPAExplanationTooltip />}
                 </div>
                 
                 {/* Descrição com Animação de Texto Avançada */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.7 }}
-                  className="max-w-5xl"
-                >
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 1 }}
-                    className="text-2xl text-white/95 leading-relaxed text-justify font-light"
-                    style={{ 
-                      textShadow: "0 2px 10px rgba(0,0,0,0.2)"
-                    }}
-                  >
+                <motion.div initial={{
+                opacity: 0,
+                y: 30
+              }} animate={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                duration: 0.8,
+                delay: 0.7
+              }} className="max-w-5xl">
+                  <motion.p initial={{
+                  opacity: 0
+                }} animate={{
+                  opacity: 1
+                }} transition={{
+                  duration: 1,
+                  delay: 1
+                }} className="text-2xl text-white/95 leading-relaxed text-justify font-light" style={{
+                  textShadow: "0 2px 10px rgba(0,0,0,0.2)"
+                }}>
                     Abordagem pedagógica comprovada do Sistema Educacional de Singapura que{" "}
-                    <motion.span
-                      initial={{ opacity: 0.7 }}
-                      animate={{ opacity: [0.7, 1, 0.7] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="font-medium text-white"
-                    >
+                    <motion.span initial={{
+                    opacity: 0.7
+                  }} animate={{
+                    opacity: [0.7, 1, 0.7]
+                  }} transition={{
+                    duration: 2,
+                    repeat: Infinity
+                  }} className="font-medium text-white">
                       revoluciona o ensino da matemática
                     </motion.span>
                     {" "}através de uma progressão natural e intuitiva.
@@ -374,137 +365,158 @@ const CPAMethod = () => {
         </motion.div>
 
         {/* O que é o Método CPA - Com Animações Avançadas */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 50
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8,
+        delay: 0.3
+      }}>
           <Card className="mb-4 shadow-2xl border-0 bg-gradient-to-br from-background via-background/95 to-background/90 backdrop-blur-sm">
             <CardContent className="p-4">
-              <motion.h2
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-3xl font-bold text-foreground mb-6 text-center"
-              >
+              <motion.h2 initial={{
+              opacity: 0,
+              y: -20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6,
+              delay: 0.5
+            }} className="text-3xl font-bold text-foreground mb-6 text-center">
                 O que é o Método CPA?
               </motion.h2>
               
-              <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                className="text-lg text-muted-foreground mb-8 text-center max-w-4xl mx-auto leading-relaxed"
-              >
+              <motion.p initial={{
+              opacity: 0,
+              y: 15
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6,
+              delay: 0.7
+            }} className="text-lg text-muted-foreground mb-8 text-center max-w-4xl mx-auto leading-relaxed">
                 O Método CPA é uma forma diferente (e muito mais legal!) de aprender matemática. 
                 Em vez de começar direto com números e fórmulas, você passa por três etapas:
               </motion.p>
               
               {/* Cards com Animações de Entrada Sequencial */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                {[
-                  { 
-                    icon: "🧱", 
-                    title: "1. Concreto", 
-                    desc: "Você manipula objetos reais, como cubos, blocos ou fichas.",
-                    delay: 0.9,
-                    borderColor: "border-l-blue-500",
-                    glowColor: "hover:shadow-blue-500/20"
-                  },
-                  { 
-                    icon: "🎨", 
-                    title: "2. Pictórico", 
-                    desc: "Você vê desenhos e imagens, como os famosos modelos de barras.",
-                    delay: 1.1,
-                    borderColor: "border-l-green-500",
-                    glowColor: "hover:shadow-green-500/20"
-                  },
-                  { 
-                    icon: "🔢", 
-                    title: "3. Abstrato", 
-                    desc: "Só depois você usa números e símbolos, como fazemos em contas.",
-                    delay: 1.3,
-                    borderColor: "border-l-purple-500",
-                    glowColor: "hover:shadow-purple-500/20"
-                  }
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -50, rotateY: -20 }}
-                    animate={{ opacity: 1, x: 0, rotateY: 0 }}
-                    transition={{ 
-                      duration: 0.7, 
-                      delay: item.delay, 
-                      type: "spring",
-                      stiffness: 100
-                    }}
-                    whileHover={{ 
-                      x: 15, 
-                      scale: 1.05,
-                      rotateY: 5,
-                      transition: { duration: 0.3 }
-                    }}
-                    className={`group relative p-4 rounded-2xl bg-gradient-to-br from-card/50 to-card/80 border-l-4 ${item.borderColor} border border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl ${item.glowColor} text-center backdrop-blur-sm`}
-                  >
+                {[{
+                icon: "🧱",
+                title: "1. Concreto",
+                desc: "Você manipula objetos reais, como cubos, blocos ou fichas.",
+                delay: 0.9,
+                borderColor: "border-l-blue-500",
+                glowColor: "hover:shadow-blue-500/20"
+              }, {
+                icon: "🎨",
+                title: "2. Pictórico",
+                desc: "Você vê desenhos e imagens, como os famosos modelos de barras.",
+                delay: 1.1,
+                borderColor: "border-l-green-500",
+                glowColor: "hover:shadow-green-500/20"
+              }, {
+                icon: "🔢",
+                title: "3. Abstrato",
+                desc: "Só depois você usa números e símbolos, como fazemos em contas.",
+                delay: 1.3,
+                borderColor: "border-l-purple-500",
+                glowColor: "hover:shadow-purple-500/20"
+              }].map((item, index) => <motion.div key={index} initial={{
+                opacity: 0,
+                x: -50,
+                rotateY: -20
+              }} animate={{
+                opacity: 1,
+                x: 0,
+                rotateY: 0
+              }} transition={{
+                duration: 0.7,
+                delay: item.delay,
+                type: "spring",
+                stiffness: 100
+              }} whileHover={{
+                x: 15,
+                scale: 1.05,
+                rotateY: 5,
+                transition: {
+                  duration: 0.3
+                }
+              }} className={`group relative p-4 rounded-2xl bg-gradient-to-br from-card/50 to-card/80 border-l-4 ${item.borderColor} border border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl ${item.glowColor} text-center backdrop-blur-sm`}>
                     {/* Glow Effect Background */}
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
-                    <motion.div 
-                      className="text-5xl mb-4 inline-block"
-                      whileHover={{ 
-                        rotate: [0, -10, 10, -5, 0],
-                        scale: [1, 1.2, 1]
-                      }}
-                      transition={{ duration: 0.5 }}
-                    >
+                    <motion.div className="text-5xl mb-4 inline-block" whileHover={{
+                  rotate: [0, -10, 10, -5, 0],
+                  scale: [1, 1.2, 1]
+                }} transition={{
+                  duration: 0.5
+                }}>
                       {item.icon}
                     </motion.div>
                     
-                    <motion.h3
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: item.delay + 0.3 }}
-                      className="text-xl font-bold text-foreground mb-3 relative z-10"
-                    >
+                    <motion.h3 initial={{
+                  opacity: 0
+                }} animate={{
+                  opacity: 1
+                }} transition={{
+                  delay: item.delay + 0.3
+                }} className="text-xl font-bold text-foreground mb-3 relative z-10">
                       {item.title}
                     </motion.h3>
                     
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: item.delay + 0.5 }}
-                      className="text-muted-foreground leading-relaxed relative z-10"
-                    >
+                    <motion.p initial={{
+                  opacity: 0
+                }} animate={{
+                  opacity: 1
+                }} transition={{
+                  delay: item.delay + 0.5
+                }} className="text-muted-foreground leading-relaxed relative z-10">
                       {item.desc}
                     </motion.p>
-                  </motion.div>
-                ))}
+                  </motion.div>)}
               </div>
               
               {/* Seção de Sucesso com Animação */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.5 }}
-                className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-4 border border-primary/30 relative overflow-hidden"
-              >
+              <motion.div initial={{
+              opacity: 0,
+              scale: 0.9
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              duration: 0.6,
+              delay: 1.5
+            }} className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-4 border border-primary/30 relative overflow-hidden">
                 {/* Efeito de Brilho Animado */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
-                  animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                ></motion.div>
+                <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" animate={{
+                x: ["-100%", "100%"]
+              }} transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "linear"
+              }}></motion.div>
                 
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.7 }}
-                  className="text-foreground text-center text-lg leading-relaxed relative z-10"
-                >
-                  <motion.strong
-                    animate={{ color: ["hsl(var(--primary))", "hsl(var(--primary-foreground))", "hsl(var(--primary))"] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
+                <motion.p initial={{
+                opacity: 0,
+                y: 10
+              }} animate={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                delay: 1.7
+              }} className="text-foreground text-center text-lg leading-relaxed relative z-10">
+                  <motion.strong animate={{
+                  color: ["hsl(var(--primary))", "hsl(var(--primary-foreground))", "hsl(var(--primary))"]
+                }} transition={{
+                  duration: 2,
+                  repeat: Infinity
+                }}>
                     🏆 Sucesso Internacional:
                   </motion.strong> Essa ideia veio de estudos sobre como aprendemos melhor. 
                   Singapura foi um dos primeiros países a usar esse método em todas as escolas, e deu super certo: 
@@ -564,7 +576,7 @@ const CPAMethod = () => {
             </div>
             
             <div className="bg-primary/10 rounded-lg p-6 border border-primary/30 text-center">
-              <p className="text-foreground">
+              <p className="text-foreground text-justify">
                 <strong>🏆 Resultados Comprovados:</strong> O CPA é usado em Singapura há décadas — e os alunos de lá sempre estão no topo dos rankings internacionais. 
                 Não é porque são gênios: é porque o método respeita o seu tempo de aprender e ajuda você a realmente pensar com a matemática, e não só repetir.
               </p>
@@ -589,18 +601,10 @@ const CPAMethod = () => {
         {/* Stage Navigation */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {Object.entries(stages).map(([key, stage]) => {
-            const stageKey = key as Stage;
-            const isActive = currentStage === stageKey;
-            const isCompleted = completedStages.includes(stageKey);
-            
-            return (
-              <Card 
-                key={key}
-                className={`cursor-pointer transition-all duration-300 hover:shadow-learning rounded-xl ${
-                  isActive ? 'ring-2 ring-primary shadow-learning' : ''
-                } ${isCompleted ? 'bg-gradient-achievement' : ''}`}
-                onClick={() => handleStageClick(stageKey)}
-              >
+          const stageKey = key as Stage;
+          const isActive = currentStage === stageKey;
+          const isCompleted = completedStages.includes(stageKey);
+          return <Card key={key} className={`cursor-pointer transition-all duration-300 hover:shadow-learning rounded-xl ${isActive ? 'ring-2 ring-primary shadow-learning' : ''} ${isCompleted ? 'bg-gradient-achievement' : ''}`} onClick={() => handleStageClick(stageKey)}>
                 <CardContent className="p-6 text-center">
                   <div className="flex items-center justify-center mb-3">
                     <div className={`text-4xl mr-3 ${isCompleted ? 'animate-pulse' : ''}`}>
@@ -615,9 +619,8 @@ const CPAMethod = () => {
                     {stage.description}
                   </p>
                 </CardContent>
-              </Card>
-            );
-          })}
+              </Card>;
+        })}
         </div>
 
         {/* Current Stage Examples */}
@@ -675,37 +678,25 @@ const CPAMethod = () => {
             </div>
 
             {/* Navigation to next stage */}
-            {currentStage !== 'abstract' && (
-              <div className="flex justify-end pt-4">
-                <Button 
-                  variant="outline" 
-                  onClick={handleStageComplete}
-                  className="flex items-center gap-2"
-                >
+            {currentStage !== 'abstract' && <div className="flex justify-end pt-4">
+                <Button variant="outline" onClick={handleStageComplete} className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4" />
                   Próximo Estágio
                 </Button>
-              </div>
-            )}
+              </div>}
           </CardContent>
         </Card>
 
         {/* Desafio Interativo */}
-        {showInteractiveChallenge ? (
-          <div className="space-y-6">
+        {showInteractiveChallenge ? <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold text-foreground">Desafio Interativo CPA</h2>
-              <Button 
-                variant="outline" 
-                onClick={() => setShowInteractiveChallenge(false)}
-              >
+              <Button variant="outline" onClick={() => setShowInteractiveChallenge(false)}>
                 Voltar aos Exemplos
               </Button>
             </div>
             <CPAIntegratedChallenge />
-          </div>
-        ) : (
-          <>
+          </div> : <>
             {/* Call to Action para Desafio Interativo */}
             <Card className="shadow-card border-2 border-primary bg-gradient-soft rounded-2xl">
               <CardContent className="p-8 text-center">
@@ -714,12 +705,7 @@ const CPAMethod = () => {
                   Agora que você conhece a teoria, experimente resolver um problema real 
                   usando os três estágios do método CPA de forma interativa!
                 </p>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  onClick={() => setShowInteractiveChallenge(true)}
-                  className="flex items-center gap-2 text-primary border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg"
-                >
+                <Button size="lg" variant="outline" onClick={() => setShowInteractiveChallenge(true)} className="flex items-center gap-2 text-primary border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg">
                   <PlayCircle className="w-5 h-5" />
                   Iniciar Desafio Interativo
                 </Button>
@@ -801,11 +787,8 @@ const CPAMethod = () => {
               </CardContent>
             </Card>
 
-          </>
-        )}
+          </>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default CPAMethod;
