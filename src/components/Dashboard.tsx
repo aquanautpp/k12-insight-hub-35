@@ -152,12 +152,12 @@ const Dashboard = ({
           delay: 0.2
         }} className="flex flex-col items-center space-y-6 max-w-2xl mx-auto px-6 text-center">
             {/* Logo Mantha Completo */}
-            <div className="mantha-logo-container mb-0 mx-0 px-0 py-0 rounded-full my-0">
-              <div className="w-[240px] md:w-[300px] lg:w-[360px] h-[240px] md:h-[300px] lg:h-[360px] flex items-center justify-center mx-auto bg-transparent -mt-12 rounded-sm my-0">
+            <div className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full">
+              <div className="w-[240px] md:w-[300px] lg:w-[360px] h-[240px] md:h-[300px] lg:h-[360px] flex items-center justify-center mx-auto bg-transparent">
                 <img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[220px] md:w-[260px] lg:w-[300px] h-auto p-2" />
               </div>
             </div>
-            <div className="-mt-28 my-0">
+            <div className="mt-0">
               <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">Bem-vindo à <span className="text-yellow-400">Mantha</span>!</h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mb-2 mx-0 my-0">
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
