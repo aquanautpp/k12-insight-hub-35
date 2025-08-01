@@ -162,31 +162,28 @@ const Dashboard = ({
               }}
               animate={{ 
                 opacity: 1,
-                y: [80, 60, 40, 20, 5, 0],
-                x: [-60, -40, -20, 10, 5, 0],
-                scale: [0.8, 0.85, 0.92, 0.98, 1.02, 1]
+                y: 0,
+                x: 0,
+                scale: 1
               }}
               transition={{
                 duration: 3.5,
-                ease: [0.25, 0.46, 0.45, 0.94],
+                ease: "easeOut",
                 opacity: {
                   duration: 3.5,
                   ease: "easeOut"
                 },
                 y: {
                   duration: 3.5,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                  times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                  ease: "easeOut"
                 },
                 x: {
                   duration: 3.5,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                  times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                  ease: "easeOut"
                 },
                 scale: {
                   duration: 3.5,
-                  ease: "easeOut",
-                  times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                  ease: "easeOut"
                 }
               }}
             >
@@ -199,13 +196,12 @@ const Dashboard = ({
                     scale: 0.95
                   }}
                   animate={{ 
-                    scale: [0.95, 0.96, 0.98, 1.01, 1.005, 1]
+                    scale: 1
                   }}
                   transition={{
                     duration: 3.5,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                    delay: 0.8,
-                    times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                    ease: "easeOut",
+                    delay: 0.8
                   }}
                 />
               </div>
