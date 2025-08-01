@@ -302,7 +302,7 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
 
           {/* Emotional Journey */}
           <Card className="sophisticated-reveal">
-            <div className="p-4">
+            <div className="p-8 text-center">
               <h4 className="font-semibold text-foreground mb-3">Jornada Emocional</h4>
               
               <div className="space-y-2">
