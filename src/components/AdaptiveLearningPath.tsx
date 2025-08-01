@@ -42,7 +42,7 @@ export const AdaptiveLearningPath: React.FC<AdaptiveLearningPathProps> = ({
         </div>
         <div className="text-right">
           <div className="text-2xl font-bold text-primary">{successRate}%</div>
-          <div className={`text-sm font-medium ${getSuccessRateColor(successRate)}`}>
+          <div className="text-sm font-medium text-primary">
             Taxa de Sucesso
           </div>
         </div>
