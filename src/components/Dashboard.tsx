@@ -142,7 +142,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
             className="flex flex-col items-center space-y-6 max-w-4xl mx-auto px-6 text-center"
           >
             {/* Logo Mantha Completo */}
-            <div className="mantha-logo-container mb-6">
+            <div className="mantha-logo-container mb-2">
               <div className="w-[180px] md:w-[240px] lg:w-[300px] h-[180px] md:h-[240px] lg:h-[300px] rounded-full flex items-center justify-center mx-auto">
                 <img 
                   src="/lovable-uploads/c9f33456-56ab-4ec3-8318-5d3c50172dbb.png"
