@@ -379,8 +379,8 @@ const CPAMethod = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <Card className="mb-6 shadow-2xl border-0 bg-gradient-to-br from-background via-background/95 to-background/90 backdrop-blur-sm">
-            <CardContent className="p-8">
+          <Card className="mb-4 shadow-2xl border-0 bg-gradient-to-br from-background via-background/95 to-background/90 backdrop-blur-sm">
+            <CardContent className="p-4">
               <motion.h2
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -401,7 +401,7 @@ const CPAMethod = () => {
               </motion.p>
               
               {/* Cards com Animações de Entrada Sequencial */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 {[
                   { 
                     icon: "🧱", 
@@ -444,7 +444,7 @@ const CPAMethod = () => {
                       rotateY: 5,
                       transition: { duration: 0.3 }
                     }}
-                    className={`group relative p-6 rounded-2xl bg-gradient-to-br from-card/50 to-card/80 border-l-4 ${item.borderColor} border border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl ${item.glowColor} text-center backdrop-blur-sm`}
+                    className={`group relative p-4 rounded-2xl bg-gradient-to-br from-card/50 to-card/80 border-l-4 ${item.borderColor} border border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl ${item.glowColor} text-center backdrop-blur-sm`}
                   >
                     {/* Glow Effect Background */}
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -486,7 +486,7 @@ const CPAMethod = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 1.5 }}
-                className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-6 border border-primary/30 relative overflow-hidden"
+                className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-4 border border-primary/30 relative overflow-hidden"
               >
                 {/* Efeito de Brilho Animado */}
                 <motion.div
