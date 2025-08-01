@@ -170,7 +170,7 @@ const Dashboard = ({
                 rotateY: [30, -15, 10, -5, 0]
               }}
               transition={{
-                duration: 4,
+                duration: 6,
                 ease: [0.25, 0.46, 0.45, 0.94],
                 times: [0, 0.3, 0.6, 0.85, 1],
                 y: {
@@ -190,7 +190,7 @@ const Dashboard = ({
                     skewX: [0, 2, -1, 0.5, 0]
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 6,
                     ease: "easeInOut",
                     times: [0, 0.25, 0.5, 0.75, 1],
                     delay: 0.5
