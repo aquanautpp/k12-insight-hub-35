@@ -99,7 +99,7 @@ const CPAMethod = () => {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-gradient-subtle rounded-lg p-4 border border-border">
+              <div className="bg-card rounded-lg p-4 border border-border">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">🧱</span>
                   <h3 className="text-lg font-bold text-primary">1. Concreto</h3>
@@ -109,7 +109,7 @@ const CPAMethod = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-subtle rounded-lg p-4 border border-border">
+              <div className="bg-card rounded-lg p-4 border border-border">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">🎨</span>
                   <h3 className="text-lg font-bold text-primary">2. Pictórico</h3>
@@ -119,7 +119,7 @@ const CPAMethod = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-subtle rounded-lg p-4 border border-border">
+              <div className="bg-card rounded-lg p-4 border border-border">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">🔢</span>
                   <h3 className="text-lg font-bold text-primary">3. Abstrato</h3>
