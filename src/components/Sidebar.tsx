@@ -97,8 +97,8 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
             >
               <div className="flex items-center space-x-3">
                  <div className="flex aspect-square size-10 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
-                    <img 
-                      src={logoImage} 
+                     <img 
+                      src="/lovable-uploads/fa8005ca-2496-41d7-9974-7c2234c4b1e8.png" 
                       alt="MANTHA Logo" 
                       className="size-8 object-contain"
                       onLoad={() => console.log('Logo carregado com sucesso')}
@@ -110,7 +110,7 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
                           e.currentTarget.parentElement.innerHTML = '<span class="text-primary font-bold text-sm">M</span>';
                         }
                       }}
-                    />
+                     />
                  </div>
                 {state !== "collapsed" && (
                   <div className="grid flex-1 text-left leading-tight">
@@ -130,15 +130,15 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
             <SidebarMenu className="space-y-2">
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton 
+                    <SidebarMenuButton 
                     onClick={() => onViewChange(item.id)}
                     className={`w-full justify-start h-11 rounded-xl transition-all duration-200 font-medium ${
                       currentView === item.id 
                         ? "bg-primary text-primary-foreground shadow-md" 
                         : "hover:bg-muted text-muted-foreground hover:text-foreground"
-                    }`}
+                    } ${state === "collapsed" ? "justify-center px-0" : ""}`}
                   >
-                    <item.icon className="h-5 w-5" />
+                    <item.icon className={`${state === "collapsed" ? "h-6 w-6" : "h-5 w-5"}`} />
                     {state !== "collapsed" && <span className="ml-3">{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>

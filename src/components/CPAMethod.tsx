@@ -138,52 +138,54 @@ const CPAMethod = () => {
               </p>
             </div>
 
-            <div className="practice-section">
-              <div className="flex items-center gap-3 mb-4">
-                <PlayCircle className="w-5 h-5 text-primary" />
-                <h3 className="text-xl font-semibold text-foreground">Como funciona na prática?</h3>
+            <div className="practice-section bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-4 border border-primary/20">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <PlayCircle className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">Como funciona na prática?</h3>
               </div>
               
-              <p className="text-foreground mb-4 text-sm leading-relaxed">
+              <p className="text-foreground mb-4 text-sm leading-relaxed opacity-90">
                 Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram 
                 imagens e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
               </p>
 
-              <details className="group bg-muted/30 rounded-lg p-4 border border-border hover:bg-muted/50 transition-all duration-200 cursor-pointer">
-                <summary className="font-medium text-foreground flex items-center gap-2 list-none">
-                  <ArrowRight className="w-4 h-4 transition-transform group-open:rotate-90" />
-                  Por exemplo, para aprender frações:
-                </summary>
+              <div className="interactive-example bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-primary/30 shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium text-primary">Exemplo: Aprender Frações</span>
+                </div>
                 
-                <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="practice-card-compact">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="bg-white rounded-lg p-3 border border-primary/20 hover:border-primary/40 transition-all duration-200 hover:scale-105 cursor-pointer shadow-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="practice-number-small">1</div>
-                      <Pizza className="w-4 h-4 text-primary" />
+                      <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+                      <Pizza className="w-4 h-4 text-orange-600" />
                     </div>
-                    <h5 className="text-sm font-medium text-foreground mb-1">Primeiro</h5>
-                    <p className="text-xs text-muted-foreground">Corta uma pizza de brinquedo</p>
+                    <h5 className="text-sm font-semibold text-foreground mb-1">Concreto</h5>
+                    <p className="text-xs text-muted-foreground">Corta uma pizza real</p>
                   </div>
                   
-                  <div className="practice-card-compact">
+                  <div className="bg-white rounded-lg p-3 border border-primary/20 hover:border-primary/40 transition-all duration-200 hover:scale-105 cursor-pointer shadow-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="practice-number-small">2</div>
-                      <Edit3 className="w-4 h-4 text-primary" />
+                      <div className="w-6 h-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+                      <Edit3 className="w-4 h-4 text-blue-600" />
                     </div>
-                    <h5 className="text-sm font-medium text-foreground mb-1">Depois</h5>
-                    <p className="text-xs text-muted-foreground">Desenha as fatias no papel</p>
+                    <h5 className="text-sm font-semibold text-foreground mb-1">Pictórico</h5>
+                    <p className="text-xs text-muted-foreground">Desenha as fatias</p>
                   </div>
                   
-                  <div className="practice-card-compact">
+                  <div className="bg-white rounded-lg p-3 border border-primary/20 hover:border-primary/40 transition-all duration-200 hover:scale-105 cursor-pointer shadow-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="practice-number-small">3</div>
-                      <FileText className="w-4 h-4 text-primary" />
+                      <div className="w-6 h-6 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+                      <FileText className="w-4 h-4 text-purple-600" />
                     </div>
-                    <h5 className="text-sm font-medium text-foreground mb-1">Por último</h5>
-                    <p className="text-xs text-muted-foreground">Faz a conta com números</p>
+                    <h5 className="text-sm font-semibold text-foreground mb-1">Abstrato</h5>
+                    <p className="text-xs text-muted-foreground">Escreve 1/4, 2/4...</p>
                   </div>
                 </div>
-              </details>
+              </div>
             </div>
 
             <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
