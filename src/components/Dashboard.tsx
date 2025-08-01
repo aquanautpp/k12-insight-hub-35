@@ -156,26 +156,45 @@ const Dashboard = ({
               className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full"
               initial={{ 
                 opacity: 0,
-                y: 45,
-                x: -40,
-                scale: 0.75,
-                rotate: -15,
-                rotateY: 25,
-                rotateX: 8
+                y: 80,
+                x: -60,
+                scale: 0.8,
+                rotate: -12
               }}
               animate={{ 
-                opacity: [0, 0.08, 0.18, 0.28, 0.38, 0.48, 0.58, 0.68, 0.75, 0.82, 0.88, 0.92, 0.96, 0.98, 1],
-                y: [45, 38, 32, 28, 24, 20, 16, 12, 8, 5, 3, 2, 1, 0.5, 0],
-                x: [-40, -32, -24, -18, -12, -6, 0, 4, 8, 6, 4, 2, 0, -1, 0],
-                scale: [0.75, 0.8, 0.84, 0.87, 0.9, 0.93, 0.95, 0.97, 0.98, 0.99, 1.01, 1.02, 1.01, 1.005, 1],
-                rotate: [-15, -12, -9, -6, -3, -1, 1, 3, 2, 1, 0.5, 0, -0.5, -0.2, 0],
-                rotateY: [25, 20, 15, 10, 6, 3, 0, -2, -3, -2, -1, 0, 0.5, 0.2, 0],
-                rotateX: [8, 6, 4, 3, 2, 1, 0, -0.5, -1, -0.5, 0, 0.2, 0.1, 0.05, 0]
+                opacity: 1,
+                y: [80, 60, 40, 20, 5, 0],
+                x: [-60, -40, -20, 10, 5, 0],
+                scale: [0.8, 0.85, 0.92, 0.98, 1.02, 1],
+                rotate: [-12, -8, -4, 2, 1, 0]
               }}
               transition={{
-                duration: 3,
+                duration: 3.5,
                 ease: [0.25, 0.46, 0.45, 0.94],
-                times: [0, 0.067, 0.133, 0.2, 0.267, 0.333, 0.4, 0.467, 0.533, 0.6, 0.667, 0.733, 0.8, 0.867, 0.933, 1]
+                opacity: {
+                  duration: 3.5,
+                  ease: "easeOut"
+                },
+                y: {
+                  duration: 3.5,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                },
+                x: {
+                  duration: 3.5,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                },
+                scale: {
+                  duration: 3.5,
+                  ease: "easeOut",
+                  times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                },
+                rotate: {
+                  duration: 3.5,
+                  ease: "easeInOut",
+                  times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                }
               }}
             >
               <div className="w-[180px] md:w-[220px] lg:w-[260px] h-[120px] md:h-[140px] lg:h-[160px] flex items-center justify-center mx-auto bg-transparent">
@@ -184,21 +203,20 @@ const Dashboard = ({
                   alt="MANTHA - Educação Personalizada" 
                   className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2"
                   initial={{ 
-                    rotateY: 30,
-                    rotateX: 12,
-                    skewX: 8
+                    rotateY: 15,
+                    rotateX: 8,
+                    scale: 0.95
                   }}
                   animate={{ 
-                    rotateX: [8, 6, 4, 3, 2, 1, 0, -0.5, -1, -0.5, 0, 0.2, 0.1, 0.05, 0],
-                    rotateY: [20, 15, 10, 6, 3, 0, -2, -3, -2, -1, 0, 0.5, 0.2, 0.1, 0],
-                    skewX: [6, 4, 2, 1, 0.5, 0, -0.5, -1, -0.5, 0, 0.2, 0.1, 0.05, 0.02, 0],
-                    skewY: [0, 0.2, 0.4, 0.3, 0.2, 0, -0.2, -0.3, -0.2, -0.1, 0, 0.1, 0.05, 0.02, 0]
+                    rotateY: [15, 10, 5, -2, 1, 0],
+                    rotateX: [8, 5, 2, -1, 0.5, 0],
+                    scale: [0.95, 0.96, 0.98, 1.01, 1.005, 1]
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 3.5,
                     ease: [0.25, 0.46, 0.45, 0.94],
-                    times: [0, 0.067, 0.133, 0.2, 0.267, 0.333, 0.4, 0.467, 0.533, 0.6, 0.667, 0.733, 0.8, 0.867, 0.933, 1],
-                    delay: 0.8
+                    delay: 0.8,
+                    times: [0, 0.2, 0.4, 0.6, 0.8, 1]
                   }}
                 />
               </div>
