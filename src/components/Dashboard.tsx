@@ -158,7 +158,7 @@ const Dashboard = ({
               </div>
             </div>
             <div className="-mt-32 my-[5px]">
-              <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">Bem-vindo à <span className="text-yellow-600">Mantha</span>!</h1>
+              <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">Bem-vindo à <span className="text-yellow-400">Mantha</span>!</h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mb-2 mx-0 my-0">
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
               </p>
