@@ -100,7 +100,7 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
                      <img 
                       src="/lovable-uploads/fa8005ca-2496-41d7-9974-7c2234c4b1e8.png" 
                       alt="MANTHA Logo" 
-                      className="size-8 object-contain"
+                      className="size-10 object-cover rounded-xl"
                       onLoad={() => console.log('Logo carregado com sucesso')}
                       onError={(e) => {
                         console.error('Erro ao carregar logo:', e);
