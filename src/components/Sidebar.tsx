@@ -52,7 +52,7 @@ export function AppSidebar({
   const {
     state
   } = useSidebar();
-  return <Sidebar collapsible="icon" className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-40" : "w-64"}`}>
+  return <Sidebar collapsible="icon" className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-48" : "w-64"}`}>
       <SidebarHeader className="border-b border-border/30 p-6 px-[10px]">
         <SidebarMenu>
           <SidebarMenuItem>
