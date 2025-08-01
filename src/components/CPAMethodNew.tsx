@@ -522,7 +522,7 @@ const CPAMethod = () => {
             <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Por que isso funciona?</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="flex items-start gap-4 p-4 rounded-lg bg-gradient-soft border border-primary/20">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-soft border border-primary/20 transition-transform duration-200 hover:scale-105 hover:-translate-y-1">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Brain className="w-6 h-6 text-primary" />
                 </div>
@@ -532,7 +532,7 @@ const CPAMethod = () => {
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-4 rounded-lg bg-gradient-soft border border-primary/20">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-soft border border-primary/20 transition-transform duration-200 hover:scale-105 hover:-translate-y-1">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Puzzle className="w-6 h-6 text-primary" />
                 </div>
@@ -542,7 +542,7 @@ const CPAMethod = () => {
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-4 rounded-lg bg-gradient-soft border border-primary/20">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-soft border border-primary/20 transition-transform duration-200 hover:scale-105 hover:-translate-y-1">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <CheckCircle className="w-6 h-6 text-primary" />
                 </div>
@@ -552,7 +552,7 @@ const CPAMethod = () => {
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-4 rounded-lg bg-gradient-soft border border-primary/20">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-soft border border-primary/20 transition-transform duration-200 hover:scale-105 hover:-translate-y-1">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Trophy className="w-6 h-6 text-primary" />
                 </div>
