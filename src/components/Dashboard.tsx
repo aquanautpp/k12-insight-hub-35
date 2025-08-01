@@ -156,38 +156,26 @@ const Dashboard = ({
               className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full"
               initial={{ 
                 opacity: 0,
-                y: 60,
-                x: -30,
-                scale: 0.8,
-                rotate: -15
+                y: 100,
+                x: -80,
+                scale: 0.6,
+                rotate: -25,
+                rotateY: 45,
+                rotateX: 15
               }}
               animate={{ 
-                opacity: 1,
-                y: 0,
-                x: 0,
-                scale: 1,
-                rotate: 0
+                opacity: [0, 0.2, 0.5, 0.8, 1],
+                y: [100, 60, 20, -5, 0],
+                x: [-80, -40, 20, 10, 0],
+                scale: [0.6, 0.75, 0.95, 1.02, 1],
+                rotate: [-25, -15, 5, -2, 0],
+                rotateY: [45, 25, -10, 5, 0],
+                rotateX: [15, 8, -3, 1, 0]
               }}
               transition={{
-                duration: 3.5,
-                ease: [0.16, 1, 0.3, 1],
-                y: {
-                  type: "spring",
-                  stiffness: 50,
-                  damping: 10
-                },
-                x: {
-                  duration: 3,
-                  ease: "easeOut"
-                },
-                rotate: {
-                  duration: 2.5,
-                  ease: "easeOut"
-                },
-                scale: {
-                  duration: 2,
-                  ease: "easeOut"
-                }
+                duration: 6,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                times: [0, 0.25, 0.5, 0.75, 1]
               }}
             >
               <div className="w-[180px] md:w-[220px] lg:w-[260px] h-[120px] md:h-[140px] lg:h-[160px] flex items-center justify-center mx-auto bg-transparent">
@@ -196,17 +184,21 @@ const Dashboard = ({
                   alt="MANTHA - Educação Personalizada" 
                   className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2"
                   initial={{ 
-                    rotateY: 25,
-                    rotateX: 10 
+                    rotateY: 30,
+                    rotateX: 12,
+                    skewX: 8
                   }}
                   animate={{ 
-                    rotateY: 0,
-                    rotateX: 0 
+                    rotateX: [12, -8, 4, -2, 0],
+                    rotateY: [30, 6, -4, 2, 0],
+                    skewX: [8, 3, -2, 1, 0],
+                    skewY: [0, 1, -0.5, 0.2, 0]
                   }}
                   transition={{
-                    duration: 3.5,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: 0.5
+                    duration: 6,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                    times: [0, 0.25, 0.5, 0.75, 1],
+                    delay: 0.8
                   }}
                 />
               </div>
