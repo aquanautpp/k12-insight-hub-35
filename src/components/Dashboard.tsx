@@ -152,11 +152,65 @@ const Dashboard = ({
           delay: 0.2
         }} className="flex flex-col items-center space-y-6 max-w-2xl mx-auto px-6 text-center">
             {/* Logo Mantha Completo */}
-            <div className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full">
+            <motion.div 
+              className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full"
+              initial={{ 
+                opacity: 0,
+                y: 60,
+                x: -30,
+                scale: 0.8,
+                rotate: -15
+              }}
+              animate={{ 
+                opacity: 1,
+                y: 0,
+                x: 0,
+                scale: 1,
+                rotate: 0
+              }}
+              transition={{
+                duration: 3.5,
+                ease: [0.16, 1, 0.3, 1],
+                y: {
+                  type: "spring",
+                  stiffness: 50,
+                  damping: 10
+                },
+                x: {
+                  duration: 3,
+                  ease: "easeOut"
+                },
+                rotate: {
+                  duration: 2.5,
+                  ease: "easeOut"
+                },
+                scale: {
+                  duration: 2,
+                  ease: "easeOut"
+                }
+              }}
+            >
               <div className="w-[180px] md:w-[220px] lg:w-[260px] h-[120px] md:h-[140px] lg:h-[160px] flex items-center justify-center mx-auto bg-transparent">
-                <img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2" />
+                <motion.img 
+                  src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" 
+                  alt="MANTHA - Educação Personalizada" 
+                  className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2"
+                  initial={{ 
+                    rotateY: 25,
+                    rotateX: 10 
+                  }}
+                  animate={{ 
+                    rotateY: 0,
+                    rotateX: 0 
+                  }}
+                  transition={{
+                    duration: 3.5,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.5
+                  }}
+                />
               </div>
-            </div>
+            </motion.div>
             <div className="mt-0">
               <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">Bem-vindo à <span className="text-yellow-400">Mantha</span>!</h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mb-2 mx-0 my-0">
