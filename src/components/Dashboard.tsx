@@ -15,63 +15,62 @@ import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
 import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
 import logoImage from '@/assets/mantha-logo-corrected.png';
-
 interface DashboardProps {
   onViewChange?: (view: string) => void;
 }
+const Dashboard = ({
+  onViewChange
+}: DashboardProps) => {
+  const {
+    progress
+  } = useProgress();
+  const {
+    xpData
+  } = useXP();
+  const {
+    achievements,
+    unlockedAchievements,
+    checkAchievements
+  } = useAchievement();
 
-const Dashboard = ({ onViewChange }: DashboardProps) => {
-  const { progress } = useProgress();
-  const { xpData } = useXP();
-  const { achievements, unlockedAchievements, checkAchievements } = useAchievement();
-  
   // Early return com loading se dados essenciais não estão disponíveis
   if (!progress || !xpData || !achievements) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
+    return <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <Brain className="w-12 h-12 animate-spin mx-auto mb-4 text-primary" />
           <p className="text-muted-foreground">Carregando seu dashboard...</p>
         </div>
-      </div>
-    );
+      </div>;
   }
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const featuresRef = useRef<HTMLDivElement>(null);
-  
-  const features = [
-    {
-      icon: Brain,
-      title: "Método CPA",
-      description: "Aprendizagem visual e progressiva baseada no método Singapura"
-    },
-    {
-      icon: MessageCircle,
-      title: "Tutor IA",
-      description: "Assistente inteligente personalizado para sua jornada"
-    },
-    {
-      icon: Target,
-      title: "Inteligência Emocional",
-      description: "Desenvolvimento de habilidades socioemocionais"
-    },
-    {
-      icon: BookOpen,
-      title: "Leitura Personalizada",
-      description: "Recomendações baseadas no seu perfil de aprendizagem"
-    }
-  ];
-
-  const { currentIndex } = useScrollHijack(featuresRef, features.length);
-
+  const features = [{
+    icon: Brain,
+    title: "Método CPA",
+    description: "Aprendizagem visual e progressiva baseada no método Singapura"
+  }, {
+    icon: MessageCircle,
+    title: "Tutor IA",
+    description: "Assistente inteligente personalizado para sua jornada"
+  }, {
+    icon: Target,
+    title: "Inteligência Emocional",
+    description: "Desenvolvimento de habilidades socioemocionais"
+  }, {
+    icon: BookOpen,
+    title: "Leitura Personalizada",
+    description: "Recomendações baseadas no seu perfil de aprendizagem"
+  }];
+  const {
+    currentIndex
+  } = useScrollHijack(featuresRef, features.length);
   React.useEffect(() => {
     // Só chama checkAchievements se os dados estão disponíveis e mudaram
     if (progress?.completedActivities !== undefined && xpData?.currentLevel !== undefined) {
       checkAchievements(progress, xpData);
     }
   }, [progress?.completedActivities, xpData?.currentLevel]);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -85,24 +84,33 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
     if (!progress?.cpaProgress) return 0;
     return Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3);
   }, [progress?.cpaProgress]);
-
   const reasoningProgress = React.useMemo(() => {
     return progress?.skillsProgress?.find(s => s.skill === 'Raciocínio Lógico')?.level || 75;
   }, [progress?.skillsProgress]);
-
   const overallProgress = React.useMemo(() => {
-    return Math.round(((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1)) * 100);
+    return Math.round((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1) * 100);
   }, [progress?.completedActivities, progress?.totalActivities]);
-
-  const displayAchievements = (achievements && achievements.length > 0) ? achievements.slice(0, 4) : [
-    { title: 'Primeiro Passo', description: 'Complete sua primeira atividade', icon: '🌱' },
-    { title: 'Explorador', description: 'Alcance o nível 5', icon: '🧭' },
-    { title: 'Dedicado', description: 'Estude por 7 dias seguidos', icon: '⚡' },
-    { title: 'Pensador', description: 'Resolva 50 problemas pictóricos', icon: '👁️' }
-  ];
-
+  const displayAchievements = achievements && achievements.length > 0 ? achievements.slice(0, 4) : [{
+    title: 'Primeiro Passo',
+    description: 'Complete sua primeira atividade',
+    icon: '🌱'
+  }, {
+    title: 'Explorador',
+    description: 'Alcance o nível 5',
+    icon: '🧭'
+  }, {
+    title: 'Dedicado',
+    description: 'Estude por 7 dias seguidos',
+    icon: '⚡'
+  }, {
+    title: 'Pensador',
+    description: 'Resolva 50 problemas pictóricos',
+    icon: '👁️'
+  }];
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {
+      opacity: 0
+    },
     visible: {
       opacity: 1,
       transition: {
@@ -112,69 +120,55 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
       }
     }
   };
-
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
+    hidden: {
+      y: 20,
+      opacity: 0
+    },
+    visible: {
+      y: 0,
       opacity: 1,
-      transition: { duration: 0.6 }
+      transition: {
+        duration: 0.6
+      }
     }
   };
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       {/* Hero Section with Educational Video */}
       <div className="relative overflow-hidden h-[60vh] md:h-[500px] lg:h-[550px] w-full rounded-2xl mb-8 shadow-card">
         <div className="absolute inset-0">
-          <img 
-            src={educationalHeroVideo} 
-            alt="Educational background" 
-            className="w-full h-full object-cover"
-          />
+          <img src={educationalHeroVideo} alt="Educational background" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/70 to-primary/60"></div>
         </div>
         <div className="relative z-10 h-full flex items-center justify-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="flex flex-col items-center space-y-6 max-w-4xl mx-auto px-6 text-center"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 1,
+          delay: 0.2
+        }} className="flex flex-col items-center space-y-6 max-w-4xl mx-auto px-6 text-center">
             {/* Logo Mantha Completo */}
             <div className="mantha-logo-container mb-0">
-              <div className="w-[180px] md:w-[240px] lg:w-[300px] h-[180px] md:h-[240px] lg:h-[300px] rounded-full flex items-center justify-center mx-auto">
-                <img 
-                  src="/lovable-uploads/c9f33456-56ab-4ec3-8318-5d3c50172dbb.png"
-                  alt="MANTHA - Educação Personalizada"
-                  className="mantha-logo-main w-[160px] md:w-[220px] lg:w-[280px] h-auto"
-                />
+              <div className="w-[180px] md:w-[240px] lg:w-[300px] h-[180px] md:h-[240px] lg:h-[300px] rounded-full flex items-center justify-center mx-auto bg-transparent">
+                <img src="/lovable-uploads/c9f33456-56ab-4ec3-8318-5d3c50172dbb.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[160px] md:w-[220px] lg:w-[280px] h-auto" />
               </div>
             </div>
             <div className="-mt-20">
-              <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-                Bem-vindo à Mantha!
-              </h1>
+              <h1 className="text-3xl text-white mb-4 font-semibold lg:text-4xl">Bem-vindo à Mantha!</h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto mb-8">
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 -mt-4">
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm"
-                onClick={() => onViewChange?.('progress')}
-              >
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}>
                 Ver Progresso
                 <TrendingUp className="ml-2 h-4 w-4" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm"
-                onClick={() => onViewChange?.('cpa-method')}
-              >
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('cpa-method')}>
                 Começar Hoje
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -184,13 +178,9 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
       </div>
 
       {/* Estatísticas Principais */}
-      <motion.section 
-        className="py-16 bg-gradient-to-b from-background to-secondary/30"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+      <motion.section className="py-16 bg-gradient-to-b from-background to-secondary/30" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
+      once: true
+    }}>
         <div className="max-w-7xl mx-auto px-6">
           <motion.div className="text-center mb-12" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -246,14 +236,9 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
       </motion.section>
 
       {/* Features com Scroll Hijacking */}
-      <motion.section 
-        ref={featuresRef}
-        className="py-16 bg-gradient-to-b from-secondary/30 to-background"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+      <motion.section ref={featuresRef} className="py-16 bg-gradient-to-b from-secondary/30 to-background" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
+      once: true
+    }}>
         <div className="max-w-7xl mx-auto px-6">
           <motion.div className="text-center mb-12" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -265,14 +250,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className={`card-gradient p-6 rounded-xl hover-scale transition-all duration-500 ${
-                  !isMobile && currentIndex === index ? 'ring-2 ring-primary shadow-lg' : ''
-                }`}
-              >
+            {features.map((feature, index) => <motion.div key={index} variants={itemVariants} className={`card-gradient p-6 rounded-xl hover-scale transition-all duration-500 ${!isMobile && currentIndex === index ? 'ring-2 ring-primary shadow-lg' : ''}`}>
                 <div className="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-lg text-primary mb-4">
                   <feature.icon className="w-6 h-6" />
                 </div>
@@ -282,20 +260,15 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
                 <p className="text-muted-foreground text-sm">
                   {feature.description}
                 </p>
-              </motion.div>
-            ))}
+              </motion.div>)}
           </div>
         </div>
       </motion.section>
 
       {/* Conteúdo Principal */}
-      <motion.div 
-        className="max-w-7xl mx-auto p-6 space-y-8"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+      <motion.div className="max-w-7xl mx-auto p-6 space-y-8" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
+      once: true
+    }}>
         {/* Progresso Detalhado */}
         <motion.div variants={itemVariants}>
           <Card className="card-gradient">
@@ -347,12 +320,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
 
         {/* Caminho Adaptativo */}
         <motion.div variants={itemVariants}>
-          <AdaptiveLearningPath 
-            currentLevel={overallProgress}
-            completedModules={["Números Básicos", "Operações Simples"]}
-            nextModules={["Percentuais", "Geometria Visual"]}
-            successRate={87}
-          />
+          <AdaptiveLearningPath currentLevel={overallProgress} completedModules={["Números Básicos", "Operações Simples"]} nextModules={["Percentuais", "Geometria Visual"]} successRate={87} />
         </motion.div>
 
         {/* Conquistas */}
@@ -369,24 +337,17 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {displayAchievements.map((achievement, index) => (
-                  <div 
-                    key={index} 
-                    className="text-center p-4 rounded-lg transition-all hover-scale bg-white border border-primary"
-                  >
+                {displayAchievements.map((achievement, index) => <div key={index} className="text-center p-4 rounded-lg transition-all hover-scale bg-white border border-primary">
                     <div className="text-2xl mb-2">{achievement.icon}</div>
                     <h4 className="font-medium text-sm mb-1">{achievement.title}</h4>
                     <p className="text-xs text-muted-foreground">{achievement.description}</p>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </CardContent>
           </Card>
         </motion.div>
 
       </motion.div>
-    </div>
-  );
+    </div>;
 };
-
 export default Dashboard;
