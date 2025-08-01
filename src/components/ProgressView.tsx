@@ -155,20 +155,17 @@ const ProgressView: React.FC = () => {
           </Card>
         </div>
 
-
-        {/* Action Buttons */}
-        <div className="text-center">
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="pill" size="lg" className="min-w-40">
-              <Brain className="w-4 h-4 mr-2" />
-              Continuar Estudando
-            </Button>
-            <Button variant="pill-outline" size="lg" className="min-w-40">
-              <Calendar className="w-4 h-4 mr-2" />
-              Ver Histórico
-            </Button>
-          </div>
+        {/* Narrative Progress */}
+        <div className="mb-8">
+          <NarrativeProgressVisualization 
+            milestones={sampleProgressMilestones}
+            currentLevel={Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3)}
+            totalXP={xpData.totalXP}
+            streak={progress.currentStreak}
+          />
         </div>
+
+      
       </div>
     </div>
   );
