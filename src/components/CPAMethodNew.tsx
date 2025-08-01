@@ -342,9 +342,9 @@ const CPAMethod = () => {
                 }} transition={{
                   duration: 1,
                   delay: 1
-                }} className="text-2xl text-white/95 leading-relaxed text-justify font-light" style={{
+                }} style={{
                   textShadow: "0 2px 10px rgba(0,0,0,0.2)"
-                }}>
+                }} className="leading-relaxed text-justify text-white font-normal text-xl">
                     Abordagem pedagógica comprovada do Sistema Educacional de Singapura que{" "}
                     <motion.span initial={{
                     opacity: 0.7
