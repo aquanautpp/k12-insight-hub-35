@@ -130,21 +130,21 @@ export default {
 					'0%': { transform: 'translateY(20px)', opacity: '0' },
 					'100%': { transform: 'translateY(0)', opacity: '1' }
 				},
-				'ray-glide': {
+				'ray-swim': {
 					'0%': { 
-						transform: 'translateX(-60px) translateY(80px) rotate(-20deg) scale(0.7)',
+						transform: 'translateX(-30px) translateY(60px) rotate(-15deg) scale(0.8)',
 						opacity: '0'
 					},
-					'30%': { 
-						transform: 'translateX(-20px) translateY(40px) rotate(-10deg) scale(0.85)',
+					'25%': { 
+						transform: 'translateX(-15px) translateY(30px) rotate(-8deg) scale(0.9)',
 						opacity: '0.3'
 					},
-					'60%': { 
-						transform: 'translateX(15px) translateY(-10px) rotate(8deg) scale(1.05)',
+					'50%': { 
+						transform: 'translateX(10px) translateY(15px) rotate(3deg) scale(0.95)',
 						opacity: '0.7'
 					},
-					'85%': { 
-						transform: 'translateX(-5px) translateY(5px) rotate(-3deg) scale(0.98)',
+					'75%': { 
+						transform: 'translateX(5px) translateY(5px) rotate(1deg) scale(0.98)',
 						opacity: '0.9'
 					},
 					'100%': { 
@@ -159,7 +159,7 @@ export default {
 				'float': 'float 3s ease-in-out infinite',
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
 				'slide-up': 'slide-up 0.6s ease-out',
-				'ray-glide': 'ray-glide 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards'
+				'ray-swim': 'ray-swim 3.5s cubic-bezier(0.16, 1, 0.3, 1) forwards'
 			}
 		}
 	},
