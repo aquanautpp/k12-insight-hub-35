@@ -120,19 +120,19 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
 
           {/* Key Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
+            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-xl p-4">
               <div className="text-2xl font-bold mb-1 text-foreground">{currentLevel}</div>
               <div className="text-sm text-foreground/70">Nível Atual</div>
             </div>
-            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
+            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-xl p-4">
               <div className="text-2xl font-bold mb-1 text-foreground">{totalXP.toLocaleString()}</div>
               <div className="text-sm text-foreground/70">XP Total</div>
             </div>
-            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
+            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-xl p-4">
               <div className="text-2xl font-bold mb-1 text-foreground">{streak}</div>
               <div className="text-sm text-foreground/70">Dias Seguidos</div>
             </div>
-            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-lg p-4">
+            <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-xl p-4">
               <div className="text-2xl font-bold mb-1 text-foreground">{milestones.length}</div>
               <div className="text-sm text-foreground/70">Marcos Históricos</div>
             </div>
@@ -300,43 +300,44 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
             </div>
           </Card>
 
-          {/* Emotional Journey */}
-          <Card className="sophisticated-reveal">
-            <div className="p-8 text-center">
-              <h4 className="font-semibold text-foreground mb-3">Jornada Emocional</h4>
-              
-              <div className="space-y-2">
-                {[
-                  { key: "autoconsciencia", label: "Autoconsciência Emocional", icon: "Brain", progress: 75 },
-                  { key: "autorregulacao", label: "Autorregulação Emocional", icon: "Heart", progress: 50 }, 
-                  { key: "automotivacao", label: "Automotivação & Resiliência", icon: "Target", progress: 30 },
-                  { key: "empatia", label: "Empatia & Consciência Social", icon: "Users", progress: 10 },
-                  { key: "habilidades_sociais", label: "Habilidades Sociais", icon: "Sparkles", progress: 0 }
-                ].map((component) => {
-                  
-                  const IconComponent = component.icon === "Brain" ? Brain : 
-                                       component.icon === "Heart" ? Heart :
-                                       component.icon === "Target" ? Target :
-                                       component.icon === "Users" ? Users : Sparkles;
-                  
-                  return (
-                    <div key={component.key} className="space-y-1">
-                      <div className="flex justify-between items-center text-sm">
-                        <div className="flex items-center gap-2">
-                          <IconComponent className="w-4 h-4 text-primary" />
-                          <span>{component.label}</span>
-                        </div>
-                        <span className="text-primary font-medium">{component.progress}%</span>
-                      </div>
-                      <Progress value={component.progress} className="h-1" />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </Card>
         </div>
       </div>
+
+      {/* Emotional Journey - Full Width */}
+      <Card className="sophisticated-reveal">
+        <div className="p-8 text-center">
+          <h4 className="font-semibold text-foreground mb-3">Jornada Emocional</h4>
+          
+          <div className="space-y-2">
+            {[
+              { key: "autoconsciencia", label: "Autoconsciência Emocional", icon: "Brain", progress: 75 },
+              { key: "autorregulacao", label: "Autorregulação Emocional", icon: "Heart", progress: 50 }, 
+              { key: "automotivacao", label: "Automotivação & Resiliência", icon: "Target", progress: 30 },
+              { key: "empatia", label: "Empatia & Consciência Social", icon: "Users", progress: 10 },
+              { key: "habilidades_sociais", label: "Habilidades Sociais", icon: "Sparkles", progress: 0 }
+            ].map((component) => {
+              
+              const IconComponent = component.icon === "Brain" ? Brain : 
+                                   component.icon === "Heart" ? Heart :
+                                   component.icon === "Target" ? Target :
+                                   component.icon === "Users" ? Users : Sparkles;
+              
+              return (
+                <div key={component.key} className="space-y-1">
+                  <div className="flex justify-between items-center text-sm">
+                    <div className="flex items-center gap-2">
+                      <IconComponent className="w-4 h-4 text-primary" />
+                      <span>{component.label}</span>
+                    </div>
+                    <span className="text-primary font-medium">{component.progress}%</span>
+                  </div>
+                  <Progress value={component.progress} className="h-1" />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </Card>
     </div>
   );
 };
