@@ -411,22 +411,22 @@ const CPAMethod = () => {
                 title: "1. Concreto",
                 desc: "Você manipula objetos reais, como cubos, blocos ou fichas.",
                 delay: 0.9,
-                borderColor: "border-l-blue-500",
-                glowColor: "hover:shadow-blue-500/20"
+                borderColor: "border-l-primary",
+                glowColor: "hover:shadow-primary/20"
               }, {
                 icon: "🎨",
                 title: "2. Pictórico",
                 desc: "Você vê desenhos e imagens, como os famosos modelos de barras.",
                 delay: 1.1,
-                borderColor: "border-l-green-500",
-                glowColor: "hover:shadow-green-500/20"
+                borderColor: "border-l-primary/80",
+                glowColor: "hover:shadow-primary/15"
               }, {
                 icon: "🔢",
                 title: "3. Abstrato",
                 desc: "Só depois você usa números e símbolos, como fazemos em contas.",
                 delay: 1.3,
-                borderColor: "border-l-purple-500",
-                glowColor: "hover:shadow-purple-500/20"
+                borderColor: "border-l-primary/60",
+                glowColor: "hover:shadow-primary/10"
               }].map((item, index) => <motion.div key={index} initial={{
                 opacity: 0,
                 x: -50,
