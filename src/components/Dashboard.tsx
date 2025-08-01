@@ -153,7 +153,7 @@ const Dashboard = ({
         }} className="flex flex-col items-center space-y-6 max-w-2xl mx-auto px-6 text-center">
             {/* Logo Mantha Completo */}
             <div className="mantha-logo-container mb-0 mx-0 px-0 my-0 py-0">
-              <div className="w-[240px] md:w-[300px] lg:w-[360px] h-[240px] md:h-[300px] lg:h-[360px] rounded-full flex items-center justify-center mx-auto bg-transparent -mt-12 my-0">
+              <div className="w-[240px] md:w-[300px] lg:w-[360px] h-[240px] md:h-[300px] lg:h-[360px] rounded-full flex items-center justify-center mx-auto bg-transparent -mt-12 my-[5px]">
                 <img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[220px] md:w-[260px] lg:w-[300px] h-auto p-2" />
               </div>
             </div>
