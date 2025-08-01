@@ -636,19 +636,17 @@ const CPAMethod = () => {
           </CardHeader>
           
           <CardContent className="space-y-6">
-            {/* Example Navigation */}
+            {/* Next Stage Navigation */}
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-foreground">
                 Exemplo {currentExampleIndex + 1} de {currentStageData.examples.length}
               </h3>
-              <div className="flex gap-2">
-                <Button variant="outline" size="sm" onClick={prevExample} className="flex items-center gap-1">
-                  ← <span className="text-xs">Exemplo anterior</span>
+              {currentStage !== 'abstract' && <div className="flex justify-end">
+                <Button variant="outline" onClick={handleStageComplete} className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4" />
+                  Próximo Estágio
                 </Button>
-                <Button variant="outline" size="sm" onClick={nextExample} className="flex items-center gap-1">
-                  <span className="text-xs">Próximo exemplo</span> →
-                </Button>
-              </div>
+              </div>}
             </div>
 
             {/* Current Example */}
@@ -677,13 +675,15 @@ const CPAMethod = () => {
               </div>
             </div>
 
-            {/* Navigation to next stage */}
-            {currentStage !== 'abstract' && <div className="flex justify-end pt-4">
-                <Button variant="outline" onClick={handleStageComplete} className="flex items-center gap-2">
-                  <ArrowRight className="w-4 h-4" />
-                  Próximo Estágio
-                </Button>
-              </div>}
+            {/* Example Navigation */}
+            <div className="flex justify-end gap-2 pt-4">
+              <Button variant="outline" size="sm" onClick={prevExample} className="flex items-center gap-1">
+                ← <span className="text-xs">Exemplo anterior</span>
+              </Button>
+              <Button variant="outline" size="sm" onClick={nextExample} className="flex items-center gap-1">
+                <span className="text-xs">Próximo exemplo</span> →
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
