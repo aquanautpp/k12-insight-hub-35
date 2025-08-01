@@ -132,7 +132,7 @@ const CPAMethod = () => {
 
             <div className="bg-muted/50 rounded-lg p-4 mb-4">
               <p className="text-sm text-foreground leading-relaxed">
-                <strong>🏆 SG Sucesso Internacional:</strong> Essa ideia veio de estudos sobre como aprendemos melhor. Singapura foi um dos primeiros países 
+                <strong>🏆 Sucesso Internacional:</strong> Essa ideia veio de estudos sobre como aprendemos melhor. Singapura foi um dos primeiros países 
                 a usar esse método em todas as escolas, e deu super certo: os alunos de lá estão entre 
                 os melhores do mundo em matemática!
               </p>

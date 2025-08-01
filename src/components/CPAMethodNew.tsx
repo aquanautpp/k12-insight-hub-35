@@ -505,7 +505,7 @@ const CPAMethod = () => {
                     animate={{ color: ["hsl(var(--primary))", "hsl(var(--primary-foreground))", "hsl(var(--primary))"] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
-                    🏆 SG Sucesso Internacional:
+                    🏆 Sucesso Internacional:
                   </motion.strong> Essa ideia veio de estudos sobre como aprendemos melhor. 
                   Singapura foi um dos primeiros países a usar esse método em todas as escolas, e deu super certo: 
                   os alunos de lá estão entre os melhores do mundo em matemática!
