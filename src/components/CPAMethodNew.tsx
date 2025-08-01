@@ -231,9 +231,7 @@ const CPAMethod = () => {
                     delay: 0.3
                   }} style={{
                     textShadow: "0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1)"
-                  }} className="text-3xl md:text-4xl text-white mb-3 tracking-tight font-semibold">
-                      Método CPA
-                    </motion.h1>
+                  }} className="text-3xl text-white mb-3 tracking-tight font-semibold text-justify md:text-4xl">Inspirada no melhor ensino de matemática do mundo</motion.h1>
                     
                     {/* Subtítulo com Animações Sequenciais Melhoradas */}
                     <div className="text-xl text-white/95 flex items-center gap-3 flex-wrap">
