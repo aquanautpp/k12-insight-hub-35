@@ -157,7 +157,7 @@ const Dashboard = ({
                 <img src="/lovable-uploads/c9f33456-56ab-4ec3-8318-5d3c50172dbb.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[160px] md:w-[220px] lg:w-[280px] h-auto" />
               </div>
             </div>
-            <div className="-mt-28 my-[5px]">
+            <div className="-mt-32 my-[5px]">
               <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">Bem-vindo à Mantha!</h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mb-2 mx-0 my-0">
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
