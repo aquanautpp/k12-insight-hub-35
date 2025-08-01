@@ -155,15 +155,6 @@ const ProgressView: React.FC = () => {
           </Card>
         </div>
 
-        {/* Narrative Progress */}
-        <div className="mb-8">
-          <NarrativeProgressVisualization 
-            milestones={sampleProgressMilestones}
-            currentLevel={Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3)}
-            totalXP={xpData.totalXP}
-            streak={progress.currentStreak}
-          />
-        </div>
 
         {/* Action Buttons */}
         <div className="text-center">
