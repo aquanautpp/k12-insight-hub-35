@@ -86,7 +86,7 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
   return (
     <Sidebar 
       collapsible="icon" 
-      className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-27" : "w-64"}`}
+      className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-14" : "w-64"}`}
     >
       <SidebarHeader className="border-b border-border/30 p-6">
         <SidebarMenu>
@@ -96,11 +96,11 @@ export function AppSidebar({ currentView, onViewChange }: AppSidebarProps) {
               className="data-[state=open]:bg-transparent hover:bg-transparent p-0"
             >
               <div className="flex items-center space-x-3">
-                 <div className="flex aspect-square size-10 items-center justify-center rounded-xl overflow-hidden">
+                 <div className="flex aspect-square size-10 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
                      <img 
                       src="/lovable-uploads/fa8005ca-2496-41d7-9974-7c2234c4b1e8.png" 
                       alt="MANTHA Logo" 
-                      className="w-full h-full object-cover"
+                      className="size-8 object-contain"
                       onLoad={() => console.log('Logo carregado com sucesso')}
                       onError={(e) => {
                         console.error('Erro ao carregar logo:', e);
