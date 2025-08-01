@@ -156,26 +156,26 @@ const Dashboard = ({
               className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full"
               initial={{ 
                 opacity: 0,
-                y: 100,
-                x: -80,
-                scale: 0.6,
-                rotate: -25,
-                rotateY: 45,
-                rotateX: 15
+                y: 60,
+                x: -50,
+                scale: 0.7,
+                rotate: -20,
+                rotateY: 35,
+                rotateX: 12
               }}
               animate={{ 
-                opacity: [0, 0.2, 0.5, 0.8, 1],
-                y: [100, 60, 20, -5, 0],
-                x: [-80, -40, 20, 10, 0],
-                scale: [0.6, 0.75, 0.95, 1.02, 1],
-                rotate: [-25, -15, 5, -2, 0],
-                rotateY: [45, 25, -10, 5, 0],
-                rotateX: [15, 8, -3, 1, 0]
+                opacity: [0, 0.15, 0.35, 0.55, 0.7, 0.85, 0.95, 1],
+                y: [60, 45, 35, 20, 10, -2, 3, 0],
+                x: [-50, -35, -15, 5, 15, 8, -3, 0],
+                scale: [0.7, 0.78, 0.85, 0.92, 0.98, 1.02, 0.99, 1],
+                rotate: [-20, -12, -5, 2, 6, 3, -1, 0],
+                rotateY: [35, 20, 8, -5, -8, -3, 2, 0],
+                rotateX: [12, 6, 2, -1, -3, 1, -0.5, 0]
               }}
               transition={{
                 duration: 4,
                 ease: [0.25, 0.46, 0.45, 0.94],
-                times: [0, 0.25, 0.5, 0.75, 1]
+                times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1]
               }}
             >
               <div className="w-[180px] md:w-[220px] lg:w-[260px] h-[120px] md:h-[140px] lg:h-[160px] flex items-center justify-center mx-auto bg-transparent">
@@ -189,15 +189,15 @@ const Dashboard = ({
                     skewX: 8
                   }}
                   animate={{ 
-                    rotateX: [12, -8, 4, -2, 0],
-                    rotateY: [30, 6, -4, 2, 0],
-                    skewX: [8, 3, -2, 1, 0],
-                    skewY: [0, 1, -0.5, 0.2, 0]
+                    rotateX: [12, 6, 2, -1, -3, 1, -0.5, 0],
+                    rotateY: [30, 15, 5, -3, -6, -2, 1, 0],
+                    skewX: [8, 4, 2, -1, -2, 1, -0.5, 0],
+                    skewY: [0, 0.5, 1, 0.5, -0.5, -0.3, 0.2, 0]
                   }}
                   transition={{
                     duration: 4,
                     ease: [0.25, 0.46, 0.45, 0.94],
-                    times: [0, 0.25, 0.5, 0.75, 1],
+                    times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1],
                     delay: 0.8
                   }}
                 />
