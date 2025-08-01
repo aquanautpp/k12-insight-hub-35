@@ -71,7 +71,7 @@ const CPAMethod = () => {
             alt="Método CPA - Concreto, Pictórico, Abstrato"
             className="w-full h-64 object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/100 to-primary/90">
+          <div className="absolute inset-0 bg-primary/90">
             <div className="px-8 py-6 h-full flex items-center">
               <div className="w-full">
                 <h1 className="text-4xl font-bold text-white mb-4">
