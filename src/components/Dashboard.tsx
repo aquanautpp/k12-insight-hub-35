@@ -139,7 +139,7 @@ const Dashboard = ({ onViewChange }: DashboardProps) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="flex flex-col items-center space-y-2 max-w-4xl mx-auto px-6 text-center"
+            className="flex flex-col items-center space-y-0 max-w-4xl mx-auto px-6 text-center"
           >
             {/* Logo Mantha Completo */}
             <div className="mantha-logo-container mb-0">
