@@ -596,7 +596,7 @@ const CPAMethod = () => {
             return (
               <Card 
                 key={key}
-                className={`cursor-pointer transition-all duration-300 hover:shadow-learning ${
+                className={`cursor-pointer transition-all duration-300 hover:shadow-learning rounded-xl ${
                   isActive ? 'ring-2 ring-primary shadow-learning' : ''
                 } ${isCompleted ? 'bg-gradient-achievement' : ''}`}
                 onClick={() => handleStageClick(stageKey)}
