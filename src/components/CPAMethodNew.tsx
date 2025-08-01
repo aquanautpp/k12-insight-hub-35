@@ -196,7 +196,7 @@ const CPAMethod = () => {
               duration: 3,
               repeat: Infinity,
               ease: "linear"
-            }} className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#7d8e4d]/[0.72]"></motion.div>
+            }} className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#7d8e4d]/[0.72] rounded-2xl"></motion.div>
               
               <div className="relative z-10">
                 <div className="flex items-center gap-6 mb-8">
@@ -231,7 +231,7 @@ const CPAMethod = () => {
                     delay: 0.3
                   }} style={{
                     textShadow: "0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1)"
-                  }} className="text-3xl text-white mb-3 tracking-tight font-semibold text-justify md:text-4xl">Inspirada no melhor ensino de matemática do mundo</motion.h1>
+                  }} className="text-3xl text-white mb-3 tracking-tight text-justify md:text-3xl font-semibold">Método CPA: a abordagem de matemática que colocou um país no topo do mundo</motion.h1>
                     
                     {/* Subtítulo com Animações Sequenciais Melhoradas */}
                     <div className="text-xl text-white/95 flex items-center gap-3 flex-wrap">
@@ -397,10 +397,7 @@ const CPAMethod = () => {
             }} transition={{
               duration: 0.6,
               delay: 0.7
-            }} className="text-lg text-muted-foreground mb-8 text-center max-w-4xl mx-auto leading-relaxed">
-                O Método CPA é uma forma diferente (e muito mais legal!) de aprender matemática. 
-                Em vez de começar direto com números e fórmulas, você passa por três etapas:
-              </motion.p>
+            }} className="text-lg text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed text-justify">Você já se perguntou porque alguns países dominam as olimpíadas internacionais de matemática? O Método CPA, inspirado no modelo educacional de Singapura, é uma forma diferente (e muito mais legal!) de aprender matemática. Em vez de começar direto com números e fórmulas, você passa por três etapas:</motion.p>
               
               {/* Cards com Animações de Entrada Sequencial */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
