@@ -515,55 +515,6 @@ const CPAMethod = () => {
           </Card>
         </motion.div>
 
-        {/* Como funciona na prática */}
-        <Card className="mb-8 shadow-card">
-          <CardContent className="p-8">
-            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Como funciona na prática?</h2>
-            <p className="text-lg text-muted-foreground mb-8 text-center max-w-4xl mx-auto">
-              Sempre que um novo conceito é ensinado, os professores começam com objetos, depois mostram imagens 
-              e só então partem para a conta em si. Isso ajuda a entender de verdade, e não só decorar.
-            </p>
-            
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-foreground text-center mb-6">Por exemplo, para aprender frações:</h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">1</div>
-                    <h4 className="text-lg font-semibold text-foreground">Primeiro</h4>
-                  </div>
-                  <div className="text-4xl mb-3 text-center">🍕</div>
-                  <p className="text-muted-foreground">
-                    Em vez de te dar uma fórmula sobre frações, você primeiro corta uma pizza de brinquedo.
-                  </p>
-                </div>
-                
-                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">2</div>
-                    <h4 className="text-lg font-semibold text-foreground">Depois</h4>
-                  </div>
-                  <div className="text-4xl mb-3 text-center">✏️</div>
-                  <p className="text-muted-foreground">
-                    Desenha as fatias no papel, visualizando as partes da pizza.
-                  </p>
-                </div>
-                
-                <div className="bg-gradient-soft rounded-lg p-6 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">3</div>
-                    <h4 className="text-lg font-semibold text-foreground">Por último</h4>
-                  </div>
-                  <div className="text-4xl mb-3 text-center">📝</div>
-                  <p className="text-muted-foreground">
-                    Só então faz a conta com números e símbolos matemáticos.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Por que isso funciona */}
         <Card className="mb-8 shadow-card">
