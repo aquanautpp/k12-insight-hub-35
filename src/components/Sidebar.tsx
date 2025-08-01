@@ -93,17 +93,17 @@ export function AppSidebar({
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-border/30 p-4 px-0">
+      <SidebarFooter className="border-t border-border/30 p-4 px-0 flex-shrink-0">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton className="w-full p-3 hover:bg-muted rounded-xl transition-colors duration-200">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-achievement flex items-center justify-center shadow-md">
+            <SidebarMenuButton className="w-full p-3 hover:bg-muted rounded-xl transition-colors duration-200 min-h-[60px]">
+              <div className="flex items-center space-x-3 w-full">
+                <div className="w-10 h-10 rounded-full bg-gradient-achievement flex items-center justify-center shadow-md flex-shrink-0">
                   <span className="text-white text-sm font-semibold py-px my-0">V</span>
                 </div>
-                {state !== "collapsed" && <div className="flex flex-col text-left">
-                    <span className="text-sm font-semibold text-foreground">Victor</span>
-                    <span className="text-xs text-muted-foreground">Estudante</span>
+                {state !== "collapsed" && <div className="flex flex-col text-left flex-1 min-w-0">
+                    <span className="text-sm font-semibold text-foreground truncate">Victor</span>
+                    <span className="text-xs text-muted-foreground truncate">Estudante</span>
                   </div>}
               </div>
             </SidebarMenuButton>
