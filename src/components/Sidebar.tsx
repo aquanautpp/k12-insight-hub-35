@@ -83,8 +83,8 @@ export function AppSidebar({
           <SidebarGroupContent>
             <SidebarMenu className="space-y-2">
               {navigationItems.map(item => <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton onClick={() => onViewChange(item.id)} className={`w-full justify-start h-11 rounded-xl transition-all duration-200 font-medium ${currentView === item.id ? "bg-primary text-primary-foreground shadow-md" : "hover:bg-muted text-muted-foreground hover:text-foreground"} ${state === "collapsed" ? "justify-center px-0" : ""}`}>
-                    <item.icon className={`${state === "collapsed" ? "h-6 w-6" : "h-5 w-5"}`} />
+                  <SidebarMenuButton onClick={() => onViewChange(item.id)} className={`w-full justify-start h-11 rounded-xl transition-all duration-200 font-medium ${currentView === item.id ? "bg-primary text-primary-foreground shadow-md" : "hover:bg-muted text-muted-foreground hover:text-foreground"} ${state === "collapsed" ? "justify-center px-0" : ""}`}>
+                    <item.icon className={`${state === "collapsed" ? "h-6 w-6" : "h-5 w-5"} ${currentView === item.id ? "text-primary-foreground" : "text-primary"}`} />
                     {state !== "collapsed" && <span className="ml-3">{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>)}
