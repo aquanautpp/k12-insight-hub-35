@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, Users, Puzzle, Heart, Trophy } from "lucide-react";
+import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, Users, Puzzle, Heart, Trophy, EyeOff } from "lucide-react";
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
 import { CPAExplanationTooltip } from "./CPAExplanationTooltip";
@@ -15,6 +15,7 @@ const CPAMethod = () => {
   const [completedStages, setCompletedStages] = useState<Stage[]>([]);
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showInteractiveChallenge, setShowInteractiveChallenge] = useState(false);
+  const [showSolution, setShowSolution] = useState(false);
   const {
     isEnabled
   } = useFeatureFlags();
@@ -659,8 +660,30 @@ const CPAMethod = () => {
                 </div>
                 
                 <div>
-                  <h5 className="font-medium text-muted-foreground mb-2">Solução:</h5>
-                  <p className="text-lg font-medium text-primary">{currentExample.solution}</p>
+                  <div className="flex items-center justify-between mb-2">
+                    <h5 className="font-medium text-muted-foreground">Solução:</h5>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowSolution(!showSolution)}
+                      className="flex items-center gap-2"
+                    >
+                      {showSolution ? (
+                        <>
+                          <EyeOff className="w-4 h-4" />
+                          Ocultar
+                        </>
+                      ) : (
+                        <>
+                          <Eye className="w-4 h-4" />
+                          Mostrar
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                  {showSolution && (
+                    <p className="text-lg font-medium text-primary">{currentExample.solution}</p>
+                  )}
                 </div>
                 
                 <div>
