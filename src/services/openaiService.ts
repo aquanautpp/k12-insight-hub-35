@@ -125,47 +125,58 @@ class OpenAIService {
   private getMockResponse(userMessage: string, context: any): ChatResponse {
     const responses = [
       {
-        message: `Ótima pergunta! 🎯 Com base no seu estilo de aprendizagem ${context.learningStyle || 'visual'}, vou explicar de forma que seja mais fácil para você entender.
+        message: `**Análise da Questão**
 
-Para resolver este tipo de problema, sugiro começar pelo estágio **concreto** - imagine objetos reais que você pode tocar. Depois, podemos desenhar ou visualizar (estágio **pictórico**), e finalmente trabalhar com números e símbolos (estágio **abstrato**).
+Com base no seu perfil de aprendizagem ${context.learningStyle || 'visual'}, organizarei a explicação de forma estruturada.
 
-Que tal tentarmos juntos? Você pode me contar que parte específica está achando mais difícil?`,
+**Abordagem Metodológica:**
+• **Concreto:** Representação através de objetos físicos
+• **Pictórico:** Visualização por meio de diagramas
+• **Abstrato:** Aplicação de símbolos matemáticos
+
+Esta progressão garante compreensão sólida do conceito. Qual estágio deseja iniciar?`,
         suggestions: [
-          "Explique com mais exemplos visuais",
-          "Mostre passo a passo",
-          "Dê uma dica para começar"
+          "Demonstre com exemplos visuais",
+          "Explique passo a passo",
+          "Forneça dica inicial"
         ],
         confidence: 94
       },
       {
-        message: `Perfeito! 🌟 Você está no nível ${context.currentLevel || 12}, então posso ver que já domina muitos conceitos.
+        message: `**Avaliação do Nível**
 
-Para este problema, recomendo a abordagem do Método CPA:
-1. **Concreto**: Use objetos do dia a dia para representar o problema
-2. **Pictórico**: Desenhe ou faça diagramas
-3. **Abstrato**: Trabalhe com as fórmulas matemáticas
+Considerando seu nível atual ${context.currentLevel || 'intermediário'}, você possui base conceitual adequada para esta abordagem.
 
-Isso vai te ajudar a ver o problema de diferentes ângulos. Qual estágio você prefere começar?`,
+**Estratégia CPA Recomendada:**
+1. **Concreto:** Manipulação de objetos cotidianos
+2. **Pictórico:** Construção de representações visuais
+3. **Abstrato:** Aplicação de fórmulas e algoritmos
+
+**Próximo passo:** Selecione o estágio de preferência para iniciarmos.`,
         suggestions: [
-          "Prefiro começar com objetos concretos",
-          "Vou direto para os desenhos",
-          "Quero ver a fórmula matemática"
+          "Iniciar com objetos concretos",
+          "Partir para representações visuais",
+          "Aplicar fórmulas diretamente"
         ],
         confidence: 91
       },
       {
-        message: `Entendo sua dúvida! 💡 Com seu estilo ${context.learningStyle || 'visual'}, é normal preferir ver as coisas de forma mais visual.
+        message: `**Estratégia de Aprendizagem**
 
-Aqui está uma estratégia que costuma funcionar bem:
-- Primeiro, quebre o problema em partes menores
-- Use cores ou símbolos para organizar as informações
-- Faça conexões com situações que você já conhece
+Para estudantes com perfil ${context.learningStyle || 'visual'}, recomendo abordagem sistematizada:
 
-Lembre-se: não existe pergunta boba! Cada dúvida é uma oportunidade de aprender algo novo. Continue perguntando! 🚀`,
+**Técnicas Eficazes:**
+• Decomposição em etapas menores
+• Uso de códigos visuais organizacionais
+• Conexão com experiências familiares
+
+**Fundamento:** Questões são oportunidades de consolidação conceitual.
+
+Está pronto para aplicarmos estas estratégias?`,
         suggestions: [
-          "Me dê mais exemplos práticos",
-          "Como posso praticar isso?",
-          "Qual é o próximo passo?"
+          "Forneça exemplos práticos",
+          "Sugira exercícios de prática",
+          "Indique próxima etapa"
         ],
         confidence: 88
       }
