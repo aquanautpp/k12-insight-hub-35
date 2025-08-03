@@ -138,7 +138,7 @@ const ComprehensibleInput = () => {
       {/* Header */}
       <div className="text-center space-y-4">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-learning text-white mb-4">
-          <Globe className="w-8 h-8 text-olive-700" />
+          <Globe className="w-8 h-8 text-primary" />
         </div>
         <h1 className="text-3xl font-bold text-foreground">Como Aprender Línguas Estrangeiras</h1>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
