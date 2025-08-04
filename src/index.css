@@ -674,4 +674,29 @@ All colors MUST be HSL.
       animation: none;
     }
   }
+
+  /* Enhanced math content styles */
+  .math-text-content .math-formula {
+    @apply bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-4 my-4;
+    font-family: 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  }
+
+  .math-text-content .inline-math {
+    @apply mx-1 px-2 py-1 bg-accent/20 rounded font-medium text-accent-foreground;
+    font-family: inherit;
+  }
+
+  .math-text-content sup {
+    @apply text-xs font-bold text-primary;
+    vertical-align: super;
+    line-height: 0;
+  }
+
+  .math-text-content .fraction {
+    @apply inline-flex flex-col items-center mx-1;
+  }
+
+  .math-text-content .fraction-line {
+    @apply w-full h-px bg-current;
+  }
 }

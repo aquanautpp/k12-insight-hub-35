@@ -6,6 +6,60 @@ interface MathTextRendererProps {
 }
 
 const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className = "" }) => {
+  // Função para converter símbolos LaTeX para Unicode
+  const convertLatexSymbols = (text: string): string => {
+    const latexToUnicode: { [key: string]: string } = {
+      '\\pm': '±',
+      '\\mp': '∓',
+      '\\times': '×',
+      '\\div': '÷',
+      '\\sqrt': '√',
+      '\\leq': '≤',
+      '\\geq': '≥',
+      '\\neq': '≠',
+      '\\approx': '≈',
+      '\\infty': '∞',
+      '\\alpha': 'α',
+      '\\beta': 'β',
+      '\\gamma': 'γ',
+      '\\delta': 'δ',
+      '\\pi': 'π',
+      '\\theta': 'θ',
+      '\\lambda': 'λ',
+      '\\mu': 'μ',
+      '\\sigma': 'σ',
+      '\\phi': 'φ',
+      '\\omega': 'ω'
+    };
+
+    let result = text;
+    Object.entries(latexToUnicode).forEach(([latex, unicode]) => {
+      result = result.replace(new RegExp(latex.replace('\\', '\\\\'), 'g'), unicode);
+    });
+
+    return result;
+  };
+
+  // Função para processar fórmulas matemáticas
+  const processFormula = (formula: string): React.ReactNode => {
+    // Converter fórmulas comuns para formato mais legível
+    let processed = formula;
+    
+    // Processar frações \frac{a}{b}
+    processed = processed.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1)/($2)');
+    
+    // Processar raízes \sqrt{x}
+    processed = processed.replace(/\\sqrt\{([^}]+)\}/g, '√($1)');
+    
+    // Processar potências com chaves x^{2}
+    processed = processed.replace(/([a-zA-Z0-9]+)\^\{([^}]+)\}/g, (match, base, exp) => {
+      return `${base}^${exp}`;
+    });
+    
+    // Aplicar formatação de texto
+    return processTextFormatting(processed);
+  };
+
   // Função para renderizar texto com formatação matemática
   const renderFormattedText = (text: string) => {
     // Dividir o texto em linhas para processar
@@ -70,8 +124,11 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
     const parts: React.ReactNode[] = [];
     let currentIndex = 0;
     
-    // Regex para diferentes formatações
-    const formatRegex = /(\*\*[^*]+\*\*|\\\[[^\]]+\\\]|\w+\^[0-9²³⁴⁵⁶⁷⁸⁹]+|\b\d+[²³⁴⁵⁶⁷⁸⁹]+|\b[a-zA-Z]+[²³⁴⁵⁶⁷⁸⁹]+)/g;
+    // Primeiro, converter símbolos LaTeX para Unicode
+    text = convertLatexSymbols(text);
+    
+    // Regex para diferentes formatações incluindo LaTeX inline e block
+    const formatRegex = /(\*\*[^*]+\*\*|\\\([^)]+\\\)|\\\[[^\]]+\\\]|\w+\^[0-9²³⁴⁵⁶⁷⁸⁹]+|\w+\^\{[^}]+\}|\b\d+[²³⁴⁵⁶⁷⁸⁹]+|\b[a-zA-Z]+[²³⁴⁵⁶⁷⁸⁹]+)/g;
     let match;
     
     while ((match = formatRegex.exec(text)) !== null) {
@@ -91,16 +148,25 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
           </strong>
         );
       }
-      // Processar fórmulas LaTeX (\[formula\])
+      // Processar LaTeX inline \(formula\)
+      else if (matchedText.startsWith('\\(') && matchedText.endsWith('\\)')) {
+        const formula = matchedText.slice(2, -2);
+        parts.push(
+          <span key={match.index} className="inline-math mx-1 px-2 py-1 bg-accent/20 rounded font-medium text-accent-foreground">
+            {processFormula(formula)}
+          </span>
+        );
+      }
+      // Processar fórmulas LaTeX block \[formula\]
       else if (matchedText.startsWith('\\[') && matchedText.endsWith('\\]')) {
         const formula = matchedText.slice(2, -2);
         parts.push(
-          <div key={match.index} className="math-formula my-3 p-4 text-center bg-gradient-to-r from-muted to-muted/50 border border-border rounded-lg font-mono text-lg font-semibold">
-            {formula}
+          <div key={match.index} className="math-formula my-4 p-4 text-center bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg text-lg font-semibold">
+            {processFormula(formula)}
           </div>
         );
       }
-      // Processar potências (x^2, 3², etc.)
+      // Processar potências (x^2, x^{2}, 3², etc.)
       else if (matchedText.includes('^') || /[²³⁴⁵⁶⁷⁸⁹]/.test(matchedText)) {
         parts.push(renderSuperscript(matchedText, match.index));
       }
@@ -128,7 +194,21 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
       '⁷': '7', '⁸': '8', '⁹': '9', '¹': '1', '⁰': '0'
     };
     
-    // Se contém ^ (formato x^2)
+    // Se contém ^ com chaves (formato x^{2})
+    if (text.includes('^{')) {
+      const match = text.match(/(.+)\^\{([^}]+)\}/);
+      if (match) {
+        const [, base, exponent] = match;
+        return (
+          <span key={key} className="font-medium">
+            {base}
+            <sup className="text-xs font-bold text-primary">{exponent}</sup>
+          </span>
+        );
+      }
+    }
+    
+    // Se contém ^ simples (formato x^2)
     if (text.includes('^')) {
       const [base, exponent] = text.split('^');
       return (
