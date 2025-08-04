@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, BookOpen, Calculator, Brain, Target, Zap, HelpCircle } from "lucide-react";
 import { openaiService } from "@/services/openaiService";
+import MathTextRenderer from "@/components/MathTextRenderer";
 
 // Componente para mostrar status da IA
 const AIStatusIndicator = () => {
@@ -50,7 +51,7 @@ const ManthaChatTutor = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: 'Olá! Sou a **Mantha**, sua tutora especializada no Método CPA de Singapura 📚\n\nEstou aqui para ajudá-lo a compreender matemática através dos três estágios: **Concreto**, **Pictórico** e **Abstrato**.\n\nQual conceito matemático gostaria de explorar hoje?',
+      content: '### Olá! Sou a Mantha 👋\n\nSua tutora especializada no **Método CPA de Singapura** 📚\n\nEstou aqui para ajudá-lo a compreender matemática através dos três estágios:\n• **Concreto** - Manipulação de objetos físicos\n• **Pictórico** - Representações visuais e desenhos\n• **Abstrato** - Símbolos e operações matemáticas\n\nQual conceito matemático gostaria de explorar hoje?',
       sender: 'mantha',
       timestamp: new Date(),
       stage: 'adaptive'
@@ -142,7 +143,7 @@ const ManthaChatTutor = () => {
         subtraction: "**Subtração - Estágio Abstrato**\n\nOpere com números diretamente: 9 - 3 = 6\n\n**Verificação:** 6 + 3 = 9 ✓\n\n**Estratégia:** Sempre verifique resultados usando a operação inversa (adição).",
         multiplication: "**Multiplicação - Estágio Abstrato**\n\nUtilize fatos matemáticos: 7 × 8 = 56\n\n**Propriedades:**\n• Comutativa: 7 × 8 = 8 × 7\n• Distributiva: 7 × (8 + 2) = 7 × 8 + 7 × 2\n\n**Domínio** das tabuadas acelera resolução de problemas.",
         division: "**Divisão - Estágio Abstrato**\n\nAplique algoritmos de divisão: 48 ÷ 6 = 8\n\n**Verificação:** 8 × 6 = 48 ✓\n\n**Conceito:** Divisão e multiplicação são **operações inversas**.",
-        fractions: "**Frações - Estágio Abstrato**\n\nOpere com notação fracionária: 1/2 + 1/4\n\n**Processo:**\n• Encontre denominador comum: 4\n• 2/4 + 1/4 = 3/4\n\n**Fundamento:** Denominadores comuns permitem operações diretas.",
+        fractions: "### Frações - Estágio Abstrato\n\nOpere com notação fracionária: 1/2 + 1/4\n\n**Processo:**\n• Encontre denominador comum: 4\n• 2/4 + 1/4 = 3/4\n\n**Fundamento:** Denominadores comuns permitem operações diretas.",
         general: "**Estágio Abstrato**\n\nUtilize símbolos matemáticos, fórmulas e algoritmos para resolver problemas. Este nível representa o **domínio conceitual** completo."
       }
     };
@@ -215,9 +216,9 @@ Deseja explorar aplicações específicas?`,
       };
     }
 
-    if (userMessage.match(/teorema\s+de\s+pitágoras/i)) {
-      return {
-        content: `**Teorema de Pitágoras**
+     if (userMessage.match(/teorema\s+de\s+pitágoras/i)) {
+       return {
+         content: `### Teorema de Pitágoras
 
 Para triângulos retângulos: a² + b² = c² (c = hipotenusa)
 
@@ -230,9 +231,9 @@ Para triângulos retângulos: a² + b² = c² (c = hipotenusa)
 **Aplicações:** Cálculo de distâncias, verificação de ângulos retos, diagonais de retângulos.
 
 Quer ver mais aplicações práticas?`,
-        stage: stage
-      };
-    }
+         stage: stage
+       };
+     }
 
     // Gera resposta baseada no estágio
     if (stage === 'adaptive') {
@@ -394,7 +395,7 @@ ${abstractResp}
                          : 'bg-muted text-foreground'
                      }`}
                    >
-                     <div className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</div>
+                     <MathTextRenderer content={message.content} className="text-sm leading-relaxed" />
                     
                     <div className="flex items-center justify-between mt-2 text-xs opacity-70">
                       <span>
