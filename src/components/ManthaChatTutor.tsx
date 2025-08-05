@@ -340,19 +340,19 @@ ${abstractResp}
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-6">
-      <Card className="h-[850px] flex flex-col shadow-card">
-        <CardHeader className="bg-gradient-to-r from-primary via-primary-hover to-primary text-white rounded-t-lg">
+    <div className="w-full max-w-5xl mx-auto p-3 md:p-6">
+      <Card className="h-[70vh] md:h-[850px] flex flex-col shadow-card">
+        <CardHeader className="bg-gradient-to-r from-primary via-primary-hover to-primary text-white rounded-t-lg p-4 md:p-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <Brain className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-2 md:space-x-3">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <Brain className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl font-bold text-white">Mantha - Tutor IA</CardTitle>
-                <p className="text-white/90 text-sm flex items-center">
+                <CardTitle className="text-lg md:text-xl font-bold text-white">Mantha - Tutor IA</CardTitle>
+                <p className="text-white/90 text-xs md:text-sm flex items-center">
                   <span className="mr-2">{stageInfo[currentStage].icon}</span>
-                  {stageInfo[currentStage].title}
+                  <span className="hidden sm:inline">{stageInfo[currentStage].title}</span>
                 </p>
               </div>
             </div>
@@ -363,68 +363,95 @@ ${abstractResp}
         </CardHeader>
 
         {/* Seleção de Estágio */}
-        <div className="p-4 border-b bg-gradient-subtle">
-          <div className="flex gap-2 flex-wrap">
+        <div className="p-3 md:p-4 border-b bg-gradient-subtle">
+          <div className="flex gap-1 md:gap-2 flex-wrap">
             {Object.entries(stageInfo).map(([key, info]) => (
               <Button
                 key={key}
                 variant={currentStage === key ? "default" : "outline"}
                 size="sm"
                 onClick={() => setCurrentStage(key as CPAStage)}
-                className="flex items-center gap-1"
+                className="flex items-center gap-1 h-8 md:h-9 text-xs md:text-sm px-2 md:px-3 min-h-[44px]"
               >
                 <span>{info.icon}</span>
-                <span className="hidden sm:inline">{info.title}</span>
+                <span className="hidden sm:inline text-xs md:text-sm">{info.title}</span>
               </Button>
             ))}
           </div>
           
-          <div className="mt-2 text-sm text-muted-foreground">
+          <div className="mt-2 text-xs md:text-sm text-muted-foreground">
             <strong>Modo atual:</strong> {stageInfo[currentStage].description}
           </div>
         </div>
 
         {/* Área do Chat */}
         <CardContent className="flex-1 p-0 overflow-hidden">
-          <ScrollArea className="h-full p-4" ref={scrollRef}>
-            <div className="space-y-4">
+          <ScrollArea className="h-full p-3 md:p-4" ref={scrollRef}>
+            <div className="space-y-3 md:space-y-4">
               {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                   <div
-                     className={`max-w-[80%] rounded-lg p-4 ${
-                       message.sender === 'user'
-                         ? 'bg-primary text-primary-foreground'
-                         : 'bg-muted text-foreground'
-                     }`}
-                   >
-                     <MathTextRenderer content={message.content} className="text-sm leading-relaxed" />
+                <div key={message.id} className={`flex gap-2 md:gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  
+                  {/* Avatar do Tutor */}
+                  {message.sender === 'mantha' && (
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-primary to-primary-hover flex items-center justify-center flex-shrink-0 mt-1">
+                      <Brain className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                    </div>
+                  )}
+                  
+                  {/* Mensagem */}
+                  <div className={`flex-1 max-w-[85%] md:max-w-[80%] ${message.sender === 'user' ? 'ml-8 md:ml-12' : ''}`}>
+                    <div className={`p-3 md:p-4 rounded-2xl text-sm md:text-base ${
+                      message.sender === 'user' 
+                        ? 'bg-primary text-primary-foreground ml-auto' 
+                        : 'bg-muted text-muted-foreground'
+                    }`}>
+                      {message.sender === 'mantha' ? (
+                        <MathTextRenderer content={message.content} />
+                      ) : (
+                        <p className="leading-relaxed break-words">{message.content}</p>
+                      )}
+                    </div>
                     
-                    <div className="flex items-center justify-between mt-2 text-xs opacity-70">
-                      <span>
-                        {message.timestamp.toLocaleTimeString([], { 
+                    {/* Timestamp e estágio */}
+                    <div className="flex items-center justify-between mt-1 px-1">
+                      <span className="text-xs text-muted-foreground">
+                        {message.timestamp.toLocaleTimeString('pt-BR', { 
                           hour: '2-digit', 
                           minute: '2-digit' 
                         })}
                       </span>
+                      
                       {message.stage && (
-                        <Badge variant="secondary" className={stageInfo[message.stage].color}>
-                          {stageInfo[message.stage].icon} {stageInfo[message.stage].title}
-                        </Badge>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          {stageInfo[message.stage].icon}
+                          <span className="hidden sm:inline">{stageInfo[message.stage].title}</span>
+                        </span>
                       )}
                     </div>
                   </div>
+                  
+                  {/* Avatar do usuário */}
+                  {message.sender === 'user' && (
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-achievement flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-white text-xs md:text-sm font-semibold">V</span>
+                    </div>
+                  )}
                 </div>
               ))}
               
+              {/* Indicador de digitação */}
               {isLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-muted rounded-lg p-3 max-w-[80%]">
-                    <div className="flex items-center space-x-2">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
-                      <span className="text-sm text-muted-foreground">Mantha está pensando...</span>
+                <div className="flex gap-2 md:gap-3 justify-start">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-primary to-primary-hover flex items-center justify-center flex-shrink-0">
+                    <Brain className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                  </div>
+                  <div className="flex-1 max-w-[80%]">
+                    <div className="bg-muted p-3 md:p-4 rounded-2xl">
+                      <div className="flex space-x-1">
+                        <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -433,69 +460,32 @@ ${abstractResp}
           </ScrollArea>
         </CardContent>
 
-        {/* Área de Input com botões específicos */}
-        <div className="p-4 border-t bg-background">
-          {/* Botões de Dica e Ajuda Específicos */}
-          <div className="flex gap-2 mb-3 justify-center flex-wrap">
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10"
-              onClick={() => {
-                const lastUserMessage = messages.filter(m => m.sender === 'user').pop();
-                const problemContext = lastUserMessage ? lastUserMessage.content : "este problema";
-                setInputMessage(`Explique ${problemContext} de forma mais visual`);
-              }}
-            >
-              <Target className="w-3 h-3 mr-1" />
-              Mais Visual
-            </Button>
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10"
-              onClick={() => {
-                setInputMessage("Como posso usar objetos físicos para entender melhor?");
-              }}
-            >
-              <BookOpen className="w-3 h-3 mr-1" />
-              Concreto
-            </Button>
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10"
-              onClick={() => {
-                setInputMessage("Mostre-me a fórmula matemática");
-              }}
-            >
-              <Calculator className="w-3 h-3 mr-1" />
-              Fórmula
-            </Button>
-          </div>
-
-          {/* Input */}
-          <div className="flex gap-2">
-            <Input
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Digite sua pergunta de matemática..."
-              className="flex-1"
-              disabled={isLoading}
-            />
+        {/* Input de mensagem */}
+        <div className="border-t p-3 md:p-4 bg-background rounded-b-lg">
+          <div className="flex gap-2 md:gap-3 items-end">
+            <div className="flex-1">
+              <Input
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Digite sua pergunta sobre matemática..."
+                className="min-h-[44px] md:min-h-[48px] text-sm md:text-base rounded-xl border-2 resize-none"
+                disabled={isLoading}
+              />
+            </div>
             <Button 
               onClick={handleSendMessage}
-              disabled={!inputMessage.trim() || isLoading}
-              size="icon"
+              disabled={isLoading || !inputMessage.trim()}
+              className="h-[44px] w-[44px] md:h-[48px] md:w-[48px] rounded-xl flex-shrink-0 p-0"
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-4 h-4 md:w-5 md:h-5" />
             </Button>
           </div>
           
-          {/* Exemplos de perguntas */}
-          <div className="mt-3 text-xs text-muted-foreground text-center">
-            Experimente: "Quanto é 7 × 8?", "Como resolver frações?", "Teorema de Pitágoras"
+          {/* Dicas de uso */}
+          <div className="mt-2 text-xs text-muted-foreground text-center">
+            <span className="hidden sm:inline">Pressione Enter para enviar • </span>
+            Experimente perguntar sobre fórmulas, cálculos ou conceitos matemáticos
           </div>
         </div>
       </Card>

@@ -52,14 +52,14 @@ export function AppSidebar({
   const {
     state
   } = useSidebar();
-  return <Sidebar collapsible="icon" className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-48" : "w-64"}`}>
-      <SidebarHeader className="border-b border-border/30 p-6 px-[10px]">
+  return <Sidebar collapsible="icon" className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-16 md:w-48" : "w-64 md:w-64"}`}>
+      <SidebarHeader className="border-b border-border/30 p-4 md:p-6 px-[10px]">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" className="data-[state=open]:bg-transparent hover:bg-transparent p-0">
               <div className="flex items-center space-x-3">
-                 <div className="flex aspect-square size-12 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
-                      <img src="/lovable-uploads/9aafef87-db99-4bf0-ae3b-c5d5ad94af1a.png" alt="MANTHA Logo" className="size-17 object-contain rounded" onLoad={() => console.log('Logo carregado com sucesso')} onError={e => {
+                 <div className="flex aspect-square size-10 md:size-12 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
+                      <img src="/lovable-uploads/9aafef87-db99-4bf0-ae3b-c5d5ad94af1a.png" alt="MANTHA Logo" className="size-8 md:size-10 object-contain rounded" onLoad={() => console.log('Logo carregado com sucesso')} onError={e => {
                   console.error('Erro ao carregar logo:', e);
                   // Fallback para texto se a imagem falhar
                   e.currentTarget.style.display = 'none';
@@ -69,7 +69,7 @@ export function AppSidebar({
                 }} />
                  </div>
                 {state !== "collapsed" && <div className="grid flex-1 text-left leading-tight">
-                    <span className="text-lg font-semibold text-foreground">Mantha</span>
+                    <span className="text-base md:text-lg font-semibold text-foreground">Mantha</span>
                     <span className="text-xs text-muted-foreground font-medium">Educação Personalizada</span>
                   </div>}
               </div>
@@ -78,14 +78,14 @@ export function AppSidebar({
         </SidebarMenu>
       </SidebarHeader>
 
-      <SidebarContent className="py-6 px-0">
+      <SidebarContent className="py-4 md:py-6 px-0">
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-2">
+            <SidebarMenu className="space-y-1 md:space-y-2">
               {navigationItems.map(item => <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton onClick={() => onViewChange(item.id)} className={`w-full justify-start h-11 rounded-xl transition-all duration-200 font-medium ${currentView === item.id ? "bg-primary text-primary-foreground shadow-md" : "hover:bg-muted text-muted-foreground hover:text-foreground"} ${state === "collapsed" ? "justify-center px-0" : ""}`}>
-                    <item.icon className={`${state === "collapsed" ? "h-6 w-6" : "h-5 w-5"} ${currentView === item.id ? "text-primary-foreground" : "text-primary"}`} />
-                    {state !== "collapsed" && <span className="ml-3">{item.title}</span>}
+                  <SidebarMenuButton onClick={() => onViewChange(item.id)} className={`w-full justify-start h-12 md:h-11 rounded-xl transition-all duration-200 font-medium text-sm md:text-base ${currentView === item.id ? "bg-primary text-primary-foreground shadow-md" : "hover:bg-muted text-muted-foreground hover:text-foreground"} ${state === "collapsed" ? "justify-center px-2" : "px-3"}`}>
+                    <item.icon className={`${state === "collapsed" ? "h-6 w-6" : "h-5 w-5"} ${currentView === item.id ? "text-primary-foreground" : "text-primary"} flex-shrink-0`} />
+                    {state !== "collapsed" && <span className="ml-3 truncate">{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>)}
             </SidebarMenu>
@@ -93,16 +93,16 @@ export function AppSidebar({
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-border/30 p-4 px-0 flex-shrink-0">
+      <SidebarFooter className="border-t border-border/30 p-3 md:p-4 px-0 flex-shrink-0">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton className="w-full p-3 hover:bg-muted rounded-xl transition-colors duration-200 min-h-[60px]">
+            <SidebarMenuButton className="w-full p-2 md:p-3 hover:bg-muted rounded-xl transition-colors duration-200 min-h-[48px] md:min-h-[60px]">
               <div className="flex items-center space-x-3 w-full">
-                <div className="w-10 h-10 rounded-full bg-gradient-achievement flex items-center justify-center shadow-md flex-shrink-0">
-                  <span className="text-white text-sm font-semibold py-px my-0">V</span>
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-achievement flex items-center justify-center shadow-md flex-shrink-0">
+                  <span className="text-white text-xs md:text-sm font-semibold py-px my-0">V</span>
                 </div>
                 {state !== "collapsed" && <div className="flex flex-col text-left flex-1 min-w-0">
-                    <span className="text-sm font-semibold text-foreground truncate">Victor</span>
+                    <span className="text-xs md:text-sm font-semibold text-foreground truncate">Victor</span>
                     <span className="text-xs text-muted-foreground truncate">Estudante</span>
                   </div>}
               </div>

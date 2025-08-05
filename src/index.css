@@ -499,6 +499,263 @@ All colors MUST be HSL.
     }
   }
 
+  /* Mobile Optimization Utilities */
+
+  /* Touch-friendly interactive elements */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .touch-target-large {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Mobile-first responsive text sizing */
+  .text-responsive-sm {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+  }
+
+  .text-responsive-base {
+    font-size: 0.875rem; /* 14px mobile */
+    line-height: 1.25rem; /* 20px */
+  }
+
+  .text-responsive-lg {
+    font-size: 1rem; /* 16px mobile */
+    line-height: 1.5rem; /* 24px */
+  }
+
+  .text-responsive-xl {
+    font-size: 1.125rem; /* 18px mobile */
+    line-height: 1.75rem; /* 28px */
+  }
+
+  @media (min-width: 768px) {
+    .text-responsive-base {
+      font-size: 1rem; /* 16px desktop */
+      line-height: 1.5rem; /* 24px */
+    }
+    
+    .text-responsive-lg {
+      font-size: 1.125rem; /* 18px desktop */
+      line-height: 1.75rem; /* 28px */
+    }
+    
+    .text-responsive-xl {
+      font-size: 1.25rem; /* 20px desktop */
+      line-height: 1.75rem; /* 28px */
+    }
+  }
+
+  /* Mobile spacing utilities */
+  .spacing-mobile {
+    padding: 0.75rem; /* 12px mobile */
+  }
+
+  .spacing-mobile-lg {
+    padding: 1rem; /* 16px mobile */
+  }
+
+  @media (min-width: 768px) {
+    .spacing-mobile {
+      padding: 1rem; /* 16px desktop */
+    }
+    
+    .spacing-mobile-lg {
+      padding: 1.5rem; /* 24px desktop */
+    }
+  }
+
+  /* Mobile-optimized card layouts */
+  .card-mobile {
+    @apply rounded-lg md:rounded-xl;
+    @apply p-3 md:p-4;
+    @apply shadow-sm md:shadow-card;
+  }
+
+  /* Mobile-friendly button variants */
+  .btn-mobile {
+    @apply h-11 md:h-10;
+    @apply text-sm md:text-base;
+    @apply px-4 md:px-6;
+    @apply rounded-xl;
+    @apply font-medium;
+    @apply transition-all duration-200;
+    @apply touch-target;
+  }
+
+  .btn-mobile-lg {
+    @apply h-12 md:h-11;
+    @apply text-base md:text-lg;
+    @apply px-6 md:px-8;
+    @apply rounded-xl;
+    @apply font-semibold;
+    @apply transition-all duration-200;
+    @apply touch-target-large;
+  }
+
+  /* Mobile navigation optimizations */
+  .nav-mobile {
+    @apply flex items-center justify-between;
+    @apply p-3 md:p-4;
+    @apply bg-white border-b border-border/50;
+  }
+
+  /* Mobile chat optimizations */
+  .chat-mobile {
+    @apply h-[70vh] md:h-auto;
+    @apply max-h-[600px] md:max-h-[800px];
+  }
+
+  .chat-input-mobile {
+    @apply min-h-[44px] md:min-h-[48px];
+    @apply text-sm md:text-base;
+    @apply p-3 md:p-4;
+    @apply rounded-xl;
+    @apply border-2;
+  }
+
+  /* Mobile sidebar optimizations */
+  .sidebar-mobile {
+    @apply w-16 md:w-64;
+    @apply transition-all duration-300;
+  }
+
+  .sidebar-item-mobile {
+    @apply h-12 md:h-11;
+    @apply text-sm md:text-base;
+    @apply px-2 md:px-3;
+    @apply rounded-xl;
+    @apply font-medium;
+    @apply transition-all duration-200;
+    @apply touch-target;
+  }
+
+  /* Mobile scrolling optimizations */
+  .scroll-mobile {
+    /* Enable momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+  }
+
+  /* Mobile viewport optimizations */
+  .viewport-mobile {
+    /* Prevent zoom on input focus on iOS */
+    @media (max-width: 767px) {
+      font-size: 16px;
+    }
+  }
+
+  /* Mobile layout utilities */
+  .container-mobile {
+    @apply px-3 md:px-6;
+    @apply py-4 md:py-6;
+    @apply max-w-full md:max-w-5xl;
+    @apply mx-auto;
+  }
+
+  .grid-mobile {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+    @apply gap-3 md:gap-4 lg:gap-6;
+  }
+
+  /* Mobile-specific animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-bounce,
+    .animate-pulse,
+    .animate-fade-in,
+    .hover-scale,
+    .celebration-bounce {
+      animation: none;
+      transition: none;
+    }
+  }
+
+  /* Mobile accessibility improvements */
+  .focus-mobile {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+    @apply focus:ring-offset-background;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .card-mobile {
+      @apply border-2 border-foreground;
+    }
+    
+    .btn-mobile {
+      @apply border-2 border-foreground;
+    }
+  }
+
+  /* Print styles for mobile */
+  @media print {
+    .sidebar-mobile,
+    .nav-mobile,
+    .btn-mobile {
+      display: none !important;
+    }
+  }
+}
+
+/* Mobile-specific media queries for fine-tuning */
+@media (max-width: 640px) {
+  /* Extra small screens */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  
+  .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+@media (max-width: 475px) {
+  /* Very small screens */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Ensure minimum touch targets */
+  button, input, select, textarea {
+    min-height: 44px;
+  }
+  
+  /* Larger text for better readability */
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* Landscape orientation optimizations */
+@media (max-height: 500px) and (orientation: landscape) {
+  .chat-mobile {
+    height: 80vh;
+  }
+  
+  .sidebar-mobile {
+    width: 60px;
+  }
+}
+
   /* Responsividade do Logo */
   @media (max-width: 768px) {
     .mantha-logo-main {
