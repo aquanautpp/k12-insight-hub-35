@@ -42,22 +42,45 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
 
   // Função para processar fórmulas matemáticas
   const processFormula = (formula: string): React.ReactNode => {
-    // Converter fórmulas comuns para formato mais legível
+    // Converter fórmulas comuns para formato mais legível e visual
     let processed = formula;
     
-    // Processar frações \frac{a}{b}
-    processed = processed.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1)/($2)');
+    // Converter símbolos LaTeX primeiro
+    processed = convertLatexSymbols(processed);
+    
+    // Processar frações \frac{a}{b} para formato visual
+    processed = processed.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, (match, numerator, denominator) => {
+      return `(${numerator}) ÷ (${denominator})`;
+    });
     
     // Processar raízes \sqrt{x}
     processed = processed.replace(/\\sqrt\{([^}]+)\}/g, '√($1)');
     
     // Processar potências com chaves x^{2}
     processed = processed.replace(/([a-zA-Z0-9]+)\^\{([^}]+)\}/g, (match, base, exp) => {
-      return `${base}^${exp}`;
+      // Converter números para sobrescrito Unicode
+      const superscriptMap: { [key: string]: string } = {
+        '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', 
+        '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹'
+      };
+      const unicodeExp = exp.split('').map(char => superscriptMap[char] || char).join('');
+      return `${base}${unicodeExp}`;
     });
     
-    // Aplicar formatação de texto
-    return processTextFormatting(processed);
+    // Processar potências simples x^2
+    processed = processed.replace(/([a-zA-Z0-9]+)\^([0-9]+)/g, (match, base, exp) => {
+      const superscriptMap: { [key: string]: string } = {
+        '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', 
+        '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹'
+      };
+      const unicodeExp = exp.split('').map(char => superscriptMap[char] || char).join('');
+      return `${base}${unicodeExp}`;
+    });
+    
+    // Remover comandos LaTeX restantes
+    processed = processed.replace(/\\[a-zA-Z]+/g, '');
+    
+    return processed;
   };
 
   // Função para renderizar texto com formatação matemática
