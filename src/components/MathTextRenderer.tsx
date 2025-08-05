@@ -48,9 +48,12 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
     // Converter símbolos LaTeX primeiro
     processed = convertLatexSymbols(processed);
     
-    // Processar frações \frac{a}{b} para formato visual
+    // Processar frações \frac{a}{b} para formato visual limpo
     processed = processed.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, (match, numerator, denominator) => {
-      return `(${numerator}) ÷ (${denominator})`;
+      // Remover parênteses desnecessários do numerador e denominador
+      const cleanNum = numerator.replace(/^\{|\}$/g, '').replace(/^\(|\)$/g, '');
+      const cleanDen = denominator.replace(/^\{|\}$/g, '').replace(/^\(|\)$/g, '');
+      return `(${cleanNum}) / (${cleanDen})`;
     });
     
     // Processar raízes \sqrt{x}

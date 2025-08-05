@@ -185,17 +185,18 @@ const ManthaChatTutor = () => {
 
 ### Explicação pelo Método CPA:
 
-**Concreto:** ${operation === 'multiplicação' ? `Organize ${a} grupos de ${b} objetos físicos` : operation === 'adição' ? `Separe ${a} objetos, adicione ${b} objetos` : operation === 'subtração' ? `Inicie com ${a} objetos, remova ${b}` : `Distribua ${a} objetos em ${b} grupos iguais`}
+**🔧 Concreto:** ${operation === 'multiplicação' ? `Organize ${a} grupos de ${b} objetos físicos` : operation === 'adição' ? `Separe ${a} objetos, adicione ${b} objetos` : operation === 'subtração' ? `Inicie com ${a} objetos, remova ${b}` : `Distribua ${a} objetos em ${b} grupos iguais`}
 
-**Pictórico:** ${operation === 'multiplicação' ? `Desenhe ${a} fileiras com ${b} pontos cada` : operation === 'adição' ? `Desenhe ${a} símbolos + ${b} símbolos` : operation === 'subtração' ? `Desenhe ${a} símbolos, risque ${b}` : `Desenhe ${a} objetos em ${b} grupos`}
+**🎨 Pictórico:** ${operation === 'multiplicação' ? `Desenhe ${a} fileiras com ${b} pontos cada` : operation === 'adição' ? `Desenhe ${a} símbolos + ${b} símbolos` : operation === 'subtração' ? `Desenhe ${a} símbolos, risque ${b}` : `Desenhe ${a} objetos em ${b} grupos`}
 
-**Abstrato:** \\[ ${a} ${symbol} ${b} = ${result} \\]
+**🔢 Abstrato:** A equação fica: ${a} ${symbol} ${b} = ${result}
 
-• A equação pode ser escrita como \\( resultado = ${result} \\)
-• Os números ${a} e ${b} são os **operandos**
-• O símbolo ${symbol} representa a **${operation}**
+### O que significa cada parte:
+• **${a}** e **${b}** são os números que estamos trabalhando
+• **${symbol}** é o símbolo da **${operation}**
+• **${result}** é nossa resposta final
 
-Qual estágio gostaria de aprofundar?`,
+Qual parte gostaria de explorar mais?`,
         stage: stage
       };
     }
