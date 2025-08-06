@@ -106,7 +106,7 @@ export const DynamicChallengeDisplay: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Badge className={getDifficultyColor(currentChallenge.difficulty)}>
+            <Badge className={`${getDifficultyColor(currentChallenge.difficulty)} text-black`}>
               {translateDifficulty(currentChallenge.difficulty)}
             </Badge>
             <Badge variant="outline" className="flex items-center gap-1 text-primary border-primary">
