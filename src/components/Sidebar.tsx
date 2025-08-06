@@ -84,7 +84,7 @@ export function AppSidebar({
             <SidebarMenu className="space-y-1 md:space-y-2">
               {navigationItems.map(item => <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton onClick={() => onViewChange(item.id)} className={`w-full justify-start h-12 md:h-11 rounded-xl transition-all duration-200 font-medium text-sm md:text-base ${currentView === item.id ? "bg-primary text-primary-foreground shadow-md" : "hover:bg-muted text-muted-foreground hover:text-foreground"} ${state === "collapsed" ? "justify-center px-2" : "px-3"}`}>
-                    <item.icon className={`${state === "collapsed" ? "h-6 w-6" : "h-5 w-5"} ${currentView === item.id ? "text-primary-foreground" : "text-primary"} flex-shrink-0`} />
+                    <item.icon className={`${state === "collapsed" ? "h-6 w-6" : "h-5 w-5"} ${currentView === item.id ? "text-white" : "text-black"} flex-shrink-0`} />
                     {state !== "collapsed" && <span className="ml-3 truncate">{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>)}
