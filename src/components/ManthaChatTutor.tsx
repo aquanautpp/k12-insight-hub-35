@@ -81,8 +81,13 @@ const ManthaChatTutor = () => {
         }))
       });
       
+      // Limit response content to 1500 characters
+      const limitedContent = response.message.length > 1500 
+        ? response.message.substring(0, 1500) + '...\n\n💡 *Resposta resumida para melhor leitura. Faça perguntas específicas para mais detalhes!*'
+        : response.message;
+      
       return {
-        content: response.message,
+        content: limitedContent,
         stage: stage,
         isRealAI: response.isRealAI
       };
@@ -180,8 +185,7 @@ const ManthaChatTutor = () => {
         symbol = '÷';
       }
 
-      return {
-        content: `## Resolução: \\( ${a} ${symbol} ${b} = ${result} \\)
+      const responseContent = `## Resolução: ${a} ${symbol} ${b} = ${result}
 
 ### Explicação pelo Método CPA:
 
@@ -196,7 +200,15 @@ const ManthaChatTutor = () => {
 • **${symbol}** é o símbolo da **${operation}**
 • **${result}** é nossa resposta final
 
-Qual parte gostaria de explorar mais?`,
+Qual parte gostaria de explorar mais?`;
+
+      // Apply character limit
+      const limitedContent = responseContent.length > 1500 
+        ? responseContent.substring(0, 1500) + '...\n\n💡 *Resposta resumida para melhor leitura. Faça perguntas específicas para mais detalhes!*'
+        : responseContent;
+
+      return {
+        content: limitedContent,
         stage: stage
       };
     }
@@ -246,8 +258,7 @@ Quer ver mais aplicações práticas?`,
       const pictorialResp = responses.pictorial[topic as keyof typeof responses.pictorial] || responses.pictorial.general;
       const abstractResp = responses.abstract[topic as keyof typeof responses.abstract] || responses.abstract.general;
       
-      return {
-        content: `**Método CPA Completo**
+      const fullContent = `**Método CPA Completo**
 
 ${concreteResp}
 
@@ -255,7 +266,15 @@ ${pictorialResp}
 
 ${abstractResp}
 
-**Próximo passo:** Escolha o estágio que deseja aprofundar ou pratique com exercícios específicos.`,
+**Próximo passo:** Escolha o estágio que deseja aprofundar ou pratique com exercícios específicos.`;
+
+      // Apply character limit
+      const limitedContent = fullContent.length > 1500 
+        ? fullContent.substring(0, 1500) + '...\n\n💡 *Resposta resumida para melhor leitura. Faça perguntas específicas para mais detalhes!*'
+        : fullContent;
+      
+      return {
+        content: limitedContent,
         stage: 'adaptive'
       };
     }
@@ -265,8 +284,13 @@ ${abstractResp}
     const stageResponses = responses[stageKey as keyof typeof responses];
     const response = stageResponses[topic as keyof typeof stageResponses] || stageResponses.general;
 
+    // Apply character limit to individual stage responses too
+    const limitedResponse = response.length > 1500 
+      ? response.substring(0, 1500) + '...\n\n💡 *Resposta resumida para melhor leitura. Faça perguntas específicas para mais detalhes!*'
+      : response;
+
     return {
-      content: response,
+      content: limitedResponse,
       stage: stage
     };
   };
