@@ -398,19 +398,21 @@ ${abstractResp}
                     </div>
                   )}
                   
-                  {/* Mensagem */}
-                  <div className={`flex-1 max-w-[85%] md:max-w-[80%] ${message.sender === 'user' ? 'ml-8 md:ml-12' : ''}`}>
-                    <div className={`p-3 md:p-4 rounded-2xl text-sm md:text-base ${
-                      message.sender === 'user' 
-                        ? 'bg-primary text-primary-foreground ml-auto' 
-                        : 'bg-muted text-muted-foreground'
-                    }`}>
-                      {message.sender === 'mantha' ? (
-                        <MathTextRenderer content={message.content} />
-                      ) : (
-                        <p className="leading-relaxed break-words">{message.content}</p>
-                      )}
-                    </div>
+                   {/* Mensagem */}
+                   <div className={`flex-1 max-w-[85%] md:max-w-[80%] ${message.sender === 'user' ? 'ml-8 md:ml-12' : ''}`}>
+                     <div className={`p-3 md:p-4 rounded-2xl text-sm md:text-base min-h-fit ${
+                       message.sender === 'user' 
+                         ? 'bg-primary text-primary-foreground ml-auto' 
+                         : 'bg-muted text-muted-foreground'
+                     }`}>
+                       {message.sender === 'mantha' ? (
+                         <div className="prose prose-sm max-w-none overflow-auto">
+                           <MathTextRenderer content={message.content} />
+                         </div>
+                       ) : (
+                         <p className="leading-relaxed break-words whitespace-pre-wrap">{message.content}</p>
+                       )}
+                     </div>
                     
                     {/* Timestamp e estágio */}
                     <div className="flex items-center justify-between mt-1 px-1">
