@@ -58,8 +58,8 @@ export function AppSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" className="data-[state=open]:bg-transparent hover:bg-transparent p-0">
               <div className="flex items-center space-x-3">
-                 <div className="flex aspect-square size-10 md:size-12 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
-                      <img src="/lovable-uploads/9aafef87-db99-4bf0-ae3b-c5d5ad94af1a.png" alt="MANTHA Logo" className="size-8 md:size-10 object-contain rounded" onLoad={() => console.log('Logo carregado com sucesso')} onError={e => {
+                 <div className="flex aspect-square size-8 md:size-10 items-center justify-center rounded-xl bg-primary/10 border shadow-md">
+                      <img src="/lovable-uploads/9aafef87-db99-4bf0-ae3b-c5d5ad94af1a.png" alt="MANTHA Logo" className="size-6 md:size-8 object-contain rounded" onLoad={() => console.log('Logo carregado com sucesso')} onError={e => {
                   console.error('Erro ao carregar logo:', e);
                   // Fallback para texto se a imagem falhar
                   e.currentTarget.style.display = 'none';
