@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, Sparkles, Pizza, Edit3, FileText } from "lucide-react";
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
+import { CPAProblemDisplay } from "./CPAProblemDisplay";
 
 type Stage = 'concrete' | 'pictorial' | 'abstract';
 
@@ -282,47 +283,23 @@ const CPAMethod = () => {
           })}
         </div>
 
-        {/* Current Stage Details */}
+        {/* Problemas CPA Interativos */}
         <Card className="mb-8 shadow-card sophisticated-reveal magnetic-hover">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3">
-              <span className="text-3xl float-animation">{stages[currentStage].icon}</span>
-              <div>
-                <h2 className="text-2xl font-bold text-foreground elegant-text-reveal">{stages[currentStage].title}</h2>
-                <p className="text-muted-foreground elegant-text-reveal">{stages[currentStage].description}</p>
-              </div>
-            </CardTitle>
-          </CardHeader>
-          
-          <CardContent className="space-y-6">
-            {/* Exemplo Prático */}
-            <div className="bg-gradient-subtle rounded-lg p-6 thoughtful-interaction">
-              <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2 elegant-text-reveal">
-                <BookOpen className="w-5 h-5" />
-                Exemplo Prático
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="artistic-emphasis">
-                  <h4 className="font-medium text-foreground mb-2">Problema:</h4>
-                  <p className="text-foreground">{stages[currentStage].problem}</p>
-                </div>
-                <div className="artistic-emphasis">
-                  <h4 className="font-medium text-foreground mb-2">Solução:</h4>
-                  <p className="text-foreground">{stages[currentStage].solution}</p>
-                </div>
-              </div>
-            </div>
+          <CardContent className="p-0">
+            <CPAProblemDisplay 
+              stage={currentStage}
+              onComplete={(problem) => {
+                if (!completedStages.includes(currentStage)) {
+                  setCompletedStages([...completedStages, currentStage]);
+                }
+              }}
+            />
+          </CardContent>
+        </Card>
 
-            {/* Visualização */}
-            <div className="bg-card border border-border rounded-lg p-6">
-              <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                <Eye className="w-5 h-5" />
-                Representação Visual
-              </h3>
-              <p className="text-foreground">{stages[currentStage].visualization}</p>
-            </div>
-
-            {/* Explicação Detalhada */}
+        {/* Explicação do Estágio */}
+        <Card className="mb-8 shadow-card">
+          <CardContent className="p-6">
             <div className="bg-muted/50 rounded-lg p-6">
               <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                 <Brain className="w-5 h-5" />

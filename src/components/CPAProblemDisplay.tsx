@@ -1,14 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { ArrowRight, ArrowLeft, RotateCcw, Brain, Timer } from "lucide-react";
-import { VirtualTenBlocks } from "./VirtualTenBlocks";
-import { BarModelEditor } from "./BarModelEditor";
-import { EquationEditor } from "./EquationEditor";
-
-type CPAStage = 'concrete' | 'pictorial' | 'abstract';
+import { CheckCircle, Eye, EyeOff, Brain } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface CPAChallenge {
   id: string;
@@ -162,262 +158,204 @@ const cpaProblems: CPAChallenge[] = [
   }
 ];
 
-interface CPAIntegratedChallengeProps {
-  stage?: CPAStage;
-  onComplete?: (challenge: CPAChallenge) => void;
+interface CPAProblemDisplayProps {
+  stage: 'concrete' | 'pictorial' | 'abstract';
+  onComplete?: (problem: CPAChallenge) => void;
 }
 
-export const CPAIntegratedChallenge = ({ 
-  stage = 'concrete',
-  onComplete 
-}: CPAIntegratedChallengeProps) => {
-  const [currentStage, setCurrentStage] = useState<CPAStage>('concrete');
-  const [completedStages, setCompletedStages] = useState<CPAStage[]>([]);
-  const [stageAttempts, setStageAttempts] = useState<Record<CPAStage, number>>({
-    concrete: 0,
-    pictorial: 0,
-    abstract: 0
-  });
-  const [startTime, setStartTime] = useState<Date>(new Date());
-  const [stageStartTime, setStageStartTime] = useState<Date>(new Date());
+export const CPAProblemDisplay = ({ stage, onComplete }: CPAProblemDisplayProps) => {
+  const [currentProblemIndex, setCurrentProblemIndex] = useState(0);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [showEducatorInstruction, setShowEducatorInstruction] = useState(false);
+  const [completedProblems, setCompletedProblems] = useState<string[]>([]);
+  const { toast } = useToast();
 
-  useEffect(() => {
-    setStartTime(new Date());
-    setStageStartTime(new Date());
-  }, []);
+  const stageProblems = cpaProblems.filter(problem => problem.stage === stage);
+  const currentProblem = stageProblems[currentProblemIndex];
 
-  useEffect(() => {
-    setStageStartTime(new Date());
-  }, [currentStage]);
+  if (!currentProblem) {
+    return (
+      <Card className="shadow-card">
+        <CardContent className="p-6 text-center">
+          <p className="text-muted-foreground">Nenhum problema disponível para este estágio.</p>
+        </CardContent>
+      </Card>
+    );
+  }
 
-  const handleStageComplete = (success: boolean) => {
-    if (success) {
-      setCompletedStages(prev => [...new Set([...prev, currentStage])]);
+  const handleAnswerSubmit = () => {
+    if (!userAnswer.trim()) {
+      toast({
+        title: "Digite sua resposta",
+        description: "Por favor, insira uma resposta antes de verificar.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const isCorrect = userAnswer.trim().toLowerCase() === currentProblem.expectedAnswer.toLowerCase();
+    
+    if (isCorrect) {
+      setCompletedProblems(prev => [...prev, currentProblem.id]);
+      onComplete?.(currentProblem);
+      toast({
+        title: "🎉 Resposta correta!",
+        description: "Parabéns! Você resolveu o problema.",
+      });
       
-      // Chamar callback se fornecido
-      const currentProblem = cpaProblems.find(p => p.stage === currentStage);
-      if (currentProblem) {
-        onComplete?.(currentProblem);
-      }
-      
-      // Lógica de progressão adaptativa
-      const attempts = stageAttempts[currentStage] + 1;
-      setStageAttempts(prev => ({ ...prev, [currentStage]: attempts }));
-      
-      // Auto-avançar para próximo estágio se bem-sucedido
-      if (currentStage === 'concrete') {
-        setTimeout(() => setCurrentStage('pictorial'), 1500);
-      } else if (currentStage === 'pictorial') {
-        setTimeout(() => setCurrentStage('abstract'), 1500);
-      }
+      // Avançar para o próximo problema após 2 segundos
+      setTimeout(() => {
+        if (currentProblemIndex < stageProblems.length - 1) {
+          setCurrentProblemIndex(prev => prev + 1);
+          setUserAnswer("");
+        } else {
+          toast({
+            title: "🏆 Estágio concluído!",
+            description: `Você completou todos os problemas do estágio ${getStageTitle(stage)}!`,
+          });
+        }
+      }, 2000);
     } else {
-      // Incrementar tentativas em caso de erro
-      setStageAttempts(prev => ({ 
-        ...prev, 
-        [currentStage]: prev[currentStage] + 1 
-      }));
-      
-      // Se muitas tentativas erradas, sugerir voltar ao estágio anterior
-      if (stageAttempts[currentStage] >= 2 && currentStage !== 'concrete') {
-        // Lógica para sugerir retorno será implementada no feedback do componente
-      }
+      toast({
+        title: "Resposta incorreta",
+        description: "Tente novamente! Observe bem a visualização.",
+        variant: "destructive",
+      });
     }
   };
 
-  const handleReturnToPictorial = () => {
-    setCurrentStage('pictorial');
-  };
-
-  const goToStage = (stage: CPAStage) => {
-    setCurrentStage(stage);
-    setStageStartTime(new Date());
-  };
-
-  const resetChallenge = () => {
-    setCurrentStage('concrete');
-    setCompletedStages([]);
-    setStageAttempts({ concrete: 0, pictorial: 0, abstract: 0 });
-    setStartTime(new Date());
-    setStageStartTime(new Date());
-  };
-
-  const getStageProgress = () => {
-    const stages: CPAStage[] = ['concrete', 'pictorial', 'abstract'];
-    const currentIndex = stages.indexOf(currentStage);
-    return ((currentIndex + 1) / stages.length) * 100;
-  };
-
-  const getStageIcon = (stage: CPAStage) => {
+  const getStageIcon = (stage: string) => {
     switch (stage) {
       case 'concrete': return '🧱';
       case 'pictorial': return '🎨';
       case 'abstract': return '🔢';
+      default: return '📚';
     }
   };
 
-  const getStageTitle = (stage: CPAStage) => {
+  const getStageTitle = (stage: string) => {
     switch (stage) {
       case 'concrete': return 'Estágio Concreto';
       case 'pictorial': return 'Estágio Pictórico';
       case 'abstract': return 'Estágio Abstrato';
+      default: return stage;
     }
   };
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'beginner': return 'bg-green-100 text-green-800 border-green-200';
-      case 'intermediate': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'advanced': return 'bg-red-100 text-red-800 border-red-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
-
-  const translateDifficulty = (difficulty: string) => {
-    switch (difficulty) {
-      case 'beginner': return 'Iniciante';
-      case 'intermediate': return 'Intermediário';
-      case 'advanced': return 'Avançado';
-      default: return difficulty;
+  const getStageDescription = (stage: string) => {
+    switch (stage) {
+      case 'concrete': return 'Aprendizagem através da manipulação física de objetos';
+      case 'pictorial': return 'Representação visual através de desenhos e diagramas';
+      case 'abstract': return 'Uso de símbolos e operações matemáticas formais';
+      default: return '';
     }
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header do Desafio */}
-        <Card className="shadow-card border-2 border-primary/20 bg-gradient-to-br from-gradient-start to-gradient-end card-interactive">
-          <CardHeader className="bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-white rounded-t-lg">
-            <div className="flex items-center justify-between">
+    <div className="space-y-6">
+      {/* Header do estágio */}
+      <Card className="shadow-card border-2 border-primary/20">
+        <CardHeader className="bg-gradient-to-r from-primary to-primary/90 text-white">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-3xl">{getStageIcon(stage)}</span>
               <div>
-                <CardTitle className="text-2xl font-bold text-white">
-                  Problemas CPA - {getStageTitle(currentStage)}
-                </CardTitle>
-                <p className="text-white mt-2">Desenvolva suas habilidades através do Método de Singapura</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Badge className="bg-white/30 text-white border-white/40">
-                  Interativo
-                </Badge>
-                <Button variant="ghost" size="sm" onClick={resetChallenge} className="bg-primary text-primary-foreground hover:bg-primary-hover shadow-primary">
-                  <RotateCcw className="w-4 h-4 text-white" />
-                </Button>
+                <CardTitle className="text-2xl">{getStageTitle(stage)}</CardTitle>
+                <p className="text-white/90 mt-1">{getStageDescription(stage)}</p>
               </div>
             </div>
-          </CardHeader>
-          
-          <CardContent>
-            {/* Progresso geral */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-foreground">Progresso no Método CPA</span>
-                <span className="text-sm text-muted-foreground">
-                  {completedStages.length}/3 estágios completos
-                </span>
-              </div>
-              <Progress value={getStageProgress()} className="h-2" />
+            <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+              Exemplo {currentProblemIndex + 1} de {stageProblems.length}
+            </Badge>
+          </div>
+        </CardHeader>
+      </Card>
+
+      {/* Problema atual */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Brain className="w-5 h-5 text-primary" />
+            {currentProblem.title}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Enunciado */}
+          <div className="bg-muted/50 rounded-lg p-4">
+            <h3 className="font-semibold text-foreground mb-2">📍 Enunciado:</h3>
+            <p className="text-foreground leading-relaxed">{currentProblem.enunciado}</p>
+          </div>
+
+          {/* Visualização */}
+          <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 border border-primary/20">
+            <h3 className="font-semibold text-foreground mb-3">🎨 Visualização:</h3>
+            <div className="bg-white rounded-lg p-4 text-center">
+              <pre className="text-lg font-mono text-foreground whitespace-pre-wrap">
+                {currentProblem.visualizacao}
+              </pre>
             </div>
+          </div>
+
+          {/* Campo de resposta */}
+          <div className="bg-card border border-border rounded-lg p-4">
+            <h3 className="font-semibold text-foreground mb-3">✏️ Sua Resposta:</h3>
+            <div className="flex gap-3">
+              <Input
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                placeholder="Digite sua resposta aqui..."
+                className="flex-1"
+                onKeyPress={(e) => e.key === 'Enter' && handleAnswerSubmit()}
+              />
+              <Button onClick={handleAnswerSubmit} className="min-w-[120px]">
+                Verificar
+              </Button>
+            </div>
+          </div>
+
+          {/* Instrução ao educador (toggle) */}
+          <div className="border-t pt-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowEducatorInstruction(!showEducatorInstruction)}
+              className="mb-3"
+            >
+              {showEducatorInstruction ? (
+                <>
+                  <EyeOff className="w-4 h-4 mr-2" />
+                  Ocultar Instrução ao Educador
+                </>
+              ) : (
+                <>
+                  <Eye className="w-4 h-4 mr-2" />
+                  Mostrar Instrução ao Educador
+                </>
+              )}
+            </Button>
             
-            {/* Navegação entre estágios */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              {(['concrete', 'pictorial', 'abstract'] as CPAStage[]).map((stage) => (
-                <Button
-                  key={stage}
-                  variant="outline"
-                  onClick={() => goToStage(stage)}
-                  className={`flex items-center gap-2 p-3 h-auto min-h-[60px] justify-start ${
-                    currentStage === stage 
-                      ? 'bg-primary text-primary-foreground hover:bg-primary-hover shadow-primary' 
-                      : ''
-                  }`}
-                  disabled={stage === 'pictorial' && !completedStages.includes('concrete') ||
-                           stage === 'abstract' && !completedStages.includes('pictorial')}
-                >
-                  <span className="text-xl">{getStageIcon(stage)}</span>
-                  <div className="text-left flex-1">
-                    <div className="font-medium text-sm">{getStageTitle(stage)}</div>
-                    <div className="text-xs opacity-70 break-words">
-                      {completedStages.includes(stage) ? '✅ Completo' : 
-                       stageAttempts[stage] > 0 ? `${stageAttempts[stage]} tentativas` : 'Novo'}
-                    </div>
-                  </div>
-                </Button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+            {showEducatorInstruction && (
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <h4 className="font-semibold text-amber-800 mb-2">📚 Instrução ao Educador:</h4>
+                <p className="text-amber-700 text-sm leading-relaxed">
+                  {currentProblem.educatorInstruction}
+                </p>
+              </div>
+            )}
+          </div>
 
-        {/* Componente do estágio atual - Novo Sistema de Problemas CPA */}
-        <div className="animate-fade-in">
-          <Card className="shadow-card">
-            <CardContent className="p-6">
-              <div className="text-center text-muted-foreground">
-                <p className="mb-4">Os problemas CPA agora estão integrados diretamente no Método CPA.</p>
-                <p>Use a navegação acima para escolher o estágio e resolver os problemas interativos!</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Estatísticas e feedback - Pronto para Desafio */}
-        <Card className="shadow-lg border-2 border-primary/30 bg-gradient-to-br from-gradient-start to-gradient-end overflow-hidden">
-          <CardHeader className="pb-4 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 backdrop-blur-sm">
-            <CardTitle className="text-xl font-bold text-center text-primary flex items-center justify-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center shadow-lg">
-                🚀
-              </div>
-              Aceita um Desafio!
-            </CardTitle>
-            <p className="text-center text-primary/80 text-sm font-medium">
-              Acompanhe seu progresso e estatísticas em tempo real
-            </p>
-          </CardHeader>
-          <CardContent className="pt-2">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl p-4 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-md">
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full flex items-center justify-center border-2 border-primary/40 shadow-inner">
-                    <Timer className="w-5 h-5 text-primary" />
-                  </div>
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-foreground">
-                      {Math.floor((new Date().getTime() - startTime.getTime()) / 1000)}s
-                    </div>
-                    <div className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">Tempo Total</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl p-4 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-md">
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full flex items-center justify-center border-2 border-primary/40 shadow-inner">
-                    <Brain className="w-5 h-5 text-primary" />
-                  </div>
-                  <div className="text-center">
-                    <div className="text-sm font-bold text-foreground">
-                      {getStageTitle(currentStage)}
-                    </div>
-                    <div className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">Estágio Atual</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl p-4 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-md">
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full flex items-center justify-center border-2 border-primary/40 shadow-inner">
-                    <span className="text-sm font-bold text-primary">
-                      {Object.values(stageAttempts).reduce((a, b) => a + b, 0)}
-                    </span>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-sm font-bold text-foreground">Tentativas</div>
-                    <div className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">Total</div>
-                  </div>
-                </div>
-              </div>
+          {/* Progresso */}
+          <div className="flex items-center justify-between text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              {completedProblems.length} problemas resolvidos
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <div>
+              {currentProblemIndex + 1} / {stageProblems.length}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
