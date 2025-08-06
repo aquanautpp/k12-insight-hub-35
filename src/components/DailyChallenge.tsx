@@ -199,12 +199,12 @@ const DailyChallenge = () => {
 
         {/* Feedback Section */}
         {feedback && (
-          <div className="bg-gradient-achievement border border-primary/20 rounded-lg p-4">
-            <h4 className="font-medium text-primary mb-2 flex items-center">
+          <div className="bg-primary border border-primary/20 rounded-lg p-4">
+            <h4 className="font-medium text-white mb-2 flex items-center">
               <span className="mr-2">✅</span>
               Feedback da Resposta
             </h4>
-            <p className="text-foreground text-sm leading-relaxed">{feedback}</p>
+            <p className="text-white text-sm leading-relaxed">{feedback}</p>
           </div>
         )}
       </div>
