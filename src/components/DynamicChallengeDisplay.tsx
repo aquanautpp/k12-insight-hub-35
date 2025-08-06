@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { RefreshCw, Trophy, Clock, Target } from "lucide-react";
+import { RefreshCw, Trophy, Clock, Target, BookOpen } from "lucide-react";
 import { useChallenge } from "@/contexts/ChallengeContext";
 import { useProgress } from "@/contexts/ProgressContext";
 import { useXP } from "@/contexts/XPContext";
@@ -15,6 +16,7 @@ export const DynamicChallengeDisplay: React.FC = () => {
   const { xpData, addXP } = useXP();
   const { toast } = useToast();
   const [isGenerating, setIsGenerating] = useState(false);
+  const [userAnswer, setUserAnswer] = useState("");
 
   const handleGenerateNewChallenge = async () => {
     setIsGenerating(true);
@@ -31,13 +33,20 @@ export const DynamicChallengeDisplay: React.FC = () => {
   };
 
   const handleCompleteChallenge = () => {
-    if (currentChallenge) {
-      completeChallenge(currentChallenge.id, "user-answer");
+    if (currentChallenge && userAnswer.trim()) {
+      completeChallenge(currentChallenge.id, userAnswer);
       addXP(currentChallenge.xpReward, `Completou desafio: ${currentChallenge.title}`);
+      setUserAnswer("");
       
       toast({
         title: "Desafio Completado!",
         description: `Você ganhou ${currentChallenge.xpReward} XP!`,
+      });
+    } else {
+      toast({
+        title: "Resposta necessária",
+        description: "Por favor, digite sua resposta antes de completar o desafio.",
+        variant: "destructive"
       });
     }
   };
@@ -134,32 +143,42 @@ export const DynamicChallengeDisplay: React.FC = () => {
           </div>
         </div>
 
-        {/* Description */}
-        <div className="bg-gradient-subtle p-4 rounded-lg">
-          <p className="text-foreground leading-relaxed">
-            {currentChallenge.description}
-          </p>
+        {/* Enunciado */}
+        <div className="space-y-2">
+          <h3 className="font-semibold text-lg text-primary flex items-center gap-2">
+            <BookOpen className="w-5 h-5" />
+            📍 Enunciado
+          </h3>
+          <div className="bg-gradient-subtle p-4 rounded-lg">
+            <p className="text-foreground leading-relaxed">
+              {currentChallenge.enunciado}
+            </p>
+          </div>
         </div>
 
-        {/* Context Information */}
-        <div>
-          <h4 className="font-medium text-foreground mb-2">Informações:</h4>
-          <ul className="space-y-1">
-            {currentChallenge.context.map((info, index) => (
-              <li key={index} className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span className="text-foreground text-sm">{info}</span>
-              </li>
-            ))}
-          </ul>
+        {/* Visualização */}
+        <div className="space-y-2">
+          <h4 className="font-medium text-primary flex items-center gap-2">
+            🎨 Visualização
+          </h4>
+          <div className="p-6 bg-accent/30 rounded-lg text-center border-2 border-dashed border-primary/20">
+            <div className="text-2xl leading-relaxed whitespace-pre-line font-mono">
+              {currentChallenge.visualizacao}
+            </div>
+          </div>
         </div>
 
-        {/* Question */}
-        <div className="bg-card border border-border rounded-lg p-4">
-          <h4 className="font-medium text-foreground mb-2">DESAFIO:</h4>
-          <p className="text-foreground leading-relaxed">
-            {currentChallenge.question}
-          </p>
+        {/* Campo de Resposta */}
+        <div className="space-y-2">
+          <h4 className="font-medium text-primary flex items-center gap-2">
+            ✏️ Sua Resposta
+          </h4>
+          <Input
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
+            placeholder="Digite sua resposta aqui..."
+            className="text-lg p-4 border-2 border-primary/20 focus:border-primary"
+          />
         </div>
 
         {/* Actions */}
