@@ -140,13 +140,25 @@ export const InteractiveEquationEditor = ({ problem, onComplete, onReturnToPicto
       icon: RefreshCw,
       needsValue: false,
       action: (left, right) => {
-        // Lógica básica de simplificação
-        const simplifiedLeft = simplifyExpression(left);
-        const simplifiedRight = simplifyExpression(right);
+        const leftResult = advancedSimplifyExpression(left);
+        const rightResult = advancedSimplifyExpression(right);
+        
+        // Verificar se houve mudança real em pelo menos um lado
+        if (!leftResult.changed && !rightResult.changed) {
+          return {
+            left,
+            right,
+            explanation: 'Expressão já está simplificada'
+          };
+        }
+        
+        // Usar a explicação mais específica disponível
+        const explanation = leftResult.changed ? leftResult.explanation : rightResult.explanation;
+        
         return {
-          left: simplifiedLeft,
-          right: simplifiedRight,
-          explanation: 'Simplificamos a expressão'
+          left: leftResult.simplified,
+          right: rightResult.simplified,
+          explanation
         };
       }
     }
@@ -162,15 +174,89 @@ export const InteractiveEquationEditor = ({ problem, onComplete, onReturnToPicto
     ['⌫', 'AC', '=', '?']
   ];
 
-  const simplifyExpression = (expr: string): string => {
-    // Simplificação básica para demonstração
-    return expr
+  const advancedSimplifyExpression = (expr: string): { simplified: string, changed: boolean, explanation: string } => {
+    let simplified = expr.trim();
+    let changed = false;
+    let explanation = '';
+    
+    // Detectar e simplificar frações KaTeX numéricas
+    const numericFractionPattern = /\\frac\{(\d+)\}\{(\d+)\}/g;
+    const numericMatches = [...simplified.matchAll(numericFractionPattern)];
+    if (numericMatches.length > 0) {
+      numericMatches.forEach(match => {
+        const numerator = parseInt(match[1]);
+        const denominator = parseInt(match[2]);
+        if (denominator !== 0 && numerator % denominator === 0) {
+          const result = numerator / denominator;
+          simplified = simplified.replace(match[0], result.toString());
+          changed = true;
+          explanation = `${numerator} ÷ ${denominator} = ${result}`;
+        }
+      });
+    }
+    
+    // Detectar e simplificar frações com variáveis (ex: \frac{2x}{2} = x)
+    const variableFractionPattern = /\\frac\{(\d*)([a-z])\}\{(\d+)\}/g;
+    const variableMatches = [...simplified.matchAll(variableFractionPattern)];
+    if (variableMatches.length > 0) {
+      variableMatches.forEach(match => {
+        const coefficient = match[1] ? parseInt(match[1]) : 1;
+        const variable = match[2];
+        const denominator = parseInt(match[3]);
+        
+        if (coefficient % denominator === 0) {
+          const result = coefficient / denominator;
+          const newTerm = result === 1 ? variable : `${result}${variable}`;
+          simplified = simplified.replace(match[0], newTerm);
+          changed = true;
+          explanation = `${coefficient}${variable} ÷ ${denominator} = ${newTerm}`;
+        }
+      });
+    }
+    
+    // Simplificar operações aritméticas básicas
+    const basicArithmeticPatterns = [
+      { pattern: /(\d+)\s*\+\s*(\d+)/g, operation: '+' },
+      { pattern: /(\d+)\s*-\s*(\d+)/g, operation: '-' },
+      { pattern: /(\d+)\s*\*\s*(\d+)/g, operation: '*' }
+    ];
+    
+    basicArithmeticPatterns.forEach(({ pattern, operation }) => {
+      const matches = [...simplified.matchAll(pattern)];
+      matches.forEach(match => {
+        const a = parseInt(match[1]);
+        const b = parseInt(match[2]);
+        let result;
+        switch (operation) {
+          case '+': result = a + b; break;
+          case '-': result = a - b; break;
+          case '*': result = a * b; break;
+          default: return;
+        }
+        simplified = simplified.replace(match[0], result.toString());
+        changed = true;
+        explanation = explanation || `${a} ${operation} ${b} = ${result}`;
+      });
+    });
+    
+    // Remover termos zero desnecessários
+    const beforeZeroRemoval = simplified;
+    simplified = simplified
       .replace(/\s*\+\s*0/g, '')
       .replace(/\s*-\s*0/g, '')
-      .replace(/(\d+)\s*\+\s*(\d+)/g, (match, a, b) => (parseInt(a) + parseInt(b)).toString())
-      .replace(/(\d+)\s*-\s*(\d+)/g, (match, a, b) => (parseInt(a) - parseInt(b)).toString())
-      .replace(/(\d+)\s*\*\s*(\d+)/g, (match, a, b) => (parseInt(a) * parseInt(b)).toString())
+      .replace(/^0\s*\+\s*/g, '')
       .trim();
+      
+    if (simplified !== beforeZeroRemoval) {
+      changed = true;
+      explanation = explanation || 'Removemos termos zero desnecessários';
+    }
+    
+    return { 
+      simplified, 
+      changed,
+      explanation: explanation || 'Simplificação aplicada'
+    };
   };
 
   const validateStep = (left: string, right: string): 'correct' | 'warning' | 'error' => {
@@ -208,6 +294,22 @@ export const InteractiveEquationEditor = ({ problem, onComplete, onReturnToPicto
     }
 
     const result = action.action(currentLeft, currentRight, inputValue || undefined);
+    
+    // Para simplificação, verificar se houve mudança real
+    if (actionId === 'simplify' && result.explanation === 'Expressão já está simplificada') {
+      alert('A expressão já está em sua forma mais simples!');
+      setSelectedAction(null);
+      return;
+    }
+    
+    // Evitar passos duplicados
+    const lastStep = steps[steps.length - 1];
+    if (lastStep && lastStep.equation === `${result.left} = ${result.right}`) {
+      alert('Este passo já foi aplicado!');
+      setSelectedAction(null);
+      return;
+    }
+    
     const status = validateStep(result.left, result.right);
     
     const newStep: EquationStep = {
@@ -215,7 +317,7 @@ export const InteractiveEquationEditor = ({ problem, onComplete, onReturnToPicto
       equation: `${result.left} = ${result.right}`,
       action: action.label + (inputValue ? ` ${inputValue}` : ''),
       explanation: result.explanation,
-      status,
+      status: actionId === 'simplify' && result.explanation !== 'Expressão já está simplificada' ? 'correct' : status,
       leftSide: result.left,
       rightSide: result.right
     };
