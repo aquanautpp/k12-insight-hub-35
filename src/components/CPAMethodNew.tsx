@@ -587,7 +587,7 @@ const CPAMethod = () => {
         
         {!showInteractiveChallenge && <>
             {/* Call to Action para Desafio Extra */}
-            <Card className="group shadow-md border border-border bg-primary rounded-2xl hover:shadow-lg transition-all duration-300 relative overflow-hidden">
+            <Card className="group shadow-md border-2 border-black bg-primary rounded-2xl hover:shadow-lg transition-all duration-300 relative overflow-hidden">
               {/* Elemento decorativo sutil */}
               <div className="absolute inset-0 opacity-[0.1] bg-gradient-to-br from-white/10 via-transparent to-white/5 pointer-events-none" />
               <div className="absolute top-4 right-4 text-4xl opacity-20 pointer-events-none text-white">🎯</div>
