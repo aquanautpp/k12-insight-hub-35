@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { generateChallenge, AIChallenge } from '@/services/challengeService';
 
 export interface Challenge {
   id: string;
@@ -13,6 +14,12 @@ export interface Challenge {
   timeEstimate: number; // in minutes
   isCompleted: boolean;
   completedAt?: Date;
+  // AI-enhanced (opcionais)
+  type?: 'numeric' | 'multiple_choice' | 'open_ended';
+  options?: string[];
+  answer?: number | string;
+  correctIndex?: number;
+  explanation?: string;
 }
 
 interface ChallengeContextType {
@@ -20,6 +27,7 @@ interface ChallengeContextType {
   currentChallenge: Challenge | null;
   completedChallenges: Challenge[];
   generateNewChallenge: (userLevel: number, userStyle: string) => Challenge;
+  generateNewChallengeAI: (userLevel: number, userStyle: string, category?: Challenge['category']) => Promise<Challenge>;
   completeChallenge: (challengeId: string, userAnswer: string) => void;
   getChallengesByCategory: (category: string) => Challenge[];
 }
@@ -113,6 +121,34 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }
     return selectedChallenge;
   };
 
+  const generateNewChallengeAI = async (
+    userLevel: number,
+    userStyle: string,
+    category?: Challenge['category']
+  ): Promise<Challenge> => {
+    const ai: AIChallenge = await generateChallenge({ level: userLevel, style: userStyle, category });
+    const mapped: Challenge = {
+      id: ai.id,
+      title: ai.title,
+      category: ai.category,
+      difficulty: ai.difficulty,
+      description: ai.description,
+      context: ai.context,
+      question: ai.question,
+      resources: ai.resources,
+      xpReward: ai.xpReward,
+      timeEstimate: ai.timeEstimate,
+      isCompleted: false,
+      type: ai.type,
+      options: ai.options,
+      answer: ai.answer,
+      correctIndex: ai.correctIndex,
+      explanation: ai.explanation,
+    };
+    setCurrentChallenge(mapped);
+    return mapped;
+  };
+
   const completeChallenge = (challengeId: string, userAnswer: string) => {
     const challenge = challenges.find(c => c.id === challengeId);
     if (challenge) {
@@ -145,6 +181,7 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }
       currentChallenge,
       completedChallenges,
       generateNewChallenge,
+      generateNewChallengeAI,
       completeChallenge,
       getChallengesByCategory
     }}>

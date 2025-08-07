@@ -1,1 +1,8 @@
 project_id = "ljkvsudqbcievkoxwgbo"
+
+[functions.generate-challenge]
+verify_jwt = false
+
+# Existing edge functions
+[functions.chat-tutor]
+# keep default settings (JWT verification as configured by Supabase)

@@ -10,7 +10,7 @@ import { useXP } from "@/contexts/XPContext";
 import { useToast } from "@/hooks/use-toast";
 
 export const DynamicChallengeDisplay: React.FC = () => {
-  const { currentChallenge, generateNewChallenge, completeChallenge } = useChallenge();
+  const { currentChallenge, generateNewChallengeAI, completeChallenge } = useChallenge();
   const { progress } = useProgress();
   const { xpData, addXP } = useXP();
   const { toast } = useToast();
@@ -18,16 +18,22 @@ export const DynamicChallengeDisplay: React.FC = () => {
 
   const handleGenerateNewChallenge = async () => {
     setIsGenerating(true);
-    // Simulate API call delay
-    setTimeout(() => {
+    try {
       const learningStyle = progress.testResults?.learningStyle || 'visual';
-      generateNewChallenge(xpData.currentLevel, learningStyle);
-      setIsGenerating(false);
+      await generateNewChallengeAI(xpData.currentLevel, learningStyle);
       toast({
         title: "Novo Desafio Gerado!",
         description: "Um desafio personalizado foi criado para você.",
       });
-    }, 1000);
+    } catch (e) {
+      toast({
+        title: "Falha ao gerar desafio",
+        description: "Tente novamente em instantes.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const handleCompleteChallenge = () => {
