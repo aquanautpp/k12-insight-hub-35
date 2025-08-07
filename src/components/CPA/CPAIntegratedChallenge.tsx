@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowRight, ArrowLeft, RotateCcw, Brain, Timer } from "lucide-react";
-import { VirtualTenBlocks } from "./VirtualTenBlocks";
+import { EnhancedVirtualTenBlocks } from "./EnhancedVirtualTenBlocks";
 import { BarModelEditor } from "./BarModelEditor";
 import { EquationEditor } from "./EquationEditor";
 
@@ -349,7 +349,7 @@ export const CPAIntegratedChallenge = ({
         {/* Componente do estágio atual - Problemas CPA Interativos */}
         <div className="animate-fade-in">
           {currentStage === 'concrete' && (
-            <VirtualTenBlocks
+            <EnhancedVirtualTenBlocks
               problem={{
                 description: "Resolva este problema usando blocos: Ana tinha 12 balas e ganhou mais 8 balas da sua avó. Quantas balas Ana tem agora?",
                 initialValue1: 12,
