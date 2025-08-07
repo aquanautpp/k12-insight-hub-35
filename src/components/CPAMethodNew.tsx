@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -19,9 +19,9 @@ const CPAMethod = () => {
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showInteractiveChallenge, setShowInteractiveChallenge] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
-  const challengeRef = useRef<HTMLDivElement | null>(null);
-  const [challengeStage, setChallengeStage] = useState<Stage>('concrete');
-  const { isEnabled } = useFeatureFlags();
+  const {
+    isEnabled
+  } = useFeatureFlags();
   const stages = {
     concrete: {
       title: "Estágio Concreto",
@@ -64,15 +64,6 @@ const CPAMethod = () => {
     if (cpa.pictorial < 100) return 'pictorial';
     if (cpa.abstract < 100) return 'abstract';
     return 'abstract';
-  };
-
-  const handlePracticeNextStage = () => {
-    const next = getNextStage();
-    setChallengeStage(next);
-    setShowInteractiveChallenge(true);
-    setTimeout(() => {
-      challengeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
   };
   return <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto p-6">
@@ -389,11 +380,6 @@ const CPAMethod = () => {
               <h2 className="text-xl font-bold text-foreground">Seu Progresso no Método CPA</h2>
               <Badge variant="secondary">{completedStages.length}/3 estágios concluídos</Badge>
             </div>
-            <div className="flex justify-end mb-2">
-              <Button size="sm" onClick={handlePracticeNextStage} className="hover-scale">
-                Praticar próxima etapa
-              </Button>
-            </div>
             <Progress value={overallProgress} className="h-3 mb-2" />
             <p className="text-sm text-muted-foreground">
               Continue praticando cada estágio para dominar completamente o método CPA
@@ -458,24 +444,22 @@ const CPAMethod = () => {
         </Card>
 
         {/* Desafio Interativo Opcional */}
-        {showInteractiveChallenge && <div ref={challengeRef}>
-            <Card className="mb-8 shadow-card">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-2xl font-bold text-foreground">Desafio Interativo</CardTitle>
-                  <Button variant="outline" onClick={() => setShowInteractiveChallenge(false)}>
-                    Voltar aos Problemas
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">Experimente este desafio avançado que combina todos os estágios CPA:</p>
-                <CPAIntegratedChallenge stage={challengeStage} onComplete={challenge => {
+        {showInteractiveChallenge && <Card className="mb-8 shadow-card">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-2xl font-bold text-foreground">Desafio Interativo</CardTitle>
+                <Button variant="outline" onClick={() => setShowInteractiveChallenge(false)}>
+                  Voltar aos Problemas
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">Experimente este desafio avançado que combina todos os estágios CPA:</p>
+              <CPAIntegratedChallenge stage="concrete" onComplete={challenge => {
             toast("🎉 Parabéns! Você completou o desafio integrado CPA!");
           }} />
-              </CardContent>
-            </Card>
-          </div>}
+            </CardContent>
+          </Card>}
         
         {!showInteractiveChallenge && <>
             {/* Call to Action para Desafio Extra */}

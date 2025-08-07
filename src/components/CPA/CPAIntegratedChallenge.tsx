@@ -171,7 +171,7 @@ export const CPAIntegratedChallenge = ({
   stage = 'concrete',
   onComplete 
 }: CPAIntegratedChallengeProps) => {
-  const [currentStage, setCurrentStage] = useState<CPAStage>(stage);
+  const [currentStage, setCurrentStage] = useState<CPAStage>('concrete');
   const [completedStages, setCompletedStages] = useState<CPAStage[]>([]);
   const [stageAttempts, setStageAttempts] = useState<Record<CPAStage, number>>({
     concrete: 0,
@@ -186,13 +186,9 @@ export const CPAIntegratedChallenge = ({
     setStageStartTime(new Date());
   }, []);
 
-useEffect(() => {
+  useEffect(() => {
     setStageStartTime(new Date());
   }, [currentStage]);
-
-  useEffect(() => {
-    setCurrentStage(stage);
-  }, [stage]);
 
   const handleStageComplete = (success: boolean) => {
     if (success) {
