@@ -40,6 +40,7 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   const [showConfetti, setShowConfetti] = useState(false);
   const [shakeWrongBlocks, setShakeWrongBlocks] = useState(false);
   const [showHint, setShowHint] = useState(false);
+  const [workAreaHover, setWorkAreaHover] = useState(false);
   
   const timerRef = useRef<NodeJS.Timeout>();
   const workAreaRef = useRef<HTMLDivElement>(null);
@@ -120,12 +121,25 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     setShowConfetti(false);
   }, [problem]);
 
-  const snapToGrid = (x: number, y: number) => {
-    const gridSize = 20;
-    return {
-      x: Math.round(x / gridSize) * gridSize,
-      y: Math.round(y / gridSize) * gridSize
-    };
+  const organizeWorkAreaBlocks = (newBlocks: Block[]) => {
+    const sortedBlocks = [...newBlocks].sort((a, b) => {
+      if (a.type === b.type) return 0;
+      if (a.type === 'hundred') return -1;
+      if (b.type === 'hundred') return 1;
+      if (a.type === 'ten') return -1;
+      if (b.type === 'ten') return 1;
+      return 0;
+    });
+
+    let currentX = 20;
+    const baseY = 60;
+    
+    return sortedBlocks.map(block => {
+      const blockWidth = block.type === 'hundred' ? 80 : block.type === 'ten' ? 64 : 24;
+      const newBlock = { ...block, x: currentX, y: baseY };
+      currentX += blockWidth + 10;
+      return newBlock;
+    });
   };
 
   const handleDragStart = (blockId: string, e: React.DragEvent) => {
@@ -136,29 +150,34 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     if (block) {
       e.dataTransfer.setData('text/plain', blockId);
       e.dataTransfer.effectAllowed = 'move';
+      
+      // Mudar cursor para grabbing
+      document.body.style.cursor = 'grabbing';
     }
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragOver = (e: React.DragEvent, area: 'work' | 'blocks') => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
     
-    if (dragging && workAreaRef.current) {
-      const rect = workAreaRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const block = blocks.find(b => b.id === dragging) || workArea.find(b => b.id === dragging);
-      if (block) {
-        const snapped = snapToGrid(x - 25, y - 25);
-        setDragPreview({ x: snapped.x, y: snapped.y, block });
-      }
+    if (area === 'work') {
+      setWorkAreaHover(true);
+    }
+  };
+
+  const handleDragLeave = (e: React.DragEvent, area: 'work' | 'blocks') => {
+    if (area === 'work') {
+      setWorkAreaHover(false);
     }
   };
 
   const handleDrop = (e: React.DragEvent, area: 'work' | 'blocks') => {
     e.preventDefault();
     setDragPreview(null);
+    setWorkAreaHover(false);
+    
+    // Restaurar cursor
+    document.body.style.cursor = 'default';
     
     const blockId = e.dataTransfer.getData('text/plain');
     if (!blockId) return;
@@ -168,19 +187,18 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     
     if (!draggedBlock) return;
 
-    if (area === 'work' && workAreaRef.current) {
-      const rect = workAreaRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const snapped = snapToGrid(x - 25, y - 25);
+    if (area === 'work') {
+      // Adicionar à área de trabalho e reorganizar
+      const newWorkArea = [...workArea.filter(b => b.id !== blockId), draggedBlock];
+      const organizedBlocks = organizeWorkAreaBlocks(newWorkArea);
       
-      const updatedBlock = { ...draggedBlock, x: snapped.x, y: snapped.y };
-      
-      setWorkArea(prev => [...prev.filter(b => b.id !== blockId), updatedBlock]);
+      setWorkArea(organizedBlocks);
       setBlocks(prev => prev.filter(b => b.id !== blockId));
     } else {
+      // Voltar para área de blocos
       setBlocks(prev => [...prev.filter(b => b.id !== blockId), draggedBlock]);
-      setWorkArea(prev => prev.filter(b => b.id !== blockId));
+      const newWorkArea = workArea.filter(b => b.id !== blockId);
+      setWorkArea(organizeWorkAreaBlocks(newWorkArea));
     }
     
     setDragging(null);
@@ -243,12 +261,14 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const getBlockStyle = (block: Block, isPreview = false) => {
-    const baseClasses = `absolute flex items-center justify-center font-bold select-none transition-all duration-200 cursor-grab bg-primary text-white border-2 border-primary/80 ${
+  const getBlockStyle = (block: Block, isPreview = false, isDragging = false) => {
+    const baseClasses = `absolute flex items-center justify-center font-bold select-none transition-all duration-200 bg-primary text-white border-2 border-primary/80 ${
       isPreview ? 'opacity-50 pointer-events-none' : ''
-    } ${shakeWrongBlocks && !isPreview ? 'animate-[shake_0.6s_ease-in-out]' : ''}`;
+    } ${isDragging ? 'opacity-30' : 'cursor-grab hover:cursor-grab'}  ${
+      shakeWrongBlocks && !isPreview ? 'animate-[shake_0.6s_ease-in-out]' : ''
+    }`;
 
-    const hoverClasses = isPreview ? '' : 'hover:scale-105 hover:shadow-lg';
+    const hoverClasses = isPreview || isDragging ? '' : 'hover:scale-105 hover:shadow-lg';
 
     switch (block.type) {
       case 'hundred':
@@ -337,25 +357,24 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
             <div 
               className="border-2 border-dashed border-primary/30 rounded-xl p-4 min-h-[300px] relative bg-gradient-to-br from-muted/20 to-muted/40 overflow-hidden"
               onDrop={(e) => handleDrop(e, 'blocks')}
-              onDragOver={(e) => e.preventDefault()}
+              onDragOver={(e) => handleDragOver(e, 'blocks')}
+              onDragLeave={(e) => handleDragLeave(e, 'blocks')}
             >
               <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
               
               {blocks.map(block => {
-                const style = getBlockStyle(block);
+                const isDraggingThis = dragging === block.id;
+                const style = getBlockStyle(block, false, isDraggingThis);
                 return (
-                  <motion.div
+                  <div
                     key={block.id}
                     className={style.className}
                     style={{ transform: style.transform }}
                     draggable
                     onDragStart={(e: any) => handleDragStart(block.id, e)}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
                     {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
@@ -373,9 +392,12 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
           <CardContent>
             <div 
               ref={workAreaRef}
-              className="border-2 border-dashed border-success/50 rounded-xl p-4 min-h-[300px] relative bg-gradient-to-br from-success/5 to-success/10 overflow-hidden"
+              className={`border-2 border-dashed rounded-xl p-4 min-h-[300px] relative bg-gradient-to-br from-success/5 to-success/10 overflow-hidden transition-all duration-200 ${
+                workAreaHover ? 'border-primary bg-primary/5' : 'border-success/50'
+              }`}
               onDrop={(e) => handleDrop(e, 'work')}
-              onDragOver={handleDragOver}
+              onDragOver={(e) => handleDragOver(e, 'work')}
+              onDragLeave={(e) => handleDragLeave(e, 'work')}
             >
               {/* Grid Pattern */}
               <div 
@@ -389,37 +411,27 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
                 }}
               ></div>
               
-              {/* Preview do drag */}
-              {dragPreview && (
-                <div
-                  className={getBlockStyle(dragPreview.block, true).className}
-                  style={{ transform: `translate(${dragPreview.x}px, ${dragPreview.y}px)` }}
-                >
-                  {dragPreview.block.value === 100 ? '100' : dragPreview.block.value === 10 ? '10' : '1'}
-                </div>
-              )}
-              
               {/* Blocos na área de trabalho */}
-              <AnimatePresence>
-                {workArea.map(block => {
-                  const style = getBlockStyle(block);
-                  return (
-                    <motion.div
-                      key={block.id}
-                      className={style.className}
-                      style={{ transform: style.transform }}
-                      draggable
-                      onDragStart={(e: any) => handleDragStart(block.id, e)}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    >
-                      {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
+              {workArea.map(block => {
+                const isDraggingThis = dragging === block.id;
+                const style = getBlockStyle(block, false, isDraggingThis);
+                return (
+                  <motion.div
+                    key={block.id}
+                    className={style.className}
+                    style={{ transform: style.transform }}
+                    draggable
+                    onDragStart={(e: any) => handleDragStart(block.id, e)}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    whileHover={{ y: -2 }}
+                  >
+                    {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
+                  </motion.div>
+                );
+              })}
             </div>
           </CardContent>
         </Card>
