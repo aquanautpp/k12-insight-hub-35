@@ -51,17 +51,44 @@ const DailyChallenge = () => {
       return;
     }
 
-    // Feedback detalhado
-    const expectedAnswer = "💡 Solução Sugerida: A família Silva tem renda de R$ 4.500. Gastos totais: R$ 3.700. Sobram R$ 800. Para 20% de emergência precisam de R$ 900/mês. Para a viagem precisam de R$ 450/mês. Total necessário: R$ 1.350. Como só sobram R$ 800, precisam cortar R$ 550 nos gastos, especialmente lazer (de R$ 300 para R$ 50) e transporte (de R$ 400 para R$ 200).";
-    
-    setFeedback(expectedAnswer);
-    
-    toast({
-      title: "✅ Resposta Avaliada!",
-      description: "Sua solução foi analisada. Veja o feedback abaixo.",
-    });
+    // Palavras-chave que indicam uma resposta correta
+    const correctKeywords = [
+      "cortar", "reduzir", "diminuir", "economizar",
+      "550", "900", "450", "1350", "lazer", "transporte",
+      "não é possível", "insuficiente", "ajustar"
+    ];
 
-    // Answer submitted - would integrate with backend here
+    // Verifica se a resposta contém elementos da solução correta
+    const answerLower = answer.toLowerCase();
+    const hasCorrectKeywords = correctKeywords.some(keyword => 
+      answerLower.includes(keyword.toLowerCase())
+    );
+
+    // Verifica se mencionou cálculos básicos corretos
+    const mentionedCalculations = answerLower.includes("3700") || 
+                                 answerLower.includes("800") ||
+                                 (answerLower.includes("4500") && answerLower.includes("gasto"));
+
+    const isCorrectAnswer = hasCorrectKeywords && mentionedCalculations;
+
+    if (isCorrectAnswer) {
+      // Resposta correta
+      setFeedback("🎉 Excelente análise! Você identificou corretamente que a família precisa reduzir gastos em R$ 550 para atingir ambas as metas. Sua solução demonstra boa compreensão de planejamento financeiro.");
+      
+      toast({
+        title: "✅ Resposta Correta!",
+        description: "Parabéns! Sua solução está no caminho certo.",
+      });
+    } else {
+      // Resposta incorreta - dar dicas
+      setFeedback("❌ Sua resposta precisa de alguns ajustes. Dica: Calcule primeiro quanto sobra após os gastos (R$ 4.500 - R$ 3.700 = R$ 800). Depois veja quanto precisam: 20% de emergência (R$ 900/mês) + viagem (R$ 450/mês) = R$ 1.350/mês. Como só sobram R$ 800, precisam cortar R$ 550 nos gastos. Tente novamente!");
+      
+      toast({
+        title: "❌ Resposta Incorreta",
+        description: "Revise os cálculos e tente novamente. Veja as dicas no feedback.",
+        variant: "destructive"
+      });
+    }
   };
 
   const getDifficultyColor = (difficulty: string) => {
