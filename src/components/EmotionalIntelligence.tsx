@@ -307,7 +307,7 @@ const EmotionalIntelligence = () => {
                   <Card className="h-full bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
                     <CardContent className="p-6 text-center h-full flex flex-col">
                       <div className="relative mb-4">
-                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center mx-auto shadow-lg">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto shadow-lg">
                           <Target className="w-8 h-8 text-white" />
                         </div>
                         <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
