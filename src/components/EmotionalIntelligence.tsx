@@ -235,7 +235,7 @@ const EmotionalIntelligence = () => {
                   <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
                     2
                   </div>
-                  <Card className="h-full bg-gradient-to-br from-secondary/5 to-secondary/10 border-secondary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
+                  <Card className="h-full bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
                     <CardContent className="p-6 text-center h-full flex flex-col">
                       <div className="relative mb-4">
                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto shadow-lg">
@@ -262,7 +262,7 @@ const EmotionalIntelligence = () => {
                   <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
                     3
                   </div>
-                  <Card className="h-full bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
+                  <Card className="h-full bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
                     <CardContent className="p-6 text-center h-full flex flex-col">
                       <div className="relative mb-4">
                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto shadow-lg">
