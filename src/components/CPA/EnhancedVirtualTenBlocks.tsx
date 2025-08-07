@@ -60,54 +60,60 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
 
   // Gerar blocos iniciais
   useEffect(() => {
-    const generateBlocks = (value: number, startX: number) => {
+    const generateBlocks = (value: number, startColumn: number) => {
       const hundreds = Math.floor(value / 100);
       const tens = Math.floor((value % 100) / 10);
       const units = value % 10;
       
       const blockList: Block[] = [];
+      let currentX = startColumn === 0 ? 20 : 200; // Posicionamento em colunas
       let currentY = 20;
       
       // Blocos de centena
       for (let i = 0; i < hundreds; i++) {
         blockList.push({
-          id: `h${startX}-${i}`,
+          id: `h${startColumn}-${i}`,
           value: 100,
           type: 'hundred',
-          x: startX,
-          y: currentY + i * 80
+          x: currentX,
+          y: currentY
         });
+        currentY += 90; // Espaçamento vertical
       }
       
       // Blocos de dezena
-      currentY += hundreds * 80 + 20;
+      if (hundreds > 0) currentY += 10; // Espaço extra entre tipos
       for (let i = 0; i < tens; i++) {
         blockList.push({
-          id: `t${startX}-${i}`,
+          id: `t${startColumn}-${i}`,
           value: 10,
           type: 'ten',
-          x: startX,
-          y: currentY + i * 50
+          x: currentX,
+          y: currentY
         });
+        currentY += 55; // Espaçamento vertical
       }
       
       // Blocos de unidade
-      currentY += tens * 50 + 20;
+      if (tens > 0) currentY += 10; // Espaço extra entre tipos
+      const unitsPerRow = 4; // Máximo 4 unidades por linha
       for (let i = 0; i < units; i++) {
+        const row = Math.floor(i / unitsPerRow);
+        const col = i % unitsPerRow;
         blockList.push({
-          id: `u${startX}-${i}`,
+          id: `u${startColumn}-${i}`,
           value: 1,
           type: 'unit',
-          x: startX + (i % 6) * 30,
-          y: currentY + Math.floor(i / 6) * 30
+          x: currentX + col * 50,
+          y: currentY + row * 50
         });
       }
       
       return blockList;
     };
 
-    const blocks1 = generateBlocks(problem.initialValue1, 50);
-    const blocks2 = generateBlocks(problem.initialValue2, 300);
+    const blocks1 = generateBlocks(problem.initialValue1, 0);
+    const blocks2 = generateBlocks(problem.initialValue2, 1);
     
     setBlocks([...blocks1, ...blocks2]);
     setWorkArea([]);
@@ -132,12 +138,21 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     });
 
     let currentX = 20;
-    const baseY = 60;
+    let currentY = 60;
+    const maxWidth = 400; // Largura máxima da linha
     
     return sortedBlocks.map(block => {
       const blockWidth = block.type === 'hundred' ? 80 : block.type === 'ten' ? 80 : 40;
-      const newBlock = { ...block, x: currentX, y: baseY };
-      currentX += blockWidth + 15;
+      
+      // Se ultrapassar a largura máxima, quebra linha
+      if (currentX + blockWidth > maxWidth) {
+        currentX = 20;
+        currentY += 100; // Nova linha
+      }
+      
+      const newBlock = { ...block, x: currentX, y: currentY };
+      currentX += blockWidth + 15; // Espaçamento entre blocos
+      
       return newBlock;
     });
   };
