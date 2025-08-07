@@ -22,12 +22,23 @@ export interface Challenge {
   explanation?: string;
 }
 
+interface ChallengeAttempt {
+  challengeId: string;
+  isCorrect: boolean;
+  timeSec: number;
+  timestamp: Date;
+  difficulty: Challenge['difficulty'];
+  category: Challenge['category'];
+}
+
 interface ChallengeContextType {
   challenges: Challenge[];
   currentChallenge: Challenge | null;
   completedChallenges: Challenge[];
+  attempts: ChallengeAttempt[];
   generateNewChallenge: (userLevel: number, userStyle: string) => Challenge;
   generateNewChallengeAI: (userLevel: number, userStyle: string, category?: Challenge['category']) => Promise<Challenge>;
+  recordAttempt: (isCorrect: boolean) => void;
   completeChallenge: (challengeId: string, userAnswer: string) => void;
   getChallengesByCategory: (category: string) => Challenge[];
 }
@@ -100,6 +111,8 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }
 
   const [completedChallenges, setCompletedChallenges] = useState<Challenge[]>([]);
   const [currentChallenge, setCurrentChallenge] = useState<Challenge | null>(challenges[0]);
+  const [attempts, setAttempts] = useState<ChallengeAttempt[]>([]);
+  const [startedAt, setStartedAt] = useState<number | null>(null);
 
   const generateNewChallenge = (userLevel: number, userStyle: string) => {
     // Simple algorithm to select appropriate challenge based on user level and learning style
@@ -126,7 +139,17 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }
     userStyle: string,
     category?: Challenge['category']
   ): Promise<Challenge> => {
-    const ai: AIChallenge = await generateChallenge({ level: userLevel, style: userStyle, category });
+    // Adaptive level based on recent attempts (last 5)
+    const recent = attempts.slice(-5);
+    let adjustedLevel = userLevel;
+    if (recent.length > 0) {
+      const accuracy = recent.filter(a => a.isCorrect).length / recent.length;
+      const avgTime = recent.reduce((s, a) => s + a.timeSec, 0) / recent.length;
+      if (accuracy >= 0.8 && avgTime <= 120) adjustedLevel = Math.max(1, userLevel + 1);
+      else if (accuracy <= 0.5 || avgTime > 180) adjustedLevel = Math.max(1, userLevel - 1);
+    }
+
+    const ai: AIChallenge = await generateChallenge({ level: adjustedLevel, style: userStyle, category });
     const mapped: Challenge = {
       id: ai.id,
       title: ai.title,
@@ -146,7 +169,25 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }
       explanation: ai.explanation,
     };
     setCurrentChallenge(mapped);
+    setStartedAt(Date.now());
     return mapped;
+  };
+
+  const recordAttempt = (isCorrect: boolean) => {
+    const now = Date.now();
+    const durationSec = startedAt ? Math.max(1, Math.round((now - startedAt) / 1000)) : 0;
+    if (currentChallenge) {
+      const attempt: ChallengeAttempt = {
+        challengeId: currentChallenge.id,
+        isCorrect,
+        timeSec: durationSec,
+        timestamp: new Date(),
+        difficulty: currentChallenge.difficulty,
+        category: currentChallenge.category,
+      };
+      setAttempts(prev => [...prev, attempt]);
+    }
+    setStartedAt(null);
   };
 
   const completeChallenge = (challengeId: string, userAnswer: string) => {
@@ -180,8 +221,10 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }
       challenges,
       currentChallenge,
       completedChallenges,
+      attempts,
       generateNewChallenge,
       generateNewChallengeAI,
+      recordAttempt,
       completeChallenge,
       getChallengesByCategory
     }}>

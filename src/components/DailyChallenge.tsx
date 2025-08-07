@@ -40,6 +40,7 @@ const DailyChallenge = () => {
   const [showTutorHelp, setShowTutorHelp] = useState(false);
   const [feedback, setFeedback] = useState("");
   const { toast } = useToast();
+  const { recordAttempt } = useChallenge();
 
   const handleSubmitAnswer = () => {
     if (!answer.trim()) {
@@ -70,6 +71,7 @@ const DailyChallenge = () => {
                                  (answerLower.includes("4500") && answerLower.includes("gasto"));
 
     const isCorrectAnswer = hasCorrectKeywords && mentionedCalculations;
+    recordAttempt(isCorrectAnswer);
 
     if (isCorrectAnswer) {
       // Resposta correta
