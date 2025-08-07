@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React from 'react';
 
 export interface Challenge {
   id: string;
@@ -24,10 +24,10 @@ interface ChallengeContextType {
   getChallengesByCategory: (category: string) => Challenge[];
 }
 
-const ChallengeContext = createContext<ChallengeContextType | undefined>(undefined);
+const ChallengeContext = React.createContext<ChallengeContextType | undefined>(undefined);
 
 export const useChallenge = () => {
-  const context = useContext(ChallengeContext);
+  const context = React.useContext(ChallengeContext);
   if (!context) {
     throw new Error('useChallenge must be used within a ChallengeProvider');
   }
@@ -35,11 +35,11 @@ export const useChallenge = () => {
 };
 
 interface ChallengeProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }) => {
-  const [challenges, setChallenges] = useState<Challenge[]>([
+  const [challenges, setChallenges] = React.useState<Challenge[]>([
     {
       id: "math-001",
       title: "Orçamento Familiar Inteligente",
@@ -90,8 +90,8 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({ children }
     }
   ]);
 
-  const [completedChallenges, setCompletedChallenges] = useState<Challenge[]>([]);
-  const [currentChallenge, setCurrentChallenge] = useState<Challenge | null>(challenges[0]);
+  const [completedChallenges, setCompletedChallenges] = React.useState<Challenge[]>([]);
+  const [currentChallenge, setCurrentChallenge] = React.useState<Challenge | null>(challenges[0]);
 
   const generateNewChallenge = (userLevel: number, userStyle: string) => {
     // Simple algorithm to select appropriate challenge based on user level and learning style

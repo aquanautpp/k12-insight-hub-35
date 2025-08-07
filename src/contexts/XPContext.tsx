@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React from 'react';
 
 export interface XPData {
   currentXP: number;
@@ -15,10 +15,10 @@ interface XPContextType {
   getLevelBenefits: (level: number) => string[];
 }
 
-const XPContext = createContext<XPContextType | undefined>(undefined);
+const XPContext = React.createContext<XPContextType | undefined>(undefined);
 
 export const useXP = () => {
-  const context = useContext(XPContext);
+  const context = React.useContext(XPContext);
   if (!context) {
     throw new Error('useXP must be used within an XPProvider');
   }
@@ -26,11 +26,11 @@ export const useXP = () => {
 };
 
 interface XPProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const XPProvider: React.FC<XPProviderProps> = ({ children }) => {
-  const [xpData, setXPData] = useState<XPData>({
+  const [xpData, setXPData] = React.useState<XPData>({
     currentXP: 350,
     currentLevel: 12,
     xpToNextLevel: 450,
