@@ -346,16 +346,46 @@ export const CPAIntegratedChallenge = ({
           </CardContent>
         </Card>
 
-        {/* Componente do estágio atual - Novo Sistema de Problemas CPA */}
+        {/* Componente do estágio atual - Problemas CPA Interativos */}
         <div className="animate-fade-in">
-          <Card className="shadow-card">
-            <CardContent className="p-6">
-              <div className="text-center text-muted-foreground">
-                <p className="mb-4">Os problemas CPA agora estão integrados diretamente no Método CPA.</p>
-                <p>Use a navegação acima para escolher o estágio e resolver os problemas interativos!</p>
-              </div>
-            </CardContent>
-          </Card>
+          {currentStage === 'concrete' && (
+            <VirtualTenBlocks
+              problem={{
+                description: "Resolva este problema usando blocos: Ana tinha 12 balas e ganhou mais 8 balas da sua avó. Quantas balas Ana tem agora?",
+                initialValue1: 12,
+                initialValue2: 8,
+                expectedResult: 20,
+                operation: "add" as const
+              }}
+              onComplete={() => handleStageComplete(true)}
+            />
+          )}
+          
+          {currentStage === 'pictorial' && (
+            <BarModelEditor
+              problem={{
+                description: "Use o modelo de barras para resolver: Em uma escola há 4 salas, cada uma com 6 alunos. Quantos alunos há no total?",
+                expectedModel: [[{id: "1", value: 6, label: "Sala 1", color: "#8B5A3C", width: 60}, {id: "2", value: 6, label: "Sala 2", color: "#8B5A3C", width: 60}, {id: "3", value: 6, label: "Sala 3", color: "#8B5A3C", width: 60}, {id: "4", value: 6, label: "Sala 4", color: "#8B5A3C", width: 60}]],
+                expectedResult: 24,
+                type: "addition" as const
+              }}
+              onComplete={() => handleStageComplete(true)}
+            />
+          )}
+          
+          {currentStage === 'abstract' && (
+            <EquationEditor
+              problem={{
+                description: "Resolva a equação para encontrar o valor de x:",
+                equation: "2x + 5 = 13",
+                expectedSteps: ["2x + 5 = 13", "2x = 13 - 5", "2x = 8", "x = 8 ÷ 2", "x = 4"],
+                expectedResult: 4,
+                hints: ["Primeiro, subtraia 5 de ambos os lados", "Depois, divida ambos os lados por 2", "Lembre-se de manter a equação equilibrada"]
+              }}
+              onComplete={() => handleStageComplete(true)}
+              onReturnToPictorial={() => goToStage('pictorial')}
+            />
+          )}
         </div>
 
         {/* Estatísticas e feedback - Pronto para Desafio */}

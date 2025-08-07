@@ -572,7 +572,7 @@ const CPAMethod = () => {
           <Card className="mb-8 shadow-card">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-2xl font-bold text-foreground">Desafio Extra Avançado</CardTitle>
+                <CardTitle className="text-2xl font-bold text-foreground">Desafio Interativo</CardTitle>
                 <Button variant="outline" onClick={() => setShowInteractiveChallenge(false)}>
                   Voltar aos Problemas
                 </Button>
@@ -595,14 +595,14 @@ const CPAMethod = () => {
             {/* Call to Action para Desafio Extra */}
             <Card className="shadow-card border-2 border-primary bg-gradient-soft rounded-2xl">
               <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Desafio Extra Avançado</h3>
+                <h3 className="text-2xl font-bold mb-4 text-foreground">Desafio Interativo</h3>
                 <p className="text-lg mb-6 text-muted-foreground">
-                  Já resolveu todos os problemas CPA? Experimente nosso desafio avançado 
+                  Já resolveu todos os problemas CPA? Experimente nosso desafio interativo 
                   que combina conceitos de todos os estágios!
                 </p>
                 <Button size="lg" variant="outline" onClick={() => setShowInteractiveChallenge(true)} className="flex items-center gap-2 text-primary border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg">
                   <PlayCircle className="w-5 h-5" />
-                  Desafio Avançado
+                  Desafio Interativo
                 </Button>
               </CardContent>
             </Card>
