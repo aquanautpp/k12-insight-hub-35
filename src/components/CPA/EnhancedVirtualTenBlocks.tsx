@@ -81,69 +81,97 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   const organizeWorkAreaBlocks = (newBlocks: Block[]) => {
     if (newBlocks.length === 0) return [];
 
-    // Ordenar blocos por tipo (centena, dezena, unidade) para organização consistente
-    const sortedBlocks = [...newBlocks].sort((a, b) => {
-      if (a.type === b.type) return 0;
-      if (a.type === 'hundred') return -1;
-      if (b.type === 'hundred') return 1;
-      if (a.type === 'ten') return -1;
-      if (b.type === 'ten') return 1;
-      return 0;
-    });
+    // Ordenar blocos por valor decrescente para organização consistente
+    const sortedBlocks = [...newBlocks].sort((a, b) => b.value - a.value);
 
-    // Configurações do grid inteligente
-    const padding = 10;
-    const maxWidth = 340;
-    const baseY = 20;
+    // Configurações do grid com snap absoluto
+    const GRID_SIZE = 10;
+    const PADDING = 20;
+    const BLOCK_SPACING = 10;
+    const MAX_WIDTH = 320; // Container width minus padding
     
-    let currentX = 20;
-    let currentY = baseY;
-    let lineHeight = 0;
+    // Dimensões fixas dos blocos
+    const blockDimensions = {
+      'hundred': { width: 80, height: 40 },
+      'ten': { width: 60, height: 40 },
+      'unit': { width: 40, height: 40 }
+    };
 
-    return sortedBlocks.map((block, index) => {
-      let blockWidth;
-      let blockHeight;
-      
-      // Definir dimensões exatas baseadas no tipo
-      switch (block.type) {
-        case 'hundred':
-          blockWidth = 80;
-          blockHeight = 80;
-          break;
-        case 'ten':
-          blockWidth = 60;
-          blockHeight = 40;
-          break;
-        case 'unit':
-          blockWidth = 40;
-          blockHeight = 40;
-          break;
-        default:
-          blockWidth = 40;
-          blockHeight = 40;
+    let currentX = PADDING;
+    let currentY = PADDING;
+    let maxHeightInRow = 0;
+    
+    // Conjunto para rastrear posições ocupadas
+    const occupiedPositions = new Set<string>();
+    
+    const isPositionOccupied = (x: number, y: number, width: number, height: number) => {
+      for (let checkX = x; checkX < x + width; checkX += GRID_SIZE) {
+        for (let checkY = y; checkY < y + height; checkY += GRID_SIZE) {
+          const key = `${Math.floor(checkX / GRID_SIZE)}_${Math.floor(checkY / GRID_SIZE)}`;
+          if (occupiedPositions.has(key)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    const markPositionOccupied = (x: number, y: number, width: number, height: number) => {
+      for (let checkX = x; checkX < x + width; checkX += GRID_SIZE) {
+        for (let checkY = y; checkY < y + height; checkY += GRID_SIZE) {
+          const key = `${Math.floor(checkX / GRID_SIZE)}_${Math.floor(checkY / GRID_SIZE)}`;
+          occupiedPositions.add(key);
+        }
+      }
+    };
+
+    const snapToGrid = (value: number) => {
+      return Math.round(value / GRID_SIZE) * GRID_SIZE;
+    };
+
+    return sortedBlocks.map((block) => {
+      const dimensions = blockDimensions[block.type];
+      let finalX = currentX;
+      let finalY = currentY;
+
+      // Verificar se o bloco cabe na linha atual
+      if (currentX + dimensions.width > MAX_WIDTH) {
+        // Nova linha
+        currentX = PADDING;
+        currentY += maxHeightInRow + BLOCK_SPACING;
+        maxHeightInRow = 0;
+        finalX = currentX;
+        finalY = currentY;
       }
 
-      // Verificar se precisa quebrar linha
-      if (currentX + blockWidth > maxWidth && currentX > 20) {
-        currentY += lineHeight + padding;
-        currentX = 20;
-        lineHeight = 0;
+      // Garantir que a posição não está ocupada
+      while (isPositionOccupied(finalX, finalY, dimensions.width, dimensions.height)) {
+        finalX += dimensions.width + BLOCK_SPACING;
+        
+        // Se não couber na linha, quebrar para nova linha
+        if (finalX + dimensions.width > MAX_WIDTH) {
+          finalX = PADDING;
+          finalY += maxHeightInRow + BLOCK_SPACING;
+          maxHeightInRow = 0;
+        }
       }
 
-      // Atualizar altura da linha
-      lineHeight = Math.max(lineHeight, blockHeight);
+      // Snap to grid para garantir alinhamento perfeito
+      finalX = snapToGrid(finalX);
+      finalY = snapToGrid(finalY);
 
-      // Criar bloco organizado com snap to grid
-      const organizedBlock = {
+      // Marcar posição como ocupada
+      markPositionOccupied(finalX, finalY, dimensions.width, dimensions.height);
+
+      // Atualizar variáveis de controle
+      maxHeightInRow = Math.max(maxHeightInRow, dimensions.height);
+      currentX = finalX + dimensions.width + BLOCK_SPACING;
+
+      return {
         ...block,
-        x: currentX,
-        y: currentY
+        x: finalX,
+        y: finalY
       };
-
-      // Atualizar posição X para o próximo bloco
-      currentX += blockWidth + padding;
-
-      return organizedBlock;
     });
   };
 
@@ -277,9 +305,9 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   };
 
   const getBlockStyle = (block: Block, isPreview = false, isDragging = false) => {
-    const baseClasses = `absolute flex items-center justify-center font-bold select-none transition-all duration-200 text-white border-2 ${
+    const baseClasses = `absolute flex items-center justify-center font-bold select-none transition-transform duration-200 text-white border-2 rounded will-change-transform ${
       isPreview ? 'opacity-50 pointer-events-none' : ''
-    } ${isDragging ? 'opacity-30' : 'cursor-grab hover:cursor-grab'}  ${
+    } ${isDragging ? 'opacity-30' : 'cursor-grab hover:cursor-grab'} ${
       shakeWrongBlocks && !isPreview ? 'animate-[shake_0.6s_ease-in-out]' : ''
     }`;
 
@@ -287,35 +315,27 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     const greenColor = 'bg-[#6B8E5A] border-[#6B8E5A]';
     const shadowClass = isDragging ? 'shadow-lg' : 'shadow-sm';
 
-    switch (block.type) {
-      case 'hundred':
-        return {
-          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} text-lg rounded`,
-          style: {
-            width: '80px',
-            height: '80px',
-            transform: `translate(${block.x}px, ${block.y}px)`
-          }
-        };
-      case 'ten':
-        return {
-          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} text-sm rounded`,
-          style: {
-            width: '60px',
-            height: '40px',
-            transform: `translate(${block.x}px, ${block.y}px)`
-          }
-        };
-      case 'unit':
-        return {
-          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} text-xs rounded`,
-          style: {
-            width: '40px',
-            height: '40px',
-            transform: `translate(${block.x}px, ${block.y}px)`
-          }
-        };
-    }
+    // Dimensões padronizadas - mesma altura para alinhamento perfeito
+    const blockDimensions = {
+      'hundred': { width: 80, height: 40 },
+      'ten': { width: 60, height: 40 },
+      'unit': { width: 40, height: 40 }
+    };
+
+    const dimensions = blockDimensions[block.type];
+    
+    return {
+      className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} ${
+        block.type === 'hundred' ? 'text-lg' : block.type === 'ten' ? 'text-sm' : 'text-xs'
+      }`,
+      style: {
+        width: `${dimensions.width}px`,
+        height: `${dimensions.height}px`,
+        left: `${block.x}px`,
+        top: `${block.y}px`,
+        zIndex: isDragging ? 1000 : 1
+      }
+    };
   };
 
   const workAreaHasBlocks = workArea.length > 0;
@@ -432,7 +452,9 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
               }`}
               style={{ 
                 padding: '20px',
-                minHeight: '220px'
+                minHeight: '220px',
+                position: 'relative',
+                overflow: 'visible'
               }}
               onDrop={(e) => handleDrop(e, 'work')}
               onDragOver={(e) => handleDragOver(e, 'work')}
