@@ -3,6 +3,7 @@ import { AppSidebar } from "@/components/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
+import { useUserProfile } from "@/hooks/useUserProfile";
 import { User } from "lucide-react";
 import Dashboard from "@/components/Dashboard";
 import CPAMethod from "@/components/CPAMethodNew";
@@ -19,6 +20,7 @@ import { FeatureFlagsDebugPanel } from "@/components/FeatureFlagsDebugPanel";
 const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
   const { user, signOut } = useAuth();
+  const { displayName } = useUserProfile();
 
   const renderView = () => {
     switch (currentView) {
@@ -74,7 +76,7 @@ const Index = () => {
               <div className="hidden md:flex items-center space-x-2 text-sm text-muted-foreground">
                 <User className="w-4 h-4" />
                 <span className="truncate max-w-[200px]">
-                  {user?.email}
+                  {displayName}
                 </span>
               </div>
               <Button 

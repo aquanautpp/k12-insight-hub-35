@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import logoImage from '@/assets/mantha-logo.png';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import { useAuth } from '@/contexts/AuthContext';
+import { useUserProfile } from '@/hooks/useUserProfile';
 import { Button } from '@/components/ui/button';
 interface AppSidebarProps {
   currentView: string;
@@ -53,6 +54,7 @@ export function AppSidebar({
 }: AppSidebarProps) {
   const { state } = useSidebar();
   const { user, signOut } = useAuth();
+  const { displayName } = useUserProfile();
   return <Sidebar collapsible="icon" className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-16 md:w-48" : "w-64 md:w-64"}`}>
       <SidebarHeader className="border-b border-border/30 p-4 md:p-6 px-[10px]">
         <SidebarMenu>
@@ -102,16 +104,16 @@ export function AppSidebar({
               <div className="flex items-center space-x-3 w-full">
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md flex-shrink-0">
                   <span className="text-white text-xs md:text-sm font-semibold">
-                    {user?.email?.charAt(0).toUpperCase() || 'U'}
+                    {displayName?.charAt(0).toUpperCase() || 'U'}
                   </span>
                 </div>
                 {state !== "collapsed" && (
                   <div className="flex flex-col text-left flex-1 min-w-0">
                     <span className="text-xs md:text-sm font-semibold text-foreground truncate">
-                      {user?.user_metadata?.display_name || 'Usuário'}
+                      Usuário
                     </span>
                     <span className="text-xs text-muted-foreground truncate">
-                      {user?.email}
+                      {displayName}
                     </span>
                   </div>
                 )}
