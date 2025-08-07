@@ -9,6 +9,7 @@ import AutorregulacaoModule from "@/components/EI/AutorregulacaoModule";
 import AutomotivacaoModule from "@/components/EI/AutomotivacaoModule";
 import EmpatiaModule from "@/components/EI/EmpatiaModule";
 import HabilidadesSociaisModule from "@/components/EI/HabilidadesSociaisModule";
+import EmotionalCheckIn from "@/components/EI/EmotionalCheckIn";
 
 // Tipos para o sistema de IE
 type EIDomain = 'autoconsciencia' | 'autorregulacao' | 'automotivacao' | 'empatia' | 'habilidades_sociais';
@@ -120,6 +121,9 @@ const EmotionalIntelligence = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Check-in Emocional */}
+        <EmotionalCheckIn />
 
         {/* Domínios da IE */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">

@@ -44,6 +44,36 @@ export type Database = {
         }
         Relationships: []
       }
+      ei_checkins: {
+        Row: {
+          created_at: string
+          energy: number
+          focus: number
+          id: string
+          mood: string
+          note: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          energy: number
+          focus: number
+          id?: string
+          mood: string
+          note?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          energy?: number
+          focus?: number
+          id?: string
+          mood?: string
+          note?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -87,6 +117,8 @@ export type Database = {
         Row: {
           atividades_completadas: Json | null
           created_at: string
+          ei_checkin_streak: number
+          ei_last_checkin_date: string | null
           id: string
           pontuacao_total: number | null
           tempo_estudo: number | null
@@ -97,6 +129,8 @@ export type Database = {
         Insert: {
           atividades_completadas?: Json | null
           created_at?: string
+          ei_checkin_streak?: number
+          ei_last_checkin_date?: string | null
           id?: string
           pontuacao_total?: number | null
           tempo_estudo?: number | null
@@ -107,6 +141,8 @@ export type Database = {
         Update: {
           atividades_completadas?: Json | null
           created_at?: string
+          ei_checkin_streak?: number
+          ei_last_checkin_date?: string | null
           id?: string
           pontuacao_total?: number | null
           tempo_estudo?: number | null
