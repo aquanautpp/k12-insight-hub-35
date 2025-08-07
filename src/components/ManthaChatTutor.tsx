@@ -23,7 +23,7 @@ import { openaiService } from "@/services/openaiService";
 import MathText from "@/components/MathText";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { useUserProgress } from "@/hooks/useUserProgress";
-
+import { useUserProfile } from "@/hooks/useUserProfile";
 // Componente para mostrar status da IA
 const AIStatusIndicator = () => {
   const [status, setStatus] = useState<'none' | 'stored' | 'active' | 'error'>('none');
@@ -66,6 +66,7 @@ interface Message {
 const ManthaChatTutor = () => {
   const { messages: chatHistory, loading: historyLoading, saveChatMessage, getLastConversation, clearChatHistory } = useChatHistory();
   const { addStudyTime, addCompletedActivity, addPoints } = useUserProgress();
+  const { displayName } = useUserProfile();
   const { toast } = useToast();
   
   const [messages, setMessages] = useState<Message[]>([]);
@@ -609,8 +610,8 @@ ${abstractResp}
                   
                   {/* Avatar do usuário */}
                   {message.sender === 'user' && (
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-achievement flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-white text-xs md:text-sm font-semibold">V</span>
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md flex-shrink-0 mt-1">
+                      <span className="text-white text-xs md:text-sm font-semibold">{displayName?.charAt(0).toUpperCase() || 'U'}</span>
                     </div>
                   )}
                 </div>
