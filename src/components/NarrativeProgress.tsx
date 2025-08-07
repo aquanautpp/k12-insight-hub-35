@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Award, Clock, Target, Star, Brain, Heart, Zap, BookOpen, Users, Lightbulb, Calendar, BarChart3, Sparkles } from "lucide-react";
+
 interface NarrativeMilestone {
   id: string;
   title: string;
@@ -14,6 +15,7 @@ interface NarrativeMilestone {
   skills: string[];
   storyText: string;
 }
+
 interface ProgressStoryProps {
   milestones: NarrativeMilestone[];
   currentLevel: number;
@@ -21,6 +23,7 @@ interface ProgressStoryProps {
   streak: number;
   className?: string;
 }
+
 export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
   milestones,
   currentLevel,
@@ -39,6 +42,7 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
       setTimeout(() => setAnimatingMilestone(null), 3000);
     }
   }, [milestones]);
+
   const getMilestoneIcon = (type: string, emotion: string) => {
     switch (type) {
       case "achievement":
@@ -53,6 +57,7 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
         return BookOpen;
     }
   };
+
   const getEmotionColor = (emotion: string) => {
     switch (emotion) {
       case "joy":
@@ -67,12 +72,14 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
         return "text-gray-600 bg-gray-50 border-gray-200";
     }
   };
+
   const getImpactSize = (impact: number) => {
     if (impact >= 8) return "w-16 h-16";
     if (impact >= 6) return "w-12 h-12";
     if (impact >= 4) return "w-10 h-10";
     return "w-8 h-8";
   };
+
   const generateProgressNarrative = () => {
     const achievementCount = milestones.filter(m => m.type === "achievement").length;
     const breakthroughCount = milestones.filter(m => m.type === "breakthrough").length;
@@ -87,14 +94,16 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
     }
     return "🎯 Sua aventura no mundo da matemática está apenas começando. Grandes descobertas te aguardam!";
   };
+
   const sortedMilestones = milestones.sort((a, b) => b.date.getTime() - a.date.getTime());
+
   return <div className={`space-y-6 ${className}`}>
       {/* Story Header */}
       <Card className="sophisticated-reveal premium-gradient-morph">
         <div className="p-8 text-center text-primary-foreground">
           <div className="mb-6">
-            <div className="w-20 h-20 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mx-auto mb-4 float-animation">
-              <BarChart3 className="w-10 h-10 text-primary" />
+            <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mx-auto mb-4 float-animation">
+              <BarChart3 className="w-8 h-8 text-primary" />
             </div>
             <h2 className="text-2xl font-bold mb-2 elegant-text-reveal text-foreground">Sua História de Conquistas</h2>
             <p className="text-foreground/90 elegant-text-reveal">
