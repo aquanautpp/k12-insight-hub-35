@@ -440,63 +440,6 @@ const CPAMethod = () => {
           </Card>
         </motion.div>
 
-
-        {/* Por que isso funciona */}
-        <Card className="mb-8 shadow-card">
-          <CardContent className="p-8">
-            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Por que isso funciona?</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-soft border border-primary/20 transition-transform duration-200 hover:scale-105 hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Brain className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Compreensão Real</h4>
-                  <p className="text-muted-foreground text-sm">Você entende melhor, em vez de só memorizar.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-soft border border-primary/20 transition-transform duration-200 hover:scale-105 hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Puzzle className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Autonomia</h4>
-                  <p className="text-muted-foreground text-sm">Aprende a resolver problemas sozinho, sem decorar fórmula.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-soft border border-primary/20 transition-transform duration-200 hover:scale-105 hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Clareza</h4>
-                  <p className="text-muted-foreground text-sm">Evita confusões porque cada passo tem sentido.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-soft border border-primary/20 transition-transform duration-200 hover:scale-105 hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Trophy className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Confiança</h4>
-                  <p className="text-muted-foreground text-sm">Fica mais confiante para usar a matemática no mundo real.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-primary/10 rounded-lg p-6 border border-primary/30 text-center">
-              <p className="text-foreground text-justify">
-                <strong>🏆 Resultados Comprovados:</strong> O CPA é usado em Singapura há décadas — e os alunos de lá sempre estão no topo dos rankings internacionais. 
-                Não é porque são gênios: é porque o método respeita o seu tempo de aprender e ajuda você a realmente pensar com a matemática, e não só repetir.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Progress Indicator */}
         <Card className="mb-8 shadow-card">
           <CardContent className="p-6">
