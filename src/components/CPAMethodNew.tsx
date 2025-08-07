@@ -11,6 +11,7 @@ import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
 import { useFeatureFlags } from "@/contexts/FeatureFlagsContext";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { useProgress } from "@/contexts/ProgressContext";
 type Stage = 'concrete' | 'pictorial' | 'abstract';
 const CPAMethod = () => {
   const [currentStage, setCurrentStage] = useState<Stage>('concrete');
@@ -38,7 +39,9 @@ const CPAMethod = () => {
       icon: "🔢"
     }
   };
-  const progressPercentage = completedStages.length / 3 * 100;
+  const { progress } = useProgress();
+  const cpa = progress.cpaProgress;
+  const overallProgress = Math.round((cpa.concrete + cpa.pictorial + cpa.abstract) / 3);
   const currentStageData = stages[currentStage];
   const handleStageComplete = () => {
     if (!completedStages.includes(currentStage)) {
@@ -55,6 +58,12 @@ const CPAMethod = () => {
   const handleStageClick = (stage: Stage) => {
     setCurrentStage(stage);
     setCurrentExampleIndex(0);
+  };
+  const getNextStage = (): Stage => {
+    if (cpa.concrete < 100) return 'concrete';
+    if (cpa.pictorial < 100) return 'pictorial';
+    if (cpa.abstract < 100) return 'abstract';
+    return 'abstract';
   };
   return <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto p-6">
@@ -317,83 +326,7 @@ const CPAMethod = () => {
               delay: 0.7
             }} className="text-lg text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed text-justify">Você já se perguntou porque alguns países dominam as olimpíadas internacionais de matemática? O Método CPA, inspirado no modelo educacional de Singapura, é uma forma diferente (e muito mais legal!) de aprender matemática. Em vez de começar direto com números e fórmulas, você passa por três etapas:</motion.p>
               
-              {/* Cards com Animações de Entrada Sequencial */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-                {[{
-                icon: "🧱",
-                title: "1. Concreto",
-                desc: "Você manipula objetos reais, como cubos, blocos ou fichas.",
-                delay: 0.9,
-                borderColor: "border-l-primary",
-                glowColor: "hover:shadow-primary/20"
-              }, {
-                icon: "🎨",
-                title: "2. Pictórico",
-                desc: "Você vê desenhos e imagens, como os famosos modelos de barras.",
-                delay: 1.1,
-                borderColor: "border-l-primary/80",
-                glowColor: "hover:shadow-primary/15"
-              }, {
-                icon: "🔢",
-                title: "3. Abstrato",
-                desc: "Só depois você usa números e símbolos, como fazemos em contas.",
-                delay: 1.3,
-                borderColor: "border-l-primary/60",
-                glowColor: "hover:shadow-primary/10"
-              }].map((item, index) => <motion.div key={index} initial={{
-                opacity: 0,
-                x: -50,
-                rotateY: -20
-              }} animate={{
-                opacity: 1,
-                x: 0,
-                rotateY: 0
-              }} transition={{
-                duration: 0.7,
-                delay: item.delay,
-                type: "spring",
-                stiffness: 100
-               }} whileHover={{
-                x: 15,
-                scale: 1.05,
-                rotateY: 5,
-                transition: {
-                  duration: 0.3
-                }
-              }} className={`group relative p-3 rounded-xl bg-gradient-to-br from-card/50 to-card/80 border-l-4 ${item.borderColor} border border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl ${item.glowColor} text-center backdrop-blur-sm`}>
-                    {/* Glow Effect Background */}
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    <motion.div className="text-3xl mb-3 inline-block" whileHover={{
-                  rotate: [0, -10, 10, -5, 0],
-                  scale: [1, 1.2, 1]
-                }} transition={{
-                  duration: 0.5
-                }}>
-                      {item.icon}
-                    </motion.div>
-                    
-                    <motion.h3 initial={{
-                  opacity: 0
-                }} animate={{
-                  opacity: 1
-                }} transition={{
-                  delay: item.delay + 0.3
-                }} className="text-lg font-bold text-foreground mb-2 relative z-10">
-                      {item.title}
-                    </motion.h3>
-                    
-                    <motion.p initial={{
-                  opacity: 0
-                }} animate={{
-                  opacity: 1
-                }} transition={{
-                  delay: item.delay + 0.5
-                }} className="text-sm text-muted-foreground leading-relaxed relative z-10">
-                      {item.desc}
-                    </motion.p>
-                  </motion.div>)}
-              </div>
+              {/* Grid de Etapas movido para baixo, após a faixa de sucesso */}
               
               {/* Seção de Sucesso com Animação */}
               <motion.div initial={{
