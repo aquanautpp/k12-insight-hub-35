@@ -380,7 +380,7 @@ const CPAMethod = () => {
               <h2 className="text-xl font-bold text-foreground">Seu Progresso no Método CPA</h2>
               <Badge variant="secondary">{completedStages.length}/3 estágios concluídos</Badge>
             </div>
-            <Progress value={progressPercentage} className="h-3 mb-2" />
+            <Progress value={overallProgress} className="h-3 mb-2" />
             <p className="text-sm text-muted-foreground">
               Continue praticando cada estágio para dominar completamente o método CPA
             </p>
