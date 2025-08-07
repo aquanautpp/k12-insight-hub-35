@@ -11,7 +11,9 @@ import { useUserProfile } from '@/hooks/useUserProfile';
 import { useUserProgress } from '@/hooks/useUserProgress';
 import { SmartInsights } from './SmartInsights';
 import { QuickWinMessage } from './QuickWinMessage';
-import { AdaptiveLearningPath } from './AdaptiveLearningPath';
+import { SkillTree } from './SkillTree';
+import { EnhancedAchievements } from './EnhancedAchievements';
+import { RadarChart } from './RadarChart';
 import { SystemTest } from './SystemTest';
 import { AnimatedCounter } from './AnimatedCounter';
 import { useScrollHijack } from '@/hooks/useScrollHijack';
@@ -371,33 +373,22 @@ const Dashboard = ({
           </motion.div>
         </div>
 
-        {/* Caminho Adaptativo */}
+        {/* Árvore de Habilidades */}
         <motion.div variants={itemVariants}>
-          <AdaptiveLearningPath currentLevel={overallProgress} completedModules={["Números Básicos", "Operações Simples"]} nextModules={["Percentuais", "Geometria Visual"]} successRate={87} />
+          <SkillTree 
+            currentLevel={overallProgress} 
+            completedModules={["Números Básicos", "Operações Simples"]} 
+          />
         </motion.div>
 
-        {/* Conquistas */}
+        {/* Gráfico de Radar */}
         <motion.div variants={itemVariants}>
-          <Card className="card-gradient">
-            <CardHeader className="text-center">
-              <CardTitle className="flex items-center justify-center gap-3 text-xl">
-                <Award className="h-5 w-5 text-primary" />
-                Suas Conquistas
-              </CardTitle>
-              <CardDescription>
-                Celebre seus marcos de aprendizagem
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {displayAchievements.map((achievement, index) => <div key={index} className="text-center p-4 rounded-xl transition-all hover-scale bg-white border border-primary">
-                    <div className="text-2xl mb-2">{achievement.icon}</div>
-                    <h4 className="font-medium text-sm mb-1">{achievement.title}</h4>
-                    <p className="text-xs text-muted-foreground">{achievement.description}</p>
-                  </div>)}
-              </div>
-            </CardContent>
-          </Card>
+          <RadarChart />
+        </motion.div>
+
+        {/* Conquistas Aprimoradas */}
+        <motion.div variants={itemVariants}>
+          <EnhancedAchievements />
         </motion.div>
 
       </motion.div>
