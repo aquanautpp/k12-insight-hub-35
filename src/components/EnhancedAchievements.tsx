@@ -167,7 +167,7 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
         </CardDescription>
       </CardHeader>
       <CardContent className="p-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <AnimatePresence>
             {displayAchievements.map((achievement, index) => {
               const rarityStyles = getRarityColors(achievement.rarity);
@@ -197,7 +197,7 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
                   onClick={() => handleCardClick(achievement.id)}
                 >
                   <motion.div
-                    className={`relative w-full h-56 transition-all duration-500 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}
+                    className={`relative w-full h-48 transition-all duration-500 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}
                   >
                     {/* Frente do Card */}
                     <div

@@ -318,7 +318,7 @@ const CPAMethod = () => {
             }} className="text-lg text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed text-justify">Você já se perguntou porque alguns países dominam as olimpíadas internacionais de matemática? O Método CPA, inspirado no modelo educacional de Singapura, é uma forma diferente (e muito mais legal!) de aprender matemática. Em vez de começar direto com números e fórmulas, você passa por três etapas:</motion.p>
               
               {/* Cards com Animações de Entrada Sequencial */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
                 {[{
                 icon: "🧱",
                 title: "1. Concreto",
@@ -353,18 +353,18 @@ const CPAMethod = () => {
                 delay: item.delay,
                 type: "spring",
                 stiffness: 100
-              }} whileHover={{
+               }} whileHover={{
                 x: 15,
                 scale: 1.05,
                 rotateY: 5,
                 transition: {
                   duration: 0.3
                 }
-              }} className={`group relative p-4 rounded-2xl bg-gradient-to-br from-card/50 to-card/80 border-l-4 ${item.borderColor} border border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl ${item.glowColor} text-center backdrop-blur-sm`}>
+              }} className={`group relative p-3 rounded-xl bg-gradient-to-br from-card/50 to-card/80 border-l-4 ${item.borderColor} border border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl ${item.glowColor} text-center backdrop-blur-sm`}>
                     {/* Glow Effect Background */}
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
-                    <motion.div className="text-5xl mb-4 inline-block" whileHover={{
+                    <motion.div className="text-3xl mb-3 inline-block" whileHover={{
                   rotate: [0, -10, 10, -5, 0],
                   scale: [1, 1.2, 1]
                 }} transition={{
@@ -379,7 +379,7 @@ const CPAMethod = () => {
                   opacity: 1
                 }} transition={{
                   delay: item.delay + 0.3
-                }} className="text-xl font-bold text-foreground mb-3 relative z-10">
+                }} className="text-lg font-bold text-foreground mb-2 relative z-10">
                       {item.title}
                     </motion.h3>
                     
@@ -389,7 +389,7 @@ const CPAMethod = () => {
                   opacity: 1
                 }} transition={{
                   delay: item.delay + 0.5
-                }} className="text-muted-foreground leading-relaxed relative z-10">
+                }} className="text-sm text-muted-foreground leading-relaxed relative z-10">
                       {item.desc}
                     </motion.p>
                   </motion.div>)}
