@@ -63,22 +63,13 @@ const Dashboard = ({
     currentIndex
   } = useScrollHijack(featuresRef, features.length);
 
-  // Early return APÓS todos os hooks
-  if (!progress || !xpData || !achievements || progressLoading) {
-    return <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <Brain className="w-12 h-12 animate-spin mx-auto mb-4 text-primary" />
-          <p className="text-muted-foreground">Carregando seu dashboard...</p>
-        </div>
-      </div>;
-  }
-
+  // Todos os useEffect também devem vir antes do early return
   React.useEffect(() => {
     // Só chama checkAchievements se os dados estão disponíveis e mudaram
     if (progress?.completedActivities !== undefined && xpData?.currentLevel !== undefined) {
       checkAchievements(progress, xpData);
     }
-  }, [progress?.completedActivities, xpData?.currentLevel]);
+  }, [progress?.completedActivities, xpData?.currentLevel, checkAchievements]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,12 +84,24 @@ const Dashboard = ({
     if (!progress?.cpaProgress) return 0;
     return Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3);
   }, [progress?.cpaProgress]);
+
   const reasoningProgress = React.useMemo(() => {
     return progress?.skillsProgress?.find(s => s.skill === 'Raciocínio Lógico')?.level || 75;
   }, [progress?.skillsProgress]);
+
   const overallProgress = React.useMemo(() => {
     return Math.round((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1) * 100);
   }, [progress?.completedActivities, progress?.totalActivities]);
+
+  // Early return APÓS todos os hooks
+  if (!progress || !xpData || !achievements || progressLoading) {
+    return <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Brain className="w-12 h-12 animate-spin mx-auto mb-4 text-primary" />
+          <p className="text-muted-foreground">Carregando seu dashboard...</p>
+        </div>
+      </div>;
+  }
   const displayAchievements = achievements && achievements.length > 0 ? achievements.slice(0, 4) : [{
     title: 'Primeiro Passo',
     description: 'Complete sua primeira atividade',
