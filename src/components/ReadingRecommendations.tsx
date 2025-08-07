@@ -35,7 +35,7 @@ const ReadingRecommendations = () => {
       title: 'Se Vira, Moleque!',
       description: 'Protagonismo, autorresponsabilidade e atitude empreendedora para jovens.',
       inspirationalText: 'Você não espera que alguém faça tudo por você. Você pensa, planeja e faz acontecer! Isso é atitude empreendedora: ser o herói da sua própria história.',
-      ageRange: '10+',
+      ageRange: '+16',
       tags: ['#protagonismo', '#atitude', '#responsabilidade'],
       isFavorite: false,
       hasRead: false,
