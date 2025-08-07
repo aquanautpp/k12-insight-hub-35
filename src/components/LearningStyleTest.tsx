@@ -405,17 +405,17 @@ const LearningStyleTest = () => {
     <div className="min-h-screen bg-gradient-subtle p-6">
       <div className="max-w-4xl mx-auto">
         <Card className="border-0 shadow-card">
-          <CardHeader className="bg-gradient-learning rounded-t-lg">
-            <div className="flex items-center justify-between text-primary">
+          <CardHeader className="bg-primary rounded-t-lg">
+            <div className="flex items-center justify-between text-white">
               <div>
-                <CardTitle className="text-xl mb-2 text-primary">Descobrir Como Eu Aprendo! 🧠</CardTitle>
-                <p className="text-primary">
+                <CardTitle className="text-xl mb-2 text-white">Descobrir Como Eu Aprendo! 🧠</CardTitle>
+                <p className="text-white">
                   Pergunta {currentQuestion + 1} de {questions.length}
                 </p>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-primary">{Math.round(((currentQuestion) / questions.length) * 100)}%</div>
-                <div className="text-sm text-primary">Completo</div>
+                <div className="text-2xl font-bold text-white">{Math.round(((currentQuestion) / questions.length) * 100)}%</div>
+                <div className="text-sm text-white">Completo</div>
               </div>
             </div>
             <Progress value={(currentQuestion / questions.length) * 100} className="mt-4" />
