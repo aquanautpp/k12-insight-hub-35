@@ -12,6 +12,7 @@ import { useUserProgress } from '@/hooks/useUserProgress';
 import { SmartInsights } from './SmartInsights';
 import { QuickWinMessage } from './QuickWinMessage';
 import { AdaptiveLearningPath } from './AdaptiveLearningPath';
+import { SystemTest } from './SystemTest';
 import { AnimatedCounter } from './AnimatedCounter';
 import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
