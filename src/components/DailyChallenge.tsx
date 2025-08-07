@@ -179,7 +179,7 @@ const DailyChallenge = () => {
               Dica
             </h4>
             <p className="text-foreground text-sm leading-relaxed">
-              Primeiro calcule quanto sobra após os gastos atuais. Depois determine se é possível atingir ambas as metas (20% para emergência + R$ 450/mês para viagem). Se não for possível, identifique onde cortar gastos.
+              {getHint()}
             </p>
           </div>
         )}
@@ -187,11 +187,11 @@ const DailyChallenge = () => {
         {showTutorHelp && (
           <div className="bg-gradient-focus border border-primary/20 rounded-lg p-4">
             <h4 className="font-medium text-primary mb-2 flex items-center">
-              <span className="mr-2">💡</span>
+              <span className="mr-2">🤖</span>
               Tutor IA
             </h4>
             <p className="text-foreground text-sm leading-relaxed">
-              Para resolver este problema, siga estes passos: 1) Calcule a renda disponível após gastos fixos, 2) Determine quanto precisa poupar mensalmente para cada meta, 3) Compare com o que sobra, 4) Se necessário, sugira ajustes nos gastos não-essenciais como lazer.
+              {getTutorAdvice()}
             </p>
           </div>
         )}
