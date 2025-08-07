@@ -180,7 +180,7 @@ const EmotionalIntelligence = () => {
             <CardHeader className="text-center pb-4">
               <div className="flex items-center justify-center mb-4">
                 <div className="relative">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+                  <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
                     <Brain className="w-8 h-8 text-white" />
                   </div>
                   
@@ -287,7 +287,7 @@ const EmotionalIntelligence = () => {
 
               {/* Call to Action */}
               <div className="mt-8 text-center">
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary/80 to-secondary/80 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                   <Sparkles className="w-5 h-5" />
                   <span>Comece sua jornada emocional agora!</span>
                   <ArrowRight className="w-5 h-5" />
