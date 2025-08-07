@@ -301,7 +301,7 @@ const EmotionalIntelligence = () => {
               
                 {/* Etapa 3 */}
                 <div className="group relative">
-                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-accent to-accent/80 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
                     3
                   </div>
                   <Card className="h-full bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
