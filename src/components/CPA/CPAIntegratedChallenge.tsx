@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowRight, ArrowLeft, RotateCcw, Brain, Timer } from "lucide-react";
 import { EnhancedVirtualTenBlocks } from "./EnhancedVirtualTenBlocks";
-import { BarModelEditor } from "./BarModelEditor";
+import { AdvancedBarModelEditor } from "./AdvancedBarModelEditor";
 import { EquationEditor } from "./EquationEditor";
 
 type CPAStage = 'concrete' | 'pictorial' | 'abstract';
@@ -362,12 +362,17 @@ export const CPAIntegratedChallenge = ({
           )}
           
           {currentStage === 'pictorial' && (
-            <BarModelEditor
+            <AdvancedBarModelEditor
               problem={{
                 description: "Use o modelo de barras para resolver: Em uma escola há 4 salas, cada uma com 6 alunos. Quantos alunos há no total?",
-                expectedModel: [[{id: "1", value: 6, label: "Sala 1", color: "#8B5A3C", width: 60}, {id: "2", value: 6, label: "Sala 2", color: "#8B5A3C", width: 60}, {id: "3", value: 6, label: "Sala 3", color: "#8B5A3C", width: 60}, {id: "4", value: 6, label: "Sala 4", color: "#8B5A3C", width: 60}]],
                 expectedResult: 24,
-                type: "addition" as const
+                type: 'addition',
+                hints: [
+                  'Desenhe uma barra grande para representar o total',
+                  'Divida em 4 partes iguais (uma para cada sala)',
+                  'Cada parte deve conter 6 alunos',
+                  'Use cores diferentes para distinguir conhecido vs incógnita'
+                ]
               }}
               onComplete={() => handleStageComplete(true)}
             />
