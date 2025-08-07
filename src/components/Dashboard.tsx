@@ -221,7 +221,7 @@ const Dashboard = ({
             </motion.div>
             <div className="mt-0">
               <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">
-                Bem-vindo{nome ? `, ${nome}` : ''} à <span className="text-yellow-400">Mantha</span>!
+                De volta à <span className="text-yellow-400">Mantha</span>{nome ? `, ${nome}` : ''}!
               </h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mb-2 mx-0 my-0">
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
