@@ -356,40 +356,40 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
             </div>
             
             {/* Estatísticas */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Clock className="w-4 h-4 text-gray-600" />
-                  <span className="text-xs font-medium text-gray-600">Tempo</span>
+            <div className="grid grid-cols-4 gap-2">
+              <div className="bg-gradient-to-br from-primary/10 to-primary/20 border border-primary/30 rounded-lg p-3 text-center">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Clock className="w-3 h-3 text-primary" />
+                  <span className="text-xs font-medium text-primary">Tempo</span>
                 </div>
-                <div className="text-xl font-bold text-gray-900">{formatTime(elapsedTime)}</div>
+                <div className="text-lg font-bold text-primary">{formatTime(elapsedTime)}</div>
                 {bestTime && (
-                  <div className="text-xs text-gray-500 mt-1">Melhor: {formatTime(bestTime)}</div>
+                  <div className="text-xs text-primary/70 mt-1">Melhor: {formatTime(bestTime)}</div>
                 )}
               </div>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Target className="w-4 h-4 text-gray-600" />
-                  <span className="text-xs font-medium text-gray-600">Movimentos</span>
+              <div className="bg-gradient-to-br from-secondary/10 to-secondary/20 border border-secondary/30 rounded-lg p-3 text-center">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Target className="w-3 h-3 text-secondary-foreground" />
+                  <span className="text-xs font-medium text-secondary-foreground">Movimentos</span>
                 </div>
-                <div className="text-xl font-bold text-gray-900">{movements}</div>
+                <div className="text-lg font-bold text-secondary-foreground">{movements}</div>
               </div>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <RotateCcw className="w-4 h-4 text-gray-600" />
-                  <span className="text-xs font-medium text-gray-600">Tentativas</span>
+              <div className="bg-gradient-to-br from-accent/10 to-accent/20 border border-accent/30 rounded-lg p-3 text-center">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <RotateCcw className="w-3 h-3 text-accent-foreground" />
+                  <span className="text-xs font-medium text-accent-foreground">Tentativas</span>
                 </div>
-                <div className="text-xl font-bold text-gray-900">{attempts}</div>
+                <div className="text-lg font-bold text-accent-foreground">{attempts}</div>
               </div>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Sparkles className="w-4 h-4 text-gray-600" />
-                  <span className="text-xs font-medium text-gray-600">Eficiência</span>
+              <div className="bg-gradient-to-br from-muted/30 to-muted/50 border border-muted-foreground/20 rounded-lg p-3 text-center">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Sparkles className="w-3 h-3 text-muted-foreground" />
+                  <span className="text-xs font-medium text-muted-foreground">Eficiência</span>
                 </div>
-                <div className="text-xl font-bold text-gray-900">{efficiency}%</div>
+                <div className="text-lg font-bold text-muted-foreground">{efficiency}%</div>
               </div>
             </div>
           </div>
