@@ -3,17 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Heart, 
-  Brain, 
-  Target, 
-  Users, 
-  Sparkles,
-  Lock,
-  CheckCircle,
-  PlayCircle,
-  ArrowRight
-} from "lucide-react";
+import { Heart, Brain, Target, Users, Sparkles, Lock, CheckCircle, PlayCircle, ArrowRight } from "lucide-react";
 import AutoconscienciaModule from "@/components/EI/AutoconscienciaModule";
 import AutorregulacaoModule from "@/components/EI/AutorregulacaoModule";
 import AutomotivacaoModule from "@/components/EI/AutomotivacaoModule";
@@ -22,7 +12,6 @@ import HabilidadesSociaisModule from "@/components/EI/HabilidadesSociaisModule";
 
 // Tipos para o sistema de IE
 type EIDomain = 'autoconsciencia' | 'autorregulacao' | 'automotivacao' | 'empatia' | 'habilidades_sociais';
-
 interface EmotionalIntelligenceDomain {
   id: EIDomain;
   title: string;
@@ -35,92 +24,77 @@ interface EmotionalIntelligenceDomain {
   activities: number;
   completedActivities: number;
 }
-
 const EmotionalIntelligence = () => {
   const [selectedDomain, setSelectedDomain] = useState<EIDomain | null>(null);
-
-  const domains: EmotionalIntelligenceDomain[] = [
-    {
-      id: 'autoconsciencia',
-      title: 'Autoconsciência Emocional',
-      description: 'Aprenda a reconhecer e nomear suas emoções',
-      icon: <Brain className="w-8 h-8" />,
-      color: 'text-primary',
-      bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
-      progress: 75,
-      isUnlocked: true,
-      activities: 8,
-      completedActivities: 6
-    },
-    {
-      id: 'autorregulacao',
-      title: 'Autorregulação Emocional',
-      description: 'Desenvolva o controle das suas emoções',
-      icon: <Heart className="w-8 h-8" />,
-      color: 'text-primary',
-      bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
-      progress: 50,
-      isUnlocked: true,
-      activities: 10,
-      completedActivities: 5
-    },
-    {
-      id: 'automotivacao',
-      title: 'Automotivação & Resiliência',
-      description: 'Fortaleça sua motivação e persistência',
-      icon: <Target className="w-8 h-8" />,
-      color: 'text-primary',
-      bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
-      progress: 30,
-      isUnlocked: true,
-      activities: 7,
-      completedActivities: 2
-    },
-    {
-      id: 'empatia',
-      title: 'Empatia & Consciência Social',
-      description: 'Compreenda melhor os sentimentos dos outros',
-      icon: <Users className="w-8 h-8" />,
-      color: 'text-primary',
-      bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
-      progress: 10,
-      isUnlocked: true,
-      activities: 9,
-      completedActivities: 1
-    },
-    {
-      id: 'habilidades_sociais',
-      title: 'Habilidades Sociais',
-      description: 'Melhore sua comunicação e relacionamentos',
-      icon: <Sparkles className="w-8 h-8" />,
-      color: 'text-primary',
-      bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
-      progress: 0,
-      isUnlocked: true,
-      activities: 12,
-      completedActivities: 0
-    }
-  ];
-
-  const overallProgress = Math.round(
-    domains.reduce((sum, domain) => sum + domain.progress, 0) / domains.length
-  );
-
+  const domains: EmotionalIntelligenceDomain[] = [{
+    id: 'autoconsciencia',
+    title: 'Autoconsciência Emocional',
+    description: 'Aprenda a reconhecer e nomear suas emoções',
+    icon: <Brain className="w-8 h-8" />,
+    color: 'text-primary',
+    bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
+    progress: 75,
+    isUnlocked: true,
+    activities: 8,
+    completedActivities: 6
+  }, {
+    id: 'autorregulacao',
+    title: 'Autorregulação Emocional',
+    description: 'Desenvolva o controle das suas emoções',
+    icon: <Heart className="w-8 h-8" />,
+    color: 'text-primary',
+    bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
+    progress: 50,
+    isUnlocked: true,
+    activities: 10,
+    completedActivities: 5
+  }, {
+    id: 'automotivacao',
+    title: 'Automotivação & Resiliência',
+    description: 'Fortaleça sua motivação e persistência',
+    icon: <Target className="w-8 h-8" />,
+    color: 'text-primary',
+    bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
+    progress: 30,
+    isUnlocked: true,
+    activities: 7,
+    completedActivities: 2
+  }, {
+    id: 'empatia',
+    title: 'Empatia & Consciência Social',
+    description: 'Compreenda melhor os sentimentos dos outros',
+    icon: <Users className="w-8 h-8" />,
+    color: 'text-primary',
+    bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
+    progress: 10,
+    isUnlocked: true,
+    activities: 9,
+    completedActivities: 1
+  }, {
+    id: 'habilidades_sociais',
+    title: 'Habilidades Sociais',
+    description: 'Melhore sua comunicação e relacionamentos',
+    icon: <Sparkles className="w-8 h-8" />,
+    color: 'text-primary',
+    bgGradient: 'bg-gradient-to-br from-gradient-start to-gradient-end',
+    progress: 0,
+    isUnlocked: true,
+    activities: 12,
+    completedActivities: 0
+  }];
+  const overallProgress = Math.round(domains.reduce((sum, domain) => sum + domain.progress, 0) / domains.length);
   const handleDomainClick = (domainId: EIDomain) => {
     const domain = domains.find(d => d.id === domainId);
     if (domain?.isUnlocked) {
       setSelectedDomain(domainId);
     }
   };
-
   if (selectedDomain) {
     // Importar componente específico do domínio
     const DomainComponent = getDomainComponent(selectedDomain);
     return <DomainComponent onBack={() => setSelectedDomain(null)} />;
   }
-
-  return (
-    <div className="min-h-screen bg-gradient-subtle">
+  return <div className="min-h-screen bg-gradient-subtle">
       <div className="max-w-6xl mx-auto p-6">
         {/* Hero Section */}
         <div className="text-center mb-8">
@@ -149,19 +123,11 @@ const EmotionalIntelligence = () => {
 
         {/* Domínios da IE */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {domains.map((domain, index) => (
-            <Card 
-              key={domain.id}
-              className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-                domain.isUnlocked ? 'shadow-lg' : 'opacity-60'
-              } bg-white`}
-              onClick={() => handleDomainClick(domain.id)}
-            >
+          {domains.map((domain, index) => <Card key={domain.id} className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl ${domain.isUnlocked ? 'shadow-lg' : 'opacity-60'} bg-white`} onClick={() => handleDomainClick(domain.id)}>
               {/* Parte superior com fundo verde oliva mais claro - padronizada */}
-              <div 
-                className="p-6 text-white h-64 flex flex-col justify-between"
-                style={{ background: 'linear-gradient(135deg, hsl(82, 25%, 40%), hsl(82, 30%, 45%))' }}
-              >
+              <div className="p-6 text-white h-64 flex flex-col justify-between" style={{
+            background: 'linear-gradient(135deg, hsl(82, 25%, 40%), hsl(82, 30%, 45%))'
+          }}>
                 <div className="flex items-start justify-between mb-4">
                   <div className="text-white text-2xl">
                     {domain.icon}
@@ -182,33 +148,27 @@ const EmotionalIntelligence = () => {
                     <span className="font-medium">{domain.progress}%</span>
                   </div>
                   <div className="w-full bg-white/20 rounded-full h-2">
-                    <div 
-                      className="bg-white/80 h-2 rounded-full transition-all duration-300" 
-                      style={{ width: `${domain.progress}%` }}
-                    ></div>
+                    <div className="bg-white/80 h-2 rounded-full transition-all duration-300" style={{
+                  width: `${domain.progress}%`
+                }}></div>
                   </div>
                 </div>
               </div>
 
               {/* Parte inferior com fundo branco - padronizada */}
               <CardContent className="p-4 bg-white h-16 flex items-center justify-center">
-                {domain.isUnlocked && (
-                  <Button variant="ghost" className="w-full flex items-center justify-center gap-2 text-foreground hover:bg-muted font-medium text-sm">
+                {domain.isUnlocked && <Button variant="ghost" className="w-full flex items-center justify-center gap-2 text-foreground hover:bg-muted font-medium text-sm">
                     <PlayCircle className="w-4 h-4" />
                     Continuar Atividades
                     <ArrowRight className="w-4 h-4" />
-                  </Button>
-                )}
+                  </Button>}
                 
-                {!domain.isUnlocked && (
-                  <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
+                {!domain.isUnlocked && <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
                     <Lock className="w-4 h-4" />
                     Bloqueado
-                  </div>
-                )}
+                  </div>}
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
 
         {/* Guia de Como Funciona - Redesenhada */}
@@ -223,9 +183,7 @@ const EmotionalIntelligence = () => {
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
                     <Brain className="w-8 h-8 text-white" />
                   </div>
-                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                    <Sparkles className="w-3 h-3 text-white" />
-                  </div>
+                  
                 </div>
               </div>
               <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -318,7 +276,7 @@ const EmotionalIntelligence = () => {
                       <p className="text-sm text-muted-foreground flex-1">
                         IA personalizada que se adapta ao seu ritmo, oferecendo desafios e feedback para você se superar!
                       </p>
-                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-primary">
+                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-accent">
                         <CheckCircle className="w-4 h-4" />
                         <span className="font-medium">Evolução Contínua</span>
                       </div>
@@ -361,8 +319,7 @@ const EmotionalIntelligence = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
 
 // Função auxiliar para retornar o componente do domínio
@@ -379,18 +336,16 @@ const getDomainComponent = (domainId: EIDomain) => {
     case 'habilidades_sociais':
       return HabilidadesSociaisModule;
     default:
-      return ({ onBack }: { onBack: () => void }) => (
-        <div className="min-h-screen bg-gradient-subtle p-6">
-          <button 
-            onClick={onBack}
-            className="mb-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg"
-          >
+      return ({
+        onBack
+      }: {
+        onBack: () => void;
+      }) => <div className="min-h-screen bg-gradient-subtle p-6">
+          <button onClick={onBack} className="mb-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg">
             ← Voltar
           </button>
           <h1 className="text-2xl font-bold">Módulo em desenvolvimento</h1>
-        </div>
-      );
+        </div>;
   }
 };
-
 export default EmotionalIntelligence;
