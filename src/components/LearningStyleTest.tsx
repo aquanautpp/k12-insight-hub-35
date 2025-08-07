@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Brain, Eye, Volume2, Hammer, Users, Navigation, Trophy, RotateCcw, BookOpen } from "lucide-react";
-
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 interface Question {
   id: number;
   scenario: string;
@@ -263,10 +265,30 @@ const LearningStyleTest = () => {
   const [testCompleted, setTestCompleted] = useState(false);
   const [results, setResults] = useState<{ [key: string]: number }>({});
 
+  const { user } = useAuth();
+  const { toast } = useToast();
+
+  const saveLearningStyle = async (profile: string) => {
+    try {
+      if (!user) return;
+      const { error } = await supabase
+        .from('profiles')
+        .update({ estilo_aprendizagem: profile })
+        .eq('user_id', user.id);
+      if (error) {
+        console.error('Erro ao salvar estilo:', error);
+        toast({ title: 'Não foi possível salvar seu estilo', description: 'Tente novamente mais tarde.' });
+      } else {
+        toast({ title: 'Estilo de aprendizagem salvo!', description: 'Recomendações personalizadas habilitadas.' });
+      }
+    } catch (e) {
+      console.error('Erro ao salvar estilo:', e);
+    }
+  };
+
   const handleAnswerSelect = (profile: string) => {
     setSelectedAnswer(profile);
   };
-
   const handleNextQuestion = () => {
     if (!selectedAnswer) return;
 
@@ -282,6 +304,12 @@ const LearningStyleTest = () => {
       });
       setResults(counts);
       setTestCompleted(true);
+      const maxScore = Math.max(...Object.values(counts));
+      const dominant = Object.entries(counts)
+        .filter(([_, score]) => score === maxScore)
+        .map(([p]) => p);
+      const mainProfile = dominant[0];
+      if (mainProfile) saveLearningStyle(mainProfile);
     } else {
       setCurrentQuestion(currentQuestion + 1);
     }

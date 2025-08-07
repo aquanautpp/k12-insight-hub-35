@@ -116,6 +116,42 @@ export type Database = {
         }
         Relationships: []
       }
+      user_books: {
+        Row: {
+          book_id: string
+          created_at: string
+          has_read: boolean
+          id: string
+          is_favorite: boolean
+          notes: string | null
+          progress: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          book_id: string
+          created_at?: string
+          has_read?: boolean
+          id?: string
+          is_favorite?: boolean
+          notes?: string | null
+          progress?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          book_id?: string
+          created_at?: string
+          has_read?: boolean
+          id?: string
+          is_favorite?: boolean
+          notes?: string | null
+          progress?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +14,9 @@ import {
   Users,
   ArrowRight
 } from "lucide-react";
-
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 interface Book {
   id: string;
   title: string;
@@ -150,6 +152,29 @@ const ReadingRecommendations = () => {
 
   const [selectedIdea, setSelectedIdea] = useState<string | null>(null);
 
+  const { user } = useAuth();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (!user) return;
+    const load = async () => {
+      const { data, error } = await supabase
+        .from('user_books')
+        .select('book_id, is_favorite, has_read')
+        .eq('user_id', user.id);
+      if (error) {
+        console.error('Erro ao carregar leituras:', error);
+        return;
+      }
+      setBooks((prev) =>
+        prev.map((b) => {
+          const row = data?.find((r) => r.book_id === b.id);
+          return row ? { ...b, isFavorite: row.is_favorite, hasRead: row.has_read } : b;
+        })
+      );
+    };
+    load();
+  }, [user]);
   const explorationIdeas = [
     {
       id: 'young-entrepreneurs',
@@ -186,18 +211,33 @@ const ReadingRecommendations = () => {
     }
   ];
 
-  const toggleFavorite = (bookId: string) => {
-    setBooks(books.map(book => 
-      book.id === bookId ? { ...book, isFavorite: !book.isFavorite } : book
-    ));
+  const toggleFavorite = async (bookId: string) => {
+    const current = books.find((b) => b.id === bookId);
+    const next = !current?.isFavorite;
+    setBooks(books.map((book) => (book.id === bookId ? { ...book, isFavorite: next } : book)));
+    if (!user) return;
+    const { error } = await supabase
+      .from('user_books')
+      .upsert({ user_id: user.id, book_id: bookId, is_favorite: next }, { onConflict: 'user_id,book_id' });
+    if (error) {
+      console.error('Erro ao atualizar favorito:', error);
+      toast({ title: 'Não foi possível atualizar favorito', description: 'Tente novamente.' });
+    }
   };
 
-  const toggleRead = (bookId: string) => {
-    setBooks(books.map(book => 
-      book.id === bookId ? { ...book, hasRead: !book.hasRead } : book
-    ));
+  const toggleRead = async (bookId: string) => {
+    const current = books.find((b) => b.id === bookId);
+    const next = !current?.hasRead;
+    setBooks(books.map((book) => (book.id === bookId ? { ...book, hasRead: next } : book)));
+    if (!user) return;
+    const { error } = await supabase
+      .from('user_books')
+      .upsert({ user_id: user.id, book_id: bookId, has_read: next }, { onConflict: 'user_id,book_id' });
+    if (error) {
+      console.error('Erro ao atualizar leitura:', error);
+      toast({ title: 'Não foi possível atualizar leitura', description: 'Tente novamente.' });
+    }
   };
-
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <div className="max-w-6xl mx-auto p-6">
