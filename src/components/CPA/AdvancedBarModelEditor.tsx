@@ -65,10 +65,10 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
   const [divisionsInput, setDivisionsInput] = useState('2');
   const [showDivisionPanel, setShowDivisionPanel] = useState(false);
 
-  const CANVAS_WIDTH = 700;
-  const CANVAS_HEIGHT = 500;
-  const GRID_SIZE = 20;
-  const RULER_SIZE = 30;
+  const CANVAS_WIDTH = 630; // 700 * 0.9
+  const CANVAS_HEIGHT = 450; // 500 * 0.9
+  const GRID_SIZE = 18; // 20 * 0.9
+  const RULER_SIZE = 27; // 30 * 0.9
 
   const colors = [
     '#6B8E5A', // Verde conhecido
@@ -124,7 +124,7 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
 
       // Marcações da régua
       ctx.fillStyle = '#6C757D';
-      ctx.font = '10px Arial';
+      ctx.font = '9px Arial'; // 10 * 0.9
       ctx.textAlign = 'center';
       
       for (let x = RULER_SIZE; x <= CANVAS_WIDTH; x += GRID_SIZE) {
@@ -176,19 +176,19 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
           // Mostrar valor se houver
           if (element.value) {
             ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 18px Arial';
+            ctx.font = 'bold 16px Arial'; // 18 * 0.9
             ctx.textAlign = 'center';
             ctx.fillText(
               element.value.toString(),
               element.x + (element.width || 0) / 2,
-              element.y + (element.height || 0) / 2 + 6
+              element.y + (element.height || 0) / 2 + 5
             );
           }
           break;
 
         case 'text':
           ctx.fillStyle = element.color;
-          ctx.font = 'bold 16px Arial';
+          ctx.font = 'bold 14px Arial'; // 16 * 0.9
           ctx.textAlign = 'left';
           ctx.fillText(element.text || '', element.x, element.y);
           break;
@@ -383,16 +383,16 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
   };
 
   const createPreConfiguredModel = () => {
-    const baseY = RULER_SIZE + 60;
-    const segmentWidth = 80;
-    const segmentHeight = 50;
+    const baseY = RULER_SIZE + 54; // 60 * 0.9
+    const segmentWidth = 72; // 80 * 0.9
+    const segmentHeight = 45; // 50 * 0.9
 
     const preConfigured: DrawingElement[] = [
       // Barra total
       {
         id: 'total-bar',
         type: 'rectangle',
-        x: RULER_SIZE + 40,
+        x: RULER_SIZE + 36, // 40 * 0.9
         y: baseY,
         width: segmentWidth * 4,
         height: segmentHeight,
@@ -575,9 +575,9 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
                   variant={selectedTool === tool.id ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedTool(tool.id as any)}
-                  className="flex flex-col gap-1 h-12"
+                  className="flex flex-col gap-1 h-11" // 12 * 0.9
                 >
-                  <tool.icon className="w-4 h-4" />
+                  <tool.icon className="w-3.5 h-3.5" /> {/* 4 * 0.9 */}
                   <span className="text-xs">{tool.label}</span>
                 </Button>
               ))}
@@ -661,7 +661,7 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
                 onClick={() => setShowGrid(!showGrid)}
                 className="w-full justify-start"
               >
-                <Grid3X3 className="w-4 h-4 mr-2" />
+                <Grid3X3 className="w-3.5 h-3.5 mr-2" /> {/* 4 * 0.9 */}
                 Grid
               </Button>
               <Button
@@ -670,7 +670,7 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
                 onClick={() => setShowRulers(!showRulers)}
                 className="w-full justify-start"
               >
-                <Ruler className="w-4 h-4 mr-2" />
+                <Ruler className="w-3.5 h-3.5 mr-2" /> {/* 4 * 0.9 */}
                 Réguas
               </Button>
             </div>
@@ -704,7 +704,7 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
               size="sm"
               className="w-full"
             >
-              <Eye className="w-4 h-4 mr-2" />
+              <Eye className="w-3.5 h-3.5 mr-2" /> {/* 4 * 0.9 */}
               Exemplo Visual
             </Button>
           </CardContent>
@@ -760,11 +760,11 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
             {/* Controles do canvas */}
             <div className="flex gap-2 mt-4">
               <Button onClick={validateModel} className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4" />
+                <CheckCircle className="w-3.5 h-3.5" /> {/* 4 * 0.9 */}
                 Verificar Modelo
               </Button>
               <Button onClick={reset} variant="outline">
-                <RotateCcw className="w-4 h-4" />
+                <RotateCcw className="w-3.5 h-3.5" /> {/* 4 * 0.9 */}
                 Limpar
               </Button>
               {result !== null && (
@@ -780,7 +780,7 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
         <Card className="lg:col-span-1">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Lightbulb className="w-5 h-5" />
+              <Lightbulb className="w-4.5 h-4.5" /> {/* 5 * 0.9 */}
               Instruções
             </CardTitle>
           </CardHeader>
@@ -800,7 +800,7 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
                 onClick={() => setShowHints(!showHints)}
                 className="w-full"
               >
-                <Lightbulb className="w-4 h-4 mr-2" />
+                <Lightbulb className="w-3.5 h-3.5 mr-2" /> {/* 4 * 0.9 */}
                 {showHints ? 'Ocultar' : 'Mostrar'} Dicas
               </Button>
             )}
@@ -841,7 +841,7 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
               <CardContent className="p-4">
                 {Math.abs(result! - problem.expectedResult) <= 1 ? (
                   <div className="flex items-center gap-2 text-green-800">
-                    <CheckCircle className="w-5 h-5" />
+                    <CheckCircle className="w-4.5 h-4.5" /> {/* 5 * 0.9 */}
                     <div>
                       <p className="font-semibold">Excelente modelo de barras!</p>
                       <p className="text-sm">Você representou o problema visualmente de forma correta.</p>
