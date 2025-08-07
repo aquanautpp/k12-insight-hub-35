@@ -16,7 +16,8 @@ import {
   Eye,
   Ruler,
   Grid3X3,
-  Palette
+  Palette,
+  GitBranch
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -48,7 +49,7 @@ interface BarModelEditorProps {
 export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [elements, setElements] = useState<DrawingElement[]>([]);
-  const [selectedTool, setSelectedTool] = useState<'select' | 'rectangle' | 'text' | 'line' | 'eraser'>('rectangle');
+  const [selectedTool, setSelectedTool] = useState<'select' | 'rectangle' | 'text' | 'line' | 'eraser' | 'divide'>('rectangle');
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
@@ -61,6 +62,8 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
   const [result, setResult] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
+  const [divisionsInput, setDivisionsInput] = useState('2');
+  const [showDivisionPanel, setShowDivisionPanel] = useState(false);
 
   const CANVAS_WIDTH = 700;
   const CANVAS_HEIGHT = 500;
@@ -271,6 +274,28 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
 
       setElements(prev => prev.map(el => ({ ...el, selected: el.id === clickedElement?.id })));
       setSelectedElement(clickedElement?.id || null);
+      
+      // Mostrar painel de divisão se retângulo selecionado
+      if (clickedElement?.type === 'rectangle') {
+        setShowDivisionPanel(true);
+      } else {
+        setShowDivisionPanel(false);
+      }
+    } else if (selectedTool === 'divide') {
+      // Ferramenta de divisão - selecionar barra para dividir
+      const clickedBar = elements.find(el => {
+        if (el.type === 'rectangle') {
+          return coords.x >= el.x && coords.x <= el.x + (el.width || 0) &&
+                 coords.y >= el.y && coords.y <= el.y + (el.height || 0);
+        }
+        return false;
+      });
+
+      if (clickedBar) {
+        setElements(prev => prev.map(el => ({ ...el, selected: el.id === clickedBar.id })));
+        setSelectedElement(clickedBar.id);
+        setShowDivisionPanel(true);
+      }
     } else if (selectedTool === 'text') {
       setTextPosition(coords);
     } else if (selectedTool === 'eraser') {
@@ -455,6 +480,44 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
     }
   };
 
+  const divideSelectedBar = () => {
+    if (!selectedElement) return;
+    
+    const selectedBar = elements.find(el => el.id === selectedElement && el.type === 'rectangle');
+    if (!selectedBar) return;
+    
+    const divisions = parseInt(divisionsInput);
+    
+    if (divisions < 2 || divisions > 10 || isNaN(divisions)) {
+      return;
+    }
+
+    const segmentWidth = (selectedBar.width || 0) / divisions;
+    const newLines: DrawingElement[] = [];
+
+    // Criar linhas de divisão
+    for (let i = 1; i < divisions; i++) {
+      const lineX = selectedBar.x + (segmentWidth * i);
+      newLines.push({
+        id: `div-${selectedBar.id}-${i}-${Date.now()}`,
+        type: 'line',
+        x: lineX,
+        y: selectedBar.y,
+        endX: lineX,
+        endY: selectedBar.y + (selectedBar.height || 0),
+        color: '#333'
+      });
+    }
+
+    setElements(prev => [...prev, ...newLines]);
+    setShowDivisionPanel(false);
+  };
+
+  const quickDivide = (divisions: number) => {
+    setDivisionsInput(divisions.toString());
+    setTimeout(() => divideSelectedBar(), 100);
+  };
+
   const reset = () => {
     setElements([]);
     setSelectedElement(null);
@@ -462,12 +525,13 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
     setShowFeedback(false);
     setTextPosition(null);
     setTextInput('');
+    setShowDivisionPanel(false);
   };
 
   const getStepInstructions = () => {
     return [
       "1. Desenhe uma barra para representar o total",
-      "2. Divida a barra em partes iguais conforme o problema",
+      "2. Use a ferramenta 'Dividir' para dividir barras em partes iguais",
       "3. Adicione valores conhecidos em cada parte",
       "4. Identifique a incógnita (parte em azul)"
     ];
@@ -497,6 +561,7 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
               {[
                 { id: 'select', icon: MousePointer, label: 'Selecionar' },
                 { id: 'rectangle', icon: Square, label: 'Retângulo' },
+                { id: 'divide', icon: GitBranch, label: 'Dividir' },
                 { id: 'text', icon: Type, label: 'Texto' },
                 { id: 'line', icon: Line, label: 'Linha' },
                 { id: 'eraser', icon: Eraser, label: 'Borracha' }
@@ -506,13 +571,69 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
                   variant={selectedTool === tool.id ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedTool(tool.id as any)}
-                  className="flex flex-col gap-1 h-16"
+                  className="flex flex-col gap-1 h-12"
                 >
                   <tool.icon className="w-4 h-4" />
                   <span className="text-xs">{tool.label}</span>
                 </Button>
               ))}
             </div>
+
+            <Separator />
+
+            {/* Painel de Divisão quando barra selecionada */}
+            {showDivisionPanel && selectedElement && (
+              <div className="space-y-3 p-3 bg-muted/50 rounded-lg border">
+                <h4 className="font-medium text-sm">Dividir Barra Selecionada</h4>
+                
+                {/* Botões de Divisão Rápida */}
+                <div className="grid grid-cols-2 gap-2">
+                  {[2, 3, 4, 5].map(num => (
+                    <Button
+                      key={num}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => quickDivide(num)}
+                      className="text-xs h-8"
+                    >
+                      {num} partes
+                    </Button>
+                  ))}
+                </div>
+
+                {/* Divisão Personalizada */}
+                <div className="space-y-2">
+                  <label className="text-xs text-muted-foreground">Divisões personalizadas:</label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="number"
+                      min="2"
+                      max="10"
+                      value={divisionsInput}
+                      onChange={(e) => setDivisionsInput(e.target.value)}
+                      className="h-8 text-xs"
+                      placeholder="2-10"
+                    />
+                    <Button
+                      onClick={divideSelectedBar}
+                      size="sm"
+                      className="h-8 text-xs"
+                    >
+                      Dividir
+                    </Button>
+                  </div>
+                </div>
+
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowDivisionPanel(false)}
+                  className="w-full h-8 text-xs"
+                >
+                  Fechar
+                </Button>
+              </div>
+            )}
 
             <Separator />
 
