@@ -91,7 +91,7 @@ const ManthaChatTutor = () => {
       if (convertedMessages.length > 0) {
         const welcomeMessage: Message = {
           id: 'welcome-back',
-          content: '### Bem-vindo de volta! 👋\n\nVejo que já conversamos antes. Vamos continuar de onde paramos?\n\nSe quiser começar um novo tópico, é só perguntar!',
+          content: '### Oi de novo! Que bom te ver! 👋😊\n\n**Nossa, você já voltou!** Isso é super legal - mostra que você está mesmo interessado em aprender! ✨\n\n**Bora continuar de onde paramos?** Ou se quiser explorar algo novo, é só falar! Estou aqui pra te ajudar sempre! 🚀',
           sender: 'mantha',
           timestamp: new Date(),
           stage: 'adaptive'
@@ -101,7 +101,7 @@ const ManthaChatTutor = () => {
         // Primeira visita
         setMessages([{
           id: '1',
-          content: '### Olá! Sou a Mantha 👋\n\nSua tutora especializada no **Método CPA de Singapura** 📚\n\nEstou aqui para ajudá-lo a compreender matemática através dos três estágios:\n• **Concreto** - Manipulação de objetos físicos\n• **Pictórico** - Representações visuais e desenhos\n• **Abstrato** - Símbolos e operações matemáticas\n\nQual conceito matemático gostaria de explorar hoje?',
+          content: '### Oi! Eu sou a Mantha! 👋✨\n\nSua tutora de matemática super animada! 🤖📚\n\n**Vou te ensinar matemática de um jeito bem legal** usando o Método CPA:\n\n• **🧱 Concreto** - Vamos usar objetos reais pra entender melhor!\n• **🎨 Pictórico** - Hora de desenhar e visualizar as ideias!\n• **🔢 Abstrato** - Agora sim, símbolos e fórmulas!\n\n**E aí, que conceito matemático você quer explorar hoje?** Pode ser qualquer coisa - desde operações básicas até equações mais complexas! 😊',
           sender: 'mantha',
           timestamp: new Date(),
           stage: 'adaptive'
@@ -111,7 +111,7 @@ const ManthaChatTutor = () => {
       // Primeira visita (sem histórico)
       setMessages([{
         id: '1',
-        content: '### Olá! Sou a Mantha 👋\n\nSua tutora especializada no **Método CPA de Singapura** 📚\n\nEstou aqui para ajudá-lo a compreender matemática através dos três estágios:\n• **Concreto** - Manipulação de objetos físicos\n• **Pictórico** - Representações visuais e desenhos\n• **Abstrato** - Símbolos e operações matemáticas\n\nQual conceito matemático gostaria de explorar hoje?',
+        content: '### Oi! Eu sou a Mantha! 👋✨\n\nSua tutora de matemática super animada! 🤖📚\n\n**Vou te ensinar matemática de um jeito bem legal** usando o Método CPA:\n\n• **🧱 Concreto** - Vamos usar objetos reais pra entender melhor!\n• **🎨 Pictórico** - Hora de desenhar e visualizar as ideias!\n• **🔢 Abstrato** - Agora sim, símbolos e fórmulas!\n\n**E aí, que conceito matemático você quer explorar hoje?** Pode ser qualquer coisa - desde operações básicas até equações mais complexas! 😊',
         sender: 'mantha',
         timestamp: new Date(),
         stage: 'adaptive'
