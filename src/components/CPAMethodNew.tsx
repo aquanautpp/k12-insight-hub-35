@@ -587,23 +587,23 @@ const CPAMethod = () => {
         
         {!showInteractiveChallenge && <>
             {/* Call to Action para Desafio Extra */}
-            <Card className="group shadow-md border border-border bg-gradient-to-b from-white to-slate-50 rounded-2xl hover:border-primary/30 hover:shadow-lg hover:bg-gradient-to-b hover:from-white hover:to-slate-25 transition-all duration-300 relative overflow-hidden">
+            <Card className="group shadow-md border border-border bg-primary rounded-2xl hover:shadow-lg transition-all duration-300 relative overflow-hidden">
               {/* Elemento decorativo sutil */}
-              <div className="absolute inset-0 opacity-[0.02] bg-gradient-to-br from-primary/10 via-transparent to-primary/5 pointer-events-none" />
-              <div className="absolute top-4 right-4 text-4xl opacity-10 pointer-events-none">🎯</div>
+              <div className="absolute inset-0 opacity-[0.1] bg-gradient-to-br from-white/10 via-transparent to-white/5 pointer-events-none" />
+              <div className="absolute top-4 right-4 text-4xl opacity-20 pointer-events-none text-white">🎯</div>
               
               <CardContent className="p-8 text-center relative z-10">
-                <h3 className="text-3xl font-bold mb-4 text-slate-900 flex items-center justify-center gap-3">
+                <h3 className="text-3xl font-bold mb-4 text-white flex items-center justify-center gap-3">
                   <span className="text-2xl">🧩</span>
                   Desafios Interativos
                 </h3>
-                <p className="text-base leading-relaxed mb-8 text-slate-600 max-w-2xl mx-auto">
-                  Já resolveu todos os problemas CPA? Experimente nossos desafios interativos que combinam conceitos de <span className="text-primary font-semibold">todos os estágios</span>!
+                <p className="text-base leading-relaxed mb-8 text-white/90 max-w-2xl mx-auto">
+                  Já resolveu todos os problemas CPA? Experimente nossos desafios interativos que combinam conceitos de <span className="text-white font-semibold">todos os estágios</span>!
                 </p>
                 <Button 
                   size="lg" 
                   onClick={() => setShowInteractiveChallenge(true)} 
-                  className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 text-white px-8 py-3 font-semibold rounded-lg shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center gap-3"
+                  className="bg-white text-primary hover:bg-white/90 px-8 py-3 font-semibold rounded-lg shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center gap-3"
                 >
                   <span className="text-lg">▶</span>
                   Desafio Interativo
