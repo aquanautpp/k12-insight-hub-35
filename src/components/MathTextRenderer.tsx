@@ -40,38 +40,62 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
     return result;
   };
 
+  // Função para limpar delimitadores LaTeX
+  const cleanLatexDelimiters = (text: string): string => {
+    return text
+      .replace(/\\\[/g, '') // Remove \[
+      .replace(/\\\]/g, '') // Remove \]
+      .replace(/\\\(/g, '') // Remove \(
+      .replace(/\\\)/g, '') // Remove \)
+      .replace(/\\text\{([^}]+)\}/g, '$1') // Convert \text{content} to content
+      .replace(/\s+/g, ' ') // Normalize spaces
+      .trim();
+  };
+
+  // Função para renderizar frações de forma visual
+  const renderFraction = (numerator: string, denominator: string, key: number): React.ReactNode => {
+    const cleanNum = cleanLatexDelimiters(numerator.replace(/^\{+|\}+$/g, ''));
+    const cleanDen = cleanLatexDelimiters(denominator.replace(/^\{+|\}+$/g, ''));
+    
+    return (
+      <span key={key} className="inline-flex flex-col items-center mx-1 text-sm">
+        <span className="border-b border-current pb-0.5 min-w-[20px] text-center">
+          {processFormula(cleanNum)}
+        </span>
+        <span className="pt-0.5 min-w-[20px] text-center">
+          {processFormula(cleanDen)}
+        </span>
+      </span>
+    );
+  };
+
   // Função para processar fórmulas matemáticas
   const processFormula = (formula: string): React.ReactNode => {
-    // Converter fórmulas comuns para formato mais legível e visual
-    let processed = formula;
+    if (!formula) return '';
     
-    // Converter símbolos LaTeX primeiro
+    // Limpar delimitadores primeiro
+    let processed = cleanLatexDelimiters(formula);
+    
+    // Converter símbolos LaTeX
     processed = convertLatexSymbols(processed);
     
-    // Processar frações \frac{a}{b} para formato visual limpo
-    processed = processed.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, (match, numerator, denominator) => {
-      // Remover parênteses desnecessários do numerador e denominador
-      const cleanNum = numerator.replace(/^\{|\}$/g, '').replace(/^\(|\)$/g, '');
-      const cleanDen = denominator.replace(/^\{|\}$/g, '').replace(/^\(|\)$/g, '');
-      return `(${cleanNum}) / (${cleanDen})`;
-    });
-    
-    // Processar raízes \sqrt{x}
+    // Processar raízes quadradas primeiro
     processed = processed.replace(/\\sqrt\{([^}]+)\}/g, '√($1)');
+    processed = processed.replace(/\\sqrt/g, '√');
     
     // Processar potências com chaves x^{2}
-    processed = processed.replace(/([a-zA-Z0-9]+)\^\{([^}]+)\}/g, (match, base, exp) => {
-      // Converter números para sobrescrito Unicode
+    processed = processed.replace(/([a-zA-Z0-9\(\)]+)\^\{([^}]+)\}/g, (match, base, exp) => {
       const superscriptMap: { [key: string]: string } = {
         '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', 
-        '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹'
+        '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
+        '+': '⁺', '-': '⁻', '=': '⁼'
       };
       const unicodeExp = exp.split('').map(char => superscriptMap[char] || char).join('');
       return `${base}${unicodeExp}`;
     });
     
     // Processar potências simples x^2
-    processed = processed.replace(/([a-zA-Z0-9]+)\^([0-9]+)/g, (match, base, exp) => {
+    processed = processed.replace(/([a-zA-Z0-9\(\)]+)\^([0-9]+)/g, (match, base, exp) => {
       const superscriptMap: { [key: string]: string } = {
         '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', 
         '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹'
@@ -80,8 +104,10 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
       return `${base}${unicodeExp}`;
     });
     
-    // Remover comandos LaTeX restantes
+    // Limpar chaves extras e comandos restantes
+    processed = processed.replace(/\{+/g, '').replace(/\}+/g, '');
     processed = processed.replace(/\\[a-zA-Z]+/g, '');
+    processed = processed.replace(/frac/g, ''); // Remove palavra "frac" solta
     
     return processed;
   };
@@ -150,11 +176,12 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
     const parts: React.ReactNode[] = [];
     let currentIndex = 0;
     
-    // Primeiro, converter símbolos LaTeX para Unicode
+    // Limpar texto primeiro
+    text = cleanLatexDelimiters(text);
     text = convertLatexSymbols(text);
     
-    // Regex para diferentes formatações incluindo LaTeX inline e block
-    const formatRegex = /(\*\*[^*]+\*\*|\\\([^)]+\\\)|\\\[[^\]]+\\\]|\w+\^[0-9²³⁴⁵⁶⁷⁸⁹]+|\w+\^\{[^}]+\}|\b\d+[²³⁴⁵⁶⁷⁸⁹]+|\b[a-zA-Z]+[²³⁴⁵⁶⁷⁸⁹]+)/g;
+    // Regex aprimorada para capturar frações e outras formatações
+    const formatRegex = /(\*\*[^*]+\*\*|\\frac\{([^}]+)\}\{([^}]+)\}|\\\([^)]+\\\)|\\\[[^\]]+\\\]|\w+\^[0-9²³⁴⁵⁶⁷⁸⁹]+|\w+\^\{[^}]+\}|\b\d+[²³⁴⁵⁶⁷⁸⁹]+|\b[a-zA-Z]+[²³⁴⁵⁶⁷⁸⁹]+)/g;
     let match;
     
     while ((match = formatRegex.exec(text)) !== null) {
@@ -173,6 +200,14 @@ const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className 
             {boldText}
           </strong>
         );
+      }
+      // Processar frações \frac{numerator}{denominator}
+      else if (matchedText.includes('\\frac')) {
+        const fracMatch = matchedText.match(/\\frac\{([^}]+)\}\{([^}]+)\}/);
+        if (fracMatch) {
+          const [, numerator, denominator] = fracMatch;
+          parts.push(renderFraction(numerator, denominator, match.index));
+        }
       }
       // Processar LaTeX inline \(formula\)
       else if (matchedText.startsWith('\\(') && matchedText.endsWith('\\)')) {
