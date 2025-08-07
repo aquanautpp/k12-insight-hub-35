@@ -74,11 +74,16 @@ const MathText: React.FC<MathTextProps> = ({ children, className = "", inline = 
 
   // Para casos em que só queremos processar markdown sem matemática
   const processMarkdown = (text: string): string => {
-    return text
-      // Headers
-      .replace(/^### (.*$)/gm, '<h3 class="text-base font-semibold text-primary mb-2 mt-2">$1</h3>')
-      .replace(/^## (.*$)/gm, '<h2 class="text-lg font-semibold text-primary mb-2 mt-2">$1</h2>')
-      .replace(/^# (.*$)/gm, '<h1 class="text-xl font-semibold text-primary mb-2 mt-2">$1</h1>')
+    // Normaliza quebras de linha para evitar grandes espaços, especialmente após títulos
+    const normalized = text
+      .replace(/^(### .*|## .*|# .*)\n+/gm, '$1\n') // apenas uma quebra após títulos
+      .replace(/\n{3,}/g, '\n\n'); // colapsa múltiplas quebras
+
+    return normalized
+      // Headers (com margens compactas)
+      .replace(/^### (.*$)/gm, '<h3 class="text-base font-semibold text-primary mb-1 mt-2">$1</h3>')
+      .replace(/^## (.*$)/gm, '<h2 class="text-lg font-semibold text-primary mb-1 mt-2">$1</h2>')
+      .replace(/^# (.*$)/gm, '<h1 class="text-xl font-semibold text-primary mb-1 mt-2">$1</h1>')
       // Bold text
       .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-primary">$1</strong>')
       // Lists

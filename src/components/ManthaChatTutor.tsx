@@ -570,11 +570,11 @@ ${abstractResp}
                          ? 'bg-primary text-primary-foreground ml-auto' 
                          : 'bg-muted text-muted-foreground'
                      }`}>
-                       {message.sender === 'mantha' ? (
-                         <div className="prose prose-sm max-w-none overflow-auto">
-                           <MathText>{message.content}</MathText>
-                         </div>
-                       ) : (
+                        {message.sender === 'mantha' ? (
+                          <div className="max-w-none overflow-auto">
+                            <MathText>{message.content}</MathText>
+                          </div>
+                        ) : (
                          <p className="leading-relaxed break-words whitespace-pre-wrap">{message.content}</p>
                        )}
                       </div>
