@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { useXP } from "@/contexts/XPContext";
+import { useAchievement } from "@/contexts/AchievementContext";
 import { CheckCircle, Flame, Gauge, Smile } from "lucide-react";
 
 interface CheckinRow {
@@ -30,6 +32,8 @@ const moods = [
 const EmotionalCheckIn = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { addXP } = useXP();
+  const { achievements, unlockedAchievements, unlockAchievement } = useAchievement();
 
   const [mood, setMood] = useState<string>("neutro");
   const [energy, setEnergy] = useState<number>(3);
@@ -47,7 +51,7 @@ const EmotionalCheckIn = () => {
     return earned;
   }, [streak]);
 
-  const loadData = async () => {
+  const loadData = async (): Promise<number | undefined> => {
     if (!user) return;
     const [{ data: checkins }, { data: prog }] = await Promise.all([
       supabase
@@ -64,7 +68,9 @@ const EmotionalCheckIn = () => {
     ]);
 
     setHistory(checkins || []);
-    setStreak(prog?.ei_checkin_streak || 0);
+    const s = prog?.ei_checkin_streak || 0;
+    setStreak(s);
+    return s;
   };
 
   useEffect(() => {
@@ -100,7 +106,35 @@ const EmotionalCheckIn = () => {
           description: "Seu progresso emocional foi atualizado.",
         });
         setNote("");
-        await loadData();
+        const newStreak = await loadData();
+        if (typeof newStreak === 'number') {
+          const milestones = [
+            { id: 'streak_3', target: 3 },
+            { id: 'streak_week', target: 7 },
+            { id: 'streak_14', target: 14 },
+            { id: 'streak_30', target: 30 },
+          ];
+          const newlyHit = milestones.filter(m => newStreak >= m.target && !unlockedAchievements.some(a => a.id === m.id));
+          if (newlyHit.length > 0) {
+            let gainedXP = 0;
+            const unlockedNames: string[] = [];
+            newlyHit.forEach(m => {
+              const ach = achievements.find(a => a.id === m.id);
+              if (ach) {
+                gainedXP += ach.reward?.xp || 0;
+                unlockedNames.push(ach.title);
+              }
+              unlockAchievement(m.id);
+            });
+            if (gainedXP > 0) {
+              addXP(gainedXP, 'EI Streak');
+            }
+            toast({
+              title: "Conquista desbloqueada!",
+              description: `${unlockedNames.join(', ')} • +${gainedXP} XP`,
+            });
+          }
+        }
       }
     } finally {
       setLoading(false);

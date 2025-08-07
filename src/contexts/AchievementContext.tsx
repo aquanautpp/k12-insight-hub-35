@@ -61,6 +61,23 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
       }
     },
     {
+      id: "streak_3",
+      title: "Começo Consistente",
+      description: "Mantenha uma sequência de 3 dias",
+      icon: "🔥",
+      category: "streak",
+      requirement: {
+        type: "maintain_streak",
+        target: 3,
+        current: 0
+      },
+      isUnlocked: false,
+      reward: {
+        xp: 50,
+        benefits: ["Badge de consistência"]
+      }
+    },
+    {
       id: "streak_week",
       title: "Semana Dedicada",
       description: "Mantenha uma sequência de 7 dias",
@@ -75,6 +92,40 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
       reward: {
         xp: 100,
         benefits: ["Multiplicador de XP +10%"]
+      }
+    },
+    {
+      id: "streak_14",
+      title: "Quinzena Firme",
+      description: "Mantenha uma sequência de 14 dias",
+      icon: "🏆",
+      category: "streak",
+      requirement: {
+        type: "maintain_streak",
+        target: 14,
+        current: 0
+      },
+      isUnlocked: false,
+      reward: {
+        xp: 200,
+        benefits: ["Reconhecimento de constância"]
+      }
+    },
+    {
+      id: "streak_30",
+      title: "Mês de Ouro",
+      description: "Mantenha uma sequência de 30 dias",
+      icon: "🏅",
+      category: "streak",
+      requirement: {
+        type: "maintain_streak",
+        target: 30,
+        current: 0
+      },
+      isUnlocked: false,
+      reward: {
+        xp: 400,
+        benefits: ["Badge lendária de disciplina"]
       }
     },
     {
