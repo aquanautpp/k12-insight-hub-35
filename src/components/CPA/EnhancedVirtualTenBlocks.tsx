@@ -79,6 +79,8 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   }, [problem]);
 
   const organizeWorkAreaBlocks = (newBlocks: Block[]) => {
+    if (newBlocks.length === 0) return [];
+
     const sortedBlocks = [...newBlocks].sort((a, b) => {
       if (a.type === b.type) return 0;
       if (a.type === 'hundred') return -1;
@@ -88,15 +90,17 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
       return 0;
     });
 
+    const organizedBlocks: Block[] = [];
+    const padding = 15;
+    const maxWidth = 340;
+    let currentRow = 0;
     let currentX = 20;
-    let currentY = 20;
-    const maxWidth = 360; // Largura máxima da linha (ajustada para evitar overflow)
-    const padding = 10; // Espaçamento entre blocos
-    
-    return sortedBlocks.map(block => {
+    let maxHeightInRow = 0;
+
+    sortedBlocks.forEach((block, index) => {
       let blockWidth, blockHeight;
       
-      // Definir dimensões baseadas no tipo
+      // Definir dimensões exatas baseadas no tipo
       switch (block.type) {
         case 'hundred':
           blockWidth = 80;
@@ -114,18 +118,53 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
           blockWidth = 40;
           blockHeight = 40;
       }
-      
-      // Se ultrapassar a largura máxima, quebra linha
-      if (currentX + blockWidth > maxWidth) {
+
+      // Verificar se precisa quebrar linha
+      if (currentX + blockWidth > maxWidth && organizedBlocks.length > 0) {
+        currentRow++;
         currentX = 20;
-        currentY += 100; // Espaço generoso para nova linha
+        maxHeightInRow = 0;
       }
+
+      // Calcular Y baseado na linha atual e altura máxima da linha anterior
+      const baseY = 20;
+      let currentY = baseY;
       
-      const newBlock = { ...block, x: currentX, y: currentY };
-      currentX += blockWidth + padding; // Adicionar largura do bloco + padding
+      if (currentRow > 0) {
+        // Encontrar a maior altura dos blocos nas linhas anteriores
+        let totalHeight = 0;
+        let tempRow = 0;
+        let maxHeightPreviousRow = 0;
+
+        organizedBlocks.forEach(placedBlock => {
+          const placedHeight = placedBlock.type === 'hundred' ? 80 : 40;
+          if (Math.floor((placedBlock.x - 20) / (maxWidth + padding)) === tempRow) {
+            maxHeightPreviousRow = Math.max(maxHeightPreviousRow, placedHeight);
+          } else {
+            totalHeight += maxHeightPreviousRow + padding;
+            tempRow++;
+            maxHeightPreviousRow = placedHeight;
+          }
+        });
+        
+        currentY = baseY + (currentRow * (80 + padding)); // Usar sempre altura máxima para consistência
+      }
+
+      // Adicionar bloco organizado
+      const organizedBlock = {
+        ...block,
+        x: currentX,
+        y: currentY
+      };
+
+      organizedBlocks.push(organizedBlock);
       
-      return newBlock;
+      // Atualizar posição X e altura máxima da linha
+      currentX += blockWidth + padding;
+      maxHeightInRow = Math.max(maxHeightInRow, blockHeight);
     });
+
+    return organizedBlocks;
   };
 
   const handleDragStart = (blockId: string, e: React.DragEvent) => {
