@@ -7,8 +7,10 @@ import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, 
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 import { CPAProblemDisplay } from "./CPAProblemDisplay";
 import { CPAExplanationTooltip } from "./CPAExplanationTooltip";
+import { CPAIntegratedChallenge } from "./CPA/CPAIntegratedChallenge";
 import { useFeatureFlags } from "@/contexts/FeatureFlagsContext";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 type Stage = 'concrete' | 'pictorial' | 'abstract';
 const CPAMethod = () => {
   const [currentStage, setCurrentStage] = useState<Stage>('concrete');
@@ -578,9 +580,12 @@ const CPAMethod = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">Experimente este desafio avançado que combina todos os estágios CPA:</p>
-              <div className="bg-gradient-subtle rounded-lg p-6">
-                <p className="text-center text-muted-foreground">Desafio avançado em desenvolvimento...</p>
-              </div>
+              <CPAIntegratedChallenge 
+                stage="concrete"
+                onComplete={(challenge) => {
+                  toast("🎉 Parabéns! Você completou o desafio integrado CPA!");
+                }}
+              />
             </CardContent>
           </Card>
         }
