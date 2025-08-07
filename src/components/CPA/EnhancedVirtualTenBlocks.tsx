@@ -135,9 +135,9 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     const baseY = 60;
     
     return sortedBlocks.map(block => {
-      const blockWidth = block.type === 'hundred' ? 80 : block.type === 'ten' ? 64 : 24;
+      const blockWidth = block.type === 'hundred' ? 80 : block.type === 'ten' ? 80 : 40;
       const newBlock = { ...block, x: currentX, y: baseY };
-      currentX += blockWidth + 10;
+      currentX += blockWidth + 15;
       return newBlock;
     });
   };
@@ -262,28 +262,30 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   };
 
   const getBlockStyle = (block: Block, isPreview = false, isDragging = false) => {
-    const baseClasses = `absolute flex items-center justify-center font-bold select-none transition-all duration-200 bg-primary text-white border-2 border-primary/80 ${
+    const baseClasses = `absolute flex items-center justify-center font-bold select-none transition-all duration-200 text-white border-2 ${
       isPreview ? 'opacity-50 pointer-events-none' : ''
     } ${isDragging ? 'opacity-30' : 'cursor-grab hover:cursor-grab'}  ${
       shakeWrongBlocks && !isPreview ? 'animate-[shake_0.6s_ease-in-out]' : ''
     }`;
 
-    const hoverClasses = isPreview || isDragging ? '' : 'hover:scale-105 hover:shadow-lg';
+    const hoverClasses = isPreview || isDragging ? '' : 'hover:scale-105';
+    const greenColor = 'bg-[#6B8E5A] border-[#6B8E5A]';
+    const shadowClass = isDragging ? 'shadow-lg' : 'shadow-sm';
 
     switch (block.type) {
       case 'hundred':
         return {
-          className: `${baseClasses} ${hoverClasses} w-20 h-20 text-lg rounded-lg shadow-md`,
+          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} w-20 h-20 text-lg rounded`,
           transform: `translate(${block.x}px, ${block.y}px)`
         };
       case 'ten':
         return {
-          className: `${baseClasses} ${hoverClasses} w-16 h-8 text-sm rounded-md shadow-sm`,
+          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} w-20 h-10 text-sm rounded`,
           transform: `translate(${block.x}px, ${block.y}px)`
         };
       case 'unit':
         return {
-          className: `${baseClasses} ${hoverClasses} w-6 h-6 text-xs rounded shadow-sm`,
+          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} w-10 h-10 text-xs rounded`,
           transform: `translate(${block.x}px, ${block.y}px)`
         };
     }
@@ -307,55 +309,58 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
             </div>
             
             {/* Estatísticas */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white border border-gray-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-primary mb-1">
-                  <Clock className="w-4 h-4" />
-                  <span className="text-xs font-semibold text-gray-600">TEMPO</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Clock className="w-4 h-4 text-gray-600" />
+                  <span className="text-xs font-medium text-gray-600">Tempo</span>
                 </div>
-                <div className="text-lg font-bold text-primary">{formatTime(elapsedTime)}</div>
+                <div className="text-xl font-bold text-gray-900">{formatTime(elapsedTime)}</div>
                 {bestTime && (
-                  <div className="text-xs text-gray-500">Melhor: {formatTime(bestTime)}</div>
+                  <div className="text-xs text-gray-500 mt-1">Melhor: {formatTime(bestTime)}</div>
                 )}
               </div>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-primary mb-1">
-                  <MousePointer className="w-4 h-4" />
-                  <span className="text-xs font-semibold text-gray-600">MOVIMENTOS</span>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Target className="w-4 h-4 text-gray-600" />
+                  <span className="text-xs font-medium text-gray-600">Movimentos</span>
                 </div>
-                <div className="text-lg font-bold text-primary">{movements}</div>
+                <div className="text-xl font-bold text-gray-900">{movements}</div>
               </div>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-primary mb-1">
-                  <Target className="w-4 h-4" />
-                  <span className="text-xs font-semibold text-gray-600">TENTATIVAS</span>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <RotateCcw className="w-4 h-4 text-gray-600" />
+                  <span className="text-xs font-medium text-gray-600">Tentativas</span>
                 </div>
-                <div className="text-lg font-bold text-primary">{attempts}</div>
+                <div className="text-xl font-bold text-gray-900">{attempts}</div>
               </div>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-primary mb-1">
-                  <Sparkles className="w-4 h-4" />
-                  <span className="text-xs font-semibold text-gray-600">EFICIÊNCIA</span>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Sparkles className="w-4 h-4 text-gray-600" />
+                  <span className="text-xs font-medium text-gray-600">Eficiência</span>
                 </div>
-                <div className="text-lg font-bold text-primary">{efficiency}%</div>
+                <div className="text-xl font-bold text-gray-900">{efficiency}%</div>
               </div>
             </div>
           </div>
         </CardHeader>
       </Card>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Área de Blocos Disponíveis */}
-        <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle className="text-lg">🎯 Blocos Disponíveis</CardTitle>
+        <Card className="shadow-sm border-gray-200">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg text-gray-900 flex items-center gap-2">
+              <span className="text-2xl">🧱</span>
+              Blocos Disponíveis
+            </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4">
             <div 
-              className="border-2 border-dashed border-primary/30 rounded-xl p-4 min-h-[300px] relative bg-gradient-to-br from-muted/20 to-muted/40 overflow-hidden"
+              className="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[250px] md:min-h-[300px] relative bg-gray-50/50 overflow-hidden"
               onDrop={(e) => handleDrop(e, 'blocks')}
               onDragOver={(e) => handleDragOver(e, 'blocks')}
               onDragLeave={(e) => handleDragLeave(e, 'blocks')}
@@ -382,18 +387,21 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
         </Card>
 
         {/* Área de Trabalho */}
-        <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle className="text-lg">🎯 Área de Trabalho</CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Arraste os blocos aqui e organize-os para resolver o problema
+        <Card className="shadow-sm border-gray-200">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg text-gray-900 flex items-center gap-2">
+              <span className="text-2xl">🎯</span>
+              Área de Trabalho
+            </CardTitle>
+            <p className="text-sm text-gray-600">
+              Arraste os blocos aqui para resolver o problema
             </p>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4">
             <div 
               ref={workAreaRef}
-              className={`border-2 border-dashed rounded-xl p-4 min-h-[300px] relative bg-gradient-to-br from-success/5 to-success/10 overflow-hidden transition-all duration-200 ${
-                workAreaHover ? 'border-primary bg-primary/5' : 'border-success/50'
+              className={`border-2 border-dashed rounded-lg p-4 min-h-[250px] md:min-h-[300px] relative bg-white overflow-hidden transition-all duration-200 ${
+                workAreaHover ? 'border-[#6B8E5A] bg-green-50/30' : 'border-gray-300'
               }`}
               onDrop={(e) => handleDrop(e, 'work')}
               onDragOver={(e) => handleDragOver(e, 'work')}
@@ -401,11 +409,11 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
             >
               {/* Grid Pattern */}
               <div 
-                className="absolute inset-0 opacity-20"
+                className="absolute inset-0 opacity-10"
                 style={{
                   backgroundImage: `
-                    linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-                    linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
+                    linear-gradient(to right, #6B8E5A 1px, transparent 1px),
+                    linear-gradient(to bottom, #6B8E5A 1px, transparent 1px)
                   `,
                   backgroundSize: '20px 20px'
                 }}
@@ -438,25 +446,28 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
       </div>
 
       {/* Controles */}
-      <Card className="shadow-card">
-        <CardContent className="p-6">
-          <div className="flex flex-wrap gap-4 items-center justify-between">
-            <div className="flex gap-3 items-center">
-                <Button 
-                  onClick={calculateResult} 
-                  disabled={!workAreaHasBlocks}
-                  className={`flex items-center gap-2 transition-all duration-300 ${
-                    workAreaHasBlocks 
-                      ? 'bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl' 
-                      : 'opacity-50'
-                  }`}
-                  size="lg"
-                >
+      <Card className="shadow-sm border-gray-200">
+        <CardContent className="p-4">
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button 
+                onClick={calculateResult} 
+                disabled={!workAreaHasBlocks}
+                className={`flex items-center gap-2 transition-all duration-300 bg-[#6B8E5A] hover:bg-[#5a7349] text-white ${
+                  !workAreaHasBlocks ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+                size="lg"
+              >
                   <Calculator className="w-5 h-5" />
                   Calcular Resultado
                 </Button>
               
-              <Button onClick={reset} variant="outline" size="lg">
+              <Button 
+                onClick={reset} 
+                variant="outline" 
+                size="lg"
+                className="border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
                 <RotateCcw className="w-4 h-4 mr-2" />
                 Reiniciar
               </Button>
@@ -470,7 +481,11 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
               >
                 <Badge 
                   variant={result === problem.expectedResult ? "default" : "destructive"}
-                  className="text-lg p-3"
+                  className={`text-base px-4 py-2 ${
+                    result === problem.expectedResult 
+                      ? 'bg-[#6B8E5A] hover:bg-[#5a7349]' 
+                      : 'bg-red-500 hover:bg-red-600'
+                  } text-white`}
                 >
                   Resultado: {result}
                 </Badge>
@@ -488,9 +503,9 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <Card className="border-amber-200 bg-amber-50">
+            <Card className="border-amber-200 bg-amber-50/50">
               <CardContent className="p-4">
-                <div className="flex items-center gap-2 text-amber-700">
+                <div className="flex items-start gap-3 text-amber-800">
                   <span className="text-2xl">💡</span>
                   <div>
                     <p className="font-semibold">Dica Visual</p>
