@@ -23,6 +23,7 @@ interface DashboardProps {
 const Dashboard = ({
   onViewChange
 }: DashboardProps) => {
+  // TODOS OS HOOKS DEVEM VIR PRIMEIRO
   const { displayName, nome } = useUserProfile();
   const { progress: userProgress, loading: progressLoading } = useUserProgress();
   const {
@@ -36,8 +37,11 @@ const Dashboard = ({
     unlockedAchievements,
     checkAchievements
   } = useAchievement();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isMobile = useIsMobile();
+  const featuresRef = useRef<HTMLDivElement>(null);
 
-  // Early return com loading se dados essenciais não estão disponíveis
+  // Early return APÓS todos os hooks
   if (!progress || !xpData || !achievements || progressLoading) {
     return <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -46,9 +50,7 @@ const Dashboard = ({
         </div>
       </div>;
   }
-  const [isScrolled, setIsScrolled] = useState(false);
-  const isMobile = useIsMobile();
-  const featuresRef = useRef<HTMLDivElement>(null);
+
   const features = [{
     icon: Brain,
     title: "Método CPA",
