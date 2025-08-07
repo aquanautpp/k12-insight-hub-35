@@ -189,7 +189,10 @@ const DailyChallenge = () => {
               Enviar Resposta
             </button>
             <button
-              onClick={() => setAnswer('')}
+              onClick={() => {
+                setAnswer('');
+                setFeedback('');
+              }}
               className="px-4 py-2 border border-border text-foreground rounded-lg hover:bg-muted transition-all duration-200 hover-scale"
             >
               Limpar
