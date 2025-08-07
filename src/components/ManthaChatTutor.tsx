@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { openaiService } from "@/services/openaiService";
-import MathTextRenderer from "@/components/MathTextRenderer";
+import MathText from "@/components/MathText";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { useUserProgress } from "@/hooks/useUserProgress";
 
@@ -251,7 +251,7 @@ const ManthaChatTutor = () => {
       }
 
       return {
-        content: `## Resolução: \\( ${a} ${symbol} ${b} = ${result} \\)
+        content: `## Resolução: $${a} ${symbol} ${b} = ${result}$
 
 ### Explicação pelo Método CPA:
 
@@ -295,13 +295,13 @@ Deseja explorar aplicações específicas?`,
        return {
          content: `### Teorema de Pitágoras
 
-Para triângulos retângulos: a² + b² = c² (c = hipotenusa)
+Para triângulos retângulos: $a^2 + b^2 = c^2$ (c = hipotenusa)
 
 **Concreto:** Construa quadrados de papel representando as áreas dos catetos e hipotenusa. Verifique que a área dos dois quadrados menores equivale à área do quadrado maior.
 
-**Pictórico:** Desenhe triângulo retângulo com quadrados em cada lado. Visualize a relação a² + b² = c².
+**Pictórico:** Desenhe triângulo retângulo com quadrados em cada lado. Visualize a relação $a^2 + b^2 = c^2$.
 
-**Abstrato:** Exemplo: triângulo (3, 4, 5): 3² + 4² = 9 + 16 = 25 = 5²
+**Abstrato:** Exemplo: triângulo (3, 4, 5): $3^2 + 4^2 = 9 + 16 = 25 = 5^2$
 
 **Aplicações:** Cálculo de distâncias, verificação de ângulos retos, diagonais de retângulos.
 
@@ -546,7 +546,7 @@ ${abstractResp}
                      }`}>
                        {message.sender === 'mantha' ? (
                          <div className="prose prose-sm max-w-none overflow-auto">
-                           <MathTextRenderer content={message.content} />
+                           <MathText>{message.content}</MathText>
                          </div>
                        ) : (
                          <p className="leading-relaxed break-words whitespace-pre-wrap">{message.content}</p>

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Eye, EyeOff, Brain, ChevronLeft, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import MathText from "./MathText";
 
 interface CPAChallenge {
   id: string;
@@ -116,7 +117,7 @@ const cpaProblems: CPAChallenge[] = [
     title: "A Equação Misteriosa",
     stage: "abstract",
     enunciado: "Existe um número misterioso. Se você multiplicar esse número por 3 e depois subtrair 7, o resultado será 11. Qual é o número misterioso?",
-    visualizacao: "3x - 7 = 11",
+    visualizacao: "$3x - 7 = 11$",
     educatorInstruction: "Oriente o aluno a isolar a variável 'x' usando operações inversas. Comece adicionando 7 a ambos os lados da equação e, em seguida, divida por 3. Reforce a importância de manter o equilíbrio da equação ao realizar operações.",
     expectedAnswer: "6"
   },
@@ -125,7 +126,7 @@ const cpaProblems: CPAChallenge[] = [
     title: "O Círculo Perfeito",
     stage: "abstract",
     enunciado: "Um designer está criando um logotipo circular. Ele precisa que a área do círculo seja de aproximadamente 78.5 cm². Se ele usar π ≈ 3.14, qual deve ser o raio desse círculo?",
-    visualizacao: "A = π × r²\n78.5 = 3.14 × r²",
+    visualizacao: "$A = \\pi \\times r^2$\n$78.5 = 3.14 \\times r^2$",
     educatorInstruction: "Guie o aluno a usar a fórmula da área do círculo. Primeiro, ele deve dividir a área por π (3.14) e, em seguida, encontrar a raiz quadrada do resultado para obter o raio. Explique a aplicação da fórmula em situações práticas.",
     expectedAnswer: "5"
   },
@@ -134,7 +135,7 @@ const cpaProblems: CPAChallenge[] = [
     title: "A Função Secreta",
     stage: "abstract",
     enunciado: "Uma máquina secreta transforma números. Se você coloca um número 'x' na máquina, ela calcula 2x + 5. Se você colocar o número 4 na máquina, qual será o resultado?",
-    visualizacao: "f(x) = 2x + 5\nf(4) = ?",
+    visualizacao: "$f(x) = 2x + 5$\n$f(4) = ?$",
     educatorInstruction: "Instrua o aluno a substituir o valor de 'x' (que é 4) na função e realizar as operações matemáticas na ordem correta (multiplicação antes da adição). Reforce o conceito de função como uma regra que relaciona valores de entrada e saída.",
     expectedAnswer: "13"
   },
@@ -143,7 +144,7 @@ const cpaProblems: CPAChallenge[] = [
     title: "O Sistema de Códigos",
     stage: "abstract",
     enunciado: "Em um jogo de enigmas, você precisa descobrir dois números secretos. A soma deles é 15, e a diferença entre eles é 3. Quais são esses dois números?",
-    visualizacao: "x + y = 15\nx - y = 3",
+    visualizacao: "$x + y = 15$\n$x - y = 3$",
     educatorInstruction: "Sugira ao aluno que use o método de adição ou substituição para resolver o sistema de equações. Explique como a combinação das duas equações pode levar à descoberta dos valores de 'x' e 'y'.",
     expectedAnswer: "9 e 6"
   },
@@ -152,7 +153,7 @@ const cpaProblems: CPAChallenge[] = [
     title: "O Limite da Velocidade",
     stage: "abstract",
     enunciado: "Em um experimento de física, a velocidade de um objeto é descrita por uma função. Conforme o tempo 't' se aproxima de 3 segundos, a velocidade é dada pela expressão (t² - 9) / (t - 3). Qual é a velocidade do objeto quando o tempo se aproxima de 3 segundos?",
-    visualizacao: "lim(t→3) (t² - 9) / (t - 3)",
+    visualizacao: "$\\lim_{t \\to 3} \\frac{t^2 - 9}{t - 3}$",
     educatorInstruction: "Oriente o aluno a simplificar a expressão algébrica antes de substituir o valor de 't'. Explique que (t² - 9) pode ser fatorado como (t - 3)(t + 3), permitindo o cancelamento do termo (t - 3). Em seguida, o aluno pode substituir t=3 na expressão simplificada. Introduza o conceito de limite de forma intuitiva, mostrando como a simplificação ajuda a evitar a divisão por zero.",
     expectedAnswer: "6"
   }
@@ -313,9 +314,9 @@ export const CPAProblemDisplay = ({ stage, onComplete }: CPAProblemDisplayProps)
           <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 border border-primary/20">
             <h3 className="font-semibold text-foreground mb-3">🎨 Visualização:</h3>
             <div className="bg-white rounded-lg p-4 text-center">
-              <pre className="text-lg font-mono text-foreground whitespace-pre-wrap">
+              <MathText className="text-lg text-foreground">
                 {currentProblem.visualizacao}
-              </pre>
+              </MathText>
             </div>
           </div>
 

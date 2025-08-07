@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { BookOpen, CheckCircle, PlayCircle, ArrowRight, Brain, Eye, Calculator, Sparkles, Pizza, Edit3, FileText } from "lucide-react";
 import cpaMethodHero from "@/assets/cpa-method-hero.jpg";
 import { CPAProblemDisplay } from "./CPAProblemDisplay";
+import MathText from "./MathText";
 
 type Stage = 'concrete' | 'pictorial' | 'abstract';
 
@@ -37,7 +38,7 @@ const CPAMethod = () => {
       description: "Uso de símbolos e operações matemáticas formais", 
       icon: "🔢",
       problem: "Problema: Resolva a equação: 4x + 6 = 26",
-      solution: "Solução: 4x + 6 = 26 → 4x = 20 → x = 5",
+      solution: "Solução: $4x + 6 = 26 \\rightarrow 4x = 20 \\rightarrow x = 5$",
       visualization: "Algoritmos e símbolos matemáticos: Notação formal para representar conceitos compreendidos.",
       explanation: "No estágio abstrato, trabalhamos com símbolos matemáticos, algoritmos e operações formais. Esta fase só é introduzida após sólida compreensão nos estágios anteriores, garantindo que os símbolos tenham significado conceitual para o estudante."
     }
