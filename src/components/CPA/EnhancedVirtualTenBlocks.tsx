@@ -79,6 +79,9 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   }, [problem]);
 
   const organizeWorkAreaBlocks = (newBlocks: Block[]) => {
+    if (newBlocks.length === 0) return [];
+
+    // Ordenar blocos por tipo (centena, dezena, unidade)
     const sortedBlocks = [...newBlocks].sort((a, b) => {
       if (a.type === b.type) return 0;
       if (a.type === 'hundred') return -1;
@@ -88,23 +91,53 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
       return 0;
     });
 
-    let currentX = 20;
-    let currentY = 60;
-    const maxWidth = 400; // Largura máxima da linha
+    // Configurações do grid simplificado
+    const padding = 15;
+    const maxWidth = 340;
+    const lineHeight = 100; // Altura fixa para cada linha
+    const baseY = 20;
     
-    return sortedBlocks.map(block => {
-      const blockWidth = block.type === 'hundred' ? 80 : block.type === 'ten' ? 80 : 40;
+    let currentX = 20;
+    let currentRow = 0;
+
+    return sortedBlocks.map((block) => {
+      let blockWidth;
       
-      // Se ultrapassar a largura máxima, quebra linha
-      if (currentX + blockWidth > maxWidth) {
-        currentX = 20;
-        currentY += 100; // Nova linha
+      // Definir largura baseada no tipo
+      switch (block.type) {
+        case 'hundred':
+          blockWidth = 80;
+          break;
+        case 'ten':
+          blockWidth = 80;
+          break;
+        case 'unit':
+          blockWidth = 40;
+          break;
+        default:
+          blockWidth = 40;
       }
-      
-      const newBlock = { ...block, x: currentX, y: currentY };
-      currentX += blockWidth + 15; // Espaçamento entre blocos
-      
-      return newBlock;
+
+      // Verificar se precisa quebrar linha
+      if (currentX + blockWidth > maxWidth && currentX > 20) {
+        currentRow++;
+        currentX = 20;
+      }
+
+      // Calcular posição Y baseada na linha atual (grid fixo)
+      const currentY = baseY + (currentRow * lineHeight);
+
+      // Criar bloco organizado
+      const organizedBlock = {
+        ...block,
+        x: currentX,
+        y: currentY
+      };
+
+      // Atualizar posição X para o próximo bloco
+      currentX += blockWidth + padding;
+
+      return organizedBlock;
     });
   };
 
