@@ -256,7 +256,7 @@ const EmotionalIntelligence = () => {
                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto shadow-lg">
                           <Brain className="w-8 h-8 text-white" />
                         </div>
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-accent rounded-full flex items-center justify-center">
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                           <PlayCircle className="w-3 h-3 text-white" />
                         </div>
                       </div>
