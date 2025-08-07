@@ -13,6 +13,16 @@ export const ReviewQueueCard: React.FC = () => {
   const { toast } = useToast();
   const telemetry = useTelemetry();
   const [newTopic, setNewTopic] = useState("");
+  const now = Date.now();
+  const formatDateTime = (iso?: string | null) => {
+    if (!iso) return "agora";
+    try {
+      const d = new Date(iso);
+      return d.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+    } catch {
+      return "—";
+    }
+  };
 
   const handleAdd = async () => {
     if (!newTopic.trim()) return;
@@ -43,8 +53,9 @@ export const ReviewQueueCard: React.FC = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-xl">
           <Repeat2 className="w-5 h-5 text-primary" /> Fila de Revisão
+          <Badge variant="secondary" className="ml-2">{items.length} devidos</Badge>
         </CardTitle>
-        <CardDescription>Prática espaçada com itens de estudo prioritários</CardDescription>
+        <CardDescription>Use Acertei/Errei para agendar a próxima revisão automaticamente.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex gap-2">
@@ -58,6 +69,7 @@ export const ReviewQueueCard: React.FC = () => {
           </Button>
         </div>
 
+        <p className="text-xs text-muted-foreground">Itens com badge "Devido" devem ser praticados agora. "Agendado" indica próxima data programada.</p>
         <div className="space-y-3">
           {items.length === 0 && (
             <p className="text-sm text-muted-foreground">Nenhum item devido agora. Adicione um tópico acima.</p>
@@ -65,14 +77,24 @@ export const ReviewQueueCard: React.FC = () => {
           {items.map((it) => (
             <div key={it.id} className="flex items-center justify-between rounded-lg border p-3">
               <div>
-                <div className="font-medium">{it.title || it.item_id}</div>
-                <div className="text-xs text-muted-foreground">Repetições: {it.repetitions} • Facilidade: {it.ease.toFixed(2)}</div>
+                <div className="flex items-center gap-2">
+                  <span className="font-medium">{it.title || it.item_id}</span>
+                  <Badge variant={(!it.next_review_at || new Date(it.next_review_at).getTime() <= now) ? "default" : "secondary"}>
+                    {(!it.next_review_at || new Date(it.next_review_at).getTime() <= now) ? "Devido" : "Agendado"}
+                  </Badge>
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Repetições: {it.repetitions} • Facilidade: {it.ease.toFixed(2)} • Intervalo: {it.interval_days}d
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Próxima: {formatDateTime(it.next_review_at)}
+                </div>
               </div>
               <div className="flex gap-2">
-                <Button size="sm" variant="secondary" onClick={() => handleReview(it.id, false)}>
+                <Button size="sm" variant="secondary" onClick={() => handleReview(it.id, false)} aria-label="Marcar como errado">
                   <X className="w-4 h-4 mr-1" /> Errei
                 </Button>
-                <Button size="sm" onClick={() => handleReview(it.id, true)}>
+                <Button size="sm" onClick={() => handleReview(it.id, true)} aria-label="Marcar como correto">
                   <Check className="w-4 h-4 mr-1" /> Acertei
                 </Button>
               </div>

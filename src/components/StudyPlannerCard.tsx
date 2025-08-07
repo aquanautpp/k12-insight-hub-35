@@ -25,16 +25,20 @@ export const StudyPlannerCard: React.FC = () => {
   const [rating, setRating] = useState<number | null>(null);
 
   React.useEffect(() => {
-    if (cycle) {
-      const goalsArr = Array.isArray(cycle.goals) ? cycle.goals : [];
-      setGoalsText(goalsArr.join("\n"));
-      const taskArr: StudyTask[] = Array.isArray(cycle.tasks) ? cycle.tasks : [];
-      setTasks(taskArr.length ? taskArr : tasks);
-      setReflection(cycle.reflection || "");
-      setRating(cycle.self_rating || null);
-    }
+    const withPadding = (arr: StudyTask[]) => {
+      const base = [...arr];
+      while (base.length < 3) base.push({ title: "", done: false });
+      return base.slice(0, 3);
+    };
+
+    const goalsArr = Array.isArray(cycle?.goals) ? cycle!.goals : [];
+    setGoalsText(goalsArr.join("\n"));
+    const taskArr: StudyTask[] = Array.isArray(cycle?.tasks) ? cycle!.tasks : [];
+    setTasks(withPadding(taskArr));
+    setReflection(cycle?.reflection || "");
+    setRating(cycle?.self_rating || null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cycle?.id]);
+  }, [cycle?.id, cycle?.tasks]);
 
   const plannedCount = useMemo(() => tasks.filter(t => t.title.trim()).length, [tasks]);
 
@@ -55,6 +59,12 @@ export const StudyPlannerCard: React.FC = () => {
 
   const handleToggle = async (idx: number) => {
     try {
+      // Atualização otimista para refletir imediatamente na UI
+      setTasks((prev) => {
+        const next = [...prev];
+        if (next[idx]) next[idx] = { ...next[idx], done: !next[idx].done };
+        return next;
+      });
       await toggleTaskDone(idx);
       telemetry.trackUserAction("toggle_task", "study_planner", { index: idx });
     } catch (e: any) {

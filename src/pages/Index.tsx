@@ -100,7 +100,7 @@ const Index = () => {
             </div>
           </header>
           
-          <main className="flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto bg-background px-4 md:px-6 py-4">
             {renderView()}
           </main>
         </div>
