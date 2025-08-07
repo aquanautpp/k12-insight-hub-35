@@ -242,7 +242,6 @@ const Dashboard = ({
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Acompanhe seu desenvolvimento através de métricas personalizadas
             </p>
-            {userProgress?.ultimo_acesso}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
