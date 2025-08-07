@@ -16,37 +16,37 @@ const navigationItems = [{
   title: 'Painel de Controle',
   icon: LayoutDashboard
 }, {
-  id: 'cpa-method',
-  title: 'Método CPA',
-  icon: Brain
-}, {
   id: 'learning-test',
   title: 'Teste de Aprendizagem',
   icon: Target
 }, {
-  id: 'comprehensible-input',
-  title: 'Línguas Estrangeiras',
-  icon: Globe
+  id: 'cpa-method',
+  title: 'Método CPA',
+  icon: Brain
 }, {
   id: 'mantha-chat',
   title: 'Tutor IA',
   icon: MessageSquare
 }, {
-  id: 'emotional-intelligence',
-  title: 'Inteligência Emocional',
-  icon: Heart
-}, {
-  id: 'progress',
-  title: 'Progresso',
-  icon: BarChart3
-}, {
   id: 'activities',
   title: 'Atividades',
   icon: BookOpen
 }, {
+  id: 'emotional-intelligence',
+  title: 'Inteligência Emocional',
+  icon: Heart
+}, {
   id: 'reading',
   title: 'Leitura',
   icon: Book
+}, {
+  id: 'comprehensible-input',
+  title: 'Línguas Estrangeiras',
+  icon: Globe
+}, {
+  id: 'progress',
+  title: 'Progresso',
+  icon: BarChart3
 }];
 export function AppSidebar({
   currentView,
