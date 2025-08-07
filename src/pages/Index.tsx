@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppSidebar } from "@/components/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,16 @@ const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
   const { user, signOut } = useAuth();
   const { displayName } = useUserProfile();
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const anyEvent = e as CustomEvent<{ view?: string }>;
+      const v = (anyEvent.detail as any)?.view;
+      if (typeof v === 'string') setCurrentView(v);
+    };
+    window.addEventListener('app:navigate' as any, handler as any);
+    return () => window.removeEventListener('app:navigate' as any, handler as any);
+  }, []);
 
   const renderView = () => {
     switch (currentView) {

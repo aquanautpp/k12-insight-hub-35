@@ -416,6 +416,41 @@ const LearningStyleTest = () => {
                 </Card>
               )}
 
+              {/* Recomendações pós‑teste */}
+              <Card className="bg-white border-primary/20 mb-6">
+                <CardHeader>
+                  <CardTitle className="text-primary">Recomendações Personalizadas</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Com base no seu perfil, sugerimos estes próximos passos para acelerar seu aprendizado:
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <Button
+                      variant="outline"
+                      className="w-full text-primary border-primary hover:bg-primary hover:text-primary-foreground"
+                      onClick={() => window.dispatchEvent(new CustomEvent('app:navigate', { detail: { view: 'cpa-method' } }))}
+                    >
+                      Praticar no Método CPA
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full text-primary border-primary hover:bg-primary hover:text-primary-foreground"
+                      onClick={() => window.dispatchEvent(new CustomEvent('app:navigate', { detail: { view: 'reading' } }))}
+                    >
+                      Ler Recomendações
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full text-primary border-primary hover:bg-primary hover:text-primary-foreground"
+                      onClick={() => window.dispatchEvent(new CustomEvent('app:navigate', { detail: { view: 'mantha-chat' } }))}
+                    >
+                      Falar com o Tutor IA
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
               <div className="text-center">
                 <Button onClick={resetTest} variant="outline">
                   <RotateCcw className="w-4 h-4 mr-2" />
