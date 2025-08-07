@@ -81,7 +81,7 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   const organizeWorkAreaBlocks = (newBlocks: Block[]) => {
     if (newBlocks.length === 0) return [];
 
-    // Ordenar blocos por tipo (centena, dezena, unidade)
+    // Ordenar blocos por tipo (centena, dezena, unidade) para organização consistente
     const sortedBlocks = [...newBlocks].sort((a, b) => {
       if (a.type === b.type) return 0;
       if (a.type === 'hundred') return -1;
@@ -91,43 +91,49 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
       return 0;
     });
 
-    // Configurações do grid simplificado
-    const padding = 15;
+    // Configurações do grid inteligente
+    const padding = 10;
     const maxWidth = 340;
-    const lineHeight = 100; // Altura fixa para cada linha
     const baseY = 20;
     
     let currentX = 20;
-    let currentRow = 0;
+    let currentY = baseY;
+    let lineHeight = 0;
 
-    return sortedBlocks.map((block) => {
+    return sortedBlocks.map((block, index) => {
       let blockWidth;
+      let blockHeight;
       
-      // Definir largura baseada no tipo
+      // Definir dimensões exatas baseadas no tipo
       switch (block.type) {
         case 'hundred':
           blockWidth = 80;
+          blockHeight = 80;
           break;
         case 'ten':
-          blockWidth = 80;
+          blockWidth = 60;
+          blockHeight = 40;
           break;
         case 'unit':
           blockWidth = 40;
+          blockHeight = 40;
           break;
         default:
           blockWidth = 40;
+          blockHeight = 40;
       }
 
       // Verificar se precisa quebrar linha
       if (currentX + blockWidth > maxWidth && currentX > 20) {
-        currentRow++;
+        currentY += lineHeight + padding;
         currentX = 20;
+        lineHeight = 0;
       }
 
-      // Calcular posição Y baseada na linha atual (grid fixo)
-      const currentY = baseY + (currentRow * lineHeight);
+      // Atualizar altura da linha
+      lineHeight = Math.max(lineHeight, blockHeight);
 
-      // Criar bloco organizado
+      // Criar bloco organizado com snap to grid
       const organizedBlock = {
         ...block,
         x: currentX,
@@ -284,18 +290,30 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     switch (block.type) {
       case 'hundred':
         return {
-          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} w-20 h-20 text-lg rounded`,
-          transform: `translate(${block.x}px, ${block.y}px)`
+          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} text-lg rounded`,
+          style: {
+            width: '80px',
+            height: '80px',
+            transform: `translate(${block.x}px, ${block.y}px)`
+          }
         };
       case 'ten':
         return {
-          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} w-20 h-10 text-sm rounded`,
-          transform: `translate(${block.x}px, ${block.y}px)`
+          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} text-sm rounded`,
+          style: {
+            width: '60px',
+            height: '40px',
+            transform: `translate(${block.x}px, ${block.y}px)`
+          }
         };
       case 'unit':
         return {
-          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} w-10 h-10 text-xs rounded`,
-          transform: `translate(${block.x}px, ${block.y}px)`
+          className: `${baseClasses} ${hoverClasses} ${greenColor} ${shadowClass} text-xs rounded`,
+          style: {
+            width: '40px',
+            height: '40px',
+            transform: `translate(${block.x}px, ${block.y}px)`
+          }
         };
     }
   };
@@ -383,7 +401,7 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
                   <div
                     key={block.id}
                     className={style.className}
-                    style={{ transform: style.transform }}
+                    style={style.style}
                     draggable
                     onDragStart={(e: any) => handleDragStart(block.id, e)}
                   >
@@ -409,9 +427,13 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
           <CardContent className="p-4">
             <div 
               ref={workAreaRef}
-              className={`border-2 border-dashed rounded-lg p-4 min-h-[250px] md:min-h-[300px] relative bg-white overflow-hidden transition-all duration-200 ${
+              className={`border-2 border-dashed rounded-lg relative bg-white overflow-hidden transition-all duration-200 ${
                 workAreaHover ? 'border-[#6B8E5A] bg-green-50/30' : 'border-gray-300'
               }`}
+              style={{ 
+                padding: '20px',
+                minHeight: '220px'
+              }}
               onDrop={(e) => handleDrop(e, 'work')}
               onDragOver={(e) => handleDragOver(e, 'work')}
               onDragLeave={(e) => handleDragLeave(e, 'work')}
@@ -436,14 +458,24 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
                   <motion.div
                     key={block.id}
                     className={style.className}
-                    style={{ transform: style.transform }}
+                    style={style.style}
                     draggable
                     onDragStart={(e: any) => handleDragStart(block.id, e)}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    whileHover={{ y: -2 }}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 400, 
+                      damping: 25,
+                      opacity: { duration: 0.2 }
+                    }}
+                    whileHover={{ y: -2, scale: 1.05 }}
+                    whileDrag={{ 
+                      scale: 1.1, 
+                      zIndex: 1000,
+                      boxShadow: "0 10px 20px rgba(0,0,0,0.2)" 
+                    }}
                   >
                     {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
                   </motion.div>
