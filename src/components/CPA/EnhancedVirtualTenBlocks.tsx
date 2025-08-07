@@ -26,10 +26,8 @@ interface VirtualTenBlocksProps {
 }
 
 export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBlocksProps) => {
-  const [blocks, setBlocks] = useState<Block[]>([]);
   const [workArea, setWorkArea] = useState<Block[]>([]);
   const [dragging, setDragging] = useState<string | null>(null);
-  const [dragPreview, setDragPreview] = useState<{ x: number; y: number; block: Block } | null>(null);
   const [result, setResult] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [attempts, setAttempts] = useState(0);
@@ -41,9 +39,17 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   const [shakeWrongBlocks, setShakeWrongBlocks] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [workAreaHover, setWorkAreaHover] = useState(false);
+  const [nextBlockId, setNextBlockId] = useState(0);
   
   const timerRef = useRef<NodeJS.Timeout>();
   const workAreaRef = useRef<HTMLDivElement>(null);
+
+  // Blocos modelo fixos (sempre disponíveis para clonagem)
+  const modelBlocks: Block[] = [
+    { id: 'model-hundred', value: 100, type: 'hundred', x: 50, y: 30 },
+    { id: 'model-ten', value: 10, type: 'ten', x: 50, y: 130 },
+    { id: 'model-unit', value: 1, type: 'unit', x: 50, y: 200 }
+  ];
 
   // Timer
   useEffect(() => {
@@ -58,64 +64,8 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     };
   }, [startTime, showFeedback]);
 
-  // Gerar blocos iniciais
+  // Reset quando problema muda
   useEffect(() => {
-    const generateBlocks = (value: number, startColumn: number) => {
-      const hundreds = Math.floor(value / 100);
-      const tens = Math.floor((value % 100) / 10);
-      const units = value % 10;
-      
-      const blockList: Block[] = [];
-      let currentX = startColumn === 0 ? 20 : 200; // Posicionamento em colunas
-      let currentY = 20;
-      
-      // Blocos de centena
-      for (let i = 0; i < hundreds; i++) {
-        blockList.push({
-          id: `h${startColumn}-${i}`,
-          value: 100,
-          type: 'hundred',
-          x: currentX,
-          y: currentY
-        });
-        currentY += 90; // Espaçamento vertical
-      }
-      
-      // Blocos de dezena
-      if (hundreds > 0) currentY += 10; // Espaço extra entre tipos
-      for (let i = 0; i < tens; i++) {
-        blockList.push({
-          id: `t${startColumn}-${i}`,
-          value: 10,
-          type: 'ten',
-          x: currentX,
-          y: currentY
-        });
-        currentY += 55; // Espaçamento vertical
-      }
-      
-      // Blocos de unidade
-      if (tens > 0) currentY += 10; // Espaço extra entre tipos
-      const unitsPerRow = 4; // Máximo 4 unidades por linha
-      for (let i = 0; i < units; i++) {
-        const row = Math.floor(i / unitsPerRow);
-        const col = i % unitsPerRow;
-        blockList.push({
-          id: `u${startColumn}-${i}`,
-          value: 1,
-          type: 'unit',
-          x: currentX + col * 50,
-          y: currentY + row * 50
-        });
-      }
-      
-      return blockList;
-    };
-
-    const blocks1 = generateBlocks(problem.initialValue1, 0);
-    const blocks2 = generateBlocks(problem.initialValue2, 1);
-    
-    setBlocks([...blocks1, ...blocks2]);
     setWorkArea([]);
     setResult(null);
     setShowFeedback(false);
@@ -125,6 +75,7 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     setElapsedTime(0);
     setShowHint(false);
     setShowConfetti(false);
+    setNextBlockId(0);
   }, [problem]);
 
   const organizeWorkAreaBlocks = (newBlocks: Block[]) => {
@@ -161,7 +112,7 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     setDragging(blockId);
     setMovements(prev => prev + 1);
     
-    const block = blocks.find(b => b.id === blockId) || workArea.find(b => b.id === blockId);
+    const block = modelBlocks.find(b => b.id === blockId) || workArea.find(b => b.id === blockId);
     if (block) {
       e.dataTransfer.setData('text/plain', blockId);
       e.dataTransfer.effectAllowed = 'move';
@@ -188,7 +139,6 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
 
   const handleDrop = (e: React.DragEvent, area: 'work' | 'blocks') => {
     e.preventDefault();
-    setDragPreview(null);
     setWorkAreaHover(false);
     
     // Restaurar cursor
@@ -197,21 +147,33 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     const blockId = e.dataTransfer.getData('text/plain');
     if (!blockId) return;
 
-    const draggedBlock = blocks.find(b => b.id === blockId) || 
-                         workArea.find(b => b.id === blockId);
-    
-    if (!draggedBlock) return;
-
     if (area === 'work') {
-      // Adicionar à área de trabalho e reorganizar
-      const newWorkArea = [...workArea.filter(b => b.id !== blockId), draggedBlock];
-      const organizedBlocks = organizeWorkAreaBlocks(newWorkArea);
-      
-      setWorkArea(organizedBlocks);
-      setBlocks(prev => prev.filter(b => b.id !== blockId));
+      // Se for um bloco modelo, criar uma cópia
+      const modelBlock = modelBlocks.find(b => b.id === blockId);
+      if (modelBlock) {
+        const newBlockId = `${modelBlock.type}-${nextBlockId}`;
+        const newBlock: Block = {
+          ...modelBlock,
+          id: newBlockId,
+          x: 0,
+          y: 0
+        };
+        
+        const newWorkArea = [...workArea, newBlock];
+        const organizedBlocks = organizeWorkAreaBlocks(newWorkArea);
+        setWorkArea(organizedBlocks);
+        setNextBlockId(prev => prev + 1);
+      } else {
+        // Se for um bloco da área de trabalho, apenas reorganizar
+        const draggedBlock = workArea.find(b => b.id === blockId);
+        if (draggedBlock) {
+          const newWorkArea = [...workArea.filter(b => b.id !== blockId), draggedBlock];
+          const organizedBlocks = organizeWorkAreaBlocks(newWorkArea);
+          setWorkArea(organizedBlocks);
+        }
+      }
     } else {
-      // Voltar para área de blocos
-      setBlocks(prev => [...prev.filter(b => b.id !== blockId), draggedBlock]);
+      // Remover da área de trabalho (voltar para blocos = deletar)
       const newWorkArea = workArea.filter(b => b.id !== blockId);
       setWorkArea(organizeWorkAreaBlocks(newWorkArea));
     }
@@ -254,7 +216,6 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   };
 
   const reset = () => {
-    setBlocks([]);
     setWorkArea([]);
     setResult(null);
     setShowFeedback(false);
@@ -264,7 +225,7 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     setElapsedTime(0);
     setShowHint(false);
     setShowConfetti(false);
-    setDragPreview(null);
+    setNextBlockId(0);
     
     // Recarregar problema
     window.location.reload();
@@ -382,7 +343,7 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
             >
               <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
               
-              {blocks.map(block => {
+              {modelBlocks.map(block => {
                 const isDraggingThis = dragging === block.id;
                 const style = getBlockStyle(block, false, isDraggingThis);
                 return (
