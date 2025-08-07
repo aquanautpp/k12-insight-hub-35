@@ -7,6 +7,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, BookOpen, Calculator, Brain, Target, Zap, HelpCircle } from "lucide-react";
 import { openaiService } from "@/services/openaiService";
 import MathTextRenderer from "@/components/MathTextRenderer";
+import { useChatHistory } from "@/hooks/useChatHistory";
+import { useUserProgress } from "@/hooks/useUserProgress";
 
 // Componente para mostrar status da IA
 const AIStatusIndicator = () => {
@@ -48,19 +50,74 @@ interface Message {
 }
 
 const ManthaChatTutor = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      content: '### Olá! Sou a Mantha 👋\n\nSua tutora especializada no **Método CPA de Singapura** 📚\n\nEstou aqui para ajudá-lo a compreender matemática através dos três estágios:\n• **Concreto** - Manipulação de objetos físicos\n• **Pictórico** - Representações visuais e desenhos\n• **Abstrato** - Símbolos e operações matemáticas\n\nQual conceito matemático gostaria de explorar hoje?',
-      sender: 'mantha',
-      timestamp: new Date(),
-      stage: 'adaptive'
-    }
-  ]);
+  const { messages: chatHistory, loading: historyLoading, saveChatMessage, getLastConversation } = useChatHistory();
+  const { addStudyTime, addCompletedActivity, addPoints } = useUserProgress();
+  
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [currentStage, setCurrentStage] = useState<CPAStage>('adaptive');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Carregar histórico do chat quando componente inicializar
+  useEffect(() => {
+    if (!historyLoading && chatHistory.length > 0) {
+      // Converter histórico do banco para formato do componente
+      const convertedMessages: Message[] = [];
+      
+      chatHistory.forEach(chat => {
+        // Adicionar mensagem do usuário
+        convertedMessages.push({
+          id: `user-${chat.id}`,
+          content: chat.mensagem,
+          sender: 'user',
+          timestamp: new Date(chat.created_at),
+          stage: (chat.estagio_cpa as CPAStage) || 'adaptive'
+        });
+        
+        // Adicionar resposta da Mantha se existir
+        if (chat.resposta) {
+          convertedMessages.push({
+            id: `mantha-${chat.id}`,
+            content: chat.resposta,
+            sender: 'mantha',
+            timestamp: new Date(chat.created_at),
+            stage: (chat.estagio_cpa as CPAStage) || 'adaptive'
+          });
+        }
+      });
+      
+      // Se há histórico, mostrar mensagem de continuação
+      if (convertedMessages.length > 0) {
+        const welcomeMessage: Message = {
+          id: 'welcome-back',
+          content: '### Bem-vindo de volta! 👋\n\nVejo que já conversamos antes. Vamos continuar de onde paramos?\n\nSe quiser começar um novo tópico, é só perguntar!',
+          sender: 'mantha',
+          timestamp: new Date(),
+          stage: 'adaptive'
+        };
+        setMessages([welcomeMessage, ...convertedMessages]);
+      } else {
+        // Primeira visita
+        setMessages([{
+          id: '1',
+          content: '### Olá! Sou a Mantha 👋\n\nSua tutora especializada no **Método CPA de Singapura** 📚\n\nEstou aqui para ajudá-lo a compreender matemática através dos três estágios:\n• **Concreto** - Manipulação de objetos físicos\n• **Pictórico** - Representações visuais e desenhos\n• **Abstrato** - Símbolos e operações matemáticas\n\nQual conceito matemático gostaria de explorar hoje?',
+          sender: 'mantha',
+          timestamp: new Date(),
+          stage: 'adaptive'
+        }]);
+      }
+    } else if (!historyLoading) {
+      // Primeira visita (sem histórico)
+      setMessages([{
+        id: '1',
+        content: '### Olá! Sou a Mantha 👋\n\nSua tutora especializada no **Método CPA de Singapura** 📚\n\nEstou aqui para ajudá-lo a compreender matemática através dos três estágios:\n• **Concreto** - Manipulação de objetos físicos\n• **Pictórico** - Representações visuais e desenhos\n• **Abstrato** - Símbolos e operações matemáticas\n\nQual conceito matemático gostaria de explorar hoje?',
+        sender: 'mantha',
+        timestamp: new Date(),
+        stage: 'adaptive'
+      }]);
+    }
+  }, [chatHistory, historyLoading]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -308,12 +365,13 @@ ${abstractResp}
       timestamp: new Date()
     };
 
+    const currentInput = inputMessage;
     setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
     setIsLoading(true);
 
     try {
-      const response = await generateManthaResponse(inputMessage, currentStage);
+      const response = await generateManthaResponse(currentInput, currentStage);
       
       const manthaMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -325,6 +383,26 @@ ${abstractResp}
       };
 
       setMessages(prev => [...prev, manthaMessage]);
+
+      // Salvar no banco de dados
+      await saveChatMessage(
+        currentInput,
+        response.content,
+        currentStage,
+        'matematica' // topico padrão
+      );
+
+      // Adicionar tempo de estudo (estimativa de 2 minutos por interação)
+      await addStudyTime(2);
+
+      // Adicionar pontos por interação
+      await addPoints(10);
+
+      // Se foi uma pergunta de cálculo específico, marcar como atividade completada
+      if (currentInput.match(/quanto\s+(?:é|e)/i)) {
+        await addCompletedActivity(`Cálculo: ${currentInput}`);
+      }
+
     } catch (error) {
       console.error('Erro ao gerar resposta:', error);
     } finally {

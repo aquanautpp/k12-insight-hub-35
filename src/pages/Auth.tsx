@@ -43,7 +43,7 @@ const Auth = () => {
     e.preventDefault();
     if (usernameError) return;
     
-    const { error } = await signUp(email, password, displayName, username);
+        const { error } = await signUp(email, password, displayName, username);
     if (!error) {
       setEmail('');
       setPassword('');

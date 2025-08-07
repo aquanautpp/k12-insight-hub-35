@@ -7,6 +7,8 @@ import { Brain, BookOpen, Target, TrendingUp, Award, BarChart3, MessageCircle, U
 import { useProgress } from '@/contexts/ProgressContext';
 import { useXP } from '@/contexts/XPContext';
 import { useAchievement } from '@/contexts/AchievementContext';
+import { useUserProfile } from '@/hooks/useUserProfile';
+import { useUserProgress } from '@/hooks/useUserProgress';
 import { SmartInsights } from './SmartInsights';
 import { QuickWinMessage } from './QuickWinMessage';
 import { AdaptiveLearningPath } from './AdaptiveLearningPath';
@@ -21,6 +23,8 @@ interface DashboardProps {
 const Dashboard = ({
   onViewChange
 }: DashboardProps) => {
+  const { displayName, nome } = useUserProfile();
+  const { progress: userProgress, loading: progressLoading } = useUserProgress();
   const {
     progress
   } = useProgress();
@@ -34,7 +38,7 @@ const Dashboard = ({
   } = useAchievement();
 
   // Early return com loading se dados essenciais não estão disponíveis
-  if (!progress || !xpData || !achievements) {
+  if (!progress || !xpData || !achievements || progressLoading) {
     return <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <Brain className="w-12 h-12 animate-spin mx-auto mb-4 text-primary" />
@@ -207,7 +211,9 @@ const Dashboard = ({
               </div>
             </motion.div>
             <div className="mt-0">
-              <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">Bem-vindo à <span className="text-yellow-400">Mantha</span>!</h1>
+              <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">
+                Bem-vindo{nome ? `, ${nome}` : ''} à <span className="text-yellow-400">Mantha</span>!
+              </h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mb-2 mx-0 my-0">
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
               </p>
@@ -238,6 +244,11 @@ const Dashboard = ({
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Acompanhe seu desenvolvimento através de métricas personalizadas
             </p>
+            {userProgress?.ultimo_acesso && (
+              <p className="text-sm text-muted-foreground mt-2">
+                Último acesso: {new Date(userProgress.ultimo_acesso).toLocaleString('pt-BR')}
+              </p>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -276,7 +287,8 @@ const Dashboard = ({
                 <Calendar className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
-                <AnimatedCounter end={progress?.completedActivities || 0} />
+                <AnimatedCounter end={userProgress?.atividades_completadas ? 
+                  (Array.isArray(userProgress.atividades_completadas) ? userProgress.atividades_completadas.length : 0) : 0} />
               </h3>
               <p className="text-muted-foreground">Atividades</p>
             </motion.div>

@@ -14,12 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_historico: {
+        Row: {
+          created_at: string
+          estagio_cpa: string | null
+          id: string
+          mensagem: string
+          resposta: string | null
+          topico: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          estagio_cpa?: string | null
+          id?: string
+          mensagem: string
+          resposta?: string | null
+          topico?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          estagio_cpa?: string | null
+          id?: string
+          mensagem?: string
+          resposta?: string | null
+          topico?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
           created_at: string
           display_name: string | null
+          estilo_aprendizagem: string | null
           id: string
+          nivel_atual: number | null
+          nome: string | null
           updated_at: string
           user_id: string
           username: string | null
@@ -28,7 +61,10 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           display_name?: string | null
+          estilo_aprendizagem?: string | null
           id?: string
+          nivel_atual?: number | null
+          nome?: string | null
           updated_at?: string
           user_id: string
           username?: string | null
@@ -37,10 +73,46 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           display_name?: string | null
+          estilo_aprendizagem?: string | null
           id?: string
+          nivel_atual?: number | null
+          nome?: string | null
           updated_at?: string
           user_id?: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      progresso: {
+        Row: {
+          atividades_completadas: Json | null
+          created_at: string
+          id: string
+          pontuacao_total: number | null
+          tempo_estudo: number | null
+          ultimo_acesso: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          atividades_completadas?: Json | null
+          created_at?: string
+          id?: string
+          pontuacao_total?: number | null
+          tempo_estudo?: number | null
+          ultimo_acesso?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          atividades_completadas?: Json | null
+          created_at?: string
+          id?: string
+          pontuacao_total?: number | null
+          tempo_estudo?: number | null
+          ultimo_acesso?: string | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
