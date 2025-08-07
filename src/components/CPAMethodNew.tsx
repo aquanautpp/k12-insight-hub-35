@@ -530,20 +530,20 @@ const CPAMethod = () => {
         
         {!showInteractiveChallenge && <>
             {/* Call to Action para Desafio Extra */}
-            <Card className="group shadow-md border-2 border-black bg-primary rounded-2xl hover:shadow-lg transition-all duration-300 relative overflow-hidden">
+            <Card className="group shadow-md border-2 border-primary bg-white rounded-2xl hover:shadow-lg transition-all duration-300 relative overflow-hidden">
               {/* Elemento decorativo sutil */}
-              <div className="absolute inset-0 opacity-[0.1] bg-gradient-to-br from-white/10 via-transparent to-white/5 pointer-events-none" />
-              <div className="absolute top-4 right-4 text-4xl opacity-20 pointer-events-none text-white">🎯</div>
+              <div className="absolute inset-0 opacity-[0.1] bg-gradient-to-br from-primary/10 via-transparent to-primary/5 pointer-events-none" />
+              <div className="absolute top-4 right-4 text-4xl opacity-20 pointer-events-none text-primary">🎯</div>
               
               <CardContent className="p-8 text-center relative z-10">
-                <h3 className="font-bold mb-4 text-white flex items-center justify-center gap-3 text-4xl">
+                <h3 className="font-bold mb-4 text-primary flex items-center justify-center gap-3 text-4xl">
                   <span className="text-2xl">🧩</span>
                   Desafios Interativos
                 </h3>
-                <p className="leading-relaxed mb-8 text-white/90 max-w-2xl mx-auto text-xl text-center">
-                  Já resolveu todos os problemas CPA? Experimente nossos desafios interativos que combinam conceitos de <span className="text-white font-semibold">todos os estágios</span>!
+                <p className="leading-relaxed mb-8 text-foreground max-w-2xl mx-auto text-xl text-center">
+                  Já resolveu todos os problemas CPA? Experimente nossos desafios interativos que combinam conceitos de <span className="text-primary font-semibold">todos os estágios</span>!
                 </p>
-                <Button size="lg" onClick={() => setShowInteractiveChallenge(true)} className="bg-white text-primary hover:bg-white/90 px-8 py-3 font-semibold rounded-lg shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center gap-3">
+                <Button size="lg" onClick={() => setShowInteractiveChallenge(true)} className="bg-primary text-white hover:bg-primary/90 px-8 py-3 font-semibold rounded-lg shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center gap-3">
                   <span className="text-lg">▶</span>
                   Desafio Interativo
                 </Button>
