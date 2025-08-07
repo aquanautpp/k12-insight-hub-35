@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface FeatureFlags {
   cpaExplanationTooltip: boolean;
@@ -28,10 +28,10 @@ const defaultFlags: FeatureFlags = {
   contentAsData: false,
 };
 
-const FeatureFlagsContext = React.createContext<FeatureFlagsContextType | undefined>(undefined);
+const FeatureFlagsContext = createContext<FeatureFlagsContextType | undefined>(undefined);
 
 export const useFeatureFlags = () => {
-  const context = React.useContext(FeatureFlagsContext);
+  const context = useContext(FeatureFlagsContext);
   if (!context) {
     throw new Error('useFeatureFlags must be used within a FeatureFlagsProvider');
   }
@@ -39,11 +39,11 @@ export const useFeatureFlags = () => {
 };
 
 interface FeatureFlagsProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const FeatureFlagsProvider: React.FC<FeatureFlagsProviderProps> = ({ children }) => {
-  const [flags, setFlags] = React.useState<FeatureFlags>(() => {
+  const [flags, setFlags] = useState<FeatureFlags>(() => {
     // Carregar flags do localStorage se disponível
     const saved = localStorage.getItem('featureFlags');
     return saved ? { ...defaultFlags, ...JSON.parse(saved) } : defaultFlags;

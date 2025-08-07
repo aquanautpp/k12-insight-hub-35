@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface ProgressData {
   completedActivities: number;
@@ -42,10 +42,10 @@ interface ProgressContextType {
   getInsights: () => string[];
 }
 
-const ProgressContext = React.createContext<ProgressContextType | undefined>(undefined);
+const ProgressContext = createContext<ProgressContextType | undefined>(undefined);
 
 export const useProgress = () => {
-  const context = React.useContext(ProgressContext);
+  const context = useContext(ProgressContext);
   if (!context) {
     throw new Error('useProgress must be used within a ProgressProvider');
   }
@@ -53,11 +53,11 @@ export const useProgress = () => {
 };
 
 interface ProgressProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const ProgressProvider: React.FC<ProgressProviderProps> = ({ children }) => {
-  const [progress, setProgress] = React.useState<ProgressData>({
+  const [progress, setProgress] = useState<ProgressData>({
     completedActivities: 5,
     totalActivities: 20,
     currentStreak: 3,

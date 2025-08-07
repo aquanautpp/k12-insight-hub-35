@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface Achievement {
   id: string;
@@ -27,10 +27,10 @@ interface AchievementContextType {
   getProgressTowardsAchievement: (achievementId: string) => number;
 }
 
-const AchievementContext = React.createContext<AchievementContextType | undefined>(undefined);
+const AchievementContext = createContext<AchievementContextType | undefined>(undefined);
 
 export const useAchievement = () => {
-  const context = React.useContext(AchievementContext);
+  const context = useContext(AchievementContext);
   if (!context) {
     throw new Error('useAchievement must be used within an AchievementProvider');
   }
@@ -38,11 +38,11 @@ export const useAchievement = () => {
 };
 
 interface AchievementProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const AchievementProvider: React.FC<AchievementProviderProps> = ({ children }) => {
-  const [achievements, setAchievements] = React.useState<Achievement[]>([
+  const [achievements, setAchievements] = useState<Achievement[]>([
     {
       id: "first_steps",
       title: "Primeiros Passos",
@@ -114,7 +114,7 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
     }
   ]);
 
-  const [unlockedAchievements, setUnlockedAchievements] = React.useState<Achievement[]>(
+  const [unlockedAchievements, setUnlockedAchievements] = useState<Achievement[]>(
     achievements.filter(a => a.isUnlocked)
   );
 
