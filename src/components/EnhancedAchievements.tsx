@@ -161,8 +161,8 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
           Celebre seus marcos de aprendizagem
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <CardContent className="p-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <AnimatePresence>
             {displayAchievements.map((achievement, index) => {
               const rarityStyles = getRarityColors(achievement.rarity);
@@ -172,7 +172,7 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
               return (
                 <motion.div
                   key={achievement.id}
-                  className="relative h-32 cursor-pointer perspective-1000"
+                  className="relative h-40 cursor-pointer perspective-1000"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -185,28 +185,28 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
                     <div
                       className={`absolute inset-0 w-full h-full rounded-xl border-2 p-4 text-center backface-hidden transition-all duration-300 ${
                         achievement.isUnlocked 
-                          ? `${rarityStyles.bg} ${rarityStyles.border} ${rarityStyles.text} ${isGlowing ? rarityStyles.glow + ' animate-pulse' : ''}` 
+                          ? `${rarityStyles.bg} ${rarityStyles.border} ${rarityStyles.text} ${isGlowing ? rarityStyles.glow : ''}` 
                           : 'bg-muted border-muted-foreground/20 text-muted-foreground'
                       }`}
                     >
-                      <div className="flex flex-col items-center justify-center h-full">
-                        <div className="text-2xl mb-2">{achievement.icon}</div>
-                        <h4 className="font-semibold text-sm mb-1">{achievement.title}</h4>
+                      <div className="flex flex-col items-center justify-center h-full gap-3">
+                        <div className="text-3xl">{achievement.icon}</div>
+                        <h4 className="font-semibold text-sm text-center leading-tight">{achievement.title}</h4>
                         
                         {/* Badge de raridade */}
-                        <Badge variant="outline" className={`text-xs ${achievement.isUnlocked ? 'border-current' : ''}`}>
+                        <Badge variant="outline" className={`text-xs px-2 py-1 ${achievement.isUnlocked ? 'border-current' : ''}`}>
                           <span className="mr-1">{getRarityIcon(achievement.rarity)}</span>
                           {achievement.rarity.charAt(0).toUpperCase() + achievement.rarity.slice(1)}
                         </Badge>
 
                         {/* Barra de progresso para conquistas não desbloqueadas */}
                         {!achievement.isUnlocked && achievement.progress !== undefined && achievement.maxProgress && (
-                          <div className="w-full mt-2">
+                          <div className="w-full mt-3">
                             <Progress 
                               value={(achievement.progress / achievement.maxProgress) * 100} 
-                              className="h-1"
+                              className="h-2"
                             />
-                            <span className="text-xs mt-1 block">
+                            <span className="text-xs mt-2 block font-medium">
                               {achievement.progress}/{achievement.maxProgress}
                             </span>
                           </div>
@@ -219,11 +219,11 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
                       <div
                         className={`absolute inset-0 w-full h-full rounded-xl border-2 p-4 rotate-y-180 backface-hidden ${rarityStyles.bg} ${rarityStyles.border} ${rarityStyles.text}`}
                       >
-                        <div className="flex flex-col items-center justify-center h-full">
-                          <p className="text-xs text-center leading-relaxed">
+                        <div className="flex flex-col items-center justify-center h-full px-2">
+                          <p className="text-sm text-center leading-relaxed mb-3">
                             {achievement.description}
                           </p>
-                          <div className="mt-2 text-xs opacity-75">
+                          <div className="text-xs opacity-75 font-medium">
                             Clique para voltar
                           </div>
                         </div>

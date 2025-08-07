@@ -11,7 +11,7 @@ import { useUserProfile } from '@/hooks/useUserProfile';
 import { useUserProgress } from '@/hooks/useUserProgress';
 import { SmartInsights } from './SmartInsights';
 import { QuickWinMessage } from './QuickWinMessage';
-import { SkillTree } from './SkillTree';
+
 import { EnhancedAchievements } from './EnhancedAchievements';
 import { RadarChart } from './RadarChart';
 import { SystemTest } from './SystemTest';
@@ -373,13 +373,6 @@ const Dashboard = ({
           </motion.div>
         </div>
 
-        {/* Árvore de Habilidades */}
-        <motion.div variants={itemVariants}>
-          <SkillTree 
-            currentLevel={overallProgress} 
-            completedModules={["Números Básicos", "Operações Simples"]} 
-          />
-        </motion.div>
 
         {/* Gráfico de Radar */}
         <motion.div variants={itemVariants}>
