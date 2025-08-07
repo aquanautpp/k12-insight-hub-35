@@ -7,11 +7,13 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signUp: (email: string, password: string, displayName?: string) => Promise<{ error?: any }>;
+  signUp: (email: string, password: string, displayName?: string, username?: string) => Promise<{ error?: any }>;
   signIn: (email: string, password: string) => Promise<{ error?: any }>;
+  signInWithEmailOrUsername: (emailOrUsername: string, password: string) => Promise<{ error?: any }>;
   signInWithGoogle: () => Promise<{ error?: any }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error?: any }>;
+  checkUsernameAvailability: (username: string) => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -50,8 +52,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, displayName?: string) => {
+  const signUp = async (email: string, password: string, displayName?: string, username?: string) => {
     try {
+      // Check if username is available if provided
+      if (username) {
+        const isAvailable = await checkUsernameAvailability(username);
+        if (!isAvailable) {
+          toast({
+            title: "Username indisponível",
+            description: "Este username já está sendo usado. Escolha outro.",
+            variant: "destructive"
+          });
+          return { error: "Username already taken" };
+        }
+      }
+
       const redirectUrl = `${window.location.origin}/`;
       
       const { error } = await supabase.auth.signUp({
@@ -60,7 +75,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         options: {
           emailRedirectTo: redirectUrl,
           data: {
-            display_name: displayName
+            display_name: displayName,
+            username: username
           }
         }
       });
@@ -72,6 +88,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           variant: "destructive"
         });
         return { error };
+      }
+
+      // Update profile with username after signup
+      if (username) {
+        setTimeout(async () => {
+          try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+              await supabase
+                .from('profiles')
+                .update({ username })
+                .eq('user_id', user.id);
+            }
+          } catch (err) {
+            console.error('Error updating profile with username:', err);
+          }
+        }, 1000);
       }
 
       toast({
@@ -179,6 +212,77 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const signInWithEmailOrUsername = async (emailOrUsername: string, password: string) => {
+    try {
+      let email = emailOrUsername;
+      
+      // Check if input contains @ (email) or not (username)
+      if (!emailOrUsername.includes('@')) {
+        // It's a username, get the email
+        const { data, error } = await supabase.rpc('get_email_by_username', {
+          lookup_username: emailOrUsername
+        });
+        
+        if (error || !data) {
+          toast({
+            title: "Username não encontrado",
+            description: "Verifique se o username está correto.",
+            variant: "destructive"
+          });
+          return { error: "Username not found" };
+        }
+        
+        email = data;
+      }
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) {
+        toast({
+          title: "Erro no login",
+          description: error.message,
+          variant: "destructive"
+        });
+        return { error };
+      }
+
+      toast({
+        title: "Login realizado!",
+        description: "Bem-vindo de volta!"
+      });
+      
+      return {};
+    } catch (error) {
+      toast({
+        title: "Erro no login",
+        description: "Ocorreu um erro inesperado.",
+        variant: "destructive"
+      });
+      return { error };
+    }
+  };
+
+  const checkUsernameAvailability = async (username: string): Promise<boolean> => {
+    try {
+      const { data, error } = await supabase.rpc('is_username_available', {
+        check_username: username
+      });
+      
+      if (error) {
+        console.error('Error checking username availability:', error);
+        return false;
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Error checking username availability:', error);
+      return false;
+    }
+  };
+
   const resetPassword = async (email: string) => {
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -216,9 +320,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loading,
     signUp,
     signIn,
+    signInWithEmailOrUsername,
     signInWithGoogle,
     signOut,
-    resetPassword
+    resetPassword,
+    checkUsernameAvailability
   };
 
   return (

@@ -11,14 +11,18 @@ import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
+  const [emailOrUsername, setEmailOrUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
+  const [username, setUsername] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
+  const [usernameChecking, setUsernameChecking] = useState(false);
+  const [usernameError, setUsernameError] = useState('');
   
-  const { signIn, signUp, signInWithGoogle, resetPassword, user, loading } = useAuth();
+  const { signIn, signUp, signInWithEmailOrUsername, signInWithGoogle, resetPassword, checkUsernameAvailability, user, loading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +33,7 @@ const Auth = () => {
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await signIn(email, password);
+    const { error } = await signInWithEmailOrUsername(emailOrUsername, password);
     if (!error) {
       navigate('/', { replace: true });
     }
@@ -37,11 +41,42 @@ const Auth = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await signUp(email, password, displayName);
+    if (usernameError) return;
+    
+    const { error } = await signUp(email, password, displayName, username);
     if (!error) {
       setEmail('');
       setPassword('');
       setDisplayName('');
+      setUsername('');
+      setEmailOrUsername('');
+    }
+  };
+
+  const handleUsernameChange = async (value: string) => {
+    setUsername(value);
+    setUsernameError('');
+    
+    if (value.length > 0) {
+      // Basic validation
+      if (value.length < 3) {
+        setUsernameError('Username deve ter pelo menos 3 caracteres');
+        return;
+      }
+      
+      if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+        setUsernameError('Username pode conter apenas letras, números e _');
+        return;
+      }
+      
+      // Check availability
+      setUsernameChecking(true);
+      const isAvailable = await checkUsernameAvailability(value);
+      setUsernameChecking(false);
+      
+      if (!isAvailable) {
+        setUsernameError('Este username já está sendo usado');
+      }
     }
   };
 
@@ -98,16 +133,16 @@ const Auth = () => {
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="signin-email" className="text-sm font-medium">
-                    Email
+                    Email ou Username
                   </Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
                     <Input
                       id="signin-email"
-                      type="email"
-                      placeholder="seu@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                      placeholder="seu@email.com ou username"
+                      value={emailOrUsername}
+                      onChange={(e) => setEmailOrUsername(e.target.value)}
                       className="pl-10"
                       required
                     />
@@ -201,6 +236,32 @@ const Auth = () => {
                       required
                     />
                   </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="signup-username" className="text-sm font-medium">
+                    Username
+                  </Label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                    <Input
+                      id="signup-username"
+                      type="text"
+                      placeholder="username"
+                      value={username}
+                      onChange={(e) => handleUsernameChange(e.target.value)}
+                      className={`pl-10 ${usernameError ? 'border-destructive' : ''}`}
+                      required
+                    />
+                    {usernameChecking && (
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+                      </div>
+                    )}
+                  </div>
+                  {usernameError && (
+                    <p className="text-sm text-destructive">{usernameError}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
