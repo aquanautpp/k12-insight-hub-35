@@ -114,7 +114,7 @@ const EmotionalCheckIn = () => {
             { id: 'streak_14', target: 14 },
             { id: 'streak_30', target: 30 },
           ];
-          const newlyHit = milestones.filter(m => newStreak >= m.target && !unlockedAchievements.some(a => a.id === m.id));
+          const newlyHit = milestones.filter(m => newStreak >= m.target && !achievements.some(a => a.id === m.id && a.isUnlocked));
           if (newlyHit.length > 0) {
             let gainedXP = 0;
             const unlockedNames: string[] = [];

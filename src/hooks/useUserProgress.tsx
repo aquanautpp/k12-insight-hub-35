@@ -11,6 +11,8 @@ interface UserProgress {
   created_at: string;
   updated_at: string;
   user_id: string;
+  ei_checkin_streak: number;
+  ei_last_checkin_date: string | null;
 }
 
 export const useUserProgress = () => {

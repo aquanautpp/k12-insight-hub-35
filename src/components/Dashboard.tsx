@@ -98,6 +98,16 @@ const Dashboard = ({
     return Math.round((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1) * 100);
   }, [progress?.completedActivities, progress?.totalActivities]);
 
+  const streakDays = userProgress?.ei_checkin_streak ?? progress?.currentStreak ?? 0;
+  const streakBadges = React.useMemo(() => {
+    const earned: string[] = [];
+    if (streakDays >= 3) earned.push('🔥 3 dias');
+    if (streakDays >= 7) earned.push('🏅 7 dias');
+    if (streakDays >= 14) earned.push('🏆 14 dias');
+    if (streakDays >= 30) earned.push('👑 30 dias');
+    return earned;
+  }, [streakDays]);
+
   // Early return APÓS todos os hooks
   if (!progress || !xpData || !achievements || progressLoading) {
     return <div className="min-h-screen flex items-center justify-center">
@@ -288,6 +298,23 @@ const Dashboard = ({
               <p className="text-muted-foreground">Atividades</p>
             </motion.div>
           </div>
+
+          <Card className="card-interactive rounded-xl p-6 mt-6">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Flame className="w-5 h-5 text-primary" />
+                  <span className="text-sm text-muted-foreground">Streak EI</span>
+                </div>
+                <h3 className="text-foreground text-2xl lg:text-3xl font-bold">{streakDays} dias</h3>
+              </div>
+              <div className="flex gap-2 flex-wrap justify-end">
+                {streakBadges.map((b, i) => (
+                  <Badge key={i} variant="secondary" className="bg-primary/10 text-primary">{b}</Badge>
+                ))}
+              </div>
+            </div>
+          </Card>
         </div>
       </motion.section>
 

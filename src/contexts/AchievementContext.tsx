@@ -228,11 +228,26 @@ export const AchievementProvider: React.FC<AchievementProviderProps> = ({ childr
   }, [achievements]);
 
   const unlockAchievement = (achievementId: string) => {
-    setAchievements(prev => prev.map(achievement => 
-      achievement.id === achievementId 
-        ? { ...achievement, isUnlocked: true, unlockedAt: new Date() }
-        : achievement
-    ));
+    setAchievements(prev => {
+      let changed = false;
+      const updated = prev.map(achievement => {
+        if (achievement.id === achievementId) {
+          if (achievement.isUnlocked) return achievement;
+          changed = true;
+          return { ...achievement, isUnlocked: true, unlockedAt: new Date() };
+        }
+        return achievement;
+      });
+      if (changed) {
+        const newly = updated.find(a => a.id === achievementId);
+        if (newly && !newly.isUnlocked) return updated; // safety
+        setUnlockedAchievements(prevUnlocked => {
+          if (prevUnlocked.some(a => a.id === achievementId)) return prevUnlocked;
+          return newly ? [...prevUnlocked, newly] : prevUnlocked;
+        });
+      }
+      return updated;
+    });
   };
 
   const getProgressTowardsAchievement = (achievementId: string) => {
