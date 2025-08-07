@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { ArrowRight, ArrowLeft, RotateCcw, Brain, Timer } from "lucide-react";
 import { EnhancedVirtualTenBlocks } from "./EnhancedVirtualTenBlocks";
 import { AdvancedBarModelEditor } from "./AdvancedBarModelEditor";
-import { EquationEditor } from "./EquationEditor";
+import { InteractiveEquationEditor } from "./InteractiveEquationEditor";
 
 type CPAStage = 'concrete' | 'pictorial' | 'abstract';
 
@@ -379,13 +379,17 @@ export const CPAIntegratedChallenge = ({
           )}
           
           {currentStage === 'abstract' && (
-            <EquationEditor
+            <InteractiveEquationEditor
               problem={{
                 description: "Resolva a equação para encontrar o valor de x:",
                 equation: "2x + 5 = 13",
-                expectedSteps: ["2x + 5 = 13", "2x = 13 - 5", "2x = 8", "x = 8 ÷ 2", "x = 4"],
                 expectedResult: 4,
-                hints: ["Primeiro, subtraia 5 de ambos os lados", "Depois, divida ambos os lados por 2", "Lembre-se de manter a equação equilibrada"]
+                hints: [
+                  "Primeiro, isole o termo com x subtraindo 5 de ambos os lados", 
+                  "Depois, divida ambos os lados por 2 para encontrar x", 
+                  "Lembre-se: o que fizer de um lado, faça do outro!",
+                  "Sempre simplifique quando possível"
+                ]
               }}
               onComplete={() => handleStageComplete(true)}
               onReturnToPictorial={() => goToStage('pictorial')}
