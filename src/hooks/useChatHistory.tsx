@@ -81,10 +81,32 @@ export const useChatHistory = () => {
     return messages.slice(-10); // Últimas 10 mensagens
   };
 
+  const clearChatHistory = async () => {
+    if (!user) return;
+
+    try {
+      const { error } = await supabase
+        .from('chat_historico')
+        .delete()
+        .eq('user_id', user.id);
+
+      if (error) {
+        console.error('Error clearing chat history:', error);
+        throw error;
+      } else {
+        setMessages([]);
+      }
+    } catch (error) {
+      console.error('Error clearing chat history:', error);
+      throw error;
+    }
+  };
+
   return {
     messages,
     loading,
     saveChatMessage,
-    getLastConversation
+    getLastConversation,
+    clearChatHistory
   };
 };

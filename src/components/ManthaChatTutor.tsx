@@ -4,7 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, BookOpen, Calculator, Brain, Target, Zap, HelpCircle } from "lucide-react";
+import { Send, BookOpen, Calculator, Brain, Target, Zap, HelpCircle, Trash2, AlertTriangle } from "lucide-react";
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useToast } from "@/components/ui/use-toast";
 import { openaiService } from "@/services/openaiService";
 import MathTextRenderer from "@/components/MathTextRenderer";
 import { useChatHistory } from "@/hooks/useChatHistory";
@@ -50,8 +62,9 @@ interface Message {
 }
 
 const ManthaChatTutor = () => {
-  const { messages: chatHistory, loading: historyLoading, saveChatMessage, getLastConversation } = useChatHistory();
+  const { messages: chatHistory, loading: historyLoading, saveChatMessage, getLastConversation, clearChatHistory } = useChatHistory();
   const { addStudyTime, addCompletedActivity, addPoints } = useUserProgress();
+  const { toast } = useToast();
   
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
@@ -410,6 +423,23 @@ ${abstractResp}
     }
   };
 
+  const handleClearChat = async () => {
+    try {
+      await clearChatHistory();
+      setMessages([]);
+      toast({
+        title: "Chat limpo com sucesso!",
+        description: "Todo o histórico de conversas foi removido.",
+      });
+    } catch (error) {
+      toast({
+        title: "Erro ao limpar chat",
+        description: "Não foi possível limpar o histórico. Tente novamente.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -435,6 +465,37 @@ ${abstractResp}
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-white/80 hover:text-white hover:bg-white/10"
+                    disabled={messages.length === 0}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    <span className="hidden md:inline ml-2">Limpar Chat</span>
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle className="flex items-center gap-2">
+                      <AlertTriangle className="w-5 h-5 text-destructive" />
+                      Confirmar Limpeza do Chat
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Tem certeza que deseja limpar todo o histórico de conversas com a Mantha? 
+                      Esta ação não pode ser desfeita e todas as mensagens anteriores serão permanentemente removidas.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleClearChat} className="bg-destructive hover:bg-destructive/90">
+                      Sim, limpar tudo
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
               <AIStatusIndicator />
             </div>
           </div>
