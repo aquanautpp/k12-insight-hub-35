@@ -21,6 +21,9 @@ import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
 import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
 import logoImage from '@/assets/mantha-logo-corrected.png';
+import { StudyPlannerCard } from './StudyPlannerCard';
+import { ReviewQueueCard } from './ReviewQueueCard';
+import { EIInsightsMini } from './EI/EIInsightsMini';
 interface DashboardProps {
   onViewChange?: (view: string) => void;
 }
@@ -401,6 +404,19 @@ const Dashboard = ({
           </motion.div>
         </div>
 
+
+        {/* Metacognição + Prática Espaçada + IE Mini */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <motion.div variants={itemVariants}>
+            <StudyPlannerCard />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <ReviewQueueCard />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <EIInsightsMini />
+          </motion.div>
+        </div>
 
         {/* Gráfico de Radar */}
         <motion.div variants={itemVariants}>

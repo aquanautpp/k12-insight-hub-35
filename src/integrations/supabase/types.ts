@@ -152,6 +152,90 @@ export type Database = {
         }
         Relationships: []
       }
+      review_items: {
+        Row: {
+          created_at: string
+          ease: number
+          failures: number
+          id: string
+          interval_days: number
+          item_id: string
+          last_reviewed: string | null
+          next_review_at: string | null
+          repetitions: number
+          successes: number
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          ease?: number
+          failures?: number
+          id?: string
+          interval_days?: number
+          item_id: string
+          last_reviewed?: string | null
+          next_review_at?: string | null
+          repetitions?: number
+          successes?: number
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          ease?: number
+          failures?: number
+          id?: string
+          interval_days?: number
+          item_id?: string
+          last_reviewed?: string | null
+          next_review_at?: string | null
+          repetitions?: number
+          successes?: number
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      study_cycles: {
+        Row: {
+          created_at: string
+          goals: Json
+          id: string
+          reflection: string | null
+          self_rating: number | null
+          tasks: Json
+          updated_at: string
+          user_id: string
+          week_start: string
+        }
+        Insert: {
+          created_at?: string
+          goals?: Json
+          id?: string
+          reflection?: string | null
+          self_rating?: number | null
+          tasks?: Json
+          updated_at?: string
+          user_id: string
+          week_start: string
+        }
+        Update: {
+          created_at?: string
+          goals?: Json
+          id?: string
+          reflection?: string | null
+          self_rating?: number | null
+          tasks?: Json
+          updated_at?: string
+          user_id?: string
+          week_start?: string
+        }
+        Relationships: []
+      }
       user_books: {
         Row: {
           book_id: string
