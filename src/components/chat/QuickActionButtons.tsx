@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { ThumbsUp, ThumbsDown, Copy, RotateCcw, BookOpen, PenTool } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Copy, RotateCcw, BookOpen, PenTool, Volume2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface QuickActionButtonsProps {
@@ -7,13 +7,15 @@ interface QuickActionButtonsProps {
   onExplainDifferently: () => void;
   onMoreDetails: () => void;
   onCreateExercise: () => void;
+  onPlayAudio?: () => void;
 }
 
 export const QuickActionButtons = ({ 
   messageContent, 
   onExplainDifferently, 
   onMoreDetails, 
-  onCreateExercise 
+  onCreateExercise,
+  onPlayAudio
 }: QuickActionButtonsProps) => {
   const { toast } = useToast();
 
@@ -103,6 +105,18 @@ export const QuickActionButtons = ({
         <PenTool className="w-3 h-3 mr-1" />
         Fazer exercício
       </Button>
+
+      {onPlayAudio && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onPlayAudio}
+          className="h-7 px-2 text-xs hover:bg-primary/10 text-primary"
+        >
+          <Volume2 className="w-3 h-3 mr-1" />
+          Ouvir
+        </Button>
+      )}
     </div>
   );
 };
