@@ -51,7 +51,7 @@ ESTRUTURA PADRÃO DE RESPOSTA:
 REGRAS DE FORMATAÇÃO:
 - Use **negrito** para destacar conceitos importantes
 - Use emojis com parcimônia (máximo 2 por resposta)
-- Mantenha máximo de 180 palavras
+- Seja conciso mas completo nas explicações
 - Seja consistente na terminologia matemática
 - Sempre termine com uma pergunta ou sugestão para continuar
 
@@ -77,8 +77,8 @@ Responda sempre de forma consistente, profissional e educativamente valiosa.`
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: messages,
-        max_tokens: 300,
-        temperature: 0.7,
+        max_tokens: 600,
+        temperature: 0.6,
         presence_penalty: 0.1,
         frequency_penalty: 0.1,
       }),
