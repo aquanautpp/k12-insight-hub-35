@@ -49,7 +49,7 @@ interface BarModelEditorProps {
 export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [elements, setElements] = useState<DrawingElement[]>([]);
-  const [selectedTool, setSelectedTool] = useState<'select' | 'rectangle' | 'text' | 'line' | 'eraser' | 'divide'>('rectangle');
+  const [selectedTool, setSelectedTool] = useState<'select' | 'rectangle' | 'line' | 'eraser' | 'divide'>('rectangle');
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
@@ -296,8 +296,6 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
         setSelectedElement(clickedBar.id);
         setShowDivisionPanel(true);
       }
-    } else if (selectedTool === 'text') {
-      setTextPosition(coords);
     } else if (selectedTool === 'eraser') {
       // Apagar elemento
       setElements(prev => prev.filter(el => {
@@ -493,24 +491,31 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
     }
 
     const segmentWidth = (selectedBar.width || 0) / divisions;
-    const newLines: DrawingElement[] = [];
+    const newElements: DrawingElement[] = [];
 
-    // Criar linhas de divisão
-    for (let i = 1; i < divisions; i++) {
-      const lineX = selectedBar.x + (segmentWidth * i);
-      newLines.push({
-        id: `div-${selectedBar.id}-${i}-${Date.now()}`,
-        type: 'line',
-        x: lineX,
+    // Criar novos retângulos para cada seção
+    for (let i = 0; i < divisions; i++) {
+      const sectionX = selectedBar.x + (segmentWidth * i);
+      
+      newElements.push({
+        id: `section-${selectedBar.id}-${i}-${Date.now()}`,
+        type: 'rectangle',
+        x: sectionX,
         y: selectedBar.y,
-        endX: lineX,
-        endY: selectedBar.y + (selectedBar.height || 0),
-        color: '#333'
+        width: segmentWidth,
+        height: selectedBar.height,
+        color: selectedBar.color
       });
     }
 
-    setElements(prev => [...prev, ...newLines]);
+    // Remover o retângulo original e adicionar as seções
+    setElements(prev => [
+      ...prev.filter(el => el.id !== selectedBar.id),
+      ...newElements
+    ]);
+    
     setShowDivisionPanel(false);
+    setSelectedElement(null);
   };
 
   const quickDivide = (divisions: number) => {
@@ -562,7 +567,6 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
                 { id: 'select', icon: MousePointer, label: 'Selecionar' },
                 { id: 'rectangle', icon: Square, label: 'Retângulo' },
                 { id: 'divide', icon: GitBranch, label: 'Dividir' },
-                { id: 'text', icon: Type, label: 'Texto' },
                 { id: 'line', icon: Line, label: 'Linha' },
                 { id: 'eraser', icon: Eraser, label: 'Borracha' }
               ].map(tool => (
