@@ -197,11 +197,11 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
                   onClick={() => handleCardClick(achievement.id)}
                 >
                   <motion.div
-                    className={`relative w-full h-48 transition-all duration-500 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}
+                    className={`relative w-full h-52 transition-all duration-500 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}
                   >
                     {/* Frente do Card */}
                     <div
-                      className={`absolute inset-0 w-full h-full rounded-xl border-2 p-6 backface-hidden transition-all duration-300 ${
+                      className={`absolute inset-0 w-full h-full rounded-xl border-2 p-6 overflow-hidden pb-3 backface-hidden transition-all duration-300 ${
                         achievement.isUnlocked 
                           ? `${rarityStyles.bg} ${rarityStyles.border} ${rarityStyles.text} shadow-lg ${isGlowing ? rarityStyles.glow : 'hover:shadow-xl'}` 
                           : 'bg-muted/40 border-muted-foreground/20 text-muted-foreground opacity-60 grayscale'
@@ -216,7 +216,7 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
                         {/* Ícone */}
                         <motion.div 
                           className="text-5xl mb-2"
-                          animate={achievement.isUnlocked && isGlowing ? {
+                          animate={achievement.isUnlocked && isGlowing && achievement.rarity === 'diamond' ? {
                             scale: [1, 1.1, 1],
                             rotate: [0, 5, -5, 0]
                           } : {}}
