@@ -291,7 +291,7 @@ const EmotionalIntelligence = () => {
                       <p className="text-sm text-muted-foreground flex-1">
                         Diário emocional personalizado para registrar seus sentimentos e descobrir padrões incríveis sobre você!
                       </p>
-                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-secondary">
+                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-primary">
                         <CheckCircle className="w-4 h-4" />
                         <span className="font-medium">Autoconhecimento</span>
                       </div>
