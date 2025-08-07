@@ -76,13 +76,13 @@ const MathText: React.FC<MathTextProps> = ({ children, className = "", inline = 
   const processMarkdown = (text: string): string => {
     return text
       // Headers
-      .replace(/^### (.*$)/gm, '<h3 class="text-lg font-bold text-primary mb-3 mt-4">$1</h3>')
-      .replace(/^## (.*$)/gm, '<h2 class="text-xl font-bold text-primary mb-3 mt-4">$1</h2>')
-      .replace(/^# (.*$)/gm, '<h1 class="text-2xl font-bold text-primary mb-4 mt-4">$1</h1>')
+      .replace(/^### (.*$)/gm, '<h3 class="text-base font-semibold text-primary mb-2 mt-2">$1</h3>')
+      .replace(/^## (.*$)/gm, '<h2 class="text-lg font-semibold text-primary mb-2 mt-2">$1</h2>')
+      .replace(/^# (.*$)/gm, '<h1 class="text-xl font-semibold text-primary mb-2 mt-2">$1</h1>')
       // Bold text
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-primary">$1</strong>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-primary">$1</strong>')
       // Lists
-      .replace(/^[•\-] (.*$)/gm, '<div class="flex items-start gap-2 mb-2"><span class="text-primary font-bold mt-0.5">•</span><span>$1</span></div>')
+      .replace(/^[•\-] (.*$)/gm, '<div class="flex items-start gap-2 mb-1"><span class="text-primary font-bold mt-0.5">•</span><span>$1</span></div>')
       // Line breaks
       .replace(/\n/g, '<br />');
   };
@@ -100,7 +100,7 @@ const MathText: React.FC<MathTextProps> = ({ children, className = "", inline = 
 
   return (
     <div 
-      className={`math-text leading-relaxed ${className}`}
+      className={`math-text text-sm md:text-[15px] leading-snug ${className}`}
       dangerouslySetInnerHTML={{ __html: processedContent }} 
     />
   );
