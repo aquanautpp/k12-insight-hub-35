@@ -211,48 +211,133 @@ const EmotionalIntelligence = () => {
           ))}
         </div>
 
-        {/* Guia de Como Funciona */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Brain className="w-6 h-6 text-primary" />
-              Como Funciona o Treinamento em IE?
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-3">
-                  <Brain className="w-6 h-6 text-blue-600" />
+        {/* Guia de Como Funciona - Redesenhada */}
+        <div className="relative mb-8 overflow-hidden">
+          {/* Background com padrão sutil */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-3xl"></div>
+          
+          <Card className="relative border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+            <CardHeader className="text-center pb-4">
+              <div className="flex items-center justify-center mb-4">
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg animate-pulse">
+                    <Brain className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center animate-bounce">
+                    <Sparkles className="w-3 h-3 text-white" />
+                  </div>
                 </div>
-                <h4 className="font-semibold mb-2">Aprenda Através da Prática</h4>
-                <p className="text-sm text-muted-foreground">
-                  Atividades interativas, jogos e simulações que tornam o aprendizado emocional divertido e eficaz.
-                </p>
               </div>
+              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                🚀 Como Funciona sua Jornada Emocional?
+              </CardTitle>
+              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+                Descubra como desenvolver sua inteligência emocional de forma divertida e eficaz!
+              </p>
+            </CardHeader>
+            <CardContent className="px-8 pb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                {/* Setas conectoras - visíveis apenas em telas médias+ */}
+                <div className="hidden md:block absolute top-20 left-1/3 transform -translate-x-1/2">
+                  <ArrowRight className="w-8 h-8 text-primary/30 animate-pulse" />
+                </div>
+                <div className="hidden md:block absolute top-20 right-1/3 transform translate-x-1/2">
+                  <ArrowRight className="w-8 h-8 text-primary/30 animate-pulse" />
+                </div>
+
+                {/* Etapa 1 */}
+                <div className="group relative">
+                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                    1
+                  </div>
+                  <Card className="h-full bg-gradient-to-br from-blue-50 to-blue-100/50 border-blue-200 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl group-hover:from-blue-100 group-hover:to-blue-200/50">
+                    <CardContent className="p-6 text-center h-full flex flex-col">
+                      <div className="relative mb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto shadow-lg group-hover:animate-bounce">
+                          <Brain className="w-8 h-8 text-white" />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
+                          <PlayCircle className="w-3 h-3 text-white" />
+                        </div>
+                      </div>
+                      <h4 className="font-bold text-lg mb-3 text-blue-800">🎮 Aprenda Brincando</h4>
+                      <p className="text-sm text-blue-700 flex-1">
+                        Jogos interativos, desafios emocionais e atividades práticas que fazem você aprender sem perceber!
+                      </p>
+                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-blue-600">
+                        <CheckCircle className="w-4 h-4" />
+                        <span className="font-medium">100% Divertido</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
-                  <Heart className="w-6 h-6 text-green-600" />
+                {/* Etapa 2 */}
+                <div className="group relative">
+                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                    2
+                  </div>
+                  <Card className="h-full bg-gradient-to-br from-green-50 to-green-100/50 border-green-200 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl group-hover:from-green-100 group-hover:to-green-200/50">
+                    <CardContent className="p-6 text-center h-full flex flex-col">
+                      <div className="relative mb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mx-auto shadow-lg group-hover:animate-bounce">
+                          <Heart className="w-8 h-8 text-white" />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-pink-400 rounded-full flex items-center justify-center">
+                          <Sparkles className="w-3 h-3 text-white" />
+                        </div>
+                      </div>
+                      <h4 className="font-bold text-lg mb-3 text-green-800">📖 Reflita e Cresça</h4>
+                      <p className="text-sm text-green-700 flex-1">
+                        Diário emocional personalizado para registrar seus sentimentos e descobrir padrões incríveis sobre você!
+                      </p>
+                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-green-600">
+                        <CheckCircle className="w-4 h-4" />
+                        <span className="font-medium">Autoconhecimento</span>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-                <h4 className="font-semibold mb-2">Reflita e Registre</h4>
-                <p className="text-sm text-muted-foreground">
-                  Use o diário emocional para registrar sentimentos e acompanhar seu crescimento pessoal.
-                </p>
-              </div>
               
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-3">
-                  <Sparkles className="w-6 h-6 text-purple-600" />
+                {/* Etapa 3 */}
+                <div className="group relative">
+                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                    3
+                  </div>
+                  <Card className="h-full bg-gradient-to-br from-purple-50 to-purple-100/50 border-purple-200 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl group-hover:from-purple-100 group-hover:to-purple-200/50">
+                    <CardContent className="p-6 text-center h-full flex flex-col">
+                      <div className="relative mb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mx-auto shadow-lg group-hover:animate-bounce">
+                          <Target className="w-8 h-8 text-white" />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-orange-400 rounded-full flex items-center justify-center">
+                          <Sparkles className="w-3 h-3 text-white" />
+                        </div>
+                      </div>
+                      <h4 className="font-bold text-lg mb-3 text-purple-800">🚀 Evolua Sempre</h4>
+                      <p className="text-sm text-purple-700 flex-1">
+                        IA personalizada que se adapta ao seu ritmo, oferecendo desafios e feedback para você se superar!
+                      </p>
+                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-purple-600">
+                        <CheckCircle className="w-4 h-4" />
+                        <span className="font-medium">Evolução Contínua</span>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-                <h4 className="font-semibold mb-2">Cresça Continuamente</h4>
-                <p className="text-sm text-muted-foreground">
-                  Receba feedback personalizado e desafios adaptativos para desenvolver suas habilidades emocionais.
-                </p>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+
+              {/* Call to Action */}
+              <div className="mt-8 text-center">
+                <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                  <Sparkles className="w-5 h-5" />
+                  <span>Comece sua jornada emocional agora!</span>
+                  <ArrowRight className="w-5 h-5" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Avatar Emocional */}
         <Card className="bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200">
