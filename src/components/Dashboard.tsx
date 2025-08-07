@@ -23,7 +23,7 @@ interface DashboardProps {
 const Dashboard = ({
   onViewChange
 }: DashboardProps) => {
-  // TODOS OS HOOKS DEVEM VIR PRIMEIRO
+  // TODOS OS HOOKS DEVEM VIR PRIMEIRO - ANTES DE QUALQUER RETURN
   const { displayName, nome } = useUserProfile();
   const { progress: userProgress, loading: progressLoading } = useUserProgress();
   const {
@@ -40,16 +40,6 @@ const Dashboard = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const featuresRef = useRef<HTMLDivElement>(null);
-
-  // Early return APÓS todos os hooks
-  if (!progress || !xpData || !achievements || progressLoading) {
-    return <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <Brain className="w-12 h-12 animate-spin mx-auto mb-4 text-primary" />
-          <p className="text-muted-foreground">Carregando seu dashboard...</p>
-        </div>
-      </div>;
-  }
 
   const features = [{
     icon: Brain,
@@ -68,15 +58,28 @@ const Dashboard = ({
     title: "Leitura Personalizada",
     description: "Recomendações baseadas no seu perfil de aprendizagem"
   }];
+
   const {
     currentIndex
   } = useScrollHijack(featuresRef, features.length);
+
+  // Early return APÓS todos os hooks
+  if (!progress || !xpData || !achievements || progressLoading) {
+    return <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Brain className="w-12 h-12 animate-spin mx-auto mb-4 text-primary" />
+          <p className="text-muted-foreground">Carregando seu dashboard...</p>
+        </div>
+      </div>;
+  }
+
   React.useEffect(() => {
     // Só chama checkAchievements se os dados estão disponíveis e mudaram
     if (progress?.completedActivities !== undefined && xpData?.currentLevel !== undefined) {
       checkAchievements(progress, xpData);
     }
   }, [progress?.completedActivities, xpData?.currentLevel]);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
