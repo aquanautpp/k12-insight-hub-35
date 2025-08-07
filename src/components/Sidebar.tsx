@@ -52,9 +52,16 @@ export function AppSidebar({
   currentView,
   onViewChange
 }: AppSidebarProps) {
-  const { state } = useSidebar();
-  const { user, signOut } = useAuth();
-  const { displayName } = useUserProfile();
+  const {
+    state
+  } = useSidebar();
+  const {
+    user,
+    signOut
+  } = useAuth();
+  const {
+    displayName
+  } = useUserProfile();
   return <Sidebar collapsible="icon" className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-16" : "w-64"}`}>
       <SidebarHeader className={`border-b border-border/30 transition-all duration-300 ${state === "collapsed" ? "p-2" : "p-4 md:p-6"}`}>
         <SidebarMenu>
@@ -88,7 +95,7 @@ export function AppSidebar({
               {navigationItems.map(item => <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton onClick={() => onViewChange(item.id)} className={`w-full justify-start h-12 md:h-11 rounded-xl transition-all duration-200 font-medium text-sm md:text-base ${currentView === item.id ? "bg-primary text-primary-foreground shadow-md" : "hover:bg-muted text-muted-foreground hover:text-foreground"} ${state === "collapsed" ? "justify-center px-2" : "px-3"}`}>
                     <item.icon className={`${state === "collapsed" ? "h-6 w-6" : "h-5 w-5"} ${currentView === item.id ? "text-white" : "text-black"} flex-shrink-0`} />
-                    {state !== "collapsed" && <span className="ml-3 truncate">{item.title}</span>}
+                    {state !== "collapsed" && <span className="ml-3 truncate text-sm">{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>)}
             </SidebarMenu>
@@ -107,16 +114,14 @@ export function AppSidebar({
                     {displayName?.charAt(0).toUpperCase() || 'U'}
                   </span>
                 </div>
-                {state !== "collapsed" && (
-                  <div className="flex flex-col text-left flex-1 min-w-0">
+                {state !== "collapsed" && <div className="flex flex-col text-left flex-1 min-w-0">
                     <span className="text-xs md:text-sm font-semibold text-foreground truncate">
                       Usuário
                     </span>
                     <span className="text-xs text-muted-foreground truncate">
                       {displayName}
                     </span>
-                  </div>
-                )}
+                  </div>}
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -125,17 +130,12 @@ export function AppSidebar({
         {/* Logout Button */}
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton 
-              onClick={signOut}
-              className={`w-full hover:bg-destructive/10 hover:text-destructive rounded-xl transition-colors duration-200 ${state === "collapsed" ? "p-2 justify-center min-h-[40px]" : "p-2 md:p-3 min-h-[40px] md:min-h-[44px]"}`}
-            >
+            <SidebarMenuButton onClick={signOut} className={`w-full hover:bg-destructive/10 hover:text-destructive rounded-xl transition-colors duration-200 ${state === "collapsed" ? "p-2 justify-center min-h-[40px]" : "p-2 md:p-3 min-h-[40px] md:min-h-[44px]"}`}>
               <div className={`flex items-center w-full ${state === "collapsed" ? "justify-center" : "space-x-3"}`}>
                 <LogOut className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-                {state !== "collapsed" && (
-                  <span className="text-xs md:text-sm font-medium truncate">
+                {state !== "collapsed" && <span className="text-xs md:text-sm font-medium truncate">
                     Sair
-                  </span>
-                )}
+                  </span>}
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
