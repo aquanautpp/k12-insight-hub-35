@@ -25,8 +25,14 @@ const Dashboard = ({
   onViewChange
 }: DashboardProps) => {
   // TODOS OS HOOKS DEVEM VIR PRIMEIRO - ANTES DE QUALQUER RETURN
-  const { displayName, nome } = useUserProfile();
-  const { progress: userProgress, loading: progressLoading } = useUserProgress();
+  const {
+    displayName,
+    nome
+  } = useUserProfile();
+  const {
+    progress: userProgress,
+    loading: progressLoading
+  } = useUserProgress();
   const {
     progress
   } = useProgress();
@@ -41,7 +47,6 @@ const Dashboard = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const featuresRef = useRef<HTMLDivElement>(null);
-
   const features = [{
     icon: Brain,
     title: "Método CPA",
@@ -59,7 +64,6 @@ const Dashboard = ({
     title: "Leitura Personalizada",
     description: "Recomendações baseadas no seu perfil de aprendizagem"
   }];
-
   const {
     currentIndex
   } = useScrollHijack(featuresRef, features.length);
@@ -71,7 +75,6 @@ const Dashboard = ({
       checkAchievements(progress, xpData);
     }
   }, [progress?.completedActivities, xpData?.currentLevel, checkAchievements]);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -85,11 +88,9 @@ const Dashboard = ({
     if (!progress?.cpaProgress) return 0;
     return Math.round((progress.cpaProgress.concrete + progress.cpaProgress.pictorial + progress.cpaProgress.abstract) / 3);
   }, [progress?.cpaProgress]);
-
   const reasoningProgress = React.useMemo(() => {
     return progress?.skillsProgress?.find(s => s.skill === 'Raciocínio Lógico')?.level || 75;
   }, [progress?.skillsProgress]);
-
   const overallProgress = React.useMemo(() => {
     return Math.round((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1) * 100);
   }, [progress?.completedActivities, progress?.totalActivities]);
@@ -165,58 +166,46 @@ const Dashboard = ({
           delay: 0.2
         }} className="flex flex-col items-center space-y-6 max-w-2xl mx-auto px-6 text-center">
             {/* Logo Mantha Completo */}
-            <motion.div 
-              className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full"
-              initial={{ 
-                opacity: 0,
-                y: 80,
-                x: -60,
-                scale: 0.8
-              }}
-              animate={{ 
-                opacity: 1,
-                y: 0,
-                x: 0,
+            <motion.div className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full" initial={{
+            opacity: 0,
+            y: 80,
+            x: -60,
+            scale: 0.8
+          }} animate={{
+            opacity: 1,
+            y: 0,
+            x: 0,
+            scale: 1
+          }} transition={{
+            duration: 3.5,
+            ease: "easeOut",
+            opacity: {
+              duration: 3.5,
+              ease: "easeOut"
+            },
+            y: {
+              duration: 3.5,
+              ease: "easeOut"
+            },
+            x: {
+              duration: 3.5,
+              ease: "easeOut"
+            },
+            scale: {
+              duration: 3.5,
+              ease: "easeOut"
+            }
+          }}>
+              <div className="w-[180px] md:w-[220px] lg:w-[260px] h-[120px] md:h-[140px] lg:h-[160px] flex items-center justify-center mx-auto bg-transparent">
+                <motion.img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2" initial={{
+                scale: 0.95
+              }} animate={{
                 scale: 1
-              }}
-              transition={{
+              }} transition={{
                 duration: 3.5,
                 ease: "easeOut",
-                opacity: {
-                  duration: 3.5,
-                  ease: "easeOut"
-                },
-                y: {
-                  duration: 3.5,
-                  ease: "easeOut"
-                },
-                x: {
-                  duration: 3.5,
-                  ease: "easeOut"
-                },
-                scale: {
-                  duration: 3.5,
-                  ease: "easeOut"
-                }
-              }}
-            >
-              <div className="w-[180px] md:w-[220px] lg:w-[260px] h-[120px] md:h-[140px] lg:h-[160px] flex items-center justify-center mx-auto bg-transparent">
-                <motion.img 
-                  src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" 
-                  alt="MANTHA - Educação Personalizada" 
-                  className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2"
-                  initial={{ 
-                    scale: 0.95
-                  }}
-                  animate={{ 
-                    scale: 1
-                  }}
-                  transition={{
-                    duration: 3.5,
-                    ease: "easeOut",
-                    delay: 0.8
-                  }}
-                />
+                delay: 0.8
+              }} />
               </div>
             </motion.div>
             <div className="mt-0">
@@ -253,11 +242,7 @@ const Dashboard = ({
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Acompanhe seu desenvolvimento através de métricas personalizadas
             </p>
-            {userProgress?.ultimo_acesso && (
-              <p className="text-sm text-muted-foreground mt-2">
-                Último acesso: {new Date(userProgress.ultimo_acesso).toLocaleString('pt-BR')}
-              </p>
-            )}
+            {userProgress?.ultimo_acesso}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -296,8 +281,7 @@ const Dashboard = ({
                 <Calendar className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-foreground text-2xl lg:text-3xl font-bold mb-2">
-                <AnimatedCounter end={userProgress?.atividades_completadas ? 
-                  (Array.isArray(userProgress.atividades_completadas) ? userProgress.atividades_completadas.length : 0) : 0} />
+                <AnimatedCounter end={userProgress?.atividades_completadas ? Array.isArray(userProgress.atividades_completadas) ? userProgress.atividades_completadas.length : 0 : 0} />
               </h3>
               <p className="text-muted-foreground">Atividades</p>
             </motion.div>
