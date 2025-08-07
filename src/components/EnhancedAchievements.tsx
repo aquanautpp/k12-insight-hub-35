@@ -248,24 +248,24 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
 
                          {/* Progresso para conquistas não desbloqueadas */}
                         {!achievement.isUnlocked && achievement.progress !== undefined && achievement.maxProgress && (
-                          <div className="w-full space-y-2 px-1">
-                            <div className="relative w-full h-3 bg-muted-foreground/20 rounded-full overflow-hidden">
+                          <div className="w-full space-y-1 px-1">
+                            <div className="relative w-full h-2 bg-muted-foreground/20 rounded-full overflow-hidden">
                               <motion.div
                                 className={`h-full ${rarityStyles.progressBg} rounded-full relative`}
                                 initial={{ width: 0 }}
                                 animate={{ width: `${progressPercentage}%` }}
-                                transition={{ duration: 1.5, delay: index * 0.2, ease: "easeOut" }}
+                                transition={{ duration: 1.2, delay: index * 0.2, ease: "easeOut" }}
                               >
                                 {achievement.rarity === 'diamond' && (
-                                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
+                                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-pulse" />
                                 )}
                               </motion.div>
                             </div>
-                            <div className="text-center overflow-hidden">
-                              <div className="text-sm font-bold truncate">
+                            <div className="text-center overflow-hidden leading-none">
+                              <div className="text-[13px] font-semibold leading-none truncate">
                                 {achievement.progress}/{achievement.maxProgress}
                               </div>
-                              <div className="text-xs opacity-80 mt-1 truncate">
+                              <div className="text-[11px] opacity-75 mt-0 leading-none truncate">
                                 {achievement.id === 'dedicado' ? 'dias' : 'problemas'}
                               </div>
                             </div>
