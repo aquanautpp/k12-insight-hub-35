@@ -180,7 +180,7 @@ const EmotionalIntelligence = () => {
             <CardHeader className="text-center pb-4">
               <div className="flex items-center justify-center mb-4">
                 <div className="relative">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/60 to-secondary/60 flex items-center justify-center shadow-lg">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
                     <Brain className="w-8 h-8 text-white" />
                   </div>
                   
