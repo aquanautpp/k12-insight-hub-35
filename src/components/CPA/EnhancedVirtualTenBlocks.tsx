@@ -89,20 +89,40 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
     });
 
     let currentX = 20;
-    let currentY = 60;
-    const maxWidth = 400; // Largura máxima da linha
+    let currentY = 20;
+    const maxWidth = 360; // Largura máxima da linha (ajustada para evitar overflow)
+    const padding = 10; // Espaçamento entre blocos
     
     return sortedBlocks.map(block => {
-      const blockWidth = block.type === 'hundred' ? 80 : block.type === 'ten' ? 80 : 40;
+      let blockWidth, blockHeight;
+      
+      // Definir dimensões baseadas no tipo
+      switch (block.type) {
+        case 'hundred':
+          blockWidth = 80;
+          blockHeight = 80;
+          break;
+        case 'ten':
+          blockWidth = 80;
+          blockHeight = 40;
+          break;
+        case 'unit':
+          blockWidth = 40;
+          blockHeight = 40;
+          break;
+        default:
+          blockWidth = 40;
+          blockHeight = 40;
+      }
       
       // Se ultrapassar a largura máxima, quebra linha
       if (currentX + blockWidth > maxWidth) {
         currentX = 20;
-        currentY += 100; // Nova linha
+        currentY += 100; // Espaço generoso para nova linha
       }
       
       const newBlock = { ...block, x: currentX, y: currentY };
-      currentX += blockWidth + 15; // Espaçamento entre blocos
+      currentX += blockWidth + padding; // Adicionar largura do bloco + padding
       
       return newBlock;
     });
