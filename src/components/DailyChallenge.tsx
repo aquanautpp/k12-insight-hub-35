@@ -113,18 +113,55 @@ const DailyChallenge = () => {
     const { currentChallenge } = useChallenge();
     if (!currentChallenge) return "Gere um novo desafio para ver dicas personalizadas.";
     
-    // Gerar dica baseada na categoria do desafio atual
+    // Dicas específicas por ID do desafio
+    const specificHints: { [key: string]: string } = {
+      'budget-planning': 'Primeiro calcule quanto sobra após os gastos atuais (Renda - Total de gastos). Depois determine se é possível atingir ambas as metas (20% para emergência + valor mensal para a viagem). Se não for possível, identifique onde cortar gastos.',
+      'pattern-sequence': 'Observe a diferença entre os números consecutivos. Existe um padrão nas diferenças? Às vezes o padrão está na progressão das diferenças.',
+      'geometry-kitchen': 'Para calcular a área do círculo, use a fórmula A = π × r². Lembre-se que o raio é metade do diâmetro.',
+      'logical-reasoning': 'Identifique as premissas verdadeiras e use dedução lógica. Elimine as opções que contradizem as informações dadas.',
+      'emotional-conflict': 'Considere os sentimentos de ambas as partes. Que estratégia de comunicação poderia resolver o conflito sem magoar ninguém?'
+    };
+
+    // Se há uma dica específica para este desafio, use-a
+    if (specificHints[currentChallenge.id]) {
+      return specificHints[currentChallenge.id];
+    }
+
+    // Análise por palavras-chave no título e contexto
+    const title = currentChallenge.title.toLowerCase();
+    const context = currentChallenge.context ? currentChallenge.context.join(' ').toLowerCase() : '';
+    const description = currentChallenge.description.toLowerCase();
+    const allText = `${title} ${context} ${description}`;
+
+    // Dicas baseadas em palavras-chave
+    if (allText.includes('orçamento') || allText.includes('dinheiro') || allText.includes('economia') || allText.includes('renda')) {
+      return 'Identifique receitas e despesas. Calcule o valor disponível e compare com as metas desejadas.';
+    }
+    if (allText.includes('sequência') || allText.includes('padrão') || allText.includes('próximo número')) {
+      return 'Procure por padrões nas diferenças entre números consecutivos ou em multiplicações/divisões.';
+    }
+    if (allText.includes('área') || allText.includes('perímetro') || allText.includes('geometria')) {
+      return 'Identifique as formas geométricas envolvidas e use as fórmulas apropriadas.';
+    }
+    if (allText.includes('conflito') || allText.includes('emoção') || allText.includes('sentimento')) {
+      return 'Considere as emoções envolvidas e busque soluções empáticas que beneficiem todos.';
+    }
+    if (allText.includes('lógica') || allText.includes('dedução') || allText.includes('premissa')) {
+      return 'Use raciocínio lógico: identifique as informações verdadeiras e tire conclusões válidas.';
+    }
+
+    // Fallback por categoria
     switch (currentChallenge.category) {
       case 'mathematics':
-        return "Dica: Identifique os dados conhecidos, determine o que precisa calcular e aplique operações matemáticas passo a passo.";
+        return 'Identifique os dados fornecidos e determine que operações são necessárias. Desenhe diagramas se ajudar.';
       case 'logic':
-        return "Dica: Analise os padrões, elimine as possibilidades impossíveis e use raciocínio dedutivo.";
+        return 'Identifique os padrões ou regras. Teste suas hipóteses com os exemplos dados.';
       case 'life_practical':
-        return "Dica: Considere soluções práticas, pense em diferentes alternativas e avalie os prós e contras.";
+        return 'Considere os recursos disponíveis e as limitações. Pense em soluções viáveis e realistas.';
       case 'emotional':
-        return "Dica: Analise os sentimentos envolvidos, identifique as emoções e considere as melhores formas de expressão.";
+        return 'Reflita sobre seus sentimentos e os dos outros. Considere diferentes perspectivas.';
       default:
-        return "Dica: Leia atentamente o problema, organize as informações e desenvolva sua solução passo a passo.";
+        return 'Leia o problema com atenção e identifique as informações-chave.';
     }
   };
 
@@ -132,18 +169,55 @@ const DailyChallenge = () => {
     const { currentChallenge } = useChallenge();
     if (!currentChallenge) return "Gere um novo desafio para receber orientação do tutor IA.";
     
-    // Gerar conselho baseado na categoria do desafio atual
+    // Conselhos específicos por ID do desafio
+    const specificAdvice: { [key: string]: string } = {
+      'budget-planning': 'Para resolver este problema: 1) Calcule a renda disponível (R$ 4.500 - gastos atuais), 2) Determine quanto precisa poupar (20% = R$ 900/mês + R$ 450/mês para viagem), 3) Compare com o disponível, 4) Se insuficiente, sugira cortes nos gastos não-essenciais como lazer.',
+      'pattern-sequence': 'Para sequências numéricas: 1) Liste as diferenças entre termos consecutivos, 2) Veja se há padrão nas diferenças, 3) Se não há padrão direto, analise as diferenças das diferenças, 4) Aplique o padrão encontrado.',
+      'geometry-kitchen': 'Para problemas de geometria: 1) Identifique as formas (círculo, retângulo, etc.), 2) Liste as medidas conhecidas, 3) Escolha a fórmula adequada, 4) Substitua os valores e calcule.',
+      'logical-reasoning': 'Para raciocínio lógico: 1) Liste todas as informações dadas como verdadeiras, 2) Identifique o que precisa descobrir, 3) Use eliminação das opções impossíveis, 4) Aplique dedução lógica.',
+      'emotional-conflict': 'Para conflitos emocionais: 1) Identifique os sentimentos de cada pessoa, 2) Reconheça as necessidades por trás das emoções, 3) Busque soluções que atendam a ambos, 4) Comunique-se com empatia.'
+    };
+
+    // Se há um conselho específico para este desafio, use-o
+    if (specificAdvice[currentChallenge.id]) {
+      return specificAdvice[currentChallenge.id];
+    }
+
+    // Análise por palavras-chave no título e contexto
+    const title = currentChallenge.title.toLowerCase();
+    const context = currentChallenge.context ? currentChallenge.context.join(' ').toLowerCase() : '';
+    const description = currentChallenge.description.toLowerCase();
+    const allText = `${title} ${context} ${description}`;
+
+    // Conselhos baseados em palavras-chave
+    if (allText.includes('orçamento') || allText.includes('dinheiro') || allText.includes('economia') || allText.includes('renda')) {
+      return 'Para problemas financeiros: 1) Liste todas as receitas e despesas, 2) Calcule o saldo disponível, 3) Compare com as metas desejadas, 4) Identifique onde ajustar se necessário.';
+    }
+    if (allText.includes('sequência') || allText.includes('padrão') || allText.includes('próximo número')) {
+      return 'Para sequências: 1) Observe as relações entre números consecutivos, 2) Teste diferentes tipos de progressão (aritmética, geométrica), 3) Identifique o padrão, 4) Aplique para encontrar os próximos termos.';
+    }
+    if (allText.includes('área') || allText.includes('perímetro') || allText.includes('geometria')) {
+      return 'Para geometria: 1) Desenhe o problema se possível, 2) Identifique as formas geométricas, 3) Liste as medidas conhecidas, 4) Use as fórmulas corretas para calcular.';
+    }
+    if (allText.includes('conflito') || allText.includes('emoção') || allText.includes('sentimento')) {
+      return 'Para questões emocionais: 1) Reconheça os sentimentos envolvidos, 2) Pratique escuta ativa, 3) Busque entender as perspectivas de todos, 4) Comunique-se com clareza e empatia.';
+    }
+    if (allText.includes('lógica') || allText.includes('dedução') || allText.includes('premissa')) {
+      return 'Para lógica: 1) Organize as informações conhecidas, 2) Identifique as regras ou premissas, 3) Use dedução sistemática, 4) Elimine possibilidades contradictórias.';
+    }
+
+    // Fallback por categoria
     switch (currentChallenge.category) {
       case 'mathematics':
-        return "💡 Tutor IA: Use o método CPA: 1) Concrete - visualize com objetos, 2) Pictorial - desenhe o problema, 3) Abstract - aplique fórmulas matemáticas.";
+        return 'Use o método CPA: 1) Concrete - visualize com objetos, 2) Pictorial - desenhe o problema, 3) Abstract - aplique fórmulas matemáticas.';
       case 'logic':
-        return "💡 Tutor IA: Para problemas lógicos: 1) Liste o que você sabe, 2) Identifique o que precisa descobrir, 3) Use eliminação e dedução sistemática.";
+        return 'Para problemas lógicos: 1) Liste o que você sabe, 2) Identifique o que precisa descobrir, 3) Use eliminação e dedução sistemática.';
       case 'life_practical':
-        return "💡 Tutor IA: Para situações práticas: 1) Analise o contexto, 2) Liste opções disponíveis, 3) Avalie consequências, 4) Escolha a melhor solução.";
+        return 'Para situações práticas: 1) Analise o contexto, 2) Liste opções disponíveis, 3) Avalie consequências, 4) Escolha a melhor solução.';
       case 'emotional':
-        return "💡 Tutor IA: Para questões emocionais: 1) Identifique os sentimentos, 2) Aceite as emoções, 3) Encontre formas saudáveis de expressão, 4) Busque apoio quando necessário.";
+        return 'Para questões emocionais: 1) Identifique os sentimentos, 2) Aceite as emoções, 3) Encontre formas saudáveis de expressão, 4) Busque apoio quando necessário.';
       default:
-        return "💡 Tutor IA: Organize suas ideias, analise os dados disponíveis e desenvolva uma solução estruturada passo a passo.";
+        return 'Organize suas ideias, analise os dados disponíveis e desenvolva uma solução estruturada passo a passo.';
     }
   };
 
