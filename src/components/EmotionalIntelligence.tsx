@@ -280,7 +280,7 @@ const EmotionalIntelligence = () => {
                   <Card className="h-full bg-gradient-to-br from-secondary/5 to-secondary/10 border-secondary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
                     <CardContent className="p-6 text-center h-full flex flex-col">
                       <div className="relative mb-4">
-                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center mx-auto shadow-lg">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto shadow-lg">
                           <Heart className="w-8 h-8 text-white" />
                         </div>
                         <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
