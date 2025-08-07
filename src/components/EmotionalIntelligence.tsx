@@ -287,7 +287,7 @@ const EmotionalIntelligence = () => {
 
               {/* Call to Action */}
               <div className="mt-8 text-center">
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary/80 to-secondary/80 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                   <Sparkles className="w-5 h-5" />
                   <span>Comece sua jornada emocional agora!</span>
                   <ArrowRight className="w-5 h-5" />
