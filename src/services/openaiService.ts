@@ -1,7 +1,7 @@
 // OpenAI Service for Real AI Tutoring via Supabase Edge Functions
 import { supabase } from '@/integrations/supabase/client';
 
-export interface ChatMessage {
+interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
   content: string;
 }
@@ -186,6 +186,7 @@ Está pronto para aplicarmos estas estratégias?`,
   }
 
   async generatePersonalizedInsight(progressData: any): Promise<string> {
+    // Mock implementation for generating insights based on progress
     const insights = [
       `Com base no seu progresso, vejo que você está se destacando em ${progressData.skillsProgress?.[0]?.skill || 'raciocínio lógico'}! 🎯`,
       `Sua sequência de ${progressData.currentStreak || 3} dias mostra grande dedicação! Continue assim! 🔥`,
@@ -194,20 +195,6 @@ Está pronto para aplicarmos estas estratégias?`,
     ];
 
     return insights[Math.floor(Math.random() * insights.length)];
-  }
-
-  async textToSpeech(text: string, voice?: string): Promise<{ base64: string; format: 'mp3' }> {
-    try {
-      const { data, error } = await supabase.functions.invoke('text-to-speech', {
-        body: { text, voice }
-      });
-      if (error) throw error;
-      if (!data?.audioContent) throw new Error('Resposta inválida do TTS');
-      return { base64: data.audioContent as string, format: (data.format || 'mp3') as 'mp3' };
-    } catch (e) {
-      console.error('TTS error:', e);
-      throw e;
-    }
   }
 }
 

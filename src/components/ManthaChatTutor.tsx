@@ -474,16 +474,6 @@ ${abstractResp}
     textareaRef.current?.focus();
   };
 
-  const handlePlayAudio = async (text: string) => {
-    try {
-      const { base64 } = await openaiService.textToSpeech(text);
-      const audio = new Audio(`data:audio/mp3;base64,${base64}`);
-      await audio.play();
-    } catch (err) {
-      console.error('Erro ao reproduzir áudio:', err);
-      toast({ title: 'Falha ao reproduzir', description: 'Não foi possível gerar o áudio desta resposta.', variant: 'destructive' });
-    }
-  };
   return (
     <div className="w-full max-w-5xl mx-auto p-3 md:p-6">
       <Card className="h-[70vh] md:h-[850px] flex flex-col shadow-card">
@@ -590,15 +580,15 @@ ${abstractResp}
                        )}
                       </div>
 
-                      {message.sender === 'mantha' && (
-                        <QuickActionButtons
-                          messageContent={message.content}
-                          onExplainDifferently={() => handleExplainDifferently(message.content)}
-                          onMoreDetails={() => handleMoreDetails(message.content)}
-                          onCreateExercise={() => handleCreateExercise(message.content)}
-                          onPlayAudio={() => handlePlayAudio(message.content)}
-                        />
-                      )}
+                     {/* Quick Action Buttons para mensagens da Mantha */}
+                     {message.sender === 'mantha' && (
+                       <QuickActionButtons
+                         messageContent={message.content}
+                         onExplainDifferently={() => handleExplainDifferently(message.content)}
+                         onMoreDetails={() => handleMoreDetails(message.content)}
+                         onCreateExercise={() => handleCreateExercise(message.content)}
+                       />
+                     )}
                      
                      {/* Timestamp e estágio */}
                     <div className="flex items-center justify-between mt-1 px-1">
