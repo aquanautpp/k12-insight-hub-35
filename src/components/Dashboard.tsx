@@ -16,6 +16,10 @@ import { SystemTest } from './SystemTest';
 import { AnimatedCounter } from './AnimatedCounter';
 import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { SkillTree } from './SkillTree';
+import { EnhancedAchievements } from './EnhancedAchievements';
+import { RadarChartComponent } from './RadarChart';
+import { ThemeToggle } from './ThemeToggle';
 import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
 import logoImage from '@/assets/mantha-logo-corrected.png';
 interface DashboardProps {
@@ -216,15 +220,18 @@ const Dashboard = ({
                 Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 mt-2">
-              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}>
-                Ver Progresso
-                <TrendingUp className="ml-2 h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('cpa-method')}>
-                Começar Hoje
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-4 mt-2 items-center">
+              <div className="flex gap-4">
+                <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}>
+                  Ver Progresso
+                  <TrendingUp className="ml-2 h-4 w-4" />
+                </Button>
+                <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('cpa-method')}>
+                  Começar Hoje
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+              <ThemeToggle />
             </div>
           </motion.div>
         </div>
@@ -371,34 +378,37 @@ const Dashboard = ({
           </motion.div>
         </div>
 
-        {/* Caminho Adaptativo */}
+        {/* Skill Tree */}
         <motion.div variants={itemVariants}>
-          <AdaptiveLearningPath currentLevel={overallProgress} completedModules={["Números Básicos", "Operações Simples"]} nextModules={["Percentuais", "Geometria Visual"]} successRate={87} />
+          <SkillTree 
+            currentLevel={xpData?.currentLevel || 1} 
+            completedActivities={userProgress?.atividades_completadas ? Array.isArray(userProgress.atividades_completadas) ? userProgress.atividades_completadas.length : 0 : 0} 
+          />
         </motion.div>
 
-        {/* Conquistas */}
-        <motion.div variants={itemVariants}>
-          <Card className="card-gradient">
-            <CardHeader className="text-center">
-              <CardTitle className="flex items-center justify-center gap-3 text-xl">
-                <Award className="h-5 w-5 text-primary" />
-                Suas Conquistas
-              </CardTitle>
-              <CardDescription>
-                Celebre seus marcos de aprendizagem
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {displayAchievements.map((achievement, index) => <div key={index} className="text-center p-4 rounded-xl transition-all hover-scale bg-white border border-primary">
-                    <div className="text-2xl mb-2">{achievement.icon}</div>
-                    <h4 className="font-medium text-sm mb-1">{achievement.title}</h4>
-                    <p className="text-xs text-muted-foreground">{achievement.description}</p>
-                  </div>)}
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        {/* Radar Chart and Enhanced Achievements */}
+        <div className="grid gap-6 md:grid-cols-2">
+          <motion.div variants={itemVariants}>
+            <RadarChartComponent 
+              mathProgress={mathProgress}
+              reasoningProgress={reasoningProgress}
+            />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <EnhancedAchievements 
+              achievements={achievements.map(a => ({
+                id: String(a.id),
+                title: a.title,
+                description: a.description,
+                icon: a.icon,
+                rarity: 'bronze' as const,
+                unlocked: unlockedAchievements.some(ua => ua.id === a.id),
+                unlockedAt: unlockedAchievements.some(ua => ua.id === a.id) ? new Date() : undefined,
+                isNew: unlockedAchievements.some(ua => ua.id === a.id)
+              }))}
+            />
+          </motion.div>
+        </div>
 
       </motion.div>
     </div>;
