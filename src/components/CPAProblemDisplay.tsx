@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Eye, EyeOff, Brain } from "lucide-react";
+import { CheckCircle, Eye, EyeOff, Brain, ChevronLeft, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface CPAChallenge {
@@ -202,25 +202,26 @@ export const CPAProblemDisplay = ({ stage, onComplete }: CPAProblemDisplayProps)
         title: "🎉 Resposta correta!",
         description: "Parabéns! Você resolveu o problema.",
       });
-      
-      // Avançar para o próximo problema após 2 segundos
-      setTimeout(() => {
-        if (currentProblemIndex < stageProblems.length - 1) {
-          setCurrentProblemIndex(prev => prev + 1);
-          setUserAnswer("");
-        } else {
-          toast({
-            title: "🏆 Estágio concluído!",
-            description: `Você completou todos os problemas do estágio ${getStageTitle(stage)}!`,
-          });
-        }
-      }, 2000);
     } else {
       toast({
         title: "Resposta incorreta",
         description: "Tente novamente! Observe bem a visualização.",
         variant: "destructive",
       });
+    }
+  };
+
+  const goToNextProblem = () => {
+    if (currentProblemIndex < stageProblems.length - 1) {
+      setCurrentProblemIndex(prev => prev + 1);
+      setUserAnswer("");
+    }
+  };
+
+  const goToPreviousProblem = () => {
+    if (currentProblemIndex > 0) {
+      setCurrentProblemIndex(prev => prev - 1);
+      setUserAnswer("");
     }
   };
 
@@ -264,9 +265,31 @@ export const CPAProblemDisplay = ({ stage, onComplete }: CPAProblemDisplayProps)
                 <p className="text-white/90 mt-1">{getStageDescription(stage)}</p>
               </div>
             </div>
-            <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
-              Exemplo {currentProblemIndex + 1} de {stageProblems.length}
-            </Badge>
+            <div className="flex items-center gap-3">
+              <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                Exemplo {currentProblemIndex + 1} de {stageProblems.length}
+              </Badge>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={goToPreviousProblem}
+                  disabled={currentProblemIndex === 0}
+                  className="text-white hover:bg-white/20 disabled:opacity-50"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={goToNextProblem}
+                  disabled={currentProblemIndex === stageProblems.length - 1}
+                  className="text-white hover:bg-white/20 disabled:opacity-50"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
           </div>
         </CardHeader>
       </Card>
