@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Brain, MessageSquare, BarChart3, Target, BookOpen, Heart, Book, User, Globe } from 'lucide-react';
+import { LayoutDashboard, Brain, MessageSquare, BarChart3, Target, BookOpen, Heart, Book, User, Globe, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import logoImage from '@/assets/mantha-logo.png';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
 interface AppSidebarProps {
   currentView: string;
   onViewChange: (view: string) => void;
@@ -49,9 +51,8 @@ export function AppSidebar({
   currentView,
   onViewChange
 }: AppSidebarProps) {
-  const {
-    state
-  } = useSidebar();
+  const { state } = useSidebar();
+  const { user, signOut } = useAuth();
   return <Sidebar collapsible="icon" className={`transition-all duration-300 bg-white border-r border-border/50 ${state === "collapsed" ? "w-16 md:w-48" : "w-64 md:w-64"}`}>
       <SidebarHeader className="border-b border-border/30 p-4 md:p-6 px-[10px]">
         <SidebarMenu>
@@ -93,18 +94,46 @@ export function AppSidebar({
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-border/30 p-3 md:p-4 px-0 flex-shrink-0">
+      <SidebarFooter className="border-t border-border/30 p-3 md:p-4 px-0 flex-shrink-0 space-y-2">
+        {/* User Info */}
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton className="w-full p-2 md:p-3 hover:bg-muted rounded-xl transition-colors duration-200 min-h-[48px] md:min-h-[60px]">
               <div className="flex items-center space-x-3 w-full">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-achievement flex items-center justify-center shadow-md flex-shrink-0">
-                  <span className="text-white text-xs md:text-sm font-semibold py-px my-0">V</span>
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md flex-shrink-0">
+                  <span className="text-white text-xs md:text-sm font-semibold">
+                    {user?.email?.charAt(0).toUpperCase() || 'U'}
+                  </span>
                 </div>
-                {state !== "collapsed" && <div className="flex flex-col text-left flex-1 min-w-0">
-                    <span className="text-xs md:text-sm font-semibold text-foreground truncate">Victor</span>
-                    <span className="text-xs text-muted-foreground truncate">Estudante</span>
-                  </div>}
+                {state !== "collapsed" && (
+                  <div className="flex flex-col text-left flex-1 min-w-0">
+                    <span className="text-xs md:text-sm font-semibold text-foreground truncate">
+                      {user?.user_metadata?.display_name || 'Usuário'}
+                    </span>
+                    <span className="text-xs text-muted-foreground truncate">
+                      {user?.email}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+
+        {/* Logout Button */}
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton 
+              onClick={signOut}
+              className="w-full p-2 md:p-3 hover:bg-destructive/10 hover:text-destructive rounded-xl transition-colors duration-200 min-h-[40px] md:min-h-[44px]"
+            >
+              <div className="flex items-center space-x-3 w-full">
+                <LogOut className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                {state !== "collapsed" && (
+                  <span className="text-xs md:text-sm font-medium truncate">
+                    Sair
+                  </span>
+                )}
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
