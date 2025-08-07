@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, BookOpen, Calculator, Brain, Target, Zap, HelpCircle, Trash2, AlertTriangle } from "lucide-react";
+import { EnhancedTextarea, EnhancedTextareaRef } from "@/components/chat/EnhancedTextarea";
+import { QuestionSuggestions } from "@/components/chat/QuestionSuggestions";
+import { QuickActionButtons } from "@/components/chat/QuickActionButtons";
 import { 
   AlertDialog,
   AlertDialogAction,
@@ -71,6 +73,7 @@ const ManthaChatTutor = () => {
   const [currentStage, setCurrentStage] = useState<CPAStage>('adaptive');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<EnhancedTextareaRef>(null);
 
   // Carregar histórico do chat quando componente inicializar
   useEffect(() => {
@@ -447,6 +450,29 @@ ${abstractResp}
     }
   };
 
+  const handleSuggestionClick = (suggestion: string) => {
+    setInputMessage(suggestion);
+    textareaRef.current?.focus();
+  };
+
+  const handleExplainDifferently = (originalMessage: string) => {
+    const prompt = `Explique de uma forma diferente: ${originalMessage}`;
+    setInputMessage(prompt);
+    textareaRef.current?.focus();
+  };
+
+  const handleMoreDetails = (originalMessage: string) => {
+    const prompt = `Preciso de mais detalhes sobre: ${originalMessage}`;
+    setInputMessage(prompt);
+    textareaRef.current?.focus();
+  };
+
+  const handleCreateExercise = (topic: string) => {
+    const prompt = `Crie um exercício prático sobre este tópico: ${topic}`;
+    setInputMessage(prompt);
+    textareaRef.current?.focus();
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto p-3 md:p-6">
       <Card className="h-[70vh] md:h-[850px] flex flex-col shadow-card">
@@ -527,8 +553,8 @@ ${abstractResp}
         <CardContent className="flex-1 p-0 overflow-hidden">
           <ScrollArea className="h-full p-3 md:p-4" ref={scrollRef}>
             <div className="space-y-3 md:space-y-4">
-              {messages.map((message) => (
-                <div key={message.id} className={`flex gap-2 md:gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+               {messages.map((message) => (
+                 <div key={message.id} className={`flex gap-2 md:gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'} group`}>
                   
                   {/* Avatar do Tutor */}
                   {message.sender === 'mantha' && (
@@ -551,9 +577,19 @@ ${abstractResp}
                        ) : (
                          <p className="leading-relaxed break-words whitespace-pre-wrap">{message.content}</p>
                        )}
-                     </div>
-                    
-                    {/* Timestamp e estágio */}
+                      </div>
+
+                     {/* Quick Action Buttons para mensagens da Mantha */}
+                     {message.sender === 'mantha' && (
+                       <QuickActionButtons
+                         messageContent={message.content}
+                         onExplainDifferently={() => handleExplainDifferently(message.content)}
+                         onMoreDetails={() => handleMoreDetails(message.content)}
+                         onCreateExercise={() => handleCreateExercise(message.content)}
+                       />
+                     )}
+                     
+                     {/* Timestamp e estágio */}
                     <div className="flex items-center justify-between mt-1 px-1">
                       <span className="text-xs text-muted-foreground">
                         {message.timestamp.toLocaleTimeString('pt-BR', { 
@@ -601,32 +637,40 @@ ${abstractResp}
           </ScrollArea>
         </CardContent>
 
+        {/* Sugestões de perguntas */}
+        {!isLoading && messages.length > 0 && (
+          <div className="border-t p-3 md:p-4 bg-muted/20">
+            <QuestionSuggestions 
+              currentStage={currentStage}
+              onSuggestionClick={handleSuggestionClick}
+              disabled={isLoading}
+            />
+          </div>
+        )}
+
         {/* Input de mensagem */}
         <div className="border-t p-3 md:p-4 bg-background rounded-b-lg">
           <div className="flex gap-2 md:gap-3 items-end">
             <div className="flex-1">
-              <Input
+              <EnhancedTextarea
+                ref={textareaRef}
                 value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onChange={setInputMessage}
+                onKeyDown={handleKeyPress}
                 placeholder="Digite sua pergunta sobre matemática..."
-                className="min-h-[44px] md:min-h-[48px] text-sm md:text-base rounded-xl border-2 resize-none"
                 disabled={isLoading}
+                maxLength={500}
               />
             </div>
             <Button 
               onClick={handleSendMessage}
               disabled={isLoading || !inputMessage.trim()}
-              className="h-[44px] w-[44px] md:h-[48px] md:w-[48px] rounded-xl flex-shrink-0 p-0"
+              className={`h-[44px] w-[44px] md:h-[48px] md:w-[48px] rounded-xl flex-shrink-0 p-0 transition-colors ${
+                inputMessage.trim() ? 'bg-primary hover:bg-primary/90' : ''
+              }`}
             >
               <Send className="w-4 h-4 md:w-5 md:h-5" />
             </Button>
-          </div>
-          
-          {/* Dicas de uso */}
-          <div className="mt-2 text-xs text-muted-foreground text-center">
-            <span className="hidden sm:inline">Pressione Enter para enviar • </span>
-            Experimente perguntar sobre fórmulas, cálculos ou conceitos matemáticos
           </div>
         </div>
       </Card>
