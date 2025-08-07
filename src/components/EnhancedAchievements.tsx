@@ -246,9 +246,9 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
                            'Diamond'}
                         </Badge>
 
-                        {/* Progresso para conquistas não desbloqueadas */}
+                         {/* Progresso para conquistas não desbloqueadas */}
                         {!achievement.isUnlocked && achievement.progress !== undefined && achievement.maxProgress && (
-                          <div className="w-full space-y-2">
+                          <div className="w-full space-y-2 px-1">
                             <div className="relative w-full h-3 bg-muted-foreground/20 rounded-full overflow-hidden">
                               <motion.div
                                 className={`h-full ${rarityStyles.progressBg} rounded-full relative`}
@@ -261,13 +261,13 @@ export const EnhancedAchievements: React.FC<EnhancedAchievementsProps> = ({
                                 )}
                               </motion.div>
                             </div>
-                            <div className="text-center">
-                              <span className="text-sm font-bold">
+                            <div className="text-center overflow-hidden">
+                              <div className="text-sm font-bold truncate">
                                 {achievement.progress}/{achievement.maxProgress}
-                              </span>
-                              <span className="text-xs block opacity-80 mt-1">
+                              </div>
+                              <div className="text-xs opacity-80 mt-1 truncate">
                                 {achievement.id === 'dedicado' ? 'dias' : 'problemas'}
-                              </span>
+                              </div>
                             </div>
                           </div>
                         )}
