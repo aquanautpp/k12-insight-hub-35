@@ -57,7 +57,7 @@ export const AdaptiveLearningPath: React.FC<AdaptiveLearningPathProps> = ({
           </h4>
           <div className="flex flex-wrap gap-2">
             {completedModules.map((module, index) => (
-              <Badge key={index} variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+              <Badge key={index} variant="outline" className="text-xs bg-primary text-white border-primary">
                 ✓ {module}
               </Badge>
             ))}
