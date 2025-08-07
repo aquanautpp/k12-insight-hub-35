@@ -7,196 +7,245 @@ interface MathTextRendererProps {
 
 const MathTextRenderer: React.FC<MathTextRendererProps> = ({ content, className = "" }) => {
   
-  // Pre-process and normalize LaTeX text
-  const preprocessText = (text: string): string => {
-    return text
-      // Remove LaTeX delimiters completely
-      .replace(/\\\[|\\\]|\\\(|\\\)/g, '')
-      .replace(/\$\$|\$/g, '')
-      // Clean LaTeX commands
-      .replace(/\\text\{([^}]*)\}/g, '$1')
-      .replace(/\\[a-z]+\s*(?=\{)/gi, '') // Remove LaTeX commands before braces
-      // Normalize whitespace
-      .replace(/\s+/g, ' ')
-      .trim();
+  // Específicamente para fórmula de Bhaskara
+  const renderBhaskaraFormula = (): React.ReactNode => {
+    return (
+      <div className="my-4 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+        <div className="text-center">
+          <div className="text-lg font-bold text-primary mb-2">Fórmula de Bhaskara</div>
+          <div className="flex items-center justify-center gap-2 text-xl font-semibold">
+            <span>x =</span>
+            <div className="inline-flex flex-col items-center mx-2">
+              <div className="flex items-center gap-1 px-3 py-1">
+                <span>-b</span>
+                <span className="text-primary font-bold">±</span>
+                <span className="flex items-center">
+                  <span className="text-lg">√</span>
+                  <span className="border-t-2 border-primary px-2 py-1">
+                    b<sup className="text-sm">2</sup> - 4ac
+                  </span>
+                </span>
+              </div>
+              <div className="border-t-2 border-primary w-full mt-1"></div>
+              <div className="px-3 py-1 mt-1">
+                2a
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
-  // Convert LaTeX symbols to Unicode equivalents
-  const convertLatexSymbols = (text: string): string => {
-    const conversions: Record<string, string> = {
-      '\\pm': '±', '\\mp': '∓', '\\times': '×', '\\div': '÷',
-      '\\leq': '≤', '\\geq': '≥', '\\neq': '≠', '\\approx': '≈',
-      '\\infty': '∞', '\\sqrt': '√', '\\alpha': 'α', '\\beta': 'β',
-      '\\gamma': 'γ', '\\delta': 'δ', '\\pi': 'π', '\\theta': 'θ',
-      '\\lambda': 'λ', '\\mu': 'μ', '\\sigma': 'σ', '\\phi': 'φ',
-      '\\omega': 'ω', '\\Delta': 'Δ', '\\sum': '∑', '\\int': '∫'
+  // Renderizar potências de forma amigável
+  const renderExponent = (base: string, exp: string): React.ReactNode => {
+    return (
+      <span className="inline-flex items-baseline">
+        <span className="font-semibold">{base}</span>
+        <sup className="text-sm font-bold text-primary ml-0.5">{exp}</sup>
+      </span>
+    );
+  };
+
+  // Renderizar frações de forma visual
+  const renderFraction = (numerator: string, denominator: string): React.ReactNode => {
+    return (
+      <span className="inline-flex flex-col items-center mx-1 text-base">
+        <span className="px-2 py-1 font-semibold text-center">
+          {numerator}
+        </span>
+        <div className="border-t-2 border-primary w-full min-w-[3rem]"></div>
+        <span className="px-2 py-1 font-semibold text-center">
+          {denominator}
+        </span>
+      </span>
+    );
+  };
+
+  // Processar equações quadráticas
+  const processQuadraticEquation = (text: string): React.ReactNode => {
+    // Detectar ax² + bx + c = 0
+    const quadraticPattern = /(\d*)x\^?2?\s*([+-])\s*(\d*)x\s*([+-])\s*(\d+)\s*=\s*0/;
+    const match = text.match(quadraticPattern);
+    
+    if (match) {
+      const [, a, sign1, b, sign2, c] = match;
+      return (
+        <div className="my-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="text-center text-lg font-semibold">
+            {a || '1'}{renderExponent('x', '2')} 
+            <span className="mx-2">{sign1}</span>
+            {b && `${b}x`}
+            <span className="mx-2">{sign2}</span>
+            {c} = 0
+          </div>
+        </div>
+      );
+    }
+    
+    return null;
+  };
+
+  // Adaptar linguagem para pré-adolescentes
+  const adaptLanguageForTeens = (text: string): string => {
+    const adaptations: Record<string, string> = {
+      'fórmula de Bhaskara': 'fórmula mágica de Bhaskara',
+      'ferramenta utilizada': 'truque especial usado',
+      'coeficientes': 'números importantes (a, b e c)',
+      'discriminante': 'valor especial (b² - 4ac)',
+      'substitua na fórmula': 'coloque os números na fórmula mágica',
+      'calcule': 'faça as contas',
+      'identifique os valores': 'encontre os números',
+      'equação quadrática': 'equação com x²',
+      'onde a, b e c são constantes': 'onde a, b e c são os números da sua equação',
+      'objetos físicos': 'coisas que você pode tocar',
+      'moedas': 'moedinhas',
+      'feijões': 'grãozinhos'
     };
 
     let result = text;
-    for (const [latex, unicode] of Object.entries(conversions)) {
-      result = result.replace(new RegExp(latex.replace(/\\/g, '\\\\'), 'g'), unicode);
+    for (const [technical, friendly] of Object.entries(adaptations)) {
+      result = result.replace(new RegExp(technical, 'gi'), friendly);
     }
+    
     return result;
   };
 
-  // Render fractions with proper visual styling
-  const renderFraction = (numerator: string, denominator: string, key: number): React.ReactNode => {
-    const cleanNum = preprocessText(numerator.replace(/^\{+|\}+$/g, ''));
-    const cleanDen = preprocessText(denominator.replace(/^\{+|\}+$/g, ''));
-    
-    return (
-      <span key={key} className="inline-flex flex-col items-center mx-1 text-base">
-        <span className="px-2 py-0.5 min-w-[1.5rem] text-center leading-tight font-medium">
-          {cleanNum}
-        </span>
-        <div className="border-t-2 border-primary w-full min-w-[2rem]"></div>
-        <span className="px-2 py-0.5 min-w-[1.5rem] text-center leading-tight font-medium">
-          {cleanDen}
-        </span>
-      </span>
-    );
-  };
+  // Processar texto principal
+  const processContent = (text: string): React.ReactNode[] => {
+    const adaptedText = adaptLanguageForTeens(text);
+    const lines = adaptedText.split('\n');
+    const result: React.ReactNode[] = [];
 
-  // Render superscripts with proper styling
-  const renderSuperscript = (base: string, exp: string, key: number): React.ReactNode => {
-    return (
-      <span key={key} className="inline-block font-medium">
-        {base}<sup className="text-xs font-bold text-primary">{exp}</sup>
-      </span>
-    );
-  };
-
-  // Process mathematical expressions with improved parsing
-  const processMathExpression = (text: string): React.ReactNode[] => {
-    let result: React.ReactNode[] = [];
-    let remaining = preprocessText(text);
-    let key = 0;
-
-    // Step 1: Process fractions first (highest precedence)
-    const fractionRegex = /\\frac\s*\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\s*\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g;
-    let lastIndex = 0;
-    let match;
-
-    while ((match = fractionRegex.exec(remaining)) !== null) {
-      // Add text before fraction
-      if (match.index > lastIndex) {
-        const beforeText = remaining.substring(lastIndex, match.index);
-        if (beforeText.trim()) {
-          result.push(convertLatexSymbols(beforeText));
-        }
-      }
-      
-      // Add fraction
-      result.push(renderFraction(match[1], match[2], key++));
-      lastIndex = match.index + match[0].length;
-    }
-
-    // Process remaining text after fractions
-    remaining = remaining.substring(lastIndex);
-    
-    // Step 2: Process square roots
-    remaining = remaining.replace(/\\sqrt\s*\{([^}]+)\}/g, (match, content) => {
-      result.push(
-        <span key={key++} className="inline-block font-medium">
-          √<span className="border-t border-primary px-1">{content}</span>
-        </span>
-      );
-      return '';
-    });
-
-    // Step 3: Process superscripts
-    remaining = remaining.replace(/([a-zA-Z0-9\(\)]+)\s*\^\s*\{([^}]+)\}/g, (match, base, exp) => {
-      result.push(renderSuperscript(base, exp, key++));
-      return '';
-    });
-    
-    remaining = remaining.replace(/([a-zA-Z0-9\(\)]+)\s*\^\s*([a-zA-Z0-9]+)/g, (match, base, exp) => {
-      result.push(renderSuperscript(base, exp, key++));
-      return '';
-    });
-
-    // Step 4: Clean up and add remaining text
-    if (remaining.trim()) {
-      const cleaned = convertLatexSymbols(remaining)
-        .replace(/\{([^}]*)\}/g, '$1') // Remove remaining braces
-        .replace(/\\?frac/g, '') // Remove stray frac commands
-        .replace(/\s+/g, ' ') // Normalize spaces
-        .trim();
-      
-      if (cleaned) {
-        result.push(cleaned);
-      }
-    }
-
-    return result.length > 0 ? result : [convertLatexSymbols(text)];
-  };
-
-  // Process text formatting including math expressions
-  const processTextFormatting = (text: string): React.ReactNode => {
-    // Check if this looks like a math expression
-    const hasMath = /\\frac|\\sqrt|\^|\\[a-zA-Z]+/.test(text);
-    
-    if (hasMath) {
-      return (
-        <span className="inline-flex items-center flex-wrap gap-1 font-medium text-primary">
-          {processMathExpression(text)}
-        </span>
-      );
-    }
-
-    // Process regular text with bold formatting
-    const boldRegex = /\*\*([^*]+)\*\*/g;
-    const parts = text.split(boldRegex);
-    
-    return parts.map((part, index) => {
-      if (index % 2 === 1) {
-        return <strong key={index} className="font-bold text-primary">{part}</strong>;
-      }
-      return part;
-    });
-  };
-
-  // Main rendering function for formatted text
-  const renderFormattedText = (text: string) => {
-    const lines = text.split('\n');
-    
-    return lines.map((line, lineIndex) => {
+    lines.forEach((line, index) => {
       if (line.trim() === '') {
-        return <br key={lineIndex} />;
+        result.push(<br key={index} />);
+        return;
       }
-      
-      // Handle headers
-      if (line.startsWith('###')) {
-        return <h3 key={lineIndex} className="text-lg font-bold text-primary mb-3 mt-4 first:mt-0">{line.replace(/^###\s*/, '')}</h3>;
-      } else if (line.startsWith('##')) {
-        return <h2 key={lineIndex} className="text-xl font-bold text-primary mb-3 mt-4 first:mt-0">{line.replace(/^##\s*/, '')}</h2>;
-      } else if (line.startsWith('#')) {
-        return <h1 key={lineIndex} className="text-2xl font-bold text-primary mb-4 mt-4 first:mt-0">{line.replace(/^#\s*/, '')}</h1>;
-      }
-      
-      // Handle lists
-      if (line.trim().startsWith('•') || line.trim().startsWith('-')) {
-        const listItem = line.replace(/^[\s]*[•-]\s*/, '');
-        return (
-          <div key={lineIndex} className="flex items-start gap-2 mb-2">
-            <span className="text-primary font-bold mt-0.5">•</span>
-            <span>{processTextFormatting(listItem)}</span>
+
+      // Detectar se é sobre Bhaskara
+      if (line.toLowerCase().includes('bhaskara') || line.includes('x =')) {
+        result.push(
+          <div key={index} className="my-4">
+            {renderBhaskaraFormula()}
           </div>
         );
+        return;
       }
-      
-      // Regular paragraph
-      return (
-        <p key={lineIndex} className="mb-2 leading-relaxed text-foreground">
-          {processTextFormatting(line)}
+
+      // Processar equação quadrática
+      const quadratic = processQuadraticEquation(line);
+      if (quadratic) {
+        result.push(<div key={index}>{quadratic}</div>);
+        return;
+      }
+
+      // Títulos
+      if (line.startsWith('##')) {
+        const title = line.replace(/^##\s*/, '');
+        result.push(
+          <h2 key={index} className="text-xl font-bold text-primary mb-3 mt-4 first:mt-0">
+            🎯 {title}
+          </h2>
+        );
+        return;
+      }
+
+      // Etapas numeradas
+      if (/^\d+\./.test(line.trim())) {
+        const step = line.replace(/^\d+\.\s*/, '');
+        const stepNumber = line.match(/^(\d+)\./)?.[1];
+        result.push(
+          <div key={index} className="flex items-start gap-3 mb-3 p-3 bg-green-50 rounded-lg border border-green-200">
+            <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm">
+              {stepNumber}
+            </div>
+            <div className="flex-1">
+              {processInlineText(step)}
+            </div>
+          </div>
+        );
+        return;
+      }
+
+      // Lista com bullets
+      if (line.trim().startsWith('•') || line.trim().startsWith('-')) {
+        const item = line.replace(/^[\s]*[•-]\s*/, '');
+        result.push(
+          <div key={index} className="flex items-start gap-2 mb-2 ml-4">
+            <span className="text-primary font-bold mt-1">🔸</span>
+            <span>{processInlineText(item)}</span>
+          </div>
+        );
+        return;
+      }
+
+      // Parágrafo normal
+      result.push(
+        <p key={index} className="mb-3 leading-relaxed text-foreground">
+          {processInlineText(line)}
         </p>
       );
     });
+
+    return result;
+  };
+
+  // Processar texto inline com matemática
+  const processInlineText = (text: string): React.ReactNode => {
+    let result = text;
+
+    // Substituir potências simples
+    result = result.replace(/(\w+)\^(\d+)/g, (match, base, exp) => {
+      return `${base}^${exp}`;
+    });
+
+    // Substituir símbolos matemáticos
+    result = result.replace(/\+-/g, '±');
+    result = result.replace(/\±/g, '±');
+
+    // Procurar e substituir expressões matemáticas específicas
+    if (result.includes('2x²') || result.includes('2x^2')) {
+      return (
+        <span>
+          {result.split(/(2x[\^²]?2?)/g).map((part, i) => {
+            if (part === '2x²' || part === '2x^2') {
+              return <span key={i}>2{renderExponent('x', '2')}</span>;
+            }
+            if (part.includes('b²') || part.includes('b^2')) {
+              return <span key={i}>{part.replace(/b[\^²]?2?/g, '')}{renderExponent('b', '2')}</span>;
+            }
+            return part;
+          })}
+        </span>
+      );
+    }
+
+    // Renderizar b² 
+    if (result.includes('b²') || result.includes('b^2')) {
+      return (
+        <span>
+          {result.split(/(b[\^²]?2?)/g).map((part, i) => {
+            if (part === 'b²' || part === 'b^2') {
+              return renderExponent('b', '2');
+            }
+            return part;
+          })}
+        </span>
+      );
+    }
+
+    // Renderizar outras expressões com destaque
+    if (/\([a-z]\)/.test(result) || /±/.test(result) || /√/.test(result)) {
+      return <span className="font-semibold text-primary">{result}</span>;
+    }
+
+    return result;
   };
 
   return (
-    <div className={`math-text-renderer ${className}`}>
-      {renderFormattedText(content)}
+    <div className={`math-text-renderer space-y-2 ${className}`}>
+      {processContent(content)}
     </div>
   );
 };
