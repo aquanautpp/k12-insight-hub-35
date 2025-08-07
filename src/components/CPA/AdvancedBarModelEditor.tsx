@@ -176,12 +176,12 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
           // Mostrar valor se houver
           if (element.value) {
             ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 14px Arial';
+            ctx.font = 'bold 18px Arial';
             ctx.textAlign = 'center';
             ctx.fillText(
               element.value.toString(),
               element.x + (element.width || 0) / 2,
-              element.y + (element.height || 0) / 2 + 5
+              element.y + (element.height || 0) / 2 + 6
             );
           }
           break;
@@ -586,21 +586,6 @@ export const AdvancedBarModelEditor = ({ problem, onComplete }: BarModelEditorPr
               <div className="space-y-3 p-3 bg-muted/50 rounded-lg border">
                 <h4 className="font-medium text-sm">Dividir Barra Selecionada</h4>
                 
-                {/* Botões de Divisão Rápida */}
-                <div className="grid grid-cols-2 gap-2">
-                  {[2, 3, 4, 5].map(num => (
-                    <Button
-                      key={num}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => quickDivide(num)}
-                      className="text-xs h-8"
-                    >
-                      {num} partes
-                    </Button>
-                  ))}
-                </div>
-
                 {/* Divisão Personalizada */}
                 <div className="space-y-2">
                   <label className="text-xs text-muted-foreground">Divisões personalizadas:</label>
