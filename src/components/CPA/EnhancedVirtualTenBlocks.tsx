@@ -244,26 +244,26 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
   };
 
   const getBlockStyle = (block: Block, isPreview = false) => {
-    const baseClasses = `absolute flex items-center justify-center font-bold select-none transition-all duration-200 cursor-grab border-2 ${
+    const baseClasses = `absolute flex items-center justify-center font-bold select-none transition-all duration-200 cursor-grab bg-primary text-white border-2 border-primary/80 ${
       isPreview ? 'opacity-50 pointer-events-none' : ''
     } ${shakeWrongBlocks && !isPreview ? 'animate-[shake_0.6s_ease-in-out]' : ''}`;
 
-    const hoverClasses = isPreview ? '' : 'hover:scale-105 hover:shadow-xl hover:-translate-y-1';
+    const hoverClasses = isPreview ? '' : 'hover:scale-105 hover:shadow-lg';
 
     switch (block.type) {
       case 'hundred':
         return {
-          className: `${baseClasses} ${hoverClasses} w-20 h-20 text-white font-bold text-lg rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 border-purple-500 shadow-lg`,
+          className: `${baseClasses} ${hoverClasses} w-20 h-20 text-lg rounded-lg shadow-md`,
           transform: `translate(${block.x}px, ${block.y}px)`
         };
       case 'ten':
         return {
-          className: `${baseClasses} ${hoverClasses} w-16 h-8 text-white font-semibold text-sm rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 border-blue-400 shadow-md`,
+          className: `${baseClasses} ${hoverClasses} w-16 h-8 text-sm rounded-md shadow-sm`,
           transform: `translate(${block.x}px, ${block.y}px)`
         };
       case 'unit':
         return {
-          className: `${baseClasses} ${hoverClasses} w-6 h-6 text-white font-medium text-xs rounded-md bg-gradient-to-br from-green-400 to-green-600 border-green-300 shadow-sm`,
+          className: `${baseClasses} ${hoverClasses} w-6 h-6 text-xs rounded shadow-sm`,
           transform: `translate(${block.x}px, ${block.y}px)`
         };
     }
@@ -287,40 +287,40 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
             </div>
             
             {/* Estatísticas */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-lg">
-                <div className="flex items-center justify-center gap-1 text-blue-600 mb-1">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-primary mb-1">
                   <Clock className="w-4 h-4" />
-                  <span className="text-xs font-semibold">TEMPO</span>
+                  <span className="text-xs font-semibold text-gray-600">TEMPO</span>
                 </div>
-                <div className="text-lg font-bold text-blue-800">{formatTime(elapsedTime)}</div>
+                <div className="text-lg font-bold text-primary">{formatTime(elapsedTime)}</div>
                 {bestTime && (
-                  <div className="text-xs text-blue-600">Melhor: {formatTime(bestTime)}</div>
+                  <div className="text-xs text-gray-500">Melhor: {formatTime(bestTime)}</div>
                 )}
               </div>
               
-              <div className="bg-gradient-to-br from-green-50 to-green-100 p-3 rounded-lg">
-                <div className="flex items-center justify-center gap-1 text-green-600 mb-1">
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-primary mb-1">
                   <MousePointer className="w-4 h-4" />
-                  <span className="text-xs font-semibold">MOVIMENTOS</span>
+                  <span className="text-xs font-semibold text-gray-600">MOVIMENTOS</span>
                 </div>
-                <div className="text-lg font-bold text-green-800">{movements}</div>
+                <div className="text-lg font-bold text-primary">{movements}</div>
               </div>
               
-              <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-3 rounded-lg">
-                <div className="flex items-center justify-center gap-1 text-purple-600 mb-1">
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-primary mb-1">
                   <Target className="w-4 h-4" />
-                  <span className="text-xs font-semibold">TENTATIVAS</span>
+                  <span className="text-xs font-semibold text-gray-600">TENTATIVAS</span>
                 </div>
-                <div className="text-lg font-bold text-purple-800">{attempts}</div>
+                <div className="text-lg font-bold text-primary">{attempts}</div>
               </div>
               
-              <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-3 rounded-lg">
-                <div className="flex items-center justify-center gap-1 text-orange-600 mb-1">
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-primary mb-1">
                   <Sparkles className="w-4 h-4" />
-                  <span className="text-xs font-semibold">EFICIÊNCIA</span>
+                  <span className="text-xs font-semibold text-gray-600">EFICIÊNCIA</span>
                 </div>
-                <div className="text-lg font-bold text-orange-800">{efficiency}%</div>
+                <div className="text-lg font-bold text-primary">{efficiency}%</div>
               </div>
             </div>
           </div>
@@ -410,9 +410,9 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
                       style={{ transform: style.transform }}
                       draggable
                       onDragStart={(e: any) => handleDragStart(block.id, e)}
-                      initial={{ scale: 0, rotate: 180 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      exit={{ scale: 0, rotate: -180 }}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
                       {block.value === 100 ? '100' : block.value === 10 ? '10' : '1'}
@@ -430,16 +430,12 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
         <CardContent className="p-6">
           <div className="flex flex-wrap gap-4 items-center justify-between">
             <div className="flex gap-3 items-center">
-              <motion.div
-                animate={workAreaHasBlocks ? { scale: [1, 1.05, 1] } : {}}
-                transition={{ repeat: Infinity, duration: 2 }}
-              >
                 <Button 
                   onClick={calculateResult} 
                   disabled={!workAreaHasBlocks}
                   className={`flex items-center gap-2 transition-all duration-300 ${
                     workAreaHasBlocks 
-                      ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-lg hover:shadow-xl' 
+                      ? 'bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl' 
                       : 'opacity-50'
                   }`}
                   size="lg"
@@ -447,7 +443,6 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
                   <Calculator className="w-5 h-5" />
                   Calcular Resultado
                 </Button>
-              </motion.div>
               
               <Button onClick={reset} variant="outline" size="lg">
                 <RotateCcw className="w-4 h-4 mr-2" />
@@ -488,8 +483,8 @@ export const EnhancedVirtualTenBlocks = ({ problem, onComplete }: VirtualTenBloc
                   <div>
                     <p className="font-semibold">Dica Visual</p>
                     <p className="text-sm">
-                      Lembre-se: cada bloco pequeno vale 1, cada barra azul vale 10, 
-                      e cada quadrado roxo vale 100. Organize-os para chegar ao resultado {problem.expectedResult}!
+                      Lembre-se: cada bloco pequeno verde vale 1, cada retângulo verde vale 10, 
+                      e cada quadrado verde grande vale 100. Organize-os para chegar ao resultado {problem.expectedResult}!
                     </p>
                   </div>
                 </div>
