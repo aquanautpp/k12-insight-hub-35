@@ -318,7 +318,7 @@ const EmotionalIntelligence = () => {
                       <p className="text-sm text-muted-foreground flex-1">
                         IA personalizada que se adapta ao seu ritmo, oferecendo desafios e feedback para você se superar!
                       </p>
-                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-accent">
+                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-primary">
                         <CheckCircle className="w-4 h-4" />
                         <span className="font-medium">Evolução Contínua</span>
                       </div>
