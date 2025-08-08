@@ -175,131 +175,54 @@ const EmotionalIntelligence = () => {
             </Card>)}
         </div>
 
-        {/* Guia de Como Funciona - Redesenhada */}
-        <div className="relative mb-8 overflow-hidden">
-          {/* Background com padrão sutil */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-3xl"></div>
-          
-          <Card className="relative border-0 shadow-xl bg-white/90 backdrop-blur-sm">
-            <CardHeader className="text-center pb-4">
-              <div className="flex items-center justify-center mb-4">
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
-                    <Brain className="w-8 h-8 text-white" />
-                  </div>
-                  
-                </div>
-              </div>
-              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                🚀 Como Funciona sua Jornada Emocional?
-              </CardTitle>
-              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                Descubra como desenvolver sua inteligência emocional de forma divertida e eficaz!
-              </p>
-            </CardHeader>
-            <CardContent className="px-8 pb-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                {/* Setas conectoras - visíveis apenas em telas médias+ */}
-                <div className="hidden md:block absolute top-20 left-1/3 transform -translate-x-1/2">
-                  <ArrowRight className="w-6 h-6 text-primary/30" />
-                </div>
-                <div className="hidden md:block absolute top-20 right-1/3 transform translate-x-1/2">
-                  <ArrowRight className="w-6 h-6 text-primary/30" />
-                </div>
+        {/* Como Funciona - versão minimalista */}
+        <section aria-label="Como funciona" className="mb-8">
+          <div className="text-center mb-6">
+            <h2 id="como-funciona" className="text-2xl font-semibold tracking-tight">Como funciona</h2>
+            <p className="text-sm text-muted-foreground mt-1">Três passos simples para evoluir sua IE</p>
+          </div>
 
-                {/* Etapa 1 */}
-                <div className="group relative">
-                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                    1
-                  </div>
-                  <Card className="h-full bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
-                    <CardContent className="p-6 text-center h-full flex flex-col">
-                      <div className="relative mb-4">
-                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto shadow-lg">
-                          <Brain className="w-8 h-8 text-white" />
-                        </div>
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                          <PlayCircle className="w-3 h-3 text-white" />
-                        </div>
-                      </div>
-                      <h4 className="font-bold text-lg mb-3 text-foreground">🎮 Aprenda Brincando</h4>
-                      <p className="text-sm text-muted-foreground flex-1">
-                        Jogos interativos, desafios emocionais e atividades práticas que fazem você aprender sem perceber!
-                      </p>
-                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-primary">
-                        <CheckCircle className="w-4 h-4" />
-                        <span className="font-medium">100% Divertido</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              
-                {/* Etapa 2 */}
-                <div className="group relative">
-                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                    2
-                  </div>
-                  <Card className="h-full bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
-                    <CardContent className="p-6 text-center h-full flex flex-col">
-                      <div className="relative mb-4">
-                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto shadow-lg">
-                          <Heart className="w-8 h-8 text-white" />
-                        </div>
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                          <Sparkles className="w-3 h-3 text-white" />
-                        </div>
-                      </div>
-                      <h4 className="font-bold text-lg mb-3 text-foreground">📖 Reflita e Cresça</h4>
-                      <p className="text-sm text-muted-foreground flex-1">
-                        Diário emocional personalizado para registrar seus sentimentos e descobrir padrões incríveis sobre você!
-                      </p>
-                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-primary">
-                        <CheckCircle className="w-4 h-4" />
-                        <span className="font-medium">Autoconhecimento</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              
-                {/* Etapa 3 */}
-                <div className="group relative">
-                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                    3
-                  </div>
-                  <Card className="h-full bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg">
-                    <CardContent className="p-6 text-center h-full flex flex-col">
-                      <div className="relative mb-4">
-                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto shadow-lg">
-                          <Target className="w-8 h-8 text-white" />
-                        </div>
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                          <Sparkles className="w-3 h-3 text-white" />
-                        </div>
-                      </div>
-                      <h4 className="font-bold text-lg mb-3 text-foreground">🚀 Evolua Sempre</h4>
-                      <p className="text-sm text-muted-foreground flex-1">
-                        IA personalizada que se adapta ao seu ritmo, oferecendo desafios e feedback para você se superar!
-                      </p>
-                      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-accent">
-                        <CheckCircle className="w-4 h-4" />
-                        <span className="font-medium">Evolução Contínua</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
+          <div className="relative">
+            {/* Conector sutil no desktop */}
+            <div
+              aria-hidden="true"
+              className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-border -translate-y-1/2"
+            />
 
-              {/* Call to Action */}
-              <div className="mt-8 text-center">
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
-                  <Sparkles className="w-5 h-5" />
-                  <span>Comece sua jornada emocional agora!</span>
-                  <ArrowRight className="w-5 h-5" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {/* Etapa 1 */}
+              <article className="relative rounded-xl border bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="absolute -top-3 left-5 h-8 w-8 rounded-full bg-background ring-2 ring-primary text-foreground flex items-center justify-center text-xs font-semibold">1</div>
+                <Brain className="absolute top-4 right-4 h-5 w-5 text-muted-foreground/70" aria-hidden="true" />
+                <h3 className="text-base font-medium">Aprenda praticando</h3>
+                <p className="mt-1 text-sm text-muted-foreground">Atividades curtas e objetivas para reconhecer emoções no dia a dia.</p>
+              </article>
+
+              {/* Etapa 2 */}
+              <article className="relative rounded-xl border bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="absolute -top-3 left-5 h-8 w-8 rounded-full bg-background ring-2 ring-primary text-foreground flex items-center justify-center text-xs font-semibold">2</div>
+                <Heart className="absolute top-4 right-4 h-5 w-5 text-muted-foreground/70" aria-hidden="true" />
+                <h3 className="text-base font-medium">Reflexão guiada</h3>
+                <p className="mt-1 text-sm text-muted-foreground">Diário emocional com perguntas simples para consolidar aprendizados.</p>
+              </article>
+
+              {/* Etapa 3 */}
+              <article className="relative rounded-xl border bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="absolute -top-3 left-5 h-8 w-8 rounded-full bg-background ring-2 ring-primary text-foreground flex items-center justify-center text-xs font-semibold">3</div>
+                <Target className="absolute top-4 right-4 h-5 w-5 text-muted-foreground/70" aria-hidden="true" />
+                <h3 className="text-base font-medium">Evolução contínua</h3>
+                <p className="mt-1 text-sm text-muted-foreground">Desafios se adaptam ao seu ritmo para manter o progresso.</p>
+              </article>
+            </div>
+          </div>
+
+          <div className="mt-6 flex justify-center">
+            <Button>
+              Começar agora
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </section>
 
         {/* Avatar Emocional */}
         <Card className="bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200">
