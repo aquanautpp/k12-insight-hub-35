@@ -70,7 +70,8 @@ const Dashboard = ({
     description: "Recomendações baseadas no seu perfil de aprendizagem"
   }];
   const {
-    currentIndex
+    currentIndex,
+    scrollProgress
   } = useScrollHijack(featuresRef, features.length);
 
   // Todos os useEffect também devem vir antes do early return
@@ -165,7 +166,7 @@ const Dashboard = ({
       {/* Hero Section with Educational Video */}
       <div className="relative overflow-hidden h-[60vh] md:h-[500px] lg:h-[550px] w-full rounded-2xl mb-8 shadow-card">
         <div className="absolute inset-0">
-          <img src={educationalHeroVideo} alt="Educational background" className="w-full h-full object-cover" />
+          <img src={educationalHeroVideo} alt="Fundo educacional ilustrativo" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/70 to-primary/60"></div>
         </div>
         <div className="relative z-10 h-full flex items-center justify-center">
@@ -317,6 +318,11 @@ const Dashboard = ({
               Descubra as ferramentas que tornam o aprendizado mais eficaz e envolvente
             </p>
           </motion.div>
+
+          <div className="max-w-md mx-auto -mt-6 mb-8">
+            <Progress value={scrollProgress} className="h-1" />
+            <div className="text-xs text-muted-foreground text-center mt-2">{Math.round(scrollProgress)}% explorado</div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => <motion.div key={index} variants={itemVariants} className={`card-gradient p-6 rounded-xl hover-scale transition-all duration-500 ${!isMobile && currentIndex === index ? 'ring-2 ring-primary shadow-lg' : ''}`}>

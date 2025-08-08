@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AppSidebar } from "@/components/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -16,11 +16,13 @@ import EmotionalIntelligence from "@/components/EmotionalIntelligence";
 import ReadingRecommendations from "@/components/ReadingRecommendations";
 import { BackgroundRemover } from "@/components/BackgroundRemover";
 import { FeatureFlagsDebugPanel } from "@/components/FeatureFlagsDebugPanel";
+import TopReadingProgress from "@/components/TopReadingProgress";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
   const { user, signOut } = useAuth();
   const { displayName } = useUserProfile();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -65,6 +67,7 @@ const Index = () => {
         <AppSidebar currentView={currentView} onViewChange={setCurrentView} />
         
         <div className="flex-1 flex flex-col">
+          <TopReadingProgress targetRef={scrollContainerRef} />
           <header className="nav-clean h-16 flex items-center justify-between px-6">
             <div className="flex items-center">
               <SidebarTrigger className="mr-4" />
@@ -100,7 +103,7 @@ const Index = () => {
             </div>
           </header>
           
-          <main className="flex-1 overflow-auto bg-background px-4 md:px-6 py-4">
+          <main ref={scrollContainerRef} className="flex-1 overflow-auto bg-background px-4 md:px-6 py-4">
             {renderView()}
           </main>
         </div>
