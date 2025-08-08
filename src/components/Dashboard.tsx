@@ -377,27 +377,25 @@ const Dashboard = ({
           </Card>
         </motion.div>
 
-        {/* Insights e Quick Wins */}
-        <div className="grid gap-6 md:grid-cols-2">
-          <motion.div variants={itemVariants}>
+        {/* Insights + Quick Wins + IE Mini (layout compacto) */}
+        <div className="grid gap-6 lg:grid-cols-12">
+          <motion.div variants={itemVariants} className="lg:col-span-8">
             <SmartInsights className="h-full" />
           </motion.div>
-          <motion.div variants={itemVariants}>
-            <QuickWinMessage />
-          </motion.div>
+          <div className="lg:col-span-4 space-y-6">
+            <motion.div variants={itemVariants}>
+              <QuickWinMessage />
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <EIInsightsMini />
+            </motion.div>
+          </div>
         </div>
 
-
-        {/* Metacognição + Prática Espaçada + IE Mini */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <motion.div variants={itemVariants}>
-            <StudyPlannerCard />
-          </motion.div>
-          
-          <motion.div variants={itemVariants}>
-            <EIInsightsMini />
-          </motion.div>
-        </div>
+        {/* Planner em largura total para reduzir espaços vazios */}
+        <motion.div variants={itemVariants}>
+          <StudyPlannerCard />
+        </motion.div>
 
         {/* Gráfico de Radar */}
         <motion.div variants={itemVariants}>
