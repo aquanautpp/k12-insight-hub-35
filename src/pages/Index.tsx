@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { AppSidebar } from "@/components/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -16,13 +16,11 @@ import EmotionalIntelligence from "@/components/EmotionalIntelligence";
 import ReadingRecommendations from "@/components/ReadingRecommendations";
 import { BackgroundRemover } from "@/components/BackgroundRemover";
 import { FeatureFlagsDebugPanel } from "@/components/FeatureFlagsDebugPanel";
-import TopReadingProgress from "@/components/TopReadingProgress";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
   const { user, signOut } = useAuth();
   const { displayName } = useUserProfile();
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -33,38 +31,6 @@ const Index = () => {
     window.addEventListener('app:navigate' as any, handler as any);
     return () => window.removeEventListener('app:navigate' as any, handler as any);
   }, []);
-
-  // SEO básico por rota autenticada
-  useEffect(() => {
-    const titles: Record<string, string> = {
-      'dashboard': 'Plataforma Educacional Personalizada | Método CPA',
-      'cpa-method': 'Método CPA | Concreto • Pictórico • Abstrato',
-      'learning-test': 'Teste de Estilo de Aprendizagem | Descubra seu superpoder',
-      'mantha-chat': 'Tutor IA | Dúvidas respondidas em tempo real',
-      'progress': 'Seu Progresso | Metas e Insights',
-      'activities': 'Desafios Diários | Prática Ativa',
-      'reading': 'Recomendações de Leitura Personalizadas'
-    };
-    document.title = titles[currentView] ?? 'Mantha - Aprendizagem Personalizada';
-
-    const description = 'Aprenda mais rápido com trilhas personalizadas, Método CPA e IA.';
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute('name', 'description');
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute('content', description);
-
-    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-    const canonicalUrl = window.location.origin + '/';
-    if (!link) {
-      link = document.createElement('link');
-      link.setAttribute('rel', 'canonical');
-      document.head.appendChild(link);
-    }
-    link.setAttribute('href', canonicalUrl);
-  }, [currentView]);
 
   const renderView = () => {
     switch (currentView) {
@@ -99,7 +65,6 @@ const Index = () => {
         <AppSidebar currentView={currentView} onViewChange={setCurrentView} />
         
         <div className="flex-1 flex flex-col">
-          <TopReadingProgress targetRef={scrollContainerRef} />
           <header className="nav-clean h-16 flex items-center justify-between px-6">
             <div className="flex items-center">
               <SidebarTrigger className="mr-4" />
@@ -135,7 +100,7 @@ const Index = () => {
             </div>
           </header>
           
-          <main ref={scrollContainerRef} className="flex-1 overflow-auto bg-background px-4 md:px-6 py-4">
+          <main className="flex-1 overflow-auto bg-background px-4 md:px-6 py-4">
             {renderView()}
           </main>
         </div>

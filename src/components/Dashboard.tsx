@@ -18,14 +18,11 @@ import { SystemTest } from './SystemTest';
 import { AnimatedCounter } from './AnimatedCounter';
 import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-
+import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
+import logoImage from '@/assets/mantha-logo-corrected.png';
 import { StudyPlannerCard } from './StudyPlannerCard';
 import { ReviewQueueCard } from './ReviewQueueCard';
 import { EIInsightsMini } from './EI/EIInsightsMini';
-import HeroSection from './home/HeroSection';
-import LogoStrip from './home/LogoStrip';
-import FeatureGrid from './home/FeatureGrid';
 interface DashboardProps {
   onViewChange?: (view: string) => void;
 }
@@ -73,8 +70,7 @@ const Dashboard = ({
     description: "Recomendações baseadas no seu perfil de aprendizagem"
   }];
   const {
-    currentIndex,
-    scrollProgress
+    currentIndex
   } = useScrollHijack(featuresRef, features.length);
 
   // Todos os useEffect também devem vir antes do early return
@@ -166,8 +162,87 @@ const Dashboard = ({
     }
   };
   return <div className="min-h-screen">
-      <HeroSection nome={nome} onViewChange={onViewChange} />
-      <LogoStrip />
+      {/* Hero Section with Educational Video */}
+      <div className="relative overflow-hidden h-[60vh] md:h-[500px] lg:h-[550px] w-full rounded-2xl mb-8 shadow-card">
+        <div className="absolute inset-0">
+          <img src={educationalHeroVideo} alt="Educational background" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/70 to-primary/60"></div>
+        </div>
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 1,
+          delay: 0.2
+        }} className="flex flex-col items-center space-y-6 max-w-2xl mx-auto px-6 text-center">
+            {/* Logo Mantha Completo */}
+            <motion.div className="mantha-logo-container mb-5 mx-0 px-0 py-0 rounded-full" initial={{
+            opacity: 0,
+            y: 80,
+            x: -60,
+            scale: 0.8
+          }} animate={{
+            opacity: 1,
+            y: 0,
+            x: 0,
+            scale: 1
+          }} transition={{
+            duration: 3.5,
+            ease: "easeOut",
+            opacity: {
+              duration: 3.5,
+              ease: "easeOut"
+            },
+            y: {
+              duration: 3.5,
+              ease: "easeOut"
+            },
+            x: {
+              duration: 3.5,
+              ease: "easeOut"
+            },
+            scale: {
+              duration: 3.5,
+              ease: "easeOut"
+            }
+          }}>
+              <div className="w-[180px] md:w-[220px] lg:w-[260px] h-[120px] md:h-[140px] lg:h-[160px] flex items-center justify-center mx-auto bg-transparent">
+                <motion.img src="/lovable-uploads/1f11a51d-9ab8-463e-8d4c-3cfb8576711e.png" alt="MANTHA - Educação Personalizada" className="mantha-logo-main w-[240px] md:w-[280px] lg:w-[320px] h-auto p-2" initial={{
+                scale: 0.95
+              }} animate={{
+                scale: 1
+              }} transition={{
+                duration: 3.5,
+                ease: "easeOut",
+                delay: 0.8
+              }} />
+              </div>
+            </motion.div>
+            <div className="mt-0">
+              <h1 className="text-3xl text-white mb-4 font-semibold lg:text-5xl">
+                De volta à <span className="text-yellow-400">Mantha</span>{nome ? `, ${nome}` : ''}!
+              </h1>
+              <p className="text-xl lg:text-2xl text-white/90 max-w-2xl mb-2 mx-0 my-0">
+                Sua jornada de aprendizagem personalizada usando IA e metodologias comprovadas
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 mt-2">
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}>
+                Ver Progresso
+                <TrendingUp className="ml-2 h-4 w-4" />
+              </Button>
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('cpa-method')}>
+                Começar Hoje
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </div>
 
       {/* Estatísticas Principais */}
       <motion.section variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
@@ -229,13 +304,35 @@ const Dashboard = ({
         </div>
       </motion.section>
 
-      <FeatureGrid
-        featuresRef={featuresRef}
-        features={features}
-        currentIndex={currentIndex}
-        isMobile={isMobile}
-        scrollProgress={scrollProgress}
-      />
+      {/* Features com Scroll Hijacking */}
+      <motion.section ref={featuresRef} variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
+      once: true
+    }} className="bg-gradient-to-b from-secondary/30 to-background py-[24px]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div className="text-center mb-12" variants={itemVariants}>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Recursos de Aprendizagem
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Descubra as ferramentas que tornam o aprendizado mais eficaz e envolvente
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => <motion.div key={index} variants={itemVariants} className={`card-gradient p-6 rounded-xl hover-scale transition-all duration-500 ${!isMobile && currentIndex === index ? 'ring-2 ring-primary shadow-lg' : ''}`}>
+                <div className="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-lg text-primary mb-4">
+                  <feature.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2 text-foreground">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {feature.description}
+                </p>
+              </motion.div>)}
+          </div>
+        </div>
+      </motion.section>
 
       {/* Conteúdo Principal */}
       <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
