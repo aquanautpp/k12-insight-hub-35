@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import BlurImage from "@/components/BlurImage";
 import heroImg from "@/assets/cpa-method-hero.jpg";
+import ManthaLogoAnimated from "@/components/home/ManthaLogoAnimated";
 
 interface HeroSectionProps {
   nome?: string;
@@ -31,10 +32,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ nome, onViewChange }) => {
           </div>
         </div>
         <aside className="relative">
-          <div className="glass rounded-2xl p-2">
+          <div className="glass rounded-2xl p-2 relative overflow-hidden">
             <BlurImage src={heroImg} alt="Estudante praticando com o Método CPA" className="w-full h-[260px] md:h-[320px] object-cover rounded-xl" />
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+              <ManthaLogoAnimated />
+            </div>
           </div>
         </aside>
+
       </div>
     </section>
   );
