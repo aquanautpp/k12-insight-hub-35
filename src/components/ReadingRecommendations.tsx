@@ -263,7 +263,7 @@ const ReadingRecommendations = () => {
 
         {/* Estatísticas */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <Card className="text-center border-primary/20">
+          <Card className="text-center rounded-xl border-primary">
             <CardContent className="p-6">
               <BookOpen className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-2xl font-bold text-foreground">{books.length}</div>
@@ -271,7 +271,7 @@ const ReadingRecommendations = () => {
             </CardContent>
           </Card>
           
-          <Card className="text-center border-primary/20">
+          <Card className="text-center rounded-xl border-primary">
             <CardContent className="p-6">
               <Heart className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-2xl font-bold text-foreground">{books.filter(b => b.isFavorite).length}</div>
@@ -279,7 +279,7 @@ const ReadingRecommendations = () => {
             </CardContent>
           </Card>
           
-          <Card className="text-center border-primary/20">
+          <Card className="text-center rounded-xl border-primary">
             <CardContent className="p-6">
               <CheckCircle className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-2xl font-bold text-foreground">{books.filter(b => b.hasRead).length}</div>
@@ -287,7 +287,7 @@ const ReadingRecommendations = () => {
             </CardContent>
           </Card>
           
-          <Card className="text-center border-primary/20">
+          <Card className="text-center rounded-xl border-primary">
             <CardContent className="p-6">
               <Star className="w-8 h-8 text-primary mx-auto mb-2" />
               <div className="text-2xl font-bold text-foreground">
