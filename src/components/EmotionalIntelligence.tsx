@@ -99,7 +99,7 @@ const EmotionalIntelligence = () => {
       <div className="max-w-6xl mx-auto p-6">
         {/* Hero Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-heart-primary to-heart-secondary mb-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-heart-primary to-heart-secondary mb-4 bg-lime-700">
             <Heart className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-foreground mb-4">
