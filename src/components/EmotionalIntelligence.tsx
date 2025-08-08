@@ -184,10 +184,7 @@ const EmotionalIntelligence = () => {
 
           <div className="relative">
             {/* Conector sutil no desktop */}
-            <div
-              aria-hidden="true"
-              className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-border -translate-y-1/2"
-            />
+            <div aria-hidden="true" className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-border -translate-y-1/2" />
 
             <div className="grid gap-4 md:grid-cols-3">
               {/* Etapa 1 */}
@@ -217,10 +214,7 @@ const EmotionalIntelligence = () => {
           </div>
 
           <div className="mt-6 flex justify-center">
-            <Button>
-              Começar agora
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            
           </div>
         </section>
 
