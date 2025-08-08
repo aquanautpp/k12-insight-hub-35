@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useScrollHijack } from "@/hooks/useScrollHijack";
@@ -7,13 +7,24 @@ export interface SectionScrollerProps {
   slides: React.ReactNode[];
   className?: string;
   id?: string;
+  goToIndex?: number;
+  onIndexChange?: (index: number) => void;
 }
 
-export function SectionScroller({ slides, className, id }: SectionScrollerProps) {
+export function SectionScroller({ slides, className, id, goToIndex, onIndexChange }: SectionScrollerProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
-  const { currentIndex, scrollProgress } = useScrollHijack(sectionRef, slides.length);
+  const { currentIndex, scrollProgress, setIndex } = useScrollHijack(sectionRef, slides.length);
 
+  useEffect(() => {
+    onIndexChange?.(currentIndex);
+  }, [currentIndex, onIndexChange]);
+
+  useEffect(() => {
+    if (typeof goToIndex === 'number' && goToIndex !== currentIndex) {
+      setIndex(goToIndex);
+    }
+  }, [goToIndex, currentIndex, setIndex]);
   // Mobile: lista empilhada, sem hijack
   if (isMobile) {
     return (
@@ -47,8 +58,10 @@ export function SectionScroller({ slides, className, id }: SectionScrollerProps)
           style={{ transform: `translateY(-${currentIndex * 100}%)` }}
         >
           {slides.map((slide, i) => (
-            <article key={i} className="h-screen w-full">
-              {slide}
+            <article key={i} className="h-screen w-full overflow-y-auto">
+              <div className="h-full w-full">
+                {slide}
+              </div>
             </article>
           ))}
         </div>
@@ -59,14 +72,16 @@ export function SectionScroller({ slides, className, id }: SectionScrollerProps)
           aria-hidden="true"
         >
           {slides.map((_, i) => (
-            <span
+            <button
               key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`Ir para seção ${i + 1}`}
               className={cn(
                 "h-2 w-2 rounded-full bg-muted-foreground/30",
                 i === currentIndex && "bg-primary"
               )}
-            />)
-          )}
+            />
+          ))}
         </div>
 
         {/* Barra de progresso */}
@@ -74,6 +89,7 @@ export function SectionScroller({ slides, className, id }: SectionScrollerProps)
           <div
             className="h-full bg-primary transition-all duration-300"
             style={{ width: `${scrollProgress}%` }}
+            aria-hidden="true"
           />
         </div>
       </div>

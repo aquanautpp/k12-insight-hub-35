@@ -246,11 +246,13 @@ const Dashboard = ({
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
-              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}>
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}
+              aria-label="Ver Progresso - navegar para seção Progresso">
                 Ver Progresso
                 <TrendingUp className="ml-2 h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('cpa-method')}>
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('cpa-method')}
+              aria-label="Começar Hoje - navegar para seção Método CPA">
                 Começar Hoje
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

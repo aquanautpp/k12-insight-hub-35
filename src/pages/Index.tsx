@@ -16,6 +16,7 @@ import EmotionalIntelligence from "@/components/EmotionalIntelligence";
 import ReadingRecommendations from "@/components/ReadingRecommendations";
 import { BackgroundRemover } from "@/components/BackgroundRemover";
 import { FeatureFlagsDebugPanel } from "@/components/FeatureFlagsDebugPanel";
+import { SectionScroller } from "@/components/SectionScroller";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -59,6 +60,51 @@ const Index = () => {
     }
   };
 
+  const viewsOrder = [
+    'dashboard',
+    'learning-test',
+    'cpa-method',
+    'mantha-chat',
+    'activities',
+    'emotional-intelligence',
+    'reading',
+    'comprehensible-input',
+    'progress',
+  ] as const;
+
+  const viewById = (id: string) => {
+    switch (id) {
+      case 'dashboard':
+        return <Dashboard onViewChange={setCurrentView} />;
+      case 'cpa-method':
+        return <CPAMethod />;
+      case 'learning-test':
+        return <LearningStyleTest />;
+      case 'comprehensible-input':
+        return <ComprehensibleInput />;
+      case 'mantha-chat':
+        return <ManthaChatTutor />;
+      case 'emotional-intelligence':
+        return <EmotionalIntelligence />;
+      case 'progress':
+        return <ProgressView />;
+      case 'activities':
+        return <DailyChallenge />;
+      case 'reading':
+        return <ReadingRecommendations />;
+      default:
+        return <Dashboard onViewChange={setCurrentView} />;
+    }
+  };
+
+  const slides = viewsOrder.map((id) => (
+    <div className="h-full w-full">
+      {viewById(id)}
+    </div>
+  ));
+
+  const activeIndex = Math.max(0, viewsOrder.indexOf(currentView as any));
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
@@ -100,8 +146,13 @@ const Index = () => {
             </div>
           </header>
           
-          <main className="flex-1 overflow-auto bg-background px-4 md:px-6 py-4">
-            {renderView()}
+          <main className="flex-1 overflow-hidden bg-background">
+            <SectionScroller
+              id="app-scroller"
+              slides={slides}
+              goToIndex={activeIndex}
+              onIndexChange={(i) => setCurrentView(viewsOrder[i])}
+            />
           </main>
         </div>
       </div>
