@@ -12,6 +12,7 @@ import { useUserProfile } from '@/hooks/useUserProfile';
 import { useUserProgress } from '@/hooks/useUserProgress';
 import { SmartInsights } from './SmartInsights';
 import { QuickWinMessage } from './QuickWinMessage';
+
 import { EnhancedAchievements } from './EnhancedAchievements';
 import { RadarChart } from './RadarChart';
 import { SystemTest } from './SystemTest';
@@ -99,6 +100,7 @@ const Dashboard = ({
   const overallProgress = React.useMemo(() => {
     return Math.round((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1) * 100);
   }, [progress?.completedActivities, progress?.totalActivities]);
+
   const streakDays = userProgress?.ei_checkin_streak ?? progress?.currentStreak ?? 0;
   const streakBadges = React.useMemo(() => {
     const earned: string[] = [];
@@ -300,7 +302,22 @@ const Dashboard = ({
             </motion.div>
           </div>
 
-          
+          <Card className="card-interactive rounded-xl p-6 mt-6">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Flame className="w-5 h-5 text-primary" />
+                  <span className="text-sm text-muted-foreground">Streak EI</span>
+                </div>
+                <h3 className="text-foreground text-2xl lg:text-3xl font-bold">{streakDays} dias</h3>
+              </div>
+              <div className="flex gap-2 flex-wrap justify-end">
+                {streakBadges.map((b, i) => (
+                  <Badge key={i} variant="secondary" className="bg-primary/10 text-primary">{b}</Badge>
+                ))}
+              </div>
+            </div>
+          </Card>
         </div>
       </motion.section>
 
@@ -393,7 +410,9 @@ const Dashboard = ({
           <motion.div variants={itemVariants}>
             <StudyPlannerCard />
           </motion.div>
-          
+          <motion.div variants={itemVariants}>
+            <ReviewQueueCard />
+          </motion.div>
           <motion.div variants={itemVariants}>
             <EIInsightsMini />
           </motion.div>
