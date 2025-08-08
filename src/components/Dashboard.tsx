@@ -16,14 +16,13 @@ import { EnhancedAchievements } from './EnhancedAchievements';
 import { RadarChart } from './RadarChart';
 import { SystemTest } from './SystemTest';
 import { AnimatedCounter } from './AnimatedCounter';
-
+import { useScrollHijack } from '@/hooks/useScrollHijack';
 import { useIsMobile } from '@/hooks/use-mobile';
 import educationalHeroVideo from '@/assets/educational-hero-video.jpg';
-
+import logoImage from '@/assets/mantha-logo-corrected.png';
 import { StudyPlannerCard } from './StudyPlannerCard';
 import { ReviewQueueCard } from './ReviewQueueCard';
 import { EIInsightsMini } from './EI/EIInsightsMini';
-import { SectionScroller } from './SectionScroller';
 interface DashboardProps {
   onViewChange?: (view: string) => void;
 }
@@ -52,7 +51,7 @@ const Dashboard = ({
   } = useAchievement();
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
-  
+  const featuresRef = useRef<HTMLDivElement>(null);
   const features = [{
     icon: Brain,
     title: "Método CPA",
@@ -70,24 +69,10 @@ const Dashboard = ({
     title: "Leitura Personalizada",
     description: "Recomendações baseadas no seu perfil de aprendizagem"
   }];
-  const featureSlides = features.map(({ icon: Icon, title, description }, index) => (
-    <div key={index} className="w-full h-screen flex items-center justify-center px-6">
-      <Card className="max-w-xl w-full card-gradient">
-        <CardHeader className="text-center">
-          <div className="mx-auto w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-2">
-            <Icon className="w-7 h-7" />
-          </div>
-          <CardTitle className="text-2xl">{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
-        </CardHeader>
-        <CardContent className="text-center">
-          <p className="text-muted-foreground">
-            Explore este recurso no seu ritmo e avance para a próxima seção com a rolagem.
-          </p>
-        </CardContent>
-      </Card>
-    </div>
-  ));
+  const {
+    currentIndex
+  } = useScrollHijack(featuresRef, features.length);
+
   // Todos os useEffect também devem vir antes do early return
   React.useEffect(() => {
     // Só chama checkAchievements se os dados estão disponíveis e mudaram
@@ -246,13 +231,11 @@ const Dashboard = ({
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
-              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}
-              aria-label="Ver Progresso - navegar para seção Progresso">
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('progress')}>
                 Ver Progresso
                 <TrendingUp className="ml-2 h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('cpa-method')}
-              aria-label="Começar Hoje - navegar para seção Método CPA">
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white hover:text-primary text-lg px-8 backdrop-blur-sm" onClick={() => onViewChange?.('cpa-method')}>
                 Começar Hoje
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -322,7 +305,7 @@ const Dashboard = ({
       </motion.section>
 
       {/* Features com Scroll Hijacking */}
-      <motion.section variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
+      <motion.section ref={featuresRef} variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
       once: true
     }} className="bg-gradient-to-b from-secondary/30 to-background py-[24px]">
         <div className="max-w-7xl mx-auto px-6">
@@ -335,7 +318,19 @@ const Dashboard = ({
             </p>
           </motion.div>
 
-          <SectionScroller slides={featureSlides} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => <motion.div key={index} variants={itemVariants} className={`card-gradient p-6 rounded-xl hover-scale transition-all duration-500 ${!isMobile && currentIndex === index ? 'ring-2 ring-primary shadow-lg' : ''}`}>
+                <div className="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-lg text-primary mb-4">
+                  <feature.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2 text-foreground">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {feature.description}
+                </p>
+              </motion.div>)}
+          </div>
         </div>
       </motion.section>
 

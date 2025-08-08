@@ -4,7 +4,6 @@ interface UseScrollHijackReturn {
   isHijacked: boolean;
   currentIndex: number;
   scrollProgress: number;
-  setIndex: (index: number) => void;
 }
 
 export const useScrollHijack = (
@@ -16,10 +15,6 @@ export const useScrollHijack = (
   const [scrollProgress, setScrollProgress] = useState(0);
   const isScrollingRef = useRef(false);
 
-  const setIndex = (i: number) => {
-    const clamped = Math.max(0, Math.min(i, Math.max(itemCount - 1, 0)));
-    setCurrentIndex(clamped);
-  };
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -36,45 +31,18 @@ export const useScrollHijack = (
     const handleWheel = (e: WheelEvent) => {
       if (!isHijacked || isScrollingRef.current) return;
 
-      // Allow inner content to scroll until reaching edges
-      const section = sectionRef.current;
-      if (section) {
-        const slides = section.querySelectorAll('article');
-        const activeSlide = slides[currentIndex] as HTMLElement | undefined;
-        if (activeSlide) {
-          const scTop = activeSlide.scrollTop;
-          const scH = activeSlide.scrollHeight;
-          const clH = activeSlide.clientHeight;
-          const atTop = scTop <= 0;
-          const atBottom = Math.ceil(scTop + clH) >= scH;
+      e.preventDefault();
+      isScrollingRef.current = true;
 
-          if (e.deltaY > 0 && !atBottom) {
-            // let inner scroll handle it
-            return;
-          }
-          if (e.deltaY < 0 && !atTop) {
-            return;
-          }
-        }
+      if (e.deltaY > 0 && currentIndex < itemCount - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else if (e.deltaY < 0 && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
       }
 
-      const canScrollNext = e.deltaY > 0 && currentIndex < itemCount - 1;
-      const canScrollPrev = e.deltaY < 0 && currentIndex > 0;
-
-      if (canScrollNext || canScrollPrev) {
-        e.preventDefault();
-        isScrollingRef.current = true;
-
-        if (canScrollNext) {
-          setCurrentIndex((prev) => prev + 1);
-        } else if (canScrollPrev) {
-          setCurrentIndex((prev) => prev - 1);
-        }
-
-        setTimeout(() => {
-          isScrollingRef.current = false;
-        }, 800);
-      }
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 800);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -103,5 +71,5 @@ export const useScrollHijack = (
     setScrollProgress((currentIndex / Math.max(itemCount - 1, 1)) * 100);
   }, [currentIndex, itemCount]);
 
-  return { isHijacked, currentIndex, scrollProgress, setIndex };
+  return { isHijacked, currentIndex, scrollProgress };
 };
