@@ -31,18 +31,23 @@ export const useScrollHijack = (
     const handleWheel = (e: WheelEvent) => {
       if (!isHijacked || isScrollingRef.current) return;
 
-      e.preventDefault();
-      isScrollingRef.current = true;
+      const canScrollNext = e.deltaY > 0 && currentIndex < itemCount - 1;
+      const canScrollPrev = e.deltaY < 0 && currentIndex > 0;
 
-      if (e.deltaY > 0 && currentIndex < itemCount - 1) {
-        setCurrentIndex(prev => prev + 1);
-      } else if (e.deltaY < 0 && currentIndex > 0) {
-        setCurrentIndex(prev => prev - 1);
+      if (canScrollNext || canScrollPrev) {
+        e.preventDefault();
+        isScrollingRef.current = true;
+
+        if (canScrollNext) {
+          setCurrentIndex(prev => prev + 1);
+        } else if (canScrollPrev) {
+          setCurrentIndex(prev => prev - 1);
+        }
+
+        setTimeout(() => {
+          isScrollingRef.current = false;
+        }, 800);
       }
-
-      setTimeout(() => {
-        isScrollingRef.current = false;
-      }, 800);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
