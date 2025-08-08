@@ -4,137 +4,154 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Play, 
-  Clock, 
-  TrendingUp, 
-  ArrowUp, 
-  ArrowDown, 
-  CheckCircle, 
-  Globe,
-  Headphones,
-  BookOpen,
-  Tv,
-  Music,
-  MessageCircle,
-  Star,
-  Timer,
-  Target,
-  Volume2,
-  Eye,
-  Lightbulb,
-  Heart
-} from 'lucide-react';
-
+import { Play, Clock, TrendingUp, ArrowUp, ArrowDown, CheckCircle, Globe, Headphones, BookOpen, Tv, Music, MessageCircle, Star, Timer, Target, Volume2, Eye, Lightbulb, Heart } from 'lucide-react';
 const ComprehensibleInput = () => {
   const [currentLevel, setCurrentLevel] = useState('iniciante');
   const [dailyMinutes, setDailyMinutes] = useState(0);
   const [weeklyGoal] = useState(150); // 150 minutes per week
 
-  const levels = [
-    {
-      id: 'iniciante',
-      title: 'Iniciante Absoluto',
-      description: 'Entender mensagens simples com muito apoio visual',
-      color: 'bg-green-100 text-green-800',
-      activities: [
-        { icon: Play, title: 'Vídeos infantis no YouTube', description: 'Com gestos, figuras e histórias curtas' },
-        { icon: BookOpen, title: 'Livros ilustrados', description: 'Pouco texto, muita imagem' },
-        { icon: Headphones, title: 'Podcasts para iniciantes', description: 'Fala mais lenta, temas do dia a dia' },
-        { icon: Tv, title: 'Séries e filmes', description: 'Com legendas na língua-alvo' },
-        { icon: Music, title: 'Músicas simples', description: 'Refrões fáceis e repetitivos' },
-        { icon: MessageCircle, title: 'Shadowing', description: 'Imite trechos curtos de podcasts/vídeos' }
-      ]
-    },
-    {
-      id: 'basico',
-      title: 'Básico',
-      description: 'Manter a compreensão com menos apoio visual',
-      color: 'bg-blue-100 text-blue-800',
-      activities: [
-        { icon: BookOpen, title: 'Histórias graduadas', description: 'Um pouco mais de texto, ainda claras' },
-        { icon: Headphones, title: 'Podcasts 5-10 min', description: 'Temas previsíveis' },
-        { icon: Play, title: 'Vídeos com legendas', description: 'Na língua-alvo' },
-        { icon: BookOpen, title: 'Leitura leve', description: 'Posts curtos, resumos simples' },
-        { icon: MessageCircle, title: 'Shadowing frases', description: '1-2 frases por vez' }
-      ]
-    },
-    {
-      id: 'intermediario',
-      title: 'Intermediário',
-      description: 'Entender conteúdos do dia a dia com vocabulário natural',
-      color: 'bg-orange-100 text-orange-800',
-      activities: [
-        { icon: Play, title: 'Vídeos nativos', description: 'Vlogs, receitas, reviews' },
-        { icon: Headphones, title: 'Podcasts nativos', description: 'Temas que você conhece' },
-        { icon: BookOpen, title: 'Artigos curtos', description: 'Sites de notícias acessíveis' },
-        { icon: Tv, title: 'Sitcoms e talk shows', description: 'Menos apoio visual' },
-        { icon: MessageCircle, title: 'Shadowing 10-20s', description: 'Foco em ritmo e entonação' }
-      ]
-    },
-    {
-      id: 'avancado',
-      title: 'Avançado',
-      description: 'Entender materiais autênticos quase sem apoio',
-      color: 'bg-purple-100 text-purple-800',
-      activities: [
-        { icon: Headphones, title: 'Podcasts sem roteiro', description: 'Entrevistas nativas' },
-        { icon: BookOpen, title: 'Artigos longos', description: 'Jornais e revistas' },
-        { icon: Tv, title: 'Filmes naturais', description: 'Legenda só quando necessário' },
-        { icon: MessageCircle, title: 'Shadowing 30-60s', description: 'Priorizando fluidez' }
-      ]
-    }
-  ];
-
-  const difficultyLevels = [
-    {
-      level: 'Muito fácil',
-      description: 'Você entende tudo e quase não aprende nada novo',
-      icon: ArrowDown,
-      color: 'text-red-600',
-      bgColor: 'bg-red-50',
-      action: 'Suba um degrau'
-    },
-    {
-      level: 'No ponto',
-      description: 'Você entende a ideia geral e encontra algumas novidades',
-      icon: Target,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
-      action: 'Continue assim!'
-    },
-    {
-      level: 'Difícil',
-      description: 'Você pausa o tempo todo e perde o fio da história',
-      icon: ArrowUp,
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-50',
-      action: 'Desça meio degrau'
-    }
-  ];
-
-  const routineExamples = [
-    {
-      duration: '10 minutos',
-      activities: ['1 vídeo curto com gestos/figuras', 'Marcar dificuldade'],
-      icon: Timer
-    },
-    {
-      duration: '20 minutos', 
-      activities: ['1 podcast para iniciantes', '2 trechos de shadowing', 'Marcar dificuldade'],
-      icon: Clock
-    },
-    {
-      duration: '30 minutos',
-      activities: ['1 episódio com legenda na língua-alvo', '1 bloco de leitura leve', 'Marcar dificuldade'],
-      icon: TrendingUp
-    }
-  ];
-
+  const levels = [{
+    id: 'iniciante',
+    title: 'Iniciante Absoluto',
+    description: 'Entender mensagens simples com muito apoio visual',
+    color: 'bg-green-100 text-green-800',
+    activities: [{
+      icon: Play,
+      title: 'Vídeos infantis no YouTube',
+      description: 'Com gestos, figuras e histórias curtas'
+    }, {
+      icon: BookOpen,
+      title: 'Livros ilustrados',
+      description: 'Pouco texto, muita imagem'
+    }, {
+      icon: Headphones,
+      title: 'Podcasts para iniciantes',
+      description: 'Fala mais lenta, temas do dia a dia'
+    }, {
+      icon: Tv,
+      title: 'Séries e filmes',
+      description: 'Com legendas na língua-alvo'
+    }, {
+      icon: Music,
+      title: 'Músicas simples',
+      description: 'Refrões fáceis e repetitivos'
+    }, {
+      icon: MessageCircle,
+      title: 'Shadowing',
+      description: 'Imite trechos curtos de podcasts/vídeos'
+    }]
+  }, {
+    id: 'basico',
+    title: 'Básico',
+    description: 'Manter a compreensão com menos apoio visual',
+    color: 'bg-blue-100 text-blue-800',
+    activities: [{
+      icon: BookOpen,
+      title: 'Histórias graduadas',
+      description: 'Um pouco mais de texto, ainda claras'
+    }, {
+      icon: Headphones,
+      title: 'Podcasts 5-10 min',
+      description: 'Temas previsíveis'
+    }, {
+      icon: Play,
+      title: 'Vídeos com legendas',
+      description: 'Na língua-alvo'
+    }, {
+      icon: BookOpen,
+      title: 'Leitura leve',
+      description: 'Posts curtos, resumos simples'
+    }, {
+      icon: MessageCircle,
+      title: 'Shadowing frases',
+      description: '1-2 frases por vez'
+    }]
+  }, {
+    id: 'intermediario',
+    title: 'Intermediário',
+    description: 'Entender conteúdos do dia a dia com vocabulário natural',
+    color: 'bg-orange-100 text-orange-800',
+    activities: [{
+      icon: Play,
+      title: 'Vídeos nativos',
+      description: 'Vlogs, receitas, reviews'
+    }, {
+      icon: Headphones,
+      title: 'Podcasts nativos',
+      description: 'Temas que você conhece'
+    }, {
+      icon: BookOpen,
+      title: 'Artigos curtos',
+      description: 'Sites de notícias acessíveis'
+    }, {
+      icon: Tv,
+      title: 'Sitcoms e talk shows',
+      description: 'Menos apoio visual'
+    }, {
+      icon: MessageCircle,
+      title: 'Shadowing 10-20s',
+      description: 'Foco em ritmo e entonação'
+    }]
+  }, {
+    id: 'avancado',
+    title: 'Avançado',
+    description: 'Entender materiais autênticos quase sem apoio',
+    color: 'bg-purple-100 text-purple-800',
+    activities: [{
+      icon: Headphones,
+      title: 'Podcasts sem roteiro',
+      description: 'Entrevistas nativas'
+    }, {
+      icon: BookOpen,
+      title: 'Artigos longos',
+      description: 'Jornais e revistas'
+    }, {
+      icon: Tv,
+      title: 'Filmes naturais',
+      description: 'Legenda só quando necessário'
+    }, {
+      icon: MessageCircle,
+      title: 'Shadowing 30-60s',
+      description: 'Priorizando fluidez'
+    }]
+  }];
+  const difficultyLevels = [{
+    level: 'Muito fácil',
+    description: 'Você entende tudo e quase não aprende nada novo',
+    icon: ArrowDown,
+    color: 'text-red-600',
+    bgColor: 'bg-red-50',
+    action: 'Suba um degrau'
+  }, {
+    level: 'No ponto',
+    description: 'Você entende a ideia geral e encontra algumas novidades',
+    icon: Target,
+    color: 'text-green-600',
+    bgColor: 'bg-green-50',
+    action: 'Continue assim!'
+  }, {
+    level: 'Difícil',
+    description: 'Você pausa o tempo todo e perde o fio da história',
+    icon: ArrowUp,
+    color: 'text-orange-600',
+    bgColor: 'bg-orange-50',
+    action: 'Desça meio degrau'
+  }];
+  const routineExamples = [{
+    duration: '10 minutos',
+    activities: ['1 vídeo curto com gestos/figuras', 'Marcar dificuldade'],
+    icon: Timer
+  }, {
+    duration: '20 minutos',
+    activities: ['1 podcast para iniciantes', '2 trechos de shadowing', 'Marcar dificuldade'],
+    icon: Clock
+  }, {
+    duration: '30 minutos',
+    activities: ['1 episódio com legenda na língua-alvo', '1 bloco de leitura leve', 'Marcar dificuldade'],
+    icon: TrendingUp
+  }];
   const currentLevelData = levels.find(level => level.id === currentLevel);
-
-  return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
+  return <div className="max-w-6xl mx-auto p-6 space-y-8">
       {/* Header */}
       <div className="text-center space-y-4">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-learning text-white mb-4">
@@ -159,9 +176,7 @@ const ComprehensibleInput = () => {
             Ocorre quando o aprendiz se concentra na comunicação e na compreensão da mensagem, sem estar ciente de que está adquirindo novas regras gramaticais ou vocabulário. É um processo "sentir" a linguagem.
           </p>
         </div>
-        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Você aprende de verdade quando entende o que ouve e lê. Escolha conteúdos que estejam "um degrau acima do confortável": você entende quase tudo, mas existem algumas coisas novas que dão leve desafio — sem travar.
-        </p>
+        
         <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 max-w-2xl mx-auto">
           <p className="text-sm text-primary font-medium">
             💡 Procure o ponto certo: entende a história e encontra algumas novidades. Se estiver fácil demais, suba um degrau; se estiver pesado, desça meio degrau.
@@ -183,7 +198,7 @@ const ComprehensibleInput = () => {
               <span className="text-sm font-medium">Meta semanal: {weeklyGoal} minutos</span>
               <span className="text-sm text-muted-foreground">{dailyMinutes}/{weeklyGoal} min</span>
             </div>
-            <Progress value={(dailyMinutes / weeklyGoal) * 100} className="h-3" />
+            <Progress value={dailyMinutes / weeklyGoal * 100} className="h-3" />
             <p className="text-xs text-muted-foreground">
               "A consistência vale mais do que a perfeição. Um pouco todo dia."
             </p>
@@ -202,9 +217,8 @@ const ComprehensibleInput = () => {
         <CardContent>
           <div className="grid md:grid-cols-3 gap-4">
             {difficultyLevels.map((level, index) => {
-              const Icon = level.icon;
-              return (
-                <div key={index} className={`${level.bgColor} rounded-lg p-4 border border-border/50`}>
+            const Icon = level.icon;
+            return <div key={index} className={`${level.bgColor} rounded-lg p-4 border border-border/50`}>
                   <div className="flex items-center gap-2 mb-2">
                     <Icon className={`w-5 h-5 ${level.color}`} />
                     <h3 className={`font-semibold ${level.color}`}>{level.level}</h3>
@@ -213,9 +227,8 @@ const ComprehensibleInput = () => {
                   <Badge variant="outline" className="text-xs">
                     {level.action}
                   </Badge>
-                </div>
-              );
-            })}
+                </div>;
+          })}
           </div>
         </CardContent>
       </Card>
@@ -228,15 +241,12 @@ const ComprehensibleInput = () => {
         <CardContent>
           <Tabs value={currentLevel} onValueChange={setCurrentLevel}>
             <TabsList className="grid w-full grid-cols-4">
-              {levels.map((level) => (
-                <TabsTrigger key={level.id} value={level.id} className="text-xs">
+              {levels.map(level => <TabsTrigger key={level.id} value={level.id} className="text-xs">
                   {level.title}
-                </TabsTrigger>
-              ))}
+                </TabsTrigger>)}
             </TabsList>
 
-            {levels.map((level) => (
-              <TabsContent key={level.id} value={level.id} className="mt-6">
+            {levels.map(level => <TabsContent key={level.id} value={level.id} className="mt-6">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Badge className={level.color}>{level.title}</Badge>
@@ -245,9 +255,8 @@ const ComprehensibleInput = () => {
 
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {level.activities.map((activity, index) => {
-                      const Icon = activity.icon;
-                      return (
-                        <Card key={index} className="bg-white/80 hover:bg-white/90 hover:shadow-lg transition-all">
+                  const Icon = activity.icon;
+                  return <Card key={index} className="bg-white/80 hover:bg-white/90 hover:shadow-lg transition-all">
                           <CardContent className="p-4">
                             <div className="flex items-start gap-3">
                               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -259,13 +268,11 @@ const ComprehensibleInput = () => {
                               </div>
                             </div>
                           </CardContent>
-                        </Card>
-                      );
-                    })}
+                        </Card>;
+                })}
                   </div>
 
-                  {level.id !== 'avancado' && (
-                    <div className="bg-muted/50 rounded-lg p-4 mt-6">
+                  {level.id !== 'avancado' && <div className="bg-muted/50 rounded-lg p-4 mt-6">
                       <h4 className="font-medium mb-2 flex items-center gap-2">
                         <ArrowUp className="w-4 h-4" />
                         Como subir um degrau:
@@ -275,11 +282,9 @@ const ComprehensibleInput = () => {
                         {level.id === 'basico' && 'Aumente a duração do áudio/vídeo sem perder a compreensão. Troque alguns textos fáceis por textos com mais detalhes.'}
                         {level.id === 'intermediario' && 'Diminuir gradualmente o uso de legendas. Alternar conteúdos favoritos com novos temas para ampliar vocabulário.'}
                       </p>
-                    </div>
-                  )}
+                    </div>}
                 </div>
-              </TabsContent>
-            ))}
+              </TabsContent>)}
           </Tabs>
         </CardContent>
       </Card>
@@ -295,26 +300,22 @@ const ComprehensibleInput = () => {
         <CardContent>
           <div className="grid md:grid-cols-3 gap-4">
             {routineExamples.map((routine, index) => {
-              const Icon = routine.icon;
-              return (
-                <Card key={index} className="border-2 border-dashed border-border hover:border-primary/50 transition-colors">
+            const Icon = routine.icon;
+            return <Card key={index} className="border-2 border-dashed border-border hover:border-primary/50 transition-colors">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-3">
                       <Icon className="w-5 h-5 text-primary" />
                       <h3 className="font-semibold">{routine.duration}</h3>
                     </div>
                     <ul className="space-y-1">
-                      {routine.activities.map((activity, actIndex) => (
-                        <li key={actIndex} className="text-sm text-muted-foreground flex items-center gap-2">
+                      {routine.activities.map((activity, actIndex) => <li key={actIndex} className="text-sm text-muted-foreground flex items-center gap-2">
                           <CheckCircle className="w-3 h-3 text-green-600" />
                           {activity}
-                        </li>
-                      ))}
+                        </li>)}
                     </ul>
                   </CardContent>
-                </Card>
-              );
-            })}
+                </Card>;
+          })}
           </div>
         </CardContent>
       </Card>
@@ -402,8 +403,6 @@ const ComprehensibleInput = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ComprehensibleInput;
