@@ -12,7 +12,6 @@ import { useUserProfile } from '@/hooks/useUserProfile';
 import { useUserProgress } from '@/hooks/useUserProgress';
 import { SmartInsights } from './SmartInsights';
 import { QuickWinMessage } from './QuickWinMessage';
-
 import { EnhancedAchievements } from './EnhancedAchievements';
 import { RadarChart } from './RadarChart';
 import { SystemTest } from './SystemTest';
@@ -100,7 +99,6 @@ const Dashboard = ({
   const overallProgress = React.useMemo(() => {
     return Math.round((progress?.completedActivities || 0) / Math.max(progress?.totalActivities || 1, 1) * 100);
   }, [progress?.completedActivities, progress?.totalActivities]);
-
   const streakDays = userProgress?.ei_checkin_streak ?? progress?.currentStreak ?? 0;
   const streakBadges = React.useMemo(() => {
     const earned: string[] = [];
@@ -247,9 +245,9 @@ const Dashboard = ({
       </div>
 
       {/* Estatísticas Principais */}
-      <motion.section className="py-16 bg-gradient-to-b from-background to-secondary/30" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
+      <motion.section variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
       once: true
-    }}>
+    }} className="bg-gradient-to-b from-background to-secondary/30 py-[44px]">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div className="text-center mb-12" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -302,29 +300,14 @@ const Dashboard = ({
             </motion.div>
           </div>
 
-          <Card className="card-interactive rounded-xl p-6 mt-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <Flame className="w-5 h-5 text-primary" />
-                  <span className="text-sm text-muted-foreground">Streak EI</span>
-                </div>
-                <h3 className="text-foreground text-2xl lg:text-3xl font-bold">{streakDays} dias</h3>
-              </div>
-              <div className="flex gap-2 flex-wrap justify-end">
-                {streakBadges.map((b, i) => (
-                  <Badge key={i} variant="secondary" className="bg-primary/10 text-primary">{b}</Badge>
-                ))}
-              </div>
-            </div>
-          </Card>
+          
         </div>
       </motion.section>
 
       {/* Features com Scroll Hijacking */}
-      <motion.section ref={featuresRef} className="py-16 bg-gradient-to-b from-secondary/30 to-background" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
+      <motion.section ref={featuresRef} variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
       once: true
-    }}>
+    }} className="bg-gradient-to-b from-secondary/30 to-background py-[24px]">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div className="text-center mb-12" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -352,9 +335,9 @@ const Dashboard = ({
       </motion.section>
 
       {/* Conteúdo Principal */}
-      <motion.div className="max-w-7xl mx-auto p-6 space-y-8" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
+      <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
       once: true
-    }}>
+    }} className="max-w-7xl mx-auto p-6 space-y-8 py-[24px]">
         {/* Progresso Detalhado */}
         <motion.div variants={itemVariants}>
           <Card className="card-gradient">
@@ -410,9 +393,7 @@ const Dashboard = ({
           <motion.div variants={itemVariants}>
             <StudyPlannerCard />
           </motion.div>
-          <motion.div variants={itemVariants}>
-            <ReviewQueueCard />
-          </motion.div>
+          
           <motion.div variants={itemVariants}>
             <EIInsightsMini />
           </motion.div>
