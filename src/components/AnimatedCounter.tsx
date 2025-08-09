@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { formatNumber as fmtNumber } from '@/lib/format';
 
 interface AnimatedCounterProps {
   end: number;
@@ -66,9 +67,8 @@ export const AnimatedCounter = ({
   }, [isVisible, end, duration]);
 
   const formatNumber = (num: number) => {
-    return num.toFixed(decimals);
+    return fmtNumber(num, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
   };
-
   return (
     <span ref={ref} className={className}>
       {prefix}{formatNumber(count)}{suffix}

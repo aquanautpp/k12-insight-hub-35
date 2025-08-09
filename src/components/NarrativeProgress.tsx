@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Award, Clock, Target, Star, Brain, Heart, Zap, BookOpen, Users, Lightbulb, Calendar, BarChart3, Sparkles } from "lucide-react";
+import { formatNumber, formatDate } from '@/lib/format';
 
 interface NarrativeMilestone {
   id: string;
@@ -118,7 +119,7 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
               <div className="text-sm text-foreground/70">Nível Atual</div>
             </div>
             <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-xl p-4">
-              <div className="text-2xl font-bold mb-1 text-foreground">{totalXP.toLocaleString()}</div>
+              <div className="text-2xl font-bold mb-1 text-foreground">{formatNumber(totalXP)}</div>
               <div className="text-sm text-foreground/70">XP Total</div>
             </div>
             <div className="thoughtful-interaction bg-primary/10 border border-primary/30 rounded-xl p-4">
@@ -174,7 +175,7 @@ export const NarrativeProgressVisualization: React.FC<ProgressStoryProps> = ({
                               {milestone.type}
                             </Badge>
                             <span className="text-xs text-muted-foreground">
-                              {milestone.date.toLocaleDateString()}
+                              {formatDate(milestone.date)}
                             </span>
                           </div>
                         </div>

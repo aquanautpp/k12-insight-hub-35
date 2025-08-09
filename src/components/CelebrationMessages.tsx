@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Star, Zap, Target, Gift, Sparkles } from "lucide-react";
+import { formatDate } from '@/lib/format';
 
 interface Achievement {
   id: string;
@@ -201,7 +202,7 @@ export const CelebrationMessages: React.FC<CelebrationMessagesProps> = ({
         {achievement.unlockedAt && (
           <div className="text-center mt-3">
             <span className={`text-xs ${styles.text} opacity-70`}>
-              Desbloqueado em {achievement.unlockedAt.toLocaleDateString()}
+              Desbloqueado em {formatDate(achievement.unlockedAt)}
             </span>
           </div>
         )}

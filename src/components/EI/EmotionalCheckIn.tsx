@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useXP } from "@/contexts/XPContext";
 import { useAchievement } from "@/contexts/AchievementContext";
 import { CheckCircle, Flame, Gauge, Smile } from "lucide-react";
+import { formatDate } from '@/lib/format';
 
 interface CheckinRow {
   id: string;
