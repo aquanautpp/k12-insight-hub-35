@@ -16,7 +16,6 @@ import EmotionalIntelligence from "@/components/EmotionalIntelligence";
 import ReadingRecommendations from "@/components/ReadingRecommendations";
 import { BackgroundRemover } from "@/components/BackgroundRemover";
 import { FeatureFlagsDebugPanel } from "@/components/FeatureFlagsDebugPanel";
-import SectionScroller from "@/components/SectionScroller";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -33,18 +32,32 @@ const Index = () => {
     return () => window.removeEventListener('app:navigate' as any, handler as any);
   }, []);
 
-  const sections = [
-    { id: 'dashboard', title: 'Painel de Controle', element: <Dashboard onViewChange={setCurrentView} /> },
-    { id: 'cpa-method', title: 'Método CPA', element: <CPAMethod /> },
-    { id: 'learning-test', title: 'Teste de Aprendizagem', element: <LearningStyleTest /> },
-    { id: 'comprehensible-input', title: 'Aprender com Comprehensible Input', element: <ComprehensibleInput /> },
-    { id: 'mantha-chat', title: 'Tutor IA', element: <ManthaChatTutor /> },
-    { id: 'emotional-intelligence', title: 'Inteligência Emocional', element: <EmotionalIntelligence /> },
-    { id: 'progress', title: 'Progresso', element: <ProgressView /> },
-    { id: 'activities', title: 'Atividades', element: <DailyChallenge /> },
-    { id: 'reading', title: 'Recomendações de Leitura', element: <ReadingRecommendations /> },
-    { id: 'background-remover', title: 'Remover Fundo de Imagem', element: <BackgroundRemover /> },
-  ];
+  const renderView = () => {
+    switch (currentView) {
+      case 'dashboard':
+        return <Dashboard onViewChange={setCurrentView} />;
+      case 'cpa-method':
+        return <CPAMethod />;
+      case 'learning-test':
+        return <LearningStyleTest />;
+      case 'comprehensible-input':
+        return <ComprehensibleInput />;
+      case 'mantha-chat':
+        return <ManthaChatTutor />;
+      case 'emotional-intelligence':
+        return <EmotionalIntelligence />;
+      case 'progress':
+        return <ProgressView />;
+      case 'activities':
+        return <DailyChallenge />;
+      case 'reading':
+        return <ReadingRecommendations />;
+      case 'background-remover':
+        return <BackgroundRemover />;
+      default:
+        return <Dashboard onViewChange={setCurrentView} />;
+    }
+  };
 
   return (
     <SidebarProvider>
@@ -87,12 +100,8 @@ const Index = () => {
             </div>
           </header>
           
-          <main className="flex-1 bg-background px-0 md:px-0 py-0">
-            <SectionScroller
-              sections={sections}
-              currentId={currentView}
-              onActiveChange={setCurrentView}
-            />
+          <main className="flex-1 overflow-auto bg-background px-4 md:px-6 py-4">
+            {renderView()}
           </main>
         </div>
       </div>
