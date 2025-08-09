@@ -80,9 +80,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				olive: 'hsl(82 39% 30%)',
+				sage: 'hsl(82 20% 62%)',
+				sand: 'hsl(46 28% 88%)',
+				charcoal: 'hsl(153 29% 6%)'
 			},
 			borderRadius: {
+				'2xl': '1.25rem',
+				xl: '1rem',
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
@@ -99,7 +105,8 @@ export default {
 			boxShadow: {
 				'learning': 'var(--shadow-learning)',
 				'achievement': 'var(--shadow-achievement)',
-				'card': 'var(--shadow-card)'
+				'card': 'var(--shadow-card)',
+				'soft': '0 8px 24px hsl(0 0% 0% / 0.06)'
 			},
 			keyframes: {
 				'accordion-down': {
