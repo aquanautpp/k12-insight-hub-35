@@ -8,6 +8,7 @@ import { FeatureFlagsDebugPanel } from '@/components/FeatureFlagsDebugPanel'
 import { User } from 'lucide-react'
 import { Suspense, useMemo } from 'react'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+import LangKey from '@/components/LangKey'
 
 const titleMap: Record<string, string> = {
   '/': 'Painel de Controle',
@@ -96,7 +97,9 @@ export default function AppLayout() {
 
           <main className="flex-1 overflow-auto bg-background px-4 md:px-6 py-4">
             <Suspense fallback={<div className="text-center text-muted-foreground py-10">Carregando...</div>}>
-              <Outlet />
+              <LangKey>
+                <Outlet />
+              </LangKey>
             </Suspense>
           </main>
         </div>
