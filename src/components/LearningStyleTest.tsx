@@ -8,6 +8,7 @@ import { Brain, Eye, Volume2, Hammer, Users, Navigation, Trophy, RotateCcw, Book
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from 'react-i18next';
 interface Question {
   id: number;
   scenario: string;
@@ -259,6 +260,7 @@ const generatePersonalizedActivities = (profile: string) => {
 };
 
 const LearningStyleTest = () => {
+  const { t } = useTranslation()
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
@@ -454,7 +456,7 @@ const LearningStyleTest = () => {
               <div className="text-center">
                 <Button onClick={resetTest} variant="outline">
                   <RotateCcw className="w-4 h-4 mr-2" />
-                  Refazer Teste
+                  {t('common.retry')}
                 </Button>
               </div>
             </CardContent>
@@ -471,14 +473,14 @@ const LearningStyleTest = () => {
           <CardHeader className="bg-primary rounded-t-lg">
             <div className="flex items-center justify-between text-white">
               <div>
-                <CardTitle className="text-xl mb-2 text-white">Descobrir Como Eu Aprendo! 🧠</CardTitle>
+                <CardTitle className="text-xl mb-2 text-white">{t('learningTest.title')}</CardTitle>
                 <p className="text-white">
-                  Pergunta {currentQuestion + 1} de {questions.length}
+                  {t('learningTest.questionOf', { current: currentQuestion + 1, total: questions.length })}
                 </p>
               </div>
               <div className="text-right">
                 <div className="text-2xl font-bold text-white">{Math.round(((currentQuestion) / questions.length) * 100)}%</div>
-                <div className="text-sm text-white">Completo</div>
+                <div className="text-sm text-white">{t('common.complete')}</div>
               </div>
             </div>
             <Progress value={(currentQuestion / questions.length) * 100} className="mt-4" />
@@ -523,7 +525,7 @@ const LearningStyleTest = () => {
                 onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
                 disabled={currentQuestion === 0}
               >
-                Voltar
+                {t('common.back')}
               </Button>
               
               <Button
@@ -532,7 +534,7 @@ const LearningStyleTest = () => {
                 variant="outline"
                 className="text-primary border-primary hover:bg-primary hover:text-primary-foreground"
               >
-                {currentQuestion === questions.length - 1 ? 'Ver Resultado' : 'Próxima'}
+                {currentQuestion === questions.length - 1 ? t('common.viewResult') : t('common.next')}
               </Button>
             </div>
           </CardContent>
