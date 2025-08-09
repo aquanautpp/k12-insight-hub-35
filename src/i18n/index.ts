@@ -10,7 +10,7 @@ i18n
       'pt-BR': { translation: ptBR },
       en: { translation: en },
     },
-    lng: 'pt-BR',
+    lng: localStorage.getItem('lang') || 'pt-BR',
     fallbackLng: 'en',
     interpolation: { escapeValue: false },
   })

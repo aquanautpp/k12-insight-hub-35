@@ -7,6 +7,7 @@ import { useUserProfile } from '@/hooks/useUserProfile'
 import { FeatureFlagsDebugPanel } from '@/components/FeatureFlagsDebugPanel'
 import { User } from 'lucide-react'
 import { Suspense, useMemo } from 'react'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 const titleMap: Record<string, string> = {
   '/': 'Painel de Controle',
@@ -77,6 +78,7 @@ export default function AppLayout() {
             </div>
 
             <div className="flex items-center space-x-3">
+              <LanguageSwitcher />
               <div className="hidden md:flex items-center space-x-2 text-sm text-muted-foreground">
                 <User className="w-4 h-4" />
                 <span className="truncate max-w-[200px]">{displayName}</span>
