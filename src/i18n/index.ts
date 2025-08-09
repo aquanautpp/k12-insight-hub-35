@@ -16,7 +16,7 @@ i18n
   .init({
     resources: { 'pt-BR': { translation: ptBR }, en: { translation: en } },
     lng: resolveInitialLang(),
-    fallbackLng: 'en',
+    fallbackLng: 'pt-BR',
     interpolation: { escapeValue: false },
   })
 
