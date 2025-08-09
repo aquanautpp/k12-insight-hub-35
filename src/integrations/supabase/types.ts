@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      achievements: {
+        Row: {
+          key: string
+          unlocked_at: string
+          user_id: string
+        }
+        Insert: {
+          key: string
+          unlocked_at?: string
+          user_id: string
+        }
+        Update: {
+          key?: string
+          unlocked_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      app_events: {
+        Row: {
+          id: number
+          name: string
+          props: Json
+          ts: string
+          user_id: string | null
+        }
+        Insert: {
+          id?: number
+          name: string
+          props?: Json
+          ts?: string
+          user_id?: string | null
+        }
+        Update: {
+          id?: number
+          name?: string
+          props?: Json
+          ts?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       chat_historico: {
         Row: {
           created_at: string
@@ -272,9 +314,49 @@ export type Database = {
         }
         Relationships: []
       }
+      xp_events: {
+        Row: {
+          amount: number
+          created_at: string
+          id: number
+          meta: Json
+          source: string
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: number
+          meta?: Json
+          source: string
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: number
+          meta?: Json
+          source?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      v_user_level: {
+        Row: {
+          level: number | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
+      v_user_xp_total: {
+        Row: {
+          user_id: string | null
+          xp_total: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       get_email_by_username: {
